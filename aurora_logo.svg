@@ -1,0 +1,244 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 200" width="480" height="200">
+  <defs>
+    <!-- Deep space background gradient -->
+    <radialGradient id="bgGrad" cx="35%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#020810"/>
+    </radialGradient>
+
+    <!-- Earth gradient -->
+    <radialGradient id="earthGrad" cx="38%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#1a6fa8"/>
+      <stop offset="45%" stop-color="#0d4f7a"/>
+      <stop offset="100%" stop-color="#061e30"/>
+    </radialGradient>
+
+    <!-- Aurora glow gradient (green) -->
+    <radialGradient id="auroraGreen" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00ffa3" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#00ffa3" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Aurora glow gradient (violet) -->
+    <radialGradient id="auroraViolet" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Satellite dot glow -->
+    <radialGradient id="satGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="60%" stop-color="#00ffa3" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#00ffa3" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Signal ripple gradient -->
+    <radialGradient id="signalGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00ffa3" stop-opacity="0"/>
+      <stop offset="70%" stop-color="#00ffa3" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00ffa3" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Text gradient: aurora green to blue -->
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ffa3"/>
+      <stop offset="55%" stop-color="#38d9f5"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+
+    <!-- Orbit glow filter -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="textGlow" x="-10%" y="-30%" width="120%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Clip to globe -->
+    <clipPath id="globeClip">
+      <circle cx="95" cy="100" r="62"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="480" height="200" fill="url(#bgGrad)" rx="12"/>
+
+  <!-- Starfield -->
+  <g opacity="0.7">
+    <circle cx="15"  cy="12"  r="0.7" fill="#fff"/>
+    <circle cx="42"  cy="8"   r="0.5" fill="#fff"/>
+    <circle cx="68"  cy="22"  r="0.8" fill="#fff"/>
+    <circle cx="28"  cy="45"  r="0.5" fill="#fff"/>
+    <circle cx="55"  cy="60"  r="0.6" fill="#fff"/>
+    <circle cx="10"  cy="78"  r="0.7" fill="#fff"/>
+    <circle cx="38"  cy="168" r="0.5" fill="#fff"/>
+    <circle cx="18"  cy="145" r="0.8" fill="#fff"/>
+    <circle cx="50"  cy="185" r="0.4" fill="#fff"/>
+    <circle cx="175" cy="15"  r="0.6" fill="#fff"/>
+    <circle cx="195" cy="185" r="0.5" fill="#fff"/>
+    <circle cx="210" cy="30"  r="0.4" fill="#fff"/>
+    <circle cx="460" cy="18"  r="0.6" fill="#fff"/>
+    <circle cx="445" cy="175" r="0.5" fill="#fff"/>
+    <circle cx="420" cy="12"  r="0.7" fill="#fff"/>
+  </g>
+
+  <!-- Aurora halo behind globe (green) -->
+  <ellipse cx="95" cy="100" rx="85" ry="85" fill="url(#auroraGreen)" opacity="0.18"/>
+  <!-- Aurora halo (violet) -->
+  <ellipse cx="95" cy="100" rx="78" ry="78" fill="url(#auroraViolet)" opacity="0.15"/>
+
+  <!-- ── GLOBE ── -->
+  <!-- Globe base shadow -->
+  <circle cx="97" cy="103" r="63" fill="#000" opacity="0.35"/>
+  <!-- Globe fill -->
+  <circle cx="95" cy="100" r="62" fill="url(#earthGrad)"/>
+
+  <!-- Land masses (stylised) -->
+  <g clip-path="url(#globeClip)" opacity="0.55" fill="#1a8a4a">
+    <!-- Eurasia -->
+    <ellipse cx="90"  cy="78"  rx="28" ry="14" transform="rotate(-15 90 78)"/>
+    <ellipse cx="118" cy="72"  rx="18" ry="10" transform="rotate(-8 118 72)"/>
+    <!-- Africa -->
+    <ellipse cx="85"  cy="108" rx="11" ry="18" transform="rotate(5 85 108)"/>
+    <!-- Americas -->
+    <ellipse cx="55"  cy="88"  rx="9"  ry="20" transform="rotate(-10 55 88)"/>
+    <!-- Antarctica hint -->
+    <ellipse cx="95"  cy="155" rx="30" ry="7"/>
+  </g>
+
+  <!-- Globe atmosphere rim -->
+  <circle cx="95" cy="100" r="62" fill="none" stroke="#38d9f5" stroke-width="1.2" opacity="0.4"/>
+  <!-- Inner light rim -->
+  <circle cx="95" cy="100" r="60" fill="none" stroke="#ffffff" stroke-width="0.4" opacity="0.25"/>
+
+  <!-- ── ORBITAL RINGS ── -->
+  <!-- Orbit 1: equatorial tilt ~15° -->
+  <ellipse cx="95" cy="100" rx="80" ry="22"
+           fill="none" stroke="#00ffa3" stroke-width="0.8" opacity="0.55"
+           stroke-dasharray="4 3"
+           transform="rotate(-15 95 100)"
+           filter="url(#glow)"/>
+
+  <!-- Orbit 2: mid-inclination ~55° -->
+  <ellipse cx="95" cy="100" rx="80" ry="38"
+           fill="none" stroke="#38d9f5" stroke-width="0.8" opacity="0.5"
+           stroke-dasharray="5 3"
+           transform="rotate(30 95 100)"
+           filter="url(#glow)"/>
+
+  <!-- Orbit 3: polar ~75° (AURORA main) — brighter -->
+  <ellipse cx="95" cy="100" rx="80" ry="75"
+           fill="none" stroke="#00ffa3" stroke-width="1.3" opacity="0.75"
+           transform="rotate(55 95 100)"
+           filter="url(#glow)"/>
+
+  <!-- Orbit 4: cross-polar -->
+  <ellipse cx="95" cy="100" rx="80" ry="75"
+           fill="none" stroke="#a855f7" stroke-width="0.7" opacity="0.4"
+           stroke-dasharray="6 4"
+           transform="rotate(-35 95 100)"
+           filter="url(#glow)"/>
+
+  <!-- ── SATELLITES ── -->
+  <!-- Sat on orbit 3 (main, upper) -->
+  <g filter="url(#strongGlow)">
+    <circle cx="95" cy="25" r="4.5" fill="url(#satGlow)"/>
+    <circle cx="95" cy="25" r="2"   fill="#ffffff"/>
+    <!-- Solar panel lines -->
+    <line x1="84" y1="25" x2="90" y2="25" stroke="#00ffa3" stroke-width="1.2" opacity="0.9"/>
+    <line x1="100" y1="25" x2="106" y2="25" stroke="#00ffa3" stroke-width="1.2" opacity="0.9"/>
+  </g>
+
+  <!-- Sat on orbit 3 (lower right) -->
+  <g filter="url(#glow)">
+    <circle cx="148" cy="148" r="3.5" fill="url(#satGlow)" opacity="0.85"/>
+    <circle cx="148" cy="148" r="1.5" fill="#ffffff"/>
+    <line x1="139" y1="148" x2="144" y2="148" stroke="#00ffa3" stroke-width="1" opacity="0.8"/>
+    <line x1="152" y1="148" x2="157" y2="148" stroke="#00ffa3" stroke-width="1" opacity="0.8"/>
+  </g>
+
+  <!-- Sat on orbit 1 (right) -->
+  <g filter="url(#glow)">
+    <circle cx="163" cy="96" r="3" fill="url(#satGlow)" opacity="0.7"/>
+    <circle cx="163" cy="96" r="1.4" fill="#fff" opacity="0.9"/>
+  </g>
+
+  <!-- Sat on orbit 2 (upper-left) -->
+  <g filter="url(#glow)">
+    <circle cx="42" cy="55" r="2.8" fill="url(#satGlow)" opacity="0.65"/>
+    <circle cx="42" cy="55" r="1.3" fill="#fff" opacity="0.9"/>
+  </g>
+
+  <!-- Signal beam from main sat to ground -->
+  <line x1="95" y1="30" x2="95" y2="62"
+        stroke="#00ffa3" stroke-width="0.7" opacity="0.5"
+        stroke-dasharray="2 2"/>
+
+  <!-- Signal ripple on ground -->
+  <circle cx="95" cy="100" r="14" fill="none" stroke="#00ffa3" stroke-width="0.6" opacity="0.3"/>
+  <circle cx="95" cy="100" r="20" fill="none" stroke="#00ffa3" stroke-width="0.4" opacity="0.18"/>
+
+  <!-- ── TEXT BLOCK ── -->
+  <!-- AURORA — main title -->
+  <text x="205" y="80"
+        font-family="'Courier New', Courier, monospace"
+        font-size="52"
+        font-weight="700"
+        letter-spacing="6"
+        fill="url(#textGrad)"
+        filter="url(#textGlow)">AURORA</text>
+
+  <!-- PNT — subtitle tag -->
+  <rect x="205" y="90" width="58" height="22" rx="4"
+        fill="#00ffa3" opacity="0.12"/>
+  <text x="211" y="106"
+        font-family="'Courier New', Courier, monospace"
+        font-size="16"
+        font-weight="700"
+        letter-spacing="4"
+        fill="#00ffa3"
+        filter="url(#glow)">PNT</text>
+
+  <!-- Divider line -->
+  <line x1="205" y1="118" x2="468" y2="118"
+        stroke="url(#textGrad)" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Full name -->
+  <text x="206" y="135"
+        font-family="'Courier New', Courier, monospace"
+        font-size="8.5"
+        letter-spacing="1.5"
+        fill="#38d9f5"
+        opacity="0.85">ADVANCED UNIVERSAL REAL-TIME ORBITAL</text>
+  <text x="206" y="148"
+        font-family="'Courier New', Courier, monospace"
+        font-size="8.5"
+        letter-spacing="1.5"
+        fill="#38d9f5"
+        opacity="0.85">RADIO-NAVIGATION ARCHITECTURE</text>
+
+  <!-- Shiwa Network brand -->
+  <text x="206" y="175"
+        font-family="'Courier New', Courier, monospace"
+        font-size="11"
+        letter-spacing="3"
+        fill="#a855f7"
+        opacity="0.9"
+        filter="url(#glow)">SHIWA NETWORK</text>
+
+  <!-- LEO altitude tag -->
+  <rect x="390" y="163" width="72" height="18" rx="3"
+        fill="#00ffa3" opacity="0.08" stroke="#00ffa3" stroke-width="0.5" stroke-opacity="0.4"/>
+  <text x="396" y="176"
+        font-family="'Courier New', Courier, monospace"
+        font-size="8"
+        letter-spacing="1"
+        fill="#00ffa3"
+        opacity="0.7">LEO 1000 KM</text>
+</svg>
