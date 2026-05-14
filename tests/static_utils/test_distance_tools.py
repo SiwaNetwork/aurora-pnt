@@ -1,11 +1,11 @@
-import math
+﻿import math
 import unittest
 
 import ephem
 from astropy import units as u
 from astropy.time import Time
 
-from leopath.topology.distance_tools import (
+from aurora.topology.distance_tools import (
     create_basic_ground_station_for_satellite_shadow,
     distance_m_between_satellites,
     distance_m_ground_station_to_satellite,
@@ -13,7 +13,7 @@ from leopath.topology.distance_tools import (
     geodetic2cartesian,
     straight_distance_m_between_ground_stations,
 )
-from leopath.topology.topology import GroundStation, Satellite
+from aurora.topology.topology import GroundStation, Satellite
 
 
 class TestDistanceTools(unittest.TestCase):

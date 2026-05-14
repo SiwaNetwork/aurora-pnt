@@ -1,4 +1,4 @@
-# The MIT License (MIT)
+﻿# The MIT License (MIT)
 #
 # Copyright (c) 2020 ETH Zurich
 #
@@ -27,11 +27,11 @@ import unittest
 import ephem
 from astropy.time import Time
 
-from leopath.tles.generate_tles_from_scratch import (
+from aurora.tles.generate_tles_from_scratch import (
     generate_tles_from_scratch_manual,
     generate_tles_from_scratch_with_sgp,
 )
-from leopath.tles.read_tles import read_tles, satellite_ephem_to_str
+from aurora.tles.read_tles import read_tles, satellite_ephem_to_str
 
 
 class TestTles(unittest.TestCase):

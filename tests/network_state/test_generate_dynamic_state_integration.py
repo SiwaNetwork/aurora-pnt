@@ -1,12 +1,12 @@
-import unittest
+﻿import unittest
 
 import ephem
 from astropy.time import Time
 
-from leopath.network_state.generate_network_state import (
+from aurora.network_state.generate_network_state import (
     generate_dynamic_state,
 )
-from leopath.topology.topology import ConstellationData, GroundStation, Satellite
+from aurora.topology.topology import ConstellationData, GroundStation, Satellite
 
 
 class TestDynamicStateIntegration(unittest.TestCase):

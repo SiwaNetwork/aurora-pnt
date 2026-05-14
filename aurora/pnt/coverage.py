@@ -92,7 +92,7 @@ def _enu_to_az_el(enu: np.ndarray):
 
 def load_satrec_from_tle_file(tle_filename: str) -> list[Satrec]:
     """
-    Parse TLE file (LEOPath format) and return list of sgp4 Satrec objects.
+    Parse TLE file (AURORA PNT format) and return list of sgp4 Satrec objects.
 
     File format:
         <n_orbits> <n_sats_per_orbit>

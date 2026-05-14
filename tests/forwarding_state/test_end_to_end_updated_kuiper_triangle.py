@@ -1,4 +1,4 @@
-# In a new file, e.g., tests/dynamic_state/test_end_to_end_kuiper_triangle.py
+﻿# In a new file, e.g., tests/dynamic_state/test_end_to_end_kuiper_triangle.py
 # Or add to test_generate_dynamic_state_integration.py
 
 import math
@@ -8,9 +8,9 @@ import unittest
 import ephem
 from astropy.time import Time
 
-from leopath.network_state.generate_network_state import _generate_state_for_step
-from leopath.topology.distance_tools import geodetic2cartesian
-from leopath.topology.topology import ConstellationData, GroundStation, Satellite
+from aurora.network_state.generate_network_state import _generate_state_for_step
+from aurora.topology.distance_tools import geodetic2cartesian
+from aurora.topology.topology import ConstellationData, GroundStation, Satellite
 
 
 class TestEndToEndKuiperTriangle(unittest.TestCase):

@@ -1,8 +1,8 @@
-import networkx as nx
+﻿import networkx as nx
 import pytest
 
-from leopath.network_state.utils.graph import validate_no_satellite_to_gs_links
-from leopath.topology.topology import GroundStation, Satellite
+from aurora.network_state.utils.graph import validate_no_satellite_to_gs_links
+from aurora.topology.topology import GroundStation, Satellite
 
 
 def test_validate_no_satellite_to_gs_links_valid_graph():

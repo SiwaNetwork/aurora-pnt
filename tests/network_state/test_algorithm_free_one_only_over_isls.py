@@ -1,4 +1,4 @@
-# tests/dynamic_state/test_algorithm_free_one_only_over_isls.py
+﻿# tests/dynamic_state/test_algorithm_free_one_only_over_isls.py
 
 import unittest
 from unittest.mock import MagicMock, patch
@@ -6,12 +6,12 @@ from unittest.mock import MagicMock, patch
 import ephem
 from astropy.time import Time
 
-from leopath.network_state.gsl_attachment.gsl_attachment_interface import GSLAttachmentStrategy
-from leopath.network_state.routing_algorithms.shortest_path_link_state_routing import (
+from aurora.network_state.gsl_attachment.gsl_attachment_interface import GSLAttachmentStrategy
+from aurora.network_state.routing_algorithms.shortest_path_link_state_routing import (
     one_iface_free_bw_allocation_only_over_isls,
 )
-from leopath.topology.satellite.satellite import Satellite
-from leopath.topology.topology import (
+from aurora.topology.satellite.satellite import Satellite
+from aurora.topology.topology import (
     ConstellationData,
     GroundStation,
     LEOTopology,
@@ -150,7 +150,7 @@ class TestAlgorithmFreeOneOnlyOverIsls(unittest.TestCase):
         # --- Patch the helper function ---
         # Patch where it's looked up: in the algorithm module itself
         patcher = patch(
-            "leopath.network_state.routing_algorithms.shortest_path_link_state_routing.one_iface_free_bw_allocation_only_over_isls.calculate_fstate_shortest_path_object_no_gs_relay"
+            "aurora.network_state.routing_algorithms.shortest_path_link_state_routing.one_iface_free_bw_allocation_only_over_isls.calculate_fstate_shortest_path_object_no_gs_relay"
         )
         self.addCleanup(patcher.stop)
         self.mock_fstate_calculator = patcher.start()
@@ -161,7 +161,7 @@ class TestAlgorithmFreeOneOnlyOverIsls(unittest.TestCase):
 
         # Patch logger (optional, useful for checking log calls)
         patcher_log = patch(
-            "leopath.network_state.routing_algorithms.shortest_path_link_state_routing.one_iface_free_bw_allocation_only_over_isls.log",
+            "aurora.network_state.routing_algorithms.shortest_path_link_state_routing.one_iface_free_bw_allocation_only_over_isls.log",
             MagicMock(),
         )
         self.addCleanup(patcher_log.stop)

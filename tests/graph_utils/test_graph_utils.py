@@ -1,10 +1,10 @@
-# In tests/dynamic_state/test_generate_dynamic_state.py
+﻿# In tests/dynamic_state/test_generate_dynamic_state.py
 import unittest
 from unittest.mock import MagicMock  # Or use a simple class with a .graph attribute
 
 import networkx as nx
 
-from leopath.network_state.utils import graph as graph_utils
+from aurora.network_state.utils import graph as graph_utils
 
 
 class TestGraphUtils(unittest.TestCase):

@@ -1,4 +1,4 @@
-import unittest
+﻿import unittest
 from unittest.mock import MagicMock, call, patch
 
 import ephem
@@ -7,13 +7,13 @@ import networkx as nx
 # Use a fixed time for reproducibility instead of relying on current time
 from astropy.time import Time
 
-from leopath import logger
-from leopath.network_state import generate_network_state
-from leopath.network_state.helpers import (
+from aurora import logger
+from aurora.network_state import generate_network_state
+from aurora.network_state.helpers import (
     _compute_isls,
 )
-from leopath.topology.satellite.satellite import Satellite
-from leopath.topology.topology import (
+from aurora.topology.satellite.satellite import Satellite
+from aurora.topology.topology import (
     ConstellationData,
     GroundStation,
     LEOTopology,
@@ -23,13 +23,13 @@ log = logger.get_logger(__name__)
 
 
 # --- Import logger if tests need to configure it ---
-# from leopath import logger # Not strictly needed unless tests modify logging
+# from aurora import logger # Not strictly needed unless tests modify logging
 
 # --- Configure logging level for test output (Optional) ---
 # You can configure the root logger or the specific logger used by the module
 # to control how much output you see during tests.
 # Example: Show DEBUG messages from the tested module during tests
-# logging.getLogger('leopath.network_state.generate_network_state').setLevel(logging.DEBUG)
+# logging.getLogger('aurora.network_state.generate_network_state').setLevel(logging.DEBUG)
 # logging.basicConfig(level=logging.DEBUG) # Or configure globally
 
 
@@ -142,13 +142,13 @@ class TestDynamicStateGeneratorUpdated(unittest.TestCase):
 
         # --- Patching ---
         # Patch distance tools module - provides self.mock_distance_tools
-        patcher_dist_tools = patch("leopath.network_state.helpers.distance_tools", MagicMock())
+        patcher_dist_tools = patch("aurora.network_state.helpers.distance_tools", MagicMock())
         self.addCleanup(patcher_dist_tools.stop)
         self.mock_distance_tools = patcher_dist_tools.start()
 
         # Patch LEOTopology class
         patcher_topology = patch(
-            "leopath.network_state.helpers.LEOTopology",
+            "aurora.network_state.helpers.LEOTopology",
             side_effect=MockLEOTopologyRefined,
         )
         self.addCleanup(patcher_topology.stop)
@@ -156,7 +156,7 @@ class TestDynamicStateGeneratorUpdated(unittest.TestCase):
 
         # Patch the routing algorithm factory to return a MagicMock algorithm instance
         patcher_algorithm_factory = patch(
-            "leopath.network_state.routing_algorithms.routing_algorithm_factory.get_routing_algorithm",
+            "aurora.network_state.routing_algorithms.routing_algorithm_factory.get_routing_algorithm",
             return_value=MagicMock(),
         )
         self.addCleanup(patcher_algorithm_factory.stop)
@@ -347,7 +347,7 @@ class TestDynamicStateGeneratorUpdated(unittest.TestCase):
             )
         self.assertIn("Unknown routing algorithm", str(cm.exception))
 
-    @patch("leopath.network_state.generate_network_state._generate_state_for_step")
+    @patch("aurora.network_state.generate_network_state._generate_state_for_step")
     def test_generate_dynamic_state_loop(self, mock_generate_at):
         """Test the main loop calls _generate_state_for_step correctly."""
         simulation_end_time_ns = 3 * 1_000_000_000
@@ -443,15 +443,15 @@ class TestDynamicStateGeneratorUpdated(unittest.TestCase):
         mock_topo_t2 = MagicMock(name="TopoT2")
 
         with patch(
-            "leopath.network_state.utils.graph._topologies_are_equal"
+            "aurora.network_state.utils.graph._topologies_are_equal"
         ) as mock_topologies_equal, patch(
-            "leopath.network_state.generate_network_state.get_routing_algorithm"
+            "aurora.network_state.generate_network_state.get_routing_algorithm"
         ) as mock_factory, patch(
-            "leopath.network_state.generate_network_state._build_topologies"
+            "aurora.network_state.generate_network_state._build_topologies"
         ) as mock_build, patch(
-            "leopath.network_state.generate_network_state._compute_isls"
+            "aurora.network_state.generate_network_state._compute_isls"
         ) as mock_isls, patch(
-            "leopath.network_state.generate_network_state._compute_ground_station_satellites_in_range"
+            "aurora.network_state.generate_network_state._compute_ground_station_satellites_in_range"
         ) as mock_gsl:
             # Setup topology comparison
             mock_topologies_equal.side_effect = [

@@ -6,7 +6,7 @@
 
 experiment:
   name: "altitude_sweep_v2"
-  base_config: "leopath/config/pnt/phase3_global.yaml"
+  base_config: "aurora/config/pnt/phase3_global.yaml"
   output_dir: "results/experiments/altitude_sweep_v2"
   sweep_parameter: "altitude_km"
 

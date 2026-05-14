@@ -1,4 +1,4 @@
-"""
+﻿"""
 Tests for TopologicalNetworkAddress class.
 
 This module tests the 6GRUPA address system used in topological routing,
@@ -7,7 +7,7 @@ including address generation, conversion, and validation.
 
 import unittest
 
-from leopath.topology.satellite.topological_network_address import TopologicalNetworkAddress
+from aurora.topology.satellite.topological_network_address import TopologicalNetworkAddress
 
 
 class TestTopologicalNetworkAddress(unittest.TestCase):

@@ -3,7 +3,7 @@ import sys
 
 from colorlog import ColoredFormatter
 
-APP_LOGGER_NAME = "LEOPath"
+APP_LOGGER_NAME = "AURORA"
 COLORED_FORMATERR = (
     "%(log_color)s%(levelname)s%(reset)s | "
     "[%(log_color)s%(name)s%(reset)s:%(log_color)s%(lineno)d%(reset)s] "

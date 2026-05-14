@@ -7,7 +7,7 @@
 experiment:
   name: "sweep_orbits_phase1"
   description: "Поиск оптимального числа орбит и спутников (высота фиксирована 700 км)"
-  base_config: "leopath/config/pnt/phase1_test.yaml"
+  base_config: "aurora/config/pnt/phase1_test.yaml"
   output_dir: "results/experiments/sweep_orbits"
   sweep_parameter: "orbits_config"
 

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Tests for topological routing algorithm implementation.
 
 This module tests the topological routing algorithm with the same scenarios used
@@ -11,13 +11,13 @@ from unittest.mock import MagicMock
 
 import ephem
 
-from leopath.network_state.gsl_attachment.gsl_attachment_interface import GSLAttachmentStrategy
-from leopath.network_state.routing_algorithms.topological_routing.fstate_calculation import (
+from aurora.network_state.gsl_attachment.gsl_attachment_interface import GSLAttachmentStrategy
+from aurora.network_state.routing_algorithms.topological_routing.fstate_calculation import (
     calculate_fstate_topological_routing_no_gs_relay,
 )
-from leopath.topology.satellite.satellite import Satellite
-from leopath.topology.satellite.topological_network_address import TopologicalNetworkAddress
-from leopath.topology.topology import (
+from aurora.topology.satellite.satellite import Satellite
+from aurora.topology.satellite.topological_network_address import TopologicalNetworkAddress
+from aurora.topology.topology import (
     ConstellationData,
     GroundStation,
     LEOTopology,
@@ -580,7 +580,7 @@ class TestTopologicalRoutingFstateCalculation(unittest.TestCase):
                 sat.id
             )
 
-        from leopath.network_state.routing_algorithms.topological_routing.fstate_calculation import (
+        from aurora.network_state.routing_algorithms.topological_routing.fstate_calculation import (
             _detect_gsl_changes,
             _perform_renumbering_for_gs,
         )
@@ -679,7 +679,7 @@ class TestTopologicalRoutingFstateCalculation(unittest.TestCase):
             ),
         ]
 
-        from leopath.network_state.routing_algorithms.topological_routing.fstate_calculation import (
+        from aurora.network_state.routing_algorithms.topological_routing.fstate_calculation import (
             _detect_gsl_changes,
         )
 
@@ -760,7 +760,7 @@ class TestTopologicalRoutingFstateCalculation(unittest.TestCase):
             SAT_A
         )
 
-        from leopath.network_state.routing_algorithms.topological_routing.fstate_calculation import (
+        from aurora.network_state.routing_algorithms.topological_routing.fstate_calculation import (
             _perform_renumbering_for_gs,
         )
 

@@ -170,7 +170,7 @@
 ## Структура файлов проекта
 
 ```
-leopath/
+aurora/
 ├── pnt/                          ← PNT модуль (новый)
 │   ├── coverage.py               ← расчёт видимости (sgp4 batch + numpy)
 │   ├── dop.py                    ← GDOP/PDOP/HDOP/VDOP/TDOP
@@ -224,7 +224,7 @@ aurora-pnt experiment -c aurora/config/pnt/experiments/sweep_altitude.yaml
 
 ## Следующие шаги
 
-- [x] Создать PNT модуль (`leopath/pnt/`)
+- [x] Создать PNT модуль (`aurora/pnt/`)
 - [x] Запустить эксперименты по высоте и числу орбит
 - [x] Найти оптимальную конфигурацию для центральной России
 - [ ] Создать конфиги Фазы 0 (3 спут.) и Фазы 1 (12 спут.)

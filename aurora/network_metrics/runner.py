@@ -2,7 +2,7 @@
 Network metrics simulation runner.
 
 Runs the ISL/GSL topology simulation at each time step and captures snapshots
-for downstream metric analysis. Reuses LEOPath building blocks without
+for downstream metric analysis. Reuses AURORA PNT building blocks without
 modifying the core simulation code.
 """
 

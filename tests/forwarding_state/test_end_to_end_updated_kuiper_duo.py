@@ -1,4 +1,4 @@
-# In tests/forwarding_state/test_end_to_end_updated_kuiper_duo.py (or similar file)
+﻿# In tests/forwarding_state/test_end_to_end_updated_kuiper_duo.py (or similar file)
 
 import math
 import unittest
@@ -6,9 +6,9 @@ import unittest
 import ephem
 from astropy.time import Time
 
-from leopath.network_state.generate_network_state import _generate_state_for_step
-from leopath.topology.distance_tools import geodetic2cartesian
-from leopath.topology.topology import ConstellationData, GroundStation, Satellite
+from aurora.network_state.generate_network_state import _generate_state_for_step
+from aurora.topology.distance_tools import geodetic2cartesian
+from aurora.topology.topology import ConstellationData, GroundStation, Satellite
 
 
 class TestEndToEndRefactored(unittest.TestCase):

@@ -1,12 +1,12 @@
-import unittest
+﻿import unittest
 from typing import Any, Dict, List, Tuple
 from unittest.mock import MagicMock
 
 from astropy.time import Time
 
-from leopath.network_state.gsl_attachment.gsl_attachment_factory import GSLAttachmentFactory
-from leopath.network_state.gsl_attachment.gsl_attachment_interface import GSLAttachmentStrategy
-from leopath.topology.topology import GroundStation, LEOTopology
+from aurora.network_state.gsl_attachment.gsl_attachment_factory import GSLAttachmentFactory
+from aurora.network_state.gsl_attachment.gsl_attachment_interface import GSLAttachmentStrategy
+from aurora.topology.topology import GroundStation, LEOTopology
 
 
 class MockGSLAttachmentStrategy(GSLAttachmentStrategy):

@@ -7,7 +7,7 @@
 
 experiment:
   name: "matrix_alt_count"
-  base_config: "leopath/config/pnt/phase3_global.yaml"
+  base_config: "aurora/config/pnt/phase3_global.yaml"
   output_dir: "results/experiments/matrix_alt_count"
   sweep_parameter: "altitude_x_count"
 

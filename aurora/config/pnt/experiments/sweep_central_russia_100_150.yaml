@@ -6,7 +6,7 @@
 experiment:
   name: "sweep_central_russia_100_150"
   description: "1000 км, 100-150 спутников — поиск порога 90% покрытия"
-  base_config: "leopath/config/pnt/phase1_central_russia.yaml"
+  base_config: "aurora/config/pnt/phase1_central_russia.yaml"
   output_dir: "results/experiments/sweep_central_russia_100_150"
   sweep_parameter: "1000km_100-150sat"
 

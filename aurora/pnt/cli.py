@@ -2,12 +2,12 @@
 CLI entry point for the LEO PNT simulator.
 
 Commands:
-  leopath-pnt run            -c CONFIG [-o OUTPUT] [-l LABEL]
-  leopath-pnt experiment     -c EXPERIMENT_CONFIG [-o OUTPUT]
-  leopath-pnt info           -c CONFIG
-  leopath-pnt viz            -c CONFIG [-o OUTPUT] [-l LABEL] [--tle TLE]
-  leopath-pnt cesium         -c CONFIG [-o OUTPUT] [-l LABEL] [--tle TLE]
-  leopath-pnt network-metrics -c CONFIG [-o OUTPUT] [-l LABEL] [--tle TLE]
+  aurora-pnt run            -c CONFIG [-o OUTPUT] [-l LABEL]
+  aurora-pnt experiment     -c EXPERIMENT_CONFIG [-o OUTPUT]
+  aurora-pnt info           -c CONFIG
+  aurora-pnt viz            -c CONFIG [-o OUTPUT] [-l LABEL] [--tle TLE]
+  aurora-pnt cesium         -c CONFIG [-o OUTPUT] [-l LABEL] [--tle TLE]
+  aurora-pnt network-metrics -c CONFIG [-o OUTPUT] [-l LABEL] [--tle TLE]
 """
 
 import argparse
@@ -423,6 +423,53 @@ def cmd_time_scale(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_clock_arch(args):
+    """Mixed-clock constellation analysis: OCXO/Rb/Cs per satellite tier."""
+    from aurora.pnt.timing_service import run_mixed_clock_analysis
+
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/clock_arch"
+
+    print(f"\n  Running mixed-clock constellation analysis: {label}")
+    print(f"  {args.n_planes} planes x {args.n_sats} sats/plane = "
+          f"{args.n_planes * args.n_sats} total")
+    print(f"  Cs/plane: {args.cs_per_plane}  Rb/plane: {args.rb_per_plane}  "
+          f"OCXO/plane: {args.n_sats - args.cs_per_plane - args.rb_per_plane}")
+
+    run_mixed_clock_analysis(
+        output_dir=output_dir,
+        label=label,
+        n_planes=args.n_planes,
+        n_sats_per_plane=args.n_sats,
+        cs_per_plane=args.cs_per_plane,
+        rb_per_plane=args.rb_per_plane,
+        sync_interval_s=args.sync_interval,
+    )
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_timing_service(args):
+    """AURORA-T timing service: PTP/NTP grandmaster accuracy by clock type."""
+    from aurora.pnt.timing_service import run_timing_service_analysis
+
+    label = args.label or "phase4"
+    output_dir = args.output or "results/timing_service"
+
+    print(f"\n  Running AURORA-T timing service analysis: {label}")
+    print(f"  ISL chain: {args.isl_hops} hops, sync interval {args.sync_interval} s")
+    print(f"  UERE: autonomous={args.uere_autonomous} m, combined={args.uere_combined} m")
+
+    run_timing_service_analysis(
+        output_dir=output_dir,
+        label=label,
+        n_isl_hops=args.isl_hops,
+        sync_interval_s=args.sync_interval,
+        uere_autonomous_m=args.uere_autonomous,
+        uere_combined_m=args.uere_combined,
+    )
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_resilience(args):
     """Satellite failure resilience analysis."""
     import json, glob as _glob
@@ -578,6 +625,36 @@ def main():
     p_ts.add_argument("--pdop-combined", type=float, default=None,
                       help="PDOP p95 for combined LEO+GLONASS mode (auto-detect if omitted)")
 
+    # clock-arch
+    p_ca2 = sub.add_parser("clock-arch",
+                           help="Mixed-clock architecture: OCXO/Rb/Cs per tier, ISL chain, holdover")
+    p_ca2.add_argument("-o", "--output", default="results/clock_arch")
+    p_ca2.add_argument("-l", "--label",  default="phase4")
+    p_ca2.add_argument("--n-planes",     type=int,   default=15,
+                       help="Number of orbital planes (default: 15)")
+    p_ca2.add_argument("--n-sats",       type=int,   default=20,
+                       help="Satellites per plane (default: 20)")
+    p_ca2.add_argument("--cs-per-plane", type=int,   default=1,
+                       help="Cs timing anchors per plane (default: 1)")
+    p_ca2.add_argument("--rb-per-plane", type=int,   default=3,
+                       help="Rb timing relays per plane (default: 3)")
+    p_ca2.add_argument("--sync-interval", type=float, default=60.0,
+                       help="ISL sync interval in seconds (default: 60)")
+
+    # timing-service
+    p_tms = sub.add_parser("timing-service",
+                           help="AURORA-T: PTP/NTP grandmaster accuracy, timing protocol stack")
+    p_tms.add_argument("-o", "--output", default="results/timing_service", help="Output directory")
+    p_tms.add_argument("-l", "--label",  default="phase4", help="Run label")
+    p_tms.add_argument("--isl-hops",       type=int,   default=8,
+                       help="Number of ISL hops in clock distribution chain (default: 8)")
+    p_tms.add_argument("--sync-interval",  type=float, default=60.0,
+                       help="ISL synchronization interval in seconds (default: 60)")
+    p_tms.add_argument("--uere-autonomous", type=float, default=3.10,
+                       help="UERE for autonomous mode in meters (default: 3.10)")
+    p_tms.add_argument("--uere-combined",   type=float, default=1.69,
+                       help="UERE for combined LEO+GLONASS mode in meters (default: 1.69)")
+
     # resilience
     p_res = sub.add_parser("resilience", help="Constellation resilience: satellite and ISL failure scenarios")
     p_res.add_argument("-c", "--config", required=True)
@@ -600,9 +677,11 @@ def main():
         "network-metrics": cmd_network_metrics,
         "clock-analysis": cmd_clock_analysis,
         "raim": cmd_raim,
-        "resilience": cmd_resilience,
-        "combined":   cmd_combined,
-        "time-scale": cmd_time_scale,
+        "resilience":     cmd_resilience,
+        "combined":       cmd_combined,
+        "time-scale":     cmd_time_scale,
+        "timing-service": cmd_timing_service,
+        "clock-arch":     cmd_clock_arch,
     }
     dispatch[args.command](args)
 

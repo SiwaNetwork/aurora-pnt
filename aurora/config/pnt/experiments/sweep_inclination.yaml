@@ -10,7 +10,7 @@
 experiment:
   name: "sweep_inclination_phase1"
   description: "Влияние наклонения орбиты на покрытие России (6×8 = 48 спутников, 700 км)"
-  base_config: "leopath/config/pnt/phase1_test.yaml"
+  base_config: "aurora/config/pnt/phase1_test.yaml"
   output_dir: "results/experiments/sweep_inclination"
   sweep_parameter: "inclination"
 

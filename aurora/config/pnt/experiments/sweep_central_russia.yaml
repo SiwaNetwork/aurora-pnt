@@ -6,7 +6,7 @@
 experiment:
   name: "sweep_central_russia"
   description: "Оптимизация созвездия для центральной России — Москва, СПб, Урал"
-  base_config: "leopath/config/pnt/phase1_central_russia.yaml"
+  base_config: "aurora/config/pnt/phase1_central_russia.yaml"
   output_dir: "results/experiments/sweep_central_russia"
   sweep_parameter: "constellation"
 

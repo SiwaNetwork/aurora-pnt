@@ -15,18 +15,18 @@ COPY requirements.txt ./
 # Install requirements
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY leopath/ ./leopath/
+COPY aurora/ ./aurora/
 COPY pyproject.toml ./
-COPY leopath_logo.png ./
+COPY aurora_logo.png ./
 COPY README.md ./
 
 # Create output directories
 RUN mkdir -p /app/logs /app/tle_output /app/visualisation_output
 
 # Environment variables for common configuration
-ENV CONFIG_FILE=leopath/config/ether_simple.yaml
+ENV CONFIG_FILE=aurora/config/ether_simple.yaml
 ENV PYTHONPATH=/app
 
 # Set the entrypoint to run the simulator with configurable config file
-ENTRYPOINT ["python", "-m", "leopath.main", "--config"]
-CMD ["leopath/config/ether_simple.yaml"]
+ENTRYPOINT ["python", "-m", "aurora.main", "--config"]
+CMD ["aurora/config/ether_simple.yaml"]

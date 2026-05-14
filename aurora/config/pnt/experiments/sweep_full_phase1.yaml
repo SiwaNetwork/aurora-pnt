@@ -8,7 +8,7 @@
 experiment:
   name: "sweep_full_phase1"
   description: "Совместный перебор высоты + орбит (финальный выбор для Фазы 1)"
-  base_config: "leopath/config/pnt/phase1_test.yaml"
+  base_config: "aurora/config/pnt/phase1_test.yaml"
   output_dir: "results/experiments/sweep_full"
   sweep_parameter: "altitude_x_orbits"
 

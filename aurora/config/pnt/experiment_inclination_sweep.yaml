@@ -1,6 +1,6 @@
 ﻿experiment:
   name: "inclination_sweep"
-  base_config: "leopath/config/pnt/phase3_global.yaml"
+  base_config: "aurora/config/pnt/phase3_global.yaml"
   output_dir: "results/experiments/inclination_sweep"
   sweep_parameter: "inclination_deg"
 

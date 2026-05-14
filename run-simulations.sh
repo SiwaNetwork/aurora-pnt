@@ -43,8 +43,8 @@ show_usage() {
     echo "  -h, --help    Show this help message"
     echo ""
     echo "Examples:"
-    echo "  $0 run -c leopath/config/ether.yaml"
-    echo "  $0 visualise -c leopath/config/ether_simple.yaml"
+    echo "  $0 run -c aurora/config/ether.yaml"
+    echo "  $0 visualise -c aurora/config/ether_simple.yaml"
     echo "  $0 clean"
 }
 
@@ -97,7 +97,7 @@ run_simulation() {
     print_status "Config: $config_file"
     
     # Run the simulation container with the config file
-    docker compose run --rm leo-routing-simu "$config_file"
+    docker compose run --rm aurora-pnt "$config_file"
     
     print_success "Simulation completed successfully"
 }
@@ -113,7 +113,7 @@ run_visualization() {
     print_status "Config: $config_file"
     
     # Generate visualization
-    docker compose run --rm --entrypoint "python -m leopath.satellite_visualisation.cesium_builder.main" leo-routing-viz "$config_file"
+    docker compose run --rm --entrypoint "python -m aurora.satellite_visualisation.cesium_builder.main" leo-routing-viz "$config_file"
     
     print_success "Visualization generated successfully"
     
@@ -131,8 +131,8 @@ clean_all() {
     print_warning "This will delete ALL generated files and tear down Docker containers:"
     echo "  - All files in ./logs/"
     echo "  - All files in ./output/"
-    echo "  - All files in ./leopath/satellite_visualisation/visualisation_output/"
-    echo "  - All files in ./leopath/satellite_visualisation/cesium_builder/visualisation_output/"
+    echo "  - All files in ./aurora/satellite_visualisation/visualisation_output/"
+    echo "  - All files in ./aurora/satellite_visualisation/cesium_builder/visualisation_output/"
     echo "  - All simulation log files (*.log)"
     echo "  - All Docker containers and networks"
     echo ""
@@ -172,15 +172,15 @@ clean_all() {
     fi
     
     # Remove visualization output
-    if [[ -d "./leopath/satellite_visualisation/visualisation_output" ]]; then
-        rm -rf ./leopath/satellite_visualisation/visualisation_output/*
-        print_status "Cleaned ./leopath/satellite_visualisation/visualisation_output/"
+    if [[ -d "./aurora/satellite_visualisation/visualisation_output" ]]; then
+        rm -rf ./aurora/satellite_visualisation/visualisation_output/*
+        print_status "Cleaned ./aurora/satellite_visualisation/visualisation_output/"
     fi
     
     # Remove cesium builder visualization output
-    if [[ -d "./leopath/satellite_visualisation/cesium_builder/visualisation_output" ]]; then
-        rm -rf ./leopath/satellite_visualisation/cesium_builder/visualisation_output/*
-        print_status "Cleaned ./leopath/satellite_visualisation/cesium_builder/visualisation_output/"
+    if [[ -d "./aurora/satellite_visualisation/cesium_builder/visualisation_output" ]]; then
+        rm -rf ./aurora/satellite_visualisation/cesium_builder/visualisation_output/*
+        print_status "Cleaned ./aurora/satellite_visualisation/cesium_builder/visualisation_output/"
     fi
     
     # Remove simulation log files
