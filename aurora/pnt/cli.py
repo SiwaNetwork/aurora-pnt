@@ -470,6 +470,58 @@ def cmd_timing_service(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_freq_plan(args):
+    """Frequency plan: ITU allocation, interference analysis, Doppler profile."""
+    from aurora.pnt.frequency_plan import run_frequency_plan_analysis, print_frequency_plan_summary
+
+    label      = args.label  or "phase3"
+    output_dir = args.output or "results/freq_plan"
+
+    print(f"\n  Running frequency plan analysis: {label}")
+    print(f"  Constellation: {args.n_sats} sats @ {args.altitude_km:.0f} km")
+    print(f"  TX: {args.tx_power:.1f} dBW, TX ant: {args.tx_gain:.1f} dBi")
+
+    result = run_frequency_plan_analysis(
+        output_dir=output_dir,
+        label=label,
+        n_sats=args.n_sats,
+        altitude_m=args.altitude_km * 1000,
+        tx_power_dbw=args.tx_power,
+        tx_gain_dbi=args.tx_gain,
+        rx_gain_dbi=args.rx_gain,
+    )
+    print_frequency_plan_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_isl_ranging(args):
+    """ISL ranging: autonomous orbit determination via crosslink distance measurements."""
+    from aurora.pnt.isl_ranging import run_isl_ranging_analysis, print_isl_summary
+
+    label      = args.label  or "phase3"
+    output_dir = args.output or "results/isl_ranging"
+
+    print(f"\n  Running ISL ranging & autonomous OD analysis: {label}")
+    print(f"  Constellation: {args.n_planes}x{args.n_sats}/plane @ {args.altitude_km:.0f} km, "
+          f"{args.inclination_deg:.0f} deg")
+    print(f"  Ranging mode: {args.mode}  |  MCS stations: {args.n_stations}")
+
+    result = run_isl_ranging_analysis(
+        output_dir=output_dir,
+        label=label,
+        n_planes=args.n_planes,
+        n_sats_per_plane=args.n_sats,
+        altitude_m=args.altitude_km * 1000,
+        inclination_deg=args.inclination_deg,
+        n_mcs_stations=args.n_stations,
+        ranging_mode=args.mode,
+        base_uere_m=args.uere_m,
+        pdop=args.pdop,
+    )
+    print_isl_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_resilience(args):
     """Satellite failure resilience analysis."""
     import json, glob as _glob
@@ -655,6 +707,42 @@ def main():
     p_tms.add_argument("--uere-combined",   type=float, default=1.69,
                        help="UERE for combined LEO+GLONASS mode in meters (default: 1.69)")
 
+    # freq-plan
+    p_fp = sub.add_parser("freq-plan",
+                          help="Frequency plan: ITU allocation, GNSS interference, Doppler profile")
+    p_fp.add_argument("-o", "--output",       default="results/freq_plan", help="Output directory")
+    p_fp.add_argument("-l", "--label",        default="phase3",            help="Run label")
+    p_fp.add_argument("--n-sats",             type=int,   default=180,
+                      help="Total satellites in constellation (default: 180 = Phase 3)")
+    p_fp.add_argument("--altitude-km",        type=float, default=1000.0,  help="Orbit altitude km")
+    p_fp.add_argument("--tx-power",           type=float, default=16.0,
+                      help="TX power dBW (default: 16 = 40 W)")
+    p_fp.add_argument("--tx-gain",            type=float, default=14.0,
+                      help="TX antenna gain dBi (default: 14)")
+    p_fp.add_argument("--rx-gain",            type=float, default=3.0,
+                      help="RX antenna gain dBi (default: 3)")
+
+    # isl-ranging
+    p_isl = sub.add_parser("isl-ranging",
+                           help="ISL ranging: autonomous orbit determination, ephemeris holdover analysis")
+    p_isl.add_argument("-o", "--output",       default="results/isl_ranging", help="Output directory")
+    p_isl.add_argument("-l", "--label",        default="phase3",              help="Run label")
+    p_isl.add_argument("--n-planes",           type=int,   default=12,
+                       help="Number of orbital planes (default: 12 = Phase 3)")
+    p_isl.add_argument("--n-sats",             type=int,   default=15,
+                       help="Satellites per plane (default: 15 = Phase 3)")
+    p_isl.add_argument("--altitude-km",        type=float, default=1000.0,   help="Orbit altitude km")
+    p_isl.add_argument("--inclination-deg",    type=float, default=75.0,     help="Inclination degrees")
+    p_isl.add_argument("--n-stations",         type=int,   default=21,
+                       help="Number of MCS ground stations (default: 21)")
+    p_isl.add_argument("--mode",               default="code",
+                       choices=["code", "phase"],
+                       help="ISL ranging mode: code (0.3m) or phase (0.01m) (default: code)")
+    p_isl.add_argument("--uere-m",             type=float, default=3.10,
+                       help="Baseline autonomous UERE in meters (default: 3.10)")
+    p_isl.add_argument("--pdop",               type=float, default=5.15,
+                       help="PDOP p95 value for CEP computation (default: 5.15 = Phase 3)")
+
     # resilience
     p_res = sub.add_parser("resilience", help="Constellation resilience: satellite and ISL failure scenarios")
     p_res.add_argument("-c", "--config", required=True)
@@ -677,6 +765,8 @@ def main():
         "network-metrics": cmd_network_metrics,
         "clock-analysis": cmd_clock_analysis,
         "raim": cmd_raim,
+        "freq-plan":      cmd_freq_plan,
+        "isl-ranging":    cmd_isl_ranging,
         "resilience":     cmd_resilience,
         "combined":       cmd_combined,
         "time-scale":     cmd_time_scale,
