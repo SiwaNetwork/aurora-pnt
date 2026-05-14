@@ -1,6 +1,7 @@
 # AURORA PNT
 
-<img src="aurora_logo.svg" alt="AURORA PNT by Shiwa Network" width="480"/>
+<img src="aurora_icon.svg" alt="AURORA PNT Icon" width="96" align="left" style="margin-right:20px"/>
+<img src="aurora_logo.svg" alt="AURORA PNT by Shiwa Network" width="420"/>
 
 ### Advanced Universal Real-time Orbital Radio-navigation Architecture
 **разработка Shiwa Network**
