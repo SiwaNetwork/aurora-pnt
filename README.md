@@ -1,207 +1,219 @@
 # AURORA PNT
 ### Advanced Universal Real-time Orbital Radio-navigation Architecture
-**by Shiwa Network**
+**разработка Shiwa Network**
 
 ---
 
-AURORA PNT is a LEO satellite navigation and timing system developed by **Shiwa Network**. It provides precise positioning, navigation, and time synchronization based on a low-Earth-orbit satellite constellation, supporting both autonomous operation (sovereign LPT time scale) and combined mode with GLONASS.
+AURORA PNT — собственная LEO-навигационная и временна́я система, разрабатываемая компанией **Shiwa Network**. Система обеспечивает точное позиционирование, навигацию и синхронизацию времени на базе низкоорбитальной спутниковой группировки с возможностью работы как автономно (собственная шкала времени LPT), так и в комбинированном режиме с ГЛОНАСС.
 
-This repository contains the simulation framework used to model, analyze, and visualize all aspects of the AURORA constellation.
+Данный репозиторий содержит фреймворк моделирования, используемый для расчёта, анализа и визуализации всех аспектов созвездия AURORA.
 
 ---
 
-## Key Characteristics (Phase 4 — Global)
+## Ключевые характеристики (Фаза 4 — Глобальная)
 
-| Parameter | Value |
+| Параметр | Значение |
 |---|---|
-| Satellites | 300 (15 planes × 20 sat) |
-| Altitude | 1000 km |
-| Inclination | 75° |
-| Type | Walker Delta, phase_diff=true |
-| Elevation mask | 10° (LEO) / 5° (GLONASS) |
-| PDOP p95 (autonomous) | 5.04 |
-| PDOP p95 (LEO+GLONASS) | **1.67** |
-| Coverage 4+ satellites | 100% (global, 24 h) |
-| Signal advantage vs GPS | **+25 dB (x316 power)** |
+| Спутников | 300 (15 орбит × 20 сат) |
+| Высота | 1000 км |
+| Наклонение | 75° |
+| Тип | Walker Delta, phase_diff=true |
+| Маска возвышения | 10° (LEO) / 5° (ГЛОНАСС) |
+| PDOP p95 (автономный) | 5.04 |
+| PDOP p95 (LEO+ГЛОНАСС) | **1.67** |
+| Покрытие 4+ спутника | 100% (глобально, 24 ч) |
+| Преимущество сигнала vs GPS | **+25 дБ (мощность ×316)** |
 
 ---
 
-## Operating Modes
+## Режимы работы
 
-| Mode | Description | CEP (L1+L5) |
+| Режим | Описание | CEP (L1+L5) |
 |---|---|---|
-| A — Autonomous LPT | LEO-only, sovereign time scale, no external dependency | 6.46 m |
-| B — Combined LEO+GLONASS | ISB solved as 5th unknown, best accuracy | **1.18 m** |
-| C — Combined + SDCM | Mode B + Russian differential corrections | **0.67 m** |
+| A — Автономный LPT | Только LEO, суверенная шкала времени, без внешней зависимости | 6.46 м |
+| B — Combined LEO+ГЛОНАСС | ISB решается как 5-й неизвестный, наилучшая точность | **1.18 м** |
+| C — Combined + СДКМ | Режим B + российские дифференциальные поправки | **0.67 м** |
 
 ---
 
-## Deployment Roadmap
+## Дорожная карта развёртывания
 
-| Phase | Satellites | Configuration | Coverage | PDOP<6 |
+| Фаза | Спутников | Конфигурация | Покрытие | PDOP<6 |
 |---|---|---|---|---|
-| 0 — Demonstrator | 3 | 1x3, 87 deg | 0% | — |
-| 1 — Test | 12 | 3x4, 87 deg | 5% | 2% |
-| 2 — Regional | 90 | 9x10, 75 deg | 82% | 62% |
-| 3 — Operational (Russia) | **180** | **12x15, 75 deg** | **100%** | **97%** |
-| 4 — Global | 300 | 15x20, 75 deg | 100% | 97%+ |
+| 0 — Демонстратор | 3 | 1×3, 87° | 0% | — |
+| 1 — Тестовая | 12 | 3×4, 87° | 5% | 2% |
+| 2 — Региональная | 90 | 9×10, 75° | 82% | 62% |
+| 3 — Операционная (Россия) | **180** | **12×15, 75°** | **100%** | **97%** |
+| 4 — Глобальная | 300 | 15×20, 75° | 100% | 97%+ |
 
 ---
 
-## Installation
+## Установка
 
 ```bash
 pip install aurora-pnt
 ```
 
-Or from source:
+Или из исходного кода:
 
 ```bash
-git clone https://github.com/ShiwaNetwork/aurora-pnt.git
+git clone https://github.com/SiwaNetwork/aurora-pnt.git
 cd aurora-pnt
 pip install -e .
 ```
 
-**Requirements:** Python 3.8+, numpy, matplotlib, sgp4, pyyaml, scipy
+**Зависимости:** Python 3.8+, numpy, matplotlib, sgp4, pyyaml, scipy
 
 ---
 
-## Quick Start
+## Быстрый старт
 
 ```bash
-# Run Phase 3 simulation (operational Russia coverage)
+# Симуляция Фазы 3 (операционное покрытие России)
 aurora-pnt run -c aurora/config/pnt/phase3_operational.yaml -o results/phase3 -l phase3
 
-# Combined LEO+GLONASS (best accuracy)
+# Комбинированный LEO+ГЛОНАСС (максимальная точность)
 aurora-pnt combined -c aurora/config/pnt/phase4_global.yaml -o results/combined -l combined
 
-# Autonomous mode (sovereign, no GLONASS)
+# Автономный режим (суверенный, без ГЛОНАСС)
 aurora-pnt combined -c aurora/config/pnt/phase4_global.yaml -o results/autonomous -l autonomous --mode autonomous
 
-# AURORA-T timing service analysis (PTP/NTP grandmaster)
+# Анализ сервиса точного времени AURORA-T (PTP/NTP)
 aurora-pnt timing-service -o results/timing -l phase4
 
-# Mixed-clock architecture (OCXO/Rb/Cs per tier)
+# Анализ архитектуры часов (OCXO/Rb/Cs по ярусам)
 aurora-pnt clock-arch -o results/clock_arch -l phase4
 ```
 
 ---
 
-## CLI Reference
+## Справочник команд CLI
 
 ```bash
-aurora-pnt run              # PNT simulation (coverage, PDOP, visibility)
-aurora-pnt combined         # Multi-constellation LEO+GLONASS (--mode combined/autonomous/glonass)
-aurora-pnt time-scale       # LPT time scale analysis (stability, UERE by mode)
-aurora-pnt timing-service   # AURORA-T PTP/NTP grandmaster accuracy
-aurora-pnt clock-arch       # Mixed-clock (OCXO/Rb/Cs) ISL chain + holdover analysis
-aurora-pnt link-budget      # Link budget (FSPL, Doppler, C/N0)
-aurora-pnt network-metrics  # ISL/GSL topology, latency, routing stability
-aurora-pnt ranging          # UERE budget, position accuracy
-aurora-pnt clock-analysis   # Clock type comparison (TCXO/Rb/Cs/Maser)
-aurora-pnt raim             # RAIM integrity (HPL, VPL, availability)
-aurora-pnt resilience       # Satellite failure resilience sweep
-aurora-pnt cesium           # Interactive CesiumJS globe visualization
-aurora-pnt viz              # 3D globe + ground track visualization
-aurora-pnt info             # Simulation plan (no execution)
-aurora-pnt experiment       # Parametric sweep experiments
+aurora-pnt run              # PNT-симуляция (покрытие, PDOP, видимость)
+aurora-pnt combined         # LEO+ГЛОНАСС мультисозвездие (--mode combined/autonomous/glonass)
+aurora-pnt time-scale       # Анализ шкалы времени LPT (стабильность, UERE по режимам)
+aurora-pnt timing-service   # AURORA-T: точность PTP/NTP Grandmaster
+aurora-pnt clock-arch       # Архитектура часов OCXO/Rb/Cs: ISL-цепочка, удержание
+aurora-pnt link-budget      # Линк-бюджет (FSPL, Doppler, C/N0)
+aurora-pnt network-metrics  # Топология ISL/GSL, задержки, стабильность маршрутизации
+aurora-pnt ranging          # Бюджет UERE, точность позиционирования
+aurora-pnt clock-analysis   # Сравнение типов часов (TCXO/Rb/Cs/Maser)
+aurora-pnt raim             # Целостность RAIM (HPL, VPL, доступность)
+aurora-pnt resilience       # Анализ живучести (отказы спутников)
+aurora-pnt cesium           # Интерактивный 3D-глобус CesiumJS
+aurora-pnt viz              # 3D-глобус + наземные треки
+aurora-pnt info             # План симуляции (без запуска)
+aurora-pnt experiment       # Параметрические эксперименты (sweep)
 ```
 
 ---
 
-## Project Structure
+## Структура проекта
 
 ```
 aurora/
-├── pnt/                  # Core PNT simulation modules
-│   ├── pnt_simulator.py  # Main Walker-Delta simulation engine
-│   ├── combined_sim.py   # LEO+GLONASS multi-constellation (ISB)
-│   ├── time_scale.py     # LPT time scale, UERE budget by mode
-│   ├── timing_service.py # AURORA-T protocol, PTP/NTP accuracy
-│   ├── glonass.py        # GLONASS constellation model
-│   ├── dop.py            # DOP computation (4- and 5-parameter H matrix)
-│   ├── coverage.py       # SGP4 propagation, visibility, footprint
-│   ├── raim.py           # RAIM integrity (HPL/VPL)
-│   ├── resilience.py     # Satellite failure analysis
-│   └── cli.py            # aurora-pnt CLI entry point
-├── link_budget/          # FSPL, Doppler, C/N0 per GS-satellite pair
-├── network_metrics/      # ISL/GSL topology, Hypatia path stability
-├── ranging/              # UERE, position error, clock analysis
-└── config/pnt/           # YAML configuration files for all phases
-results/                  # Simulation outputs (auto-generated)
+├── pnt/                  # Ядро симуляции PNT
+│   ├── pnt_simulator.py  # Основной движок (Walker-Delta, SGP4)
+│   ├── combined_sim.py   # LEO+ГЛОНАСС мультисозвездие (ISB)
+│   ├── time_scale.py     # Шкала LPT, бюджет UERE по режимам
+│   ├── timing_service.py # Протокол AURORA-T, точность PTP/NTP
+│   ├── glonass.py        # Модель созвездия ГЛОНАСС
+│   ├── dop.py            # Вычисление DOP (4- и 5-параметрическая матрица H)
+│   ├── coverage.py       # Пропагация SGP4, видимость, footprint
+│   ├── raim.py           # Целостность RAIM (HPL/VPL)
+│   ├── resilience.py     # Анализ отказов спутников
+│   └── cli.py            # Точка входа CLI aurora-pnt
+├── link_budget/          # FSPL, Doppler, C/N0 по парам НС-спутник
+├── network_metrics/      # Топология ISL/GSL, стабильность маршрутов (Hypatia)
+├── ranging/              # UERE, точность позиции, анализ часов
+└── config/pnt/           # YAML-конфигурации для всех фаз
+results/                  # Результаты симуляций (генерируются автоматически)
 ```
 
 ---
 
-## LPT Time Scale
+## Собственная шкала времени LPT
 
-AURORA operates its own sovereign time scale (LPT — LEO PNT Time), independent of GPS and GLONASS:
+AURORA формирует и поддерживает суверенную шкалу времени LPT (LEO PNT Time), независимую от GPS и ГЛОНАСС:
 
 ```
-MCS Master Clock (Cs/H-Maser, Zheleznogorsk)
-    |
-    +-- ISL chain --> all 300 satellites     sigma_ISL = sqrt(N) x ppb x T_sync
-    |
-    +-- AURORA-T broadcast (L1/L5, 10 s frame)
-         |
-         +-- Ground receiver
-              +-- 1PPS output          < 5 ns  (with Cs master)
-              +-- PTP Grandmaster      IEEE 1588-2019, Class 25
-              +-- NTP Stratum-1        RFC 5905, refid="AURA"
+Мастер-часы МЦУ (Cs/H-Maser, Железногорск)
+    │
+    ├─ ISL-цепочка → все 300 спутников      σ_ISL = √N × ppb × T_sync
+    │
+    └─ Трансляция AURORA-T (L1/L5, кадр 10 с)
+         │
+         └─ Наземный приёмник
+              ├─ Выход 1PPS              < 5 нс (с Cs-мастером)
+              ├─ PTP Grandmaster         IEEE 1588-2019, Class 25
+              └─ NTP Stratum-1           RFC 5905, refid="AURA"
 ```
 
-| Master clock | Timing accuracy | PTP class |
+| Мастер-часы | Точность времени | Класс PTP |
 |---|---|---|
-| OCXO (1 ppb) | 169.7 ns | Class 33 |
-| Rb (0.1 ppb) | 17.0 ns | **Class 25** |
-| Cs (0.01 ppb) | **2.2 ns** | **Class 25 — Stratum-0** |
+| OCXO (1 ppb) | 169.7 нс | Class 33 |
+| Rb (0.1 ppb) | 17.0 нс | **Class 25** |
+| Cs (0.01 ppb) | **2.2 нс** | **Class 25 — Stratum-0** |
 
 ---
 
-## Ground Infrastructure (Phase 4 — 21 stations)
+## Архитектура бортовых часов
 
-| Region | Stations |
+| Ярус | Тип | Кол-во (Фаза 4) | Точность ISL | Удержание при разрыве ISL |
+|---|---|---|---|---|
+| Якорные (1/плоскость) | Миниатюрный Cs | 15 | 0.60 нс | 16.7 мин |
+| Ретрансляторы (3/плоскость) | Миниатюрный Rb | 45 | 6.03 нс | 1.7 мин |
+| Терминальные | OCXO | 240 | 6.03 нс | 10 с |
+
+Суммарный бюджет часов на 300 спутников: **57.3 кг / 1350 Вт** (191 г / 4.5 Вт на спутник).
+
+---
+
+## Наземная инфраструктура МЦУ (Фаза 4 — 21 станция)
+
+| Регион | Станции |
 |---|---|
-| Russia | Vladimir, Murmansk, Novosibirsk, Zheleznogorsk, Yakutsk, Khabarovsk, Vladivostok |
-| CIS | Minsk, Almaty |
-| Middle East | Tehran |
-| Asia | Urumqi, Delhi, Yangon, Jakarta, Pyongyang, Ulaanbaatar |
-| Africa | Luanda, Nairobi, Johannesburg |
-| Western Hemisphere | Havana, Buenos Aires |
+| Россия | Владимир, Мурманск, Новосибирск, Железногорск, Якутск, Хабаровск, Владивосток |
+| СНГ | Минск, Алматы |
+| Ближний Восток | Тегеран |
+| Азия | Урумчи, Дели, Янгон, Джакарта, Пхеньян, Улан-Батор |
+| Африка | Луанда, Найроби, Йоханнесбург |
+| Западное полушарие | Гавана, Буэнос-Айрес |
 
 ---
 
-## UERE Budget (L1+L5 dual-frequency)
+## Бюджет UERE (L1+L5 dual-freq)
 
-| Error source | Autonomous | Combined | Combined+SDCM |
+| Источник ошибки | Автономный | Combined | Combined+СДКМ |
 |---|---|---|---|
-| Clock bias | 3.0 m | 1.5 m | 0.8 m |
-| Ephemeris | 0.5 m | 0.1 m | 0.05 m |
-| Ionosphere | 0.05 m | 0.05 m | 0.05 m |
-| Troposphere | 0.5 m | 0.5 m | 0.3 m |
-| Multipath | 0.3 m | 0.3 m | 0.3 m |
-| ISB residual | — | 0.5 m | 0.3 m |
-| **UERE RSS** | **3.10 m** | **1.69 m** | **0.96 m** |
+| Смещение часов | 3.0 м | 1.5 м | 0.8 м |
+| Эфемериды | 0.5 м | 0.1 м | 0.05 м |
+| Ионосфера | 0.05 м | 0.05 м | 0.05 м |
+| Тропосфера | 0.5 м | 0.5 м | 0.3 м |
+| Многолучёвость | 0.3 м | 0.3 м | 0.3 м |
+| Остаток ISB | — | 0.5 м | 0.3 м |
+| **UERE RSS** | **3.10 м** | **1.69 м** | **0.96 м** |
 
 ---
 
-## Signal Advantage vs GPS
+## Преимущество сигнала LEO vs GPS
 
-| Parameter | GPS (MEO, 20200 km) | AURORA (LEO, 1000 km) | Gain |
+| Параметр | GPS (MEO, 20200 км) | AURORA (LEO, 1000 км) | Выигрыш |
 |---|---|---|---|
-| FSPL at zenith | -166.3 dB | -141.4 dB | **+24.9 dB** |
-| FSPL at 10 deg | -177.9 dB | -157.7 dB | **+20.2 dB** |
-| Signal power | x1 | **x316 (zenith)** | |
-| Jamming resistance | standard | significantly higher | |
+| FSPL в зените | −166.3 дБ | −141.4 дБ | **+24.9 дБ** |
+| FSPL при 10° | −177.9 дБ | −157.7 дБ | **+20.2 дБ** |
+| Мощность сигнала | ×1 | **×316 (зенит)** | |
+| Устойчивость к помехам | стандартная | значительно выше | |
 
-The +25 dB advantage enables reception in urban canyons, indoors, and under jamming conditions where GPS fails.
+Преимущество в +25 дБ обеспечивает приём сигнала в городских кварталах, в помещениях и в условиях РЭП, где GPS отказывает.
 
 ---
 
-## License
+## Лицензия
 
-Copyright (c) 2026 Shiwa Network. All rights reserved.
-See [LICENSE](LICENSE) for details.
+Copyright (c) 2026 Shiwa Network. Все права защищены.
+Подробнее см. [LICENSE](LICENSE).
 
 ---
 
