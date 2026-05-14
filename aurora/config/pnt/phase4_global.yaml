@@ -1,0 +1,144 @@
+﻿# ═══════════════════════════════════════════════════════════════
+# AURORA PNT — Фаза 4: Глобальная операционная система
+# ═══════════════════════════════════════════════════════════════
+# 15 орбит × 20 спутников = 300 спутников
+# Высота: 1000 км, Наклонение: 75°
+# Цель: глобальное покрытие PDOP<6 на 97% времени
+
+constellation:
+  name: "AURORA-Phase4"
+  num_orbits: 15
+  num_sats_per_orbit: 20
+  phase_diff: true
+  inclination_degree: 75.0
+  eccentricity: 0.0000001
+  arg_of_perigee_degree: 0.0
+  mean_motion_rev_per_day: 13.74   # ~1000 км
+
+satellite:
+  altitude_m: 1000000
+  cone_angle_degrees: 10.0
+
+earth:
+  radius_m: 6378135.0
+  isl_min_altitude_m: 80000
+
+simulation:
+  dynamic_state_algorithm: shortest_path_link_state
+  end_time_hours: 24
+  time_step_minutes: 10
+  offset_ns: 0
+
+pnt:
+  grid: "global"
+  grid_step_deg: 5.0
+  min_elevation_deg: 10.0
+
+ground_stations:
+  # ── Россия ─────────────────────────────────────────────────
+  - name: "Vladimir"
+    latitude: 56.1294
+    longitude: 40.4067
+    elevation_m: 177.0
+  - name: "Murmansk"
+    latitude: 68.9585
+    longitude: 33.0827
+    elevation_m: 50.0
+  - name: "Novosibirsk"
+    latitude: 54.9884
+    longitude: 82.9357
+    elevation_m: 162.0
+  - name: "Zheleznogorsk"
+    latitude: 56.2505
+    longitude: 93.5319
+    elevation_m: 305.0
+  - name: "Yakutsk"
+    latitude: 62.0355
+    longitude: 129.6755
+    elevation_m: 103.0
+  - name: "Khabarovsk"
+    latitude: 48.4802
+    longitude: 135.0719
+    elevation_m: 68.0
+  - name: "Vladivostok"
+    latitude: 43.1198
+    longitude: 131.8869
+    elevation_m: 28.0
+
+  # ── Ближнее зарубежье ──────────────────────────────────────
+  - name: "Minsk"
+    latitude: 53.9045
+    longitude: 27.5615
+    elevation_m: 220.0
+  - name: "Almaty"
+    latitude: 43.2567
+    longitude: 76.9286
+    elevation_m: 773.0
+
+  # ── Ближний Восток ─────────────────────────────────────────
+  - name: "Tehran"
+    latitude: 35.6892
+    longitude: 51.3890
+    elevation_m: 1191.0
+
+  # ── Азия ───────────────────────────────────────────────────
+  - name: "Urumqi"
+    latitude: 43.8256
+    longitude: 87.6168
+    elevation_m: 859.0
+  - name: "Delhi"
+    latitude: 28.6139
+    longitude: 77.2090
+    elevation_m: 216.0
+  - name: "Yangon"
+    latitude: 16.8661
+    longitude: 96.1951
+    elevation_m: 17.0
+  - name: "Jakarta"
+    latitude: -6.2088
+    longitude: 106.8456
+    elevation_m: 8.0
+
+  # ── Африка ─────────────────────────────────────────────────
+  - name: "Luanda"
+    latitude: -8.8399
+    longitude: 13.2894
+    elevation_m: 6.0
+  - name: "Nairobi"
+    latitude: -1.2921
+    longitude: 36.8219
+    elevation_m: 1661.0
+  - name: "Johannesburg"
+    latitude: -26.2041
+    longitude: 28.0473
+    elevation_m: 1753.0
+
+  # ── Западное полушарие ─────────────────────────────────────
+  - name: "Havana"
+    latitude: 23.1136
+    longitude: -82.3666
+    elevation_m: 59.0
+  - name: "Buenos_Aires"
+    latitude: -34.6037
+    longitude: -58.3816
+    elevation_m: 25.0
+  # Каракас исключён — политические ограничения
+
+  # ── Дополнительно: Юго-Восточная Азия + Тихий океан ──────
+  - name: "Pyongyang"
+    latitude: 39.0392
+    longitude: 125.7625
+    elevation_m: 38.0
+  - name: "Ulaanbaatar"
+    latitude: 47.8864
+    longitude: 106.9057
+    elevation_m: 1350.0
+
+network:
+  gsl_interfaces:
+    number_of_interfaces: 6
+    aggregate_max_bandwidth: 10.0
+
+logging:
+  is_debug: false
+  file_name: "aurora_phase4.log"

@@ -1,0 +1,59 @@
+# ═══════════════════════════════════════════════════════════════
+# Эксперимент: полный перебор — совместная оптимизация
+# высоты и конфигурации созвездия (Фаза 1)
+# ═══════════════════════════════════════════════════════════════
+# Это "грубый поиск" для нахождения лучшей конфигурации
+# перед переходом к Фазе 2.
+
+experiment:
+  name: "sweep_full_phase1"
+  description: "Совместный перебор высоты + орбит (финальный выбор для Фазы 1)"
+  base_config: "leopath/config/pnt/phase1_test.yaml"
+  output_dir: "results/experiments/sweep_full"
+  sweep_parameter: "altitude_x_orbits"
+
+  runs:
+    # 500 км
+    - label: "500km_6x8"
+      overrides:
+        satellite.altitude_m: 500000
+        constellation.num_orbits: 6
+        constellation.num_sats_per_orbit: 8
+
+    - label: "500km_8x8"
+      overrides:
+        satellite.altitude_m: 500000
+        constellation.num_orbits: 8
+        constellation.num_sats_per_orbit: 8
+
+    # 700 км
+    - label: "700km_6x8"
+      overrides:
+        satellite.altitude_m: 700000
+        constellation.num_orbits: 6
+        constellation.num_sats_per_orbit: 8
+
+    - label: "700km_6x10"
+      overrides:
+        satellite.altitude_m: 700000
+        constellation.num_orbits: 6
+        constellation.num_sats_per_orbit: 10
+
+    - label: "700km_8x8"
+      overrides:
+        satellite.altitude_m: 700000
+        constellation.num_orbits: 8
+        constellation.num_sats_per_orbit: 8
+
+    # 1000 км
+    - label: "1000km_6x8"
+      overrides:
+        satellite.altitude_m: 1000000
+        constellation.num_orbits: 6
+        constellation.num_sats_per_orbit: 8
+
+    - label: "1000km_6x6"
+      overrides:
+        satellite.altitude_m: 1000000
+        constellation.num_orbits: 6
+        constellation.num_sats_per_orbit: 6

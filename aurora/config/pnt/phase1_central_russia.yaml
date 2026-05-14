@@ -1,0 +1,57 @@
+﻿# ═══════════════════════════════════════════════════════════════
+# AURORA PNT — Фаза 1: Центральная Россия
+# Покрытие: 49°N–65°N, 28°E–65°E
+# Города: Москва, СПб, Казань, Екатеринбург, Пермь, Уфа, Самара
+# ═══════════════════════════════════════════════════════════════
+
+constellation:
+  name: "LEO-PNT-CentralRU"
+  num_orbits: 6
+  num_sats_per_orbit: 8
+  phase_diff: true
+  inclination_degree: 87.0
+  eccentricity: 0.0000001
+  arg_of_perigee_degree: 0.0
+  mean_motion_rev_per_day: 14.76   # ~700 км
+
+satellite:
+  altitude_m: 700000
+  cone_angle_degrees: 10.0
+
+earth:
+  radius_m: 6378135.0
+  isl_min_altitude_m: 80000
+
+simulation:
+  dynamic_state_algorithm: shortest_path_link_state
+  end_time_hours: 6
+  time_step_minutes: 5
+  offset_ns: 0
+
+pnt:
+  grid: "central_russia"     # 49°N–65°N, 28°E–65°E
+  grid_step_deg: 2.0         # мелкая сетка — более точная картина
+  min_elevation_deg: 10.0
+
+ground_stations:
+  - name: "Vladimir"
+    latitude: 56.1294
+    longitude: 40.4067
+    elevation_m: 177.0
+  - name: "Zheleznogorsk"
+    latitude: 56.2505
+    longitude: 93.5319
+    elevation_m: 305.0
+  - name: "Khabarovsk"
+    latitude: 48.4802
+    longitude: 135.0719
+    elevation_m: 68.0
+
+network:
+  gsl_interfaces:
+    number_of_interfaces: 4
+    aggregate_max_bandwidth: 10.0
+
+logging:
+  is_debug: false
+  file_name: "pnt_central_ru.log"

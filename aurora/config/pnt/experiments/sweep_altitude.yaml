@@ -1,0 +1,41 @@
+# ═══════════════════════════════════════════════════════════════
+# Эксперимент: перебор высот орбиты (500–1200 км)
+# ═══════════════════════════════════════════════════════════════
+# mean_motion_rev_per_day рассчитывается автоматически
+# из satellite.altitude_m (формула Кеплера).
+# Запуск: leopath-pnt experiment -c this_file.yaml
+
+experiment:
+  name: "sweep_altitude_phase1"
+  description: "Оптимизация высоты орбиты для тестовой системы (6×8 = 48 спутников)"
+  base_config: "leopath/config/pnt/phase1_test.yaml"
+  output_dir: "results/experiments/sweep_altitude"
+  sweep_parameter: "altitude"
+
+  runs:
+    - label: "500km"
+      overrides:
+        satellite.altitude_m: 500000
+        # mean_motion_rev_per_day = 15.19 — вычисляется автоматически
+
+    - label: "600km"
+      overrides:
+        satellite.altitude_m: 600000
+        # mean_motion_rev_per_day = 14.93 — автоматически
+
+    - label: "700km"
+      overrides:
+        satellite.altitude_m: 700000
+        # mean_motion_rev_per_day = 14.76 — базовый вариант
+
+    - label: "800km"
+      overrides:
+        satellite.altitude_m: 800000
+
+    - label: "1000km"
+      overrides:
+        satellite.altitude_m: 1000000
+
+    - label: "1200km"
+      overrides:
+        satellite.altitude_m: 1200000

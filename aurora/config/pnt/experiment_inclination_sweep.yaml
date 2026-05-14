@@ -1,0 +1,34 @@
+﻿experiment:
+  name: "inclination_sweep"
+  base_config: "leopath/config/pnt/phase3_global.yaml"
+  output_dir: "results/experiments/inclination_sweep"
+  sweep_parameter: "inclination_deg"
+
+  runs:
+    - label: "inc_55"
+      overrides:
+        constellation.inclination_degree: 55.0
+
+    - label: "inc_60"
+      overrides:
+        constellation.inclination_degree: 60.0
+
+    - label: "inc_65"
+      overrides:
+        constellation.inclination_degree: 65.0
+
+    - label: "inc_70"
+      overrides:
+        constellation.inclination_degree: 70.0
+
+    - label: "inc_75"
+      overrides:
+        constellation.inclination_degree: 75.0
+
+    - label: "inc_80"
+      overrides:
+        constellation.inclination_degree: 80.0
+
+    - label: "inc_87"
+      overrides:
+        constellation.inclination_degree: 87.0

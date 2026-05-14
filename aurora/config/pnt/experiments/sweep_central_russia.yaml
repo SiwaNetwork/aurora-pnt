@@ -1,0 +1,62 @@
+# ═══════════════════════════════════════════════════════════════
+# Эксперимент: поиск минимального созвездия для
+# покрытия центральной России (49°N–65°N, 28°E–65°E)
+# ═══════════════════════════════════════════════════════════════
+
+experiment:
+  name: "sweep_central_russia"
+  description: "Оптимизация созвездия для центральной России — Москва, СПб, Урал"
+  base_config: "leopath/config/pnt/phase1_central_russia.yaml"
+  output_dir: "results/experiments/sweep_central_russia"
+  sweep_parameter: "constellation"
+
+  runs:
+    # ── 700 км, разное число спутников ────────────────────
+    - label: "700km_6x8_48sat"
+      overrides:
+        satellite.altitude_m: 700000
+        constellation.num_orbits: 6
+        constellation.num_sats_per_orbit: 8
+
+    - label: "700km_6x10_60sat"
+      overrides:
+        satellite.altitude_m: 700000
+        constellation.num_orbits: 6
+        constellation.num_sats_per_orbit: 10
+
+    - label: "700km_8x8_64sat"
+      overrides:
+        satellite.altitude_m: 700000
+        constellation.num_orbits: 8
+        constellation.num_sats_per_orbit: 8
+
+    - label: "700km_8x12_96sat"
+      overrides:
+        satellite.altitude_m: 700000
+        constellation.num_orbits: 8
+        constellation.num_sats_per_orbit: 12
+
+    - label: "700km_10x12_120sat"
+      overrides:
+        satellite.altitude_m: 700000
+        constellation.num_orbits: 10
+        constellation.num_sats_per_orbit: 12
+
+    # ── 1000 км — меньше спутников, больше покрытие ───────
+    - label: "1000km_6x8_48sat"
+      overrides:
+        satellite.altitude_m: 1000000
+        constellation.num_orbits: 6
+        constellation.num_sats_per_orbit: 8
+
+    - label: "1000km_6x10_60sat"
+      overrides:
+        satellite.altitude_m: 1000000
+        constellation.num_orbits: 6
+        constellation.num_sats_per_orbit: 10
+
+    - label: "1000km_8x10_80sat"
+      overrides:
+        satellite.altitude_m: 1000000
+        constellation.num_orbits: 8
+        constellation.num_sats_per_orbit: 10

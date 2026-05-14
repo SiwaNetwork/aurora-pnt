@@ -1,0 +1,78 @@
+﻿experiment:
+  name: "phase4_global"
+  base_config: "leopath/config/pnt/phase3_global.yaml"
+  output_dir: "results/experiments/phase4_global"
+  sweep_parameter: "n_satellites"
+
+  # 55° (GPS-подобное) — хорошая геометрия в умеренных широтах
+  runs:
+    - label: "55deg_120"
+      overrides:
+        constellation.inclination_degree: 55.0
+        constellation.num_orbits: 10
+        constellation.num_sats_per_orbit: 12
+        constellation.mean_motion_rev_per_day: 13.74
+        satellite.altitude_m: 1000000
+        pnt.grid: "global"
+        pnt.grid_step_deg: 5.0
+
+    - label: "55deg_180"
+      overrides:
+        constellation.inclination_degree: 55.0
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 15
+        constellation.mean_motion_rev_per_day: 13.74
+        satellite.altitude_m: 1000000
+        pnt.grid: "global"
+        pnt.grid_step_deg: 5.0
+
+    - label: "55deg_240"
+      overrides:
+        constellation.inclination_degree: 55.0
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 20
+        constellation.mean_motion_rev_per_day: 13.74
+        satellite.altitude_m: 1000000
+        pnt.grid: "global"
+        pnt.grid_step_deg: 5.0
+
+    - label: "55deg_300"
+      overrides:
+        constellation.inclination_degree: 55.0
+        constellation.num_orbits: 15
+        constellation.num_sats_per_orbit: 20
+        constellation.mean_motion_rev_per_day: 13.74
+        satellite.altitude_m: 1000000
+        pnt.grid: "global"
+        pnt.grid_step_deg: 5.0
+
+  # 75° — сравнение: хорошо для России, слабее на экваторе
+    - label: "75deg_180"
+      overrides:
+        constellation.inclination_degree: 75.0
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 15
+        constellation.mean_motion_rev_per_day: 13.74
+        satellite.altitude_m: 1000000
+        pnt.grid: "global"
+        pnt.grid_step_deg: 5.0
+
+    - label: "75deg_240"
+      overrides:
+        constellation.inclination_degree: 75.0
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 20
+        constellation.mean_motion_rev_per_day: 13.74
+        satellite.altitude_m: 1000000
+        pnt.grid: "global"
+        pnt.grid_step_deg: 5.0
+
+    - label: "75deg_300"
+      overrides:
+        constellation.inclination_degree: 75.0
+        constellation.num_orbits: 15
+        constellation.num_sats_per_orbit: 20
+        constellation.mean_motion_rev_per_day: 13.74
+        satellite.altitude_m: 1000000
+        pnt.grid: "global"
+        pnt.grid_step_deg: 5.0

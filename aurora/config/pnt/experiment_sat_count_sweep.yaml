@@ -1,0 +1,62 @@
+﻿experiment:
+  name: "sat_count_sweep"
+  base_config: "leopath/config/pnt/phase3_global.yaml"
+  output_dir: "results/experiments/sat_count_sweep"
+  sweep_parameter: "n_satellites"
+
+  runs:
+    - label: "sats_060"   # 6 орбит × 10 спутн.
+      overrides:
+        constellation.inclination_degree: 75.0
+        constellation.num_orbits: 6
+        constellation.num_sats_per_orbit: 10
+        pnt.grid: "russia"
+        pnt.grid_step_deg: 3.0
+
+    - label: "sats_090"   # 9 × 10
+      overrides:
+        constellation.inclination_degree: 75.0
+        constellation.num_orbits: 9
+        constellation.num_sats_per_orbit: 10
+        pnt.grid: "russia"
+        pnt.grid_step_deg: 3.0
+
+    - label: "sats_120"   # 10 × 12
+      overrides:
+        constellation.inclination_degree: 75.0
+        constellation.num_orbits: 10
+        constellation.num_sats_per_orbit: 12
+        pnt.grid: "russia"
+        pnt.grid_step_deg: 3.0
+
+    - label: "sats_150"   # 10 × 15
+      overrides:
+        constellation.inclination_degree: 75.0
+        constellation.num_orbits: 10
+        constellation.num_sats_per_orbit: 15
+        pnt.grid: "russia"
+        pnt.grid_step_deg: 3.0
+
+    - label: "sats_180"   # 12 × 15
+      overrides:
+        constellation.inclination_degree: 75.0
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 15
+        pnt.grid: "russia"
+        pnt.grid_step_deg: 3.0
+
+    - label: "sats_240"   # 12 × 20
+      overrides:
+        constellation.inclination_degree: 75.0
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 20
+        pnt.grid: "russia"
+        pnt.grid_step_deg: 3.0
+
+    - label: "sats_300"   # 15 × 20
+      overrides:
+        constellation.inclination_degree: 75.0
+        constellation.num_orbits: 15
+        constellation.num_sats_per_orbit: 20
+        pnt.grid: "russia"
+        pnt.grid_step_deg: 3.0

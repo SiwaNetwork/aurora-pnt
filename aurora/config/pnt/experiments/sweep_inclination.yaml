@@ -1,0 +1,44 @@
+# ═══════════════════════════════════════════════════════════════
+# Эксперимент: перебор наклонения орбиты
+# ═══════════════════════════════════════════════════════════════
+# Важно для покрытия высоких широт России (Мурманск, Якутия).
+# 55°  — как Starlink shell 1 (плохо покрывает >70°N)
+# 65°  — компромисс
+# 87°  — почти полярная (базовый вариант)
+# 98°  — солнечно-синхронная
+
+experiment:
+  name: "sweep_inclination_phase1"
+  description: "Влияние наклонения орбиты на покрытие России (6×8 = 48 спутников, 700 км)"
+  base_config: "leopath/config/pnt/phase1_test.yaml"
+  output_dir: "results/experiments/sweep_inclination"
+  sweep_parameter: "inclination"
+
+  runs:
+    - label: "inc_53deg"
+      overrides:
+        constellation.inclination_degree: 53.0
+
+    - label: "inc_60deg"
+      overrides:
+        constellation.inclination_degree: 60.0
+
+    - label: "inc_70deg"
+      overrides:
+        constellation.inclination_degree: 70.0
+
+    - label: "inc_80deg"
+      overrides:
+        constellation.inclination_degree: 80.0
+
+    - label: "inc_87deg"
+      overrides:
+        constellation.inclination_degree: 87.0
+
+    - label: "inc_90deg"
+      overrides:
+        constellation.inclination_degree: 90.0
+
+    - label: "inc_98deg"
+      overrides:
+        constellation.inclination_degree: 98.0

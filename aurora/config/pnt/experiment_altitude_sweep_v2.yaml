@@ -1,0 +1,84 @@
+﻿# ═══════════════════════════════════════════════════════════════
+# Блок D: Altitude sweep — финальные параметры
+# 180 спутников (12×15), 75°, глобальная сетка
+# Высоты: 600 / 800 / 1000 / 1200 / 1400 / 1600 км
+# ═══════════════════════════════════════════════════════════════
+
+experiment:
+  name: "altitude_sweep_v2"
+  base_config: "leopath/config/pnt/phase3_global.yaml"
+  output_dir: "results/experiments/altitude_sweep_v2"
+  sweep_parameter: "altitude_km"
+
+  runs:
+    - label: "alt_0600"
+      overrides:
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 15
+        constellation.inclination_degree: 75.0
+        constellation.mean_motion_rev_per_day: 15.24   # 600 км
+        satellite.altitude_m: 600000
+        pnt.grid: "global"
+        pnt.grid_step_deg: 5.0
+        simulation.end_time_hours: 24
+        simulation.time_step_minutes: 10
+
+    - label: "alt_0800"
+      overrides:
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 15
+        constellation.inclination_degree: 75.0
+        constellation.mean_motion_rev_per_day: 14.31   # 800 км
+        satellite.altitude_m: 800000
+        pnt.grid: "global"
+        pnt.grid_step_deg: 5.0
+        simulation.end_time_hours: 24
+        simulation.time_step_minutes: 10
+
+    - label: "alt_1000"
+      overrides:
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 15
+        constellation.inclination_degree: 75.0
+        constellation.mean_motion_rev_per_day: 13.74   # 1000 км (Phase 3 baseline)
+        satellite.altitude_m: 1000000
+        pnt.grid: "global"
+        pnt.grid_step_deg: 5.0
+        simulation.end_time_hours: 24
+        simulation.time_step_minutes: 10
+
+    - label: "alt_1200"
+      overrides:
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 15
+        constellation.inclination_degree: 75.0
+        constellation.mean_motion_rev_per_day: 13.17   # 1200 км
+        satellite.altitude_m: 1200000
+        pnt.grid: "global"
+        pnt.grid_step_deg: 5.0
+        simulation.end_time_hours: 24
+        simulation.time_step_minutes: 10
+
+    - label: "alt_1400"
+      overrides:
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 15
+        constellation.inclination_degree: 75.0
+        constellation.mean_motion_rev_per_day: 12.64   # 1400 км
+        satellite.altitude_m: 1400000
+        pnt.grid: "global"
+        pnt.grid_step_deg: 5.0
+        simulation.end_time_hours: 24
+        simulation.time_step_minutes: 10
+
+    - label: "alt_1600"
+      overrides:
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 15
+        constellation.inclination_degree: 75.0
+        constellation.mean_motion_rev_per_day: 12.18   # 1600 км
+        satellite.altitude_m: 1600000
+        pnt.grid: "global"
+        pnt.grid_step_deg: 5.0
+        simulation.end_time_hours: 24
+        simulation.time_step_minutes: 10

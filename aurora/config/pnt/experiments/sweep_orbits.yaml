@@ -1,0 +1,56 @@
+# ═══════════════════════════════════════════════════════════════
+# Эксперимент: перебор количества орбит и спутников
+# ═══════════════════════════════════════════════════════════════
+# Ищем минимальное число спутников, при котором достигается
+# покрытие 4+ сат на 95% территории и PDOP p95 < 6.
+
+experiment:
+  name: "sweep_orbits_phase1"
+  description: "Поиск оптимального числа орбит и спутников (высота фиксирована 700 км)"
+  base_config: "leopath/config/pnt/phase1_test.yaml"
+  output_dir: "results/experiments/sweep_orbits"
+  sweep_parameter: "orbits_config"
+
+  runs:
+    # Маленькие созвездия
+    - label: "4x6_24sat"
+      overrides:
+        constellation.num_orbits: 4
+        constellation.num_sats_per_orbit: 6
+
+    - label: "4x8_32sat"
+      overrides:
+        constellation.num_orbits: 4
+        constellation.num_sats_per_orbit: 8
+
+    - label: "6x6_36sat"
+      overrides:
+        constellation.num_orbits: 6
+        constellation.num_sats_per_orbit: 6
+
+    # Базовый (phase 1)
+    - label: "6x8_48sat"
+      overrides:
+        constellation.num_orbits: 6
+        constellation.num_sats_per_orbit: 8
+
+    - label: "6x10_60sat"
+      overrides:
+        constellation.num_orbits: 6
+        constellation.num_sats_per_orbit: 10
+
+    # Средние созвездия
+    - label: "8x8_64sat"
+      overrides:
+        constellation.num_orbits: 8
+        constellation.num_sats_per_orbit: 8
+
+    - label: "8x10_80sat"
+      overrides:
+        constellation.num_orbits: 8
+        constellation.num_sats_per_orbit: 10
+
+    - label: "9x14_126sat"
+      overrides:
+        constellation.num_orbits: 9
+        constellation.num_sats_per_orbit: 14

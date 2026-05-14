@@ -1,0 +1,54 @@
+# ═══════════════════════════════════════════════════════════════
+# Эксперимент: 1000 км, 100–150 спутников, центральная Россия
+# Цель: найти порог при котором покрытие 4+ сат > 90%
+# ═══════════════════════════════════════════════════════════════
+
+experiment:
+  name: "sweep_central_russia_100_150"
+  description: "1000 км, 100-150 спутников — поиск порога 90% покрытия"
+  base_config: "leopath/config/pnt/phase1_central_russia.yaml"
+  output_dir: "results/experiments/sweep_central_russia_100_150"
+  sweep_parameter: "1000km_100-150sat"
+
+  runs:
+    - label: "1000km_8x12_96sat"
+      overrides:
+        satellite.altitude_m: 1000000
+        constellation.num_orbits: 8
+        constellation.num_sats_per_orbit: 12
+
+    - label: "1000km_10x10_100sat"
+      overrides:
+        satellite.altitude_m: 1000000
+        constellation.num_orbits: 10
+        constellation.num_sats_per_orbit: 10
+
+    - label: "1000km_10x12_120sat"
+      overrides:
+        satellite.altitude_m: 1000000
+        constellation.num_orbits: 10
+        constellation.num_sats_per_orbit: 12
+
+    - label: "1000km_12x10_120sat"
+      overrides:
+        satellite.altitude_m: 1000000
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 10
+
+    - label: "1000km_10x14_140sat"
+      overrides:
+        satellite.altitude_m: 1000000
+        constellation.num_orbits: 10
+        constellation.num_sats_per_orbit: 14
+
+    - label: "1000km_12x12_144sat"
+      overrides:
+        satellite.altitude_m: 1000000
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 12
+
+    - label: "1000km_12x14_168sat"
+      overrides:
+        satellite.altitude_m: 1000000
+        constellation.num_orbits: 12
+        constellation.num_sats_per_orbit: 14
