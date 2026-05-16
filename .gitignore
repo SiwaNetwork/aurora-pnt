@@ -34,3 +34,6 @@ dist/
 __pycache__/
 *.py[cod]
 *$py.class
+# IDE / tool artifacts
+Untitled
+.claude/
