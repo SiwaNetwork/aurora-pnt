@@ -37,3 +37,6 @@ __pycache__/
 # IDE / tool artifacts
 Untitled
 .claude/
+
+# Local CesiumJS assets (downloaded via aurora-pnt download-cesium, ~50 MB)
+assets/cesium/

@@ -6,10 +6,20 @@ Generates a self-contained HTML file with:
   - Ground station markers with labels
   - Interactive time slider (play/pause, speed control)
   - Full 3D globe rotation and zoom
+
+Offline mode:
+  Run `aurora-pnt download-cesium` once to download CesiumJS (~50 MB) into
+  assets/cesium/.  After that, all generated HTML files reference the local
+  copy and load Natural Earth II imagery from disk — no internet required.
 """
 
 import json
 import math
+import os
+import sys
+import urllib.request
+import zipfile
+import io
 from pathlib import Path
 
 import numpy as np
@@ -19,6 +29,101 @@ from sgp4.api import SatrecArray
 from aurora.pnt.coverage import load_satrec_from_tle_file, _gmst_rad
 
 _SEC_PER_DAY = 86400.0
+
+# ── Offline CesiumJS support ──────────────────────────────────────────────────
+_CESIUM_VERSION = "1.117"
+
+# Local asset directory: <project_root>/assets/cesium/
+_CESIUM_LOCAL_DIR = Path(__file__).resolve().parent.parent.parent / "assets" / "cesium"
+_CESIUM_BUILD     = _CESIUM_LOCAL_DIR / "Build" / "Cesium"
+_CESIUM_JS_PATH   = _CESIUM_BUILD / "Cesium.js"
+
+_CDN_BASE = f"https://cesium.com/downloads/cesiumjs/releases/{_CESIUM_VERSION}/Build/Cesium"
+
+
+def is_cesium_local() -> bool:
+    """Return True if CesiumJS has been downloaded to assets/cesium/."""
+    return _CESIUM_JS_PATH.exists()
+
+
+def _rel_or_abs(cesium_build_path: Path, html_path: Path) -> str:
+    """
+    Return the URL prefix to reference CesiumJS from the given HTML file.
+
+    Uses a relative path when possible (same drive on Windows).
+    Falls back to a file:/// absolute URL if drives differ.
+    """
+    try:
+        rel = os.path.relpath(cesium_build_path, html_path.parent)
+        return rel.replace("\\", "/")
+    except ValueError:
+        # Different drives on Windows — use absolute file URL
+        return cesium_build_path.as_uri()
+
+
+def download_cesium(
+    target_dir: str | None = None,
+    version: str = _CESIUM_VERSION,
+) -> bool:
+    """
+    Download CesiumJS release zip from GitHub and extract to target_dir.
+
+    Default target_dir: <project_root>/assets/cesium/
+
+    The extracted layout is:
+      assets/cesium/Build/Cesium/Cesium.js
+      assets/cesium/Build/Cesium/Widgets/widgets.css
+      assets/cesium/Build/Cesium/Assets/Textures/NaturalEarthII/  ← offline imagery
+    """
+    target = Path(target_dir) if target_dir else _CESIUM_LOCAL_DIR
+
+    url = (
+        f"https://github.com/CesiumGS/cesium/releases/download/"
+        f"{version}/Cesium-{version}.zip"
+    )
+
+    print(f"  Downloading CesiumJS {version}...")
+    print(f"  Source : {url}")
+    print(f"  Target : {target}")
+    print(f"  Size   : ~50 MB — please wait...")
+
+    try:
+        with urllib.request.urlopen(url, timeout=120) as resp:
+            total = int(resp.headers.get("Content-Length", 0))
+            data = bytearray()
+            chunk = 65536
+            while True:
+                buf = resp.read(chunk)
+                if not buf:
+                    break
+                data.extend(buf)
+                if total:
+                    pct = len(data) * 100 // total
+                    print(f"\r  Progress: {pct:3d}%  ({len(data)//1024//1024} MB)", end="", flush=True)
+        print()
+    except Exception as exc:
+        print(f"\n  ERROR: download failed — {exc}")
+        return False
+
+    print("  Extracting...")
+    try:
+        with zipfile.ZipFile(io.BytesIO(bytes(data))) as zf:
+            zf.extractall(target)
+    except Exception as exc:
+        print(f"  ERROR: extraction failed — {exc}")
+        return False
+
+    js = target / "Build" / "Cesium" / "Cesium.js"
+    if js.exists():
+        size_mb = js.stat().st_size // (1024 * 1024)
+        print(f"  OK: Cesium.js ({size_mb} MB) -> {js}")
+        nat_earth = target / "Build" / "Cesium" / "Assets" / "Textures" / "NaturalEarthII"
+        if nat_earth.exists():
+            print(f"  OK: Natural Earth II imagery available (offline globe ready)")
+        return True
+
+    print("  ERROR: Cesium.js not found after extraction")
+    return False
 
 # Satellite color palette (RGBA) — one per orbital plane
 _PLANE_COLORS = [
@@ -264,17 +369,49 @@ def write_cesium_html(
     label: str,
     ion_token: str = "",
 ) -> str:
-    """Embed CZML into a self-contained CesiumJS HTML file."""
+    """
+    Embed CZML into a CesiumJS HTML file.
+
+    If CesiumJS has been downloaded locally (via `aurora-pnt download-cesium`),
+    the HTML references local files and uses offline Natural Earth II imagery.
+    Otherwise falls back to CDN + Cesium Ion.
+    """
     czml_json = json.dumps(czml_packets, separators=(",", ":"))
     speed = czml_packets[0]["clock"]["multiplier"]
+
+    out = Path(output_path).resolve()
+
+    if is_cesium_local():
+        prefix = _rel_or_abs(_CESIUM_BUILD, out)
+        js_src  = f"{prefix}/Cesium.js"
+        css_src = f"{prefix}/Widgets/widgets.css"
+        # Natural Earth II ships with Cesium in Assets/Textures/NaturalEarthII
+        # Cesium.buildModuleUrl resolves relative to the loaded Cesium.js, so the
+        # path is correct as long as the Assets/ folder is next to Cesium.js.
+        imagery_js = """
+  // Offline: Natural Earth II tiles bundled with CesiumJS (no internet needed)
+  Cesium.TileMapServiceImageryProvider.fromUrl(
+    Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
+  ).then(function(provider) {
+    viewer.imageryLayers.removeAll();
+    viewer.imageryLayers.addImageryProvider(provider);
+  });"""
+        mode_note = "offline"
+        print(f"  [cesium] Using local CesiumJS: {_CESIUM_BUILD}")
+    else:
+        js_src  = f"{_CDN_BASE}/Cesium.js"
+        css_src = f"{_CDN_BASE}/Widgets/widgets.css"
+        imagery_js = f"\n  // Online: imagery loaded via Cesium Ion token\n  Cesium.Ion.defaultAccessToken = '{ion_token}';"
+        mode_note = "CDN"
+        print(f"  [cesium] CesiumJS not found locally — using CDN. Run 'aurora-pnt download-cesium' to enable offline mode.")
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <title>LEO PNT — {label}</title>
-  <script src="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Cesium.js"></script>
-  <link href="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <script src="{js_src}"></script>
+  <link href="{css_src}" rel="stylesheet">
   <style>
     html, body, #cesiumContainer {{ width:100%; height:100%; margin:0; padding:0; overflow:hidden; }}
     #overlay {{
@@ -283,14 +420,19 @@ def write_cesium_html(
       text-shadow:1px 1px 4px #000; z-index:100; pointer-events:none;
       background:rgba(0,0,0,0.45); padding:6px 18px; border-radius:8px;
     }}
+    #mode-badge {{
+      position:absolute; bottom:8px; right:12px;
+      color:#aaa; font-family:monospace; font-size:11px;
+      background:rgba(0,0,0,0.5); padding:3px 8px; border-radius:4px;
+      z-index:100; pointer-events:none;
+    }}
   </style>
 </head>
 <body>
 <div id="cesiumContainer"></div>
 <div id="overlay">LEO PNT &mdash; {label} &nbsp;|&nbsp; {speed}&times; speed</div>
+<div id="mode-badge">CesiumJS {_CESIUM_VERSION} &bull; {mode_note}</div>
 <script>
-Cesium.Ion.defaultAccessToken = '{ion_token}';
-
 var viewer = new Cesium.Viewer('cesiumContainer', {{
   animation: true,
   timeline: true,
@@ -301,12 +443,13 @@ var viewer = new Cesium.Viewer('cesiumContainer', {{
   navigationHelpButton: true,
   infoBox: true,
   selectionIndicator: true,
+  imageryProvider: false,
   creditContainer: document.createElement('div'),
 }});
 
-// Dark space background; real Earth imagery loaded via Ion token above
 viewer.scene.backgroundColor = Cesium.Color.BLACK;
 viewer.scene.globe.enableLighting = true;
+{imagery_js}
 
 // Load CZML
 var czml = {czml_json};
@@ -325,10 +468,10 @@ viewer.clock.shouldAnimate = true;
 </body>
 </html>"""
 
-    Path(output_path).parent.mkdir(parents=True, exist_ok=True)
-    with open(output_path, "w", encoding="utf-8") as f:
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with open(out, "w", encoding="utf-8") as f:
         f.write(html)
-    return output_path
+    return str(out)
 
 
 def generate_cesium_visualization(

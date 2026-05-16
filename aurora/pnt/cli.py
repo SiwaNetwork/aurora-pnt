@@ -125,6 +125,25 @@ def cmd_cesium(args):
     )
 
 
+def cmd_download_cesium(args):
+    """Download CesiumJS once for offline globe visualization."""
+    from aurora.pnt.cesium_pnt import download_cesium, is_cesium_local, _CESIUM_LOCAL_DIR, _CESIUM_VERSION
+
+    if is_cesium_local() and not args.force:
+        print(f"  CesiumJS {_CESIUM_VERSION} already installed at:")
+        print(f"  {_CESIUM_LOCAL_DIR}")
+        print(f"  Use --force to re-download.")
+        return
+
+    ok = download_cesium(target_dir=args.target or None, version=_CESIUM_VERSION)
+    if ok:
+        print(f"\n  Done. All future 'cesium' commands will use local files.")
+        print(f"  No internet connection needed for globe visualization.")
+    else:
+        print(f"\n  Download failed. Check your internet connection and try again.")
+        sys.exit(1)
+
+
 def cmd_ranging(args):
     """Ranging accuracy: UERE budget, position error, timing error."""
     import glob as _glob
@@ -732,6 +751,20 @@ def main():
     p_ces.add_argument("--speed", type=int, default=60, help="Множитель скорости анимации (по умолч. 60x)")
     p_ces.add_argument("--token", default="", help="Cesium Ion access token для текстур Земли")
 
+    # download-cesium
+    p_dlc = sub.add_parser(
+        "download-cesium",
+        help="Скачать CesiumJS один раз для работы глобуса без интернета"
+    )
+    p_dlc.add_argument(
+        "--target", default=None,
+        help="Папка назначения (по умолчанию assets/cesium/ в корне проекта)"
+    )
+    p_dlc.add_argument(
+        "--force", action="store_true",
+        help="Перезагрузить, даже если уже установлен"
+    )
+
     # ranging
     p_rng = sub.add_parser("ranging", help="Ranging accuracy: UERE, position error, timing")
     p_rng.add_argument("-c", "--config", required=True)
@@ -978,10 +1011,11 @@ def main():
         "isl-ranging":    cmd_isl_ranging,
         "monte-carlo":    cmd_monte_carlo,
         "resilience":     cmd_resilience,
-        "combined":       cmd_combined,
-        "time-scale":     cmd_time_scale,
-        "timing-service": cmd_timing_service,
-        "clock-arch":     cmd_clock_arch,
+        "combined":         cmd_combined,
+        "time-scale":       cmd_time_scale,
+        "timing-service":   cmd_timing_service,
+        "clock-arch":       cmd_clock_arch,
+        "download-cesium":  cmd_download_cesium,
     }
     dispatch[args.command](args)
 
