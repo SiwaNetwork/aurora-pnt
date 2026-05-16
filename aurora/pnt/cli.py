@@ -436,6 +436,7 @@ def cmd_clock_arch(args):
     print(f"  Cs/plane: {args.cs_per_plane}  Rb/plane: {args.rb_per_plane}  "
           f"OCXO/plane: {args.n_sats - args.cs_per_plane - args.rb_per_plane}")
 
+    ocxo_sync = getattr(args, "ocxo_sync_interval", 10.0)
     run_mixed_clock_analysis(
         output_dir=output_dir,
         label=label,
@@ -444,6 +445,7 @@ def cmd_clock_arch(args):
         cs_per_plane=args.cs_per_plane,
         rb_per_plane=args.rb_per_plane,
         sync_interval_s=args.sync_interval,
+        ocxo_sync_interval_s=ocxo_sync,
     )
     print(f"  Results saved to: {output_dir}/")
 
@@ -815,7 +817,9 @@ def main():
     p_ca2.add_argument("--rb-per-plane", type=int,   default=3,
                        help="Rb timing relays per plane (default: 3)")
     p_ca2.add_argument("--sync-interval", type=float, default=60.0,
-                       help="ISL sync interval in seconds (default: 60)")
+                       help="ISL sync interval for Cs/Rb tiers in seconds (default: 60)")
+    p_ca2.add_argument("--ocxo-sync-interval", type=float, default=10.0,
+                       help="ISL sync interval for OCXO tier in seconds (default: 10, must be <=24 for PTP Class 25)")
 
     # timing-service
     p_tms = sub.add_parser("timing-service",

@@ -284,6 +284,21 @@ def compute_holdover(clock_key: str, target_ns: float = 10.0) -> dict:
     }
 
 
+def _autonomous_nav_limit(clock_key: str, target_m: float = 1.0) -> dict:
+    """Time until clock drift accumulates target_m range error in autonomous navigation."""
+    ppb = SPACE_CLOCKS[clock_key]["ppb"]
+    drift_rate_m_per_s = ppb * 1e-9 * _C
+    limit_s = target_m / drift_rate_m_per_s
+    return {
+        "clock_key":           clock_key,
+        "drift_rate_m_per_s":  drift_rate_m_per_s,
+        "drift_rate_m_per_hr": drift_rate_m_per_s * 3600,
+        "limit_s":             limit_s,
+        "limit_min":           limit_s / 60,
+        "target_m":            target_m,
+    }
+
+
 def run_mixed_clock_analysis(
     output_dir: str,
     label: str = "phase4",
@@ -292,6 +307,7 @@ def run_mixed_clock_analysis(
     cs_per_plane: int = 1,
     rb_per_plane: int = 3,
     sync_interval_s: float = 60.0,
+    ocxo_sync_interval_s: float = 10.0,
 ) -> dict:
     """
     Mixed-clock constellation analysis for AURORA Phase 4.
@@ -307,6 +323,10 @@ def run_mixed_clock_analysis(
       OCXO terminal: MCS -> [Cs relay x1] -> [Rb relay x1] -> OCXO
       Rb relay:      MCS -> [Cs relay x1] -> Rb
       Cs anchor:     MCS -> Cs  (direct TWSTT or 1 ISL hop)
+
+    OCXO timing budget = ISL chain sigma + OCXO self-drift during ocxo_sync_interval_s.
+    To stay within PTP Class 25 (< 25 ns), OCXO requires ocxo_sync_interval_s ≤ ~24 s.
+    Default: ocxo_sync_interval_s = 10 s → sigma ≈ 10 ns (Class 25 ✓).
     """
     os.makedirs(output_dir, exist_ok=True)
 
@@ -319,11 +339,14 @@ def run_mixed_clock_analysis(
     # Cs anchor: 1 Cs hop from MCS (MCS itself is H-Maser/Cs ground clock ~0.001 ppb)
     sigma_cs_anchor = compute_isl_chain_sigma(["cs"], sync_interval_s)
 
-    # Rb relay: 1 Cs + 1 Rb hop from MCS
+    # Rb relay: Cs relay error + Rb's own drift during T_sync
     sigma_rb_relay  = compute_isl_chain_sigma(["cs", "rb"], sync_interval_s)
 
-    # OCXO terminal: 1 Cs + 1 Rb hop (OCXO does not relay, is terminal)
-    sigma_ocxo_term = compute_isl_chain_sigma(["cs", "rb"], sync_interval_s)
+    # OCXO terminal: ISL chain error (Cs+Rb relays) + OCXO's own drift during ocxo_sync_interval_s
+    # BUG FIX: previously missing OCXO self-drift term (10× underestimate at T=60 s)
+    sigma_chain_to_ocxo = compute_isl_chain_sigma(["cs", "rb"], ocxo_sync_interval_s)
+    ocxo_self_drift_ns  = SPACE_CLOCKS["ocxo"]["ppb"] * ocxo_sync_interval_s
+    sigma_ocxo_term     = math.sqrt(sigma_chain_to_ocxo**2 + ocxo_self_drift_ns**2)
 
     # ── Holdover performance ────────────────────────────────────────────────
     target_ns = 10.0  # < 10 ns = < 3 m range error
@@ -342,17 +365,26 @@ def run_mixed_clock_analysis(
             "per_sat_w":   c["power_w"],
         }
 
+    # ── Autonomous navigation limits (clock-dominated) ─────────────────────
+    auto_nav = {k: _autonomous_nav_limit(k, target_m=1.0) for k in ["ocxo", "rb", "cs"]}
+
     results = {
         "label": label,
         "n_total": n_total, "n_cs": n_cs, "n_rb": n_rb, "n_ocxo": n_ocxo,
         "n_planes": n_planes, "sats_per_plane": n_sats_per_plane,
-        "sync_interval_s": sync_interval_s,
+        "sync_interval_s":      sync_interval_s,
+        "ocxo_sync_interval_s": ocxo_sync_interval_s,
         "isl_chain": {
-            "cs_anchor_sigma_ns":  round(sigma_cs_anchor, 3),
-            "rb_relay_sigma_ns":   round(sigma_rb_relay, 3),
-            "ocxo_terminal_sigma_ns": round(sigma_ocxo_term, 3),
+            "cs_anchor_sigma_ns":      round(sigma_cs_anchor, 3),
+            "rb_relay_sigma_ns":       round(sigma_rb_relay, 3),
+            "ocxo_terminal_sigma_ns":  round(sigma_ocxo_term, 3),
+            "ocxo_self_drift_ns":      round(ocxo_self_drift_ns, 3),
+            "ocxo_ptp_class":          _ptp_class(sigma_ocxo_term),
+            "rb_ptp_class":            _ptp_class(sigma_rb_relay),
+            "cs_ptp_class":            _ptp_class(sigma_cs_anchor),
         },
-        "holdover": {k: v for k, v in holdover.items()},
+        "holdover":        {k: v for k, v in holdover.items()},
+        "autonomous_nav":  auto_nav,
         "hardware_budget": budget,
     }
 
@@ -377,7 +409,10 @@ def _plot_mixed_clock(results: dict, output_dir: str, label: str):
 
     # ── Plot 1: ISL chain accuracy per tier ──────────────────────────────────
     ax = axes[0]
-    tiers  = ["Cs anchor", "Rb relay", "OCXO terminal"]
+    T_rb   = results["sync_interval_s"]
+    T_ocxo = results["ocxo_sync_interval_s"]
+    tiers  = [f"Cs anchor\n(T={T_rb:.0f}s)", f"Rb relay\n(T={T_rb:.0f}s)",
+              f"OCXO terminal\n(T={T_ocxo:.0f}s)"]
     sigmas = [
         results["isl_chain"]["cs_anchor_sigma_ns"],
         results["isl_chain"]["rb_relay_sigma_ns"],
@@ -386,12 +421,13 @@ def _plot_mixed_clock(results: dict, output_dir: str, label: str):
     colors = ["#1565C0", "#2E7D32", "#F57F17"]
     bars = ax.bar(tiers, sigmas, color=colors, alpha=0.88)
     ax.axhline(25,   color="green",  linestyle="--", alpha=0.8, label="PTP Class 25 (25 ns)")
+    ax.axhline(100,  color="orange", linestyle="--", alpha=0.6, label="PTP Class 32 (100 ns)")
     ax.axhline(1000, color="red",    linestyle="--", alpha=0.6, label="NTP stratum-1 (1 us)")
     for bar, val in zip(bars, sigmas):
         ax.text(bar.get_x() + bar.get_width() / 2, val + 0.2, f"{val:.2f} ns",
                 ha="center", va="bottom", fontsize=9, fontweight="bold")
-    ax.set_ylabel("ISL timing error 1s [ns]")
-    ax.set_title("Timing accuracy by satellite tier\n(normal ISL operation)")
+    ax.set_ylabel("Timing error 1σ [ns]")
+    ax.set_title("Timing accuracy by satellite tier\n(ISL chain + self-drift, normal operation)")
     ax.legend(fontsize=8)
     ax.grid(axis="y", alpha=0.3)
     ax.set_ylim(0, max(sigmas) * 1.5)
@@ -470,11 +506,17 @@ def _print_mixed_clock_summary(results: dict):
           f"{n['n_rb']} Rb relays + {n['n_ocxo']} OCXO terminals")
 
     isl = results["isl_chain"]
+    T_rb   = results["sync_interval_s"]
+    T_ocxo = results["ocxo_sync_interval_s"]
     print(f"\n  ISL Timing Accuracy (normal operation):")
-    print(f"    Cs anchor (1 Cs hop from MCS)      : {isl['cs_anchor_sigma_ns']:.3f} ns")
-    print(f"    Rb relay  (Cs+Rb hops from MCS)    : {isl['rb_relay_sigma_ns']:.3f} ns")
-    print(f"    OCXO term (Cs+Rb hops, terminal)   : {isl['ocxo_terminal_sigma_ns']:.3f} ns")
-    print(f"    -> All tiers: PTP Class 25 capable")
+    print(f"    Cs anchor  (T={T_rb:.0f}s, 1 Cs hop)           : "
+          f"{isl['cs_anchor_sigma_ns']:.3f} ns  -> {isl['cs_ptp_class']}")
+    print(f"    Rb relay   (T={T_rb:.0f}s, Cs+Rb chain)         : "
+          f"{isl['rb_relay_sigma_ns']:.3f} ns  -> {isl['rb_ptp_class']}")
+    print(f"    OCXO term  (T={T_ocxo:.0f}s, chain+self drift)   : "
+          f"{isl['ocxo_terminal_sigma_ns']:.3f} ns  -> {isl['ocxo_ptp_class']}")
+    print(f"    OCXO self-drift component            : "
+          f"{isl['ocxo_self_drift_ns']:.3f} ns  (1 ppb x {T_ocxo:.0f}s)")
 
     print(f"\n  Holdover (ISL disrupted, target < {results['holdover']['ocxo']['target_ns']:.0f} ns = "
           f"< {results['holdover']['ocxo']['target_range_m']:.0f} m):")
@@ -482,6 +524,16 @@ def _print_mixed_clock_summary(results: dict):
         ho = results["holdover"][key]
         print(f"    {ho['clock_label']:<18}: {ho['holdover_s']:>6.0f} s "
               f"({ho['holdover_min']:>5.1f} min)")
+
+    auto = results["autonomous_nav"]
+    print(f"\n  Autonomous navigation (1 m range error limit, clock-dominated):")
+    for key in ["ocxo", "rb", "cs"]:
+        a = auto[key]
+        print(f"    {SPACE_CLOCKS[key]['label']:<18}: drift {a['drift_rate_m_per_hr']:>7.2f} m/hr "
+              f"-> {a['limit_s']:>6.0f} s ({a['limit_min']:.1f} min) to 1 m error")
+    print(f"    Ephemeris (no ISL OD)  :  0.50 m/hr -> 7200 s (120 min, 2.0 hr) limit")
+    print(f"    Ephemeris (with ISL OD): ~0.02 m/hr -> 180000 s (~50 hr = 2.1 days) limit")
+    print(f"    => OCXO/Rb: clock-limited (seconds-minutes); Cs: ~5.6 min; with ISL OD: ephemeris-limited")
 
     bud = results["hardware_budget"]
     print(f"\n  Hardware budget (full {results['n_total']}-satellite constellation):")
