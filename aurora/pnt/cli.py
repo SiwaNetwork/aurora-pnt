@@ -562,6 +562,38 @@ def cmd_deorbit(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_monte_carlo(args):
+    """Monte Carlo position accuracy: empirical CEP histograms vs analytical estimates."""
+    from aurora.pnt.monte_carlo import run_monte_carlo, print_mc_summary
+
+    label      = args.label  or "phase3"
+    output_dir = args.output or "results/monte_carlo"
+
+    phase_configs = [
+        {"mode": "autonomous",    "n_sats": args.n_sats_auto,
+         "pdop_target": args.pdop_auto,    "name": "Autonomous (LEO-only)"},
+        {"mode": "combined",      "n_sats": args.n_sats_comb,
+         "pdop_target": args.pdop_combined, "name": "Combined (LEO+GLONASS)"},
+        {"mode": "combined_sdcm", "n_sats": args.n_sats_comb,
+         "pdop_target": args.pdop_combined, "name": "Combined+SDCM"},
+    ]
+
+    print(f"\n  Running Monte Carlo position accuracy simulation: {label}")
+    print(f"  Trials: {args.n_trials:,}  |  Seed: {args.seed}")
+    print(f"  Autonomous: {args.n_sats_auto} sats, PDOP={args.pdop_auto}")
+    print(f"  Combined:   {args.n_sats_comb} sats, PDOP={args.pdop_combined}")
+
+    results = run_monte_carlo(
+        output_dir=output_dir,
+        label=label,
+        n_trials=args.n_trials,
+        seed=args.seed,
+        phase_configs=phase_configs,
+    )
+    print_mc_summary(label, results)
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_freq_plan(args):
     """Frequency plan: ITU allocation, interference analysis, Doppler profile."""
     from aurora.pnt.frequency_plan import run_frequency_plan_analysis, print_frequency_plan_summary
@@ -885,6 +917,24 @@ def main():
     p_isl.add_argument("--pdop",               type=float, default=5.15,
                        help="PDOP p95 value for CEP computation (default: 5.15 = Phase 3)")
 
+    # monte-carlo
+    p_mc = sub.add_parser("monte-carlo",
+                          help="Monte Carlo accuracy: empirical CEP histograms vs analytical estimates")
+    p_mc.add_argument("-o", "--output",     default="results/monte_carlo", help="Output directory")
+    p_mc.add_argument("-l", "--label",      default="phase3",              help="Run label")
+    p_mc.add_argument("--n-trials",         type=int,   default=10_000,
+                      help="Number of Monte Carlo trials (default: 10000)")
+    p_mc.add_argument("--seed",             type=int,   default=42,
+                      help="Random seed for reproducibility (default: 42)")
+    p_mc.add_argument("--pdop-auto",        type=float, default=5.15,
+                      help="PDOP p95 for autonomous mode (default: 5.15 = Phase 3)")
+    p_mc.add_argument("--pdop-combined",    type=float, default=1.67,
+                      help="PDOP p95 for combined mode (default: 1.67 = Phase 4)")
+    p_mc.add_argument("--n-sats-auto",      type=int,   default=10,
+                      help="Visible satellites for autonomous mode (default: 10)")
+    p_mc.add_argument("--n-sats-comb",      type=int,   default=22,
+                      help="Visible satellites for combined mode (default: 22)")
+
     # resilience
     p_res = sub.add_parser("resilience", help="Constellation resilience: satellite and ISL failure scenarios")
     p_res.add_argument("-c", "--config", required=True)
@@ -916,6 +966,7 @@ def main():
         "deorbit":        cmd_deorbit,
         "freq-plan":      cmd_freq_plan,
         "isl-ranging":    cmd_isl_ranging,
+        "monte-carlo":    cmd_monte_carlo,
         "resilience":     cmd_resilience,
         "combined":       cmd_combined,
         "time-scale":     cmd_time_scale,
