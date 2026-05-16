@@ -13,6 +13,12 @@ Commands:
 import argparse
 import sys
 
+# Ensure UTF-8 output on Windows (cp1251 console can't handle Unicode symbols)
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 from aurora.pnt.pnt_simulator import load_config, run_experiment, run_pnt_simulation
 from aurora.pnt.visualize import generate_all_visuals
 
