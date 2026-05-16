@@ -470,6 +470,98 @@ def cmd_timing_service(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_sdcm(args):
+    """SDCM differential corrections: Mode C UERE, coverage, CEP improvement."""
+    from aurora.pnt.sdcm import run_sdcm_analysis, print_sdcm_summary
+    label      = args.label  or "phase3"
+    output_dir = args.output or "results/sdcm"
+    print(f"\n  Running SDCM differential corrections analysis: {label}")
+    result = run_sdcm_analysis(output_dir=output_dir, label=label,
+                               pdop_autonomous=args.pdop_auto,
+                               pdop_combined=args.pdop_combined,
+                               grid_step_deg=args.grid_step)
+    print_sdcm_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_isl_link(args):
+    """ISL RF link budget: Ka/V/Optical bands, margin vs range."""
+    from aurora.pnt.isl_link_budget import run_isl_link_budget_analysis, print_isl_link_summary
+    label      = args.label  or "phase3"
+    output_dir = args.output or "results/isl_link"
+    print(f"\n  Running ISL link budget analysis: {label}")
+    result = run_isl_link_budget_analysis(output_dir=output_dir, label=label,
+                                          n_planes=args.n_planes,
+                                          n_sats_per_plane=args.n_sats)
+    print_isl_link_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_anti_jam(args):
+    """Anti-jamming analysis: J/S ratio, effective jamming radius vs GPS."""
+    from aurora.pnt.anti_jam import run_anti_jam_analysis, print_anti_jam_summary
+    label      = args.label  or "phase3"
+    output_dir = args.output or "results/anti_jam"
+    print(f"\n  Running anti-jamming analysis: {label}  "
+          f"(elevation {args.elevation} deg)")
+    result = run_anti_jam_analysis(output_dir=output_dir, label=label,
+                                   elevation_deg=args.elevation)
+    print_anti_jam_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_tesla_mac(args):
+    """TESLA MAC anti-spoofing: key chain, vulnerability window, attack mitigation."""
+    from aurora.pnt.tesla_mac import run_tesla_mac_analysis, print_tesla_summary
+    label      = args.label  or "phase3"
+    output_dir = args.output or "results/tesla_mac"
+    print(f"\n  Running TESLA MAC anti-spoofing analysis: {label}")
+    result = run_tesla_mac_analysis(output_dir=output_dir, label=label)
+    print_tesla_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_multipath(args):
+    """Multipath environment model: CEP by scenario vs GPS."""
+    from aurora.pnt.multipath import run_multipath_analysis, print_multipath_summary
+    label      = args.label  or "phase3"
+    output_dir = args.output or "results/multipath"
+    print(f"\n  Running multipath environment analysis: {label}")
+    result = run_multipath_analysis(output_dir=output_dir, label=label,
+                                    pdop_leo=args.pdop_leo,
+                                    pdop_gps=args.pdop_gps)
+    print_multipath_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_acquisition(args):
+    """Signal acquisition and TTFF analysis: Doppler search, cold/warm/hot start."""
+    from aurora.pnt.acquisition import run_acquisition_analysis, print_acquisition_summary
+    label      = args.label  or "phase3"
+    output_dir = args.output or "results/acquisition"
+    print(f"\n  Running signal acquisition & TTFF analysis: {label}  "
+          f"(clock {args.clock_ppm} ppm, {args.channels} channels)")
+    result = run_acquisition_analysis(output_dir=output_dir, label=label,
+                                      rx_clock_ppm=args.clock_ppm,
+                                      parallel_ch=args.channels)
+    print_acquisition_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_deorbit(args):
+    """Orbital lifetime and deorbit analysis: decay, IADC compliance, delta-V."""
+    from aurora.pnt.deorbit import run_deorbit_analysis, print_deorbit_summary
+    label      = args.label  or "phase3"
+    output_dir = args.output or "results/deorbit"
+    print(f"\n  Running orbital lifetime & deorbit analysis: {label}  "
+          f"({args.altitude_km:.0f} km, {args.n_sats} sats)")
+    result = run_deorbit_analysis(output_dir=output_dir, label=label,
+                                  altitude_km=args.altitude_km,
+                                  n_sats=args.n_sats)
+    print_deorbit_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_freq_plan(args):
     """Frequency plan: ITU allocation, interference analysis, Doppler profile."""
     from aurora.pnt.frequency_plan import run_frequency_plan_analysis, print_frequency_plan_summary
@@ -707,6 +799,56 @@ def main():
     p_tms.add_argument("--uere-combined",   type=float, default=1.69,
                        help="UERE for combined LEO+GLONASS mode in meters (default: 1.69)")
 
+    # sdcm
+    p_sdcm = sub.add_parser("sdcm", help="SDCM differential corrections: Mode C UERE/CEP analysis")
+    p_sdcm.add_argument("-o","--output", default="results/sdcm")
+    p_sdcm.add_argument("-l","--label",  default="phase3")
+    p_sdcm.add_argument("--pdop-auto",     type=float, default=5.15, help="Autonomous PDOP p95")
+    p_sdcm.add_argument("--pdop-combined", type=float, default=1.67, help="Combined PDOP p95")
+    p_sdcm.add_argument("--grid-step",    type=float, default=2.0,  help="Grid step degrees")
+
+    # isl-link
+    p_isl_lnk = sub.add_parser("isl-link", help="ISL RF link budget: Ka/V/Optical bands")
+    p_isl_lnk.add_argument("-o","--output",  default="results/isl_link")
+    p_isl_lnk.add_argument("-l","--label",   default="phase3")
+    p_isl_lnk.add_argument("--n-planes", type=int, default=12)
+    p_isl_lnk.add_argument("--n-sats",   type=int, default=15)
+
+    # anti-jam
+    p_aj = sub.add_parser("anti-jam", help="Anti-jamming: J/S ratio, jamming radius vs GPS")
+    p_aj.add_argument("-o","--output",    default="results/anti_jam")
+    p_aj.add_argument("-l","--label",     default="phase3")
+    p_aj.add_argument("--elevation", type=float, default=10.0,
+                      help="Satellite elevation angle in degrees (default: 10)")
+
+    # tesla-mac
+    p_tsl = sub.add_parser("tesla-mac", help="TESLA MAC anti-spoofing analysis")
+    p_tsl.add_argument("-o","--output", default="results/tesla_mac")
+    p_tsl.add_argument("-l","--label",  default="phase3")
+
+    # multipath
+    p_mp = sub.add_parser("multipath", help="Multipath model: CEP by environment vs GPS")
+    p_mp.add_argument("-o","--output",   default="results/multipath")
+    p_mp.add_argument("-l","--label",    default="phase3")
+    p_mp.add_argument("--pdop-leo", type=float, default=5.15)
+    p_mp.add_argument("--pdop-gps", type=float, default=3.50)
+
+    # acquisition
+    p_acq = sub.add_parser("acquisition", help="Signal acquisition & TTFF: Doppler, search, TTFF")
+    p_acq.add_argument("-o","--output",   default="results/acquisition")
+    p_acq.add_argument("-l","--label",    default="phase3")
+    p_acq.add_argument("--clock-ppm",  type=float, default=1.0,
+                       help="RX oscillator uncertainty in ppm (default: 1.0 = TCXO)")
+    p_acq.add_argument("--channels",   type=int,   default=32,
+                       help="Number of parallel acquisition channels (default: 32)")
+
+    # deorbit
+    p_deo = sub.add_parser("deorbit", help="Orbital lifetime & deorbit: IADC compliance, delta-V")
+    p_deo.add_argument("-o","--output",       default="results/deorbit")
+    p_deo.add_argument("-l","--label",        default="phase3")
+    p_deo.add_argument("--altitude-km",   type=float, default=1000.0)
+    p_deo.add_argument("--n-sats",        type=int,   default=180)
+
     # freq-plan
     p_fp = sub.add_parser("freq-plan",
                           help="Frequency plan: ITU allocation, GNSS interference, Doppler profile")
@@ -765,6 +907,13 @@ def main():
         "network-metrics": cmd_network_metrics,
         "clock-analysis": cmd_clock_analysis,
         "raim": cmd_raim,
+        "sdcm":           cmd_sdcm,
+        "isl-link":       cmd_isl_link,
+        "anti-jam":       cmd_anti_jam,
+        "tesla-mac":      cmd_tesla_mac,
+        "multipath":      cmd_multipath,
+        "acquisition":    cmd_acquisition,
+        "deorbit":        cmd_deorbit,
         "freq-plan":      cmd_freq_plan,
         "isl-ranging":    cmd_isl_ranging,
         "resilience":     cmd_resilience,
