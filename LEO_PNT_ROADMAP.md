@@ -593,8 +593,13 @@ HPL/VPL превышают авиационные нормы (40/50 м) — си
 | `results/time_scale/` | LPT стабильность, UERE breakdown, графики |
 | `results/timing_service/` | AURORA-T PTP/NTP: точность по типам часов |
 | `results/clock_arch/` | Архитектура OCXO/Rb/Cs: ISL-цепочка, удержание |
-| `results/raim/` | RAIM: HPL/VPL, доступность целостности |
+| `results/raim_phase3/` | RAIM Phase 3: HPL/VPL, доступность целостности |
+| `results/raim_phase4/` | RAIM Phase 4: HPL/VPL (расширенный) |
 | `results/resilience/` | Живучесть при 5–50% отказа спутников |
+| `results/phase4_core/` | Phase 4 ядро: TLE, timestep_metrics, link_budget, ranging |
+| `results/clock_analysis/` | Анализ синхронизации часов (ISL chain) |
+| `results/clock_analysis_v1/` | Анализ синхронизации (ранняя версия) |
+| `results/monte_carlo/` | Monte Carlo CEP: p50/p68/p95 по трём режимам |
 | `results/isl_ranging/` | ISL OD: удержание эфемерид, кривые роста ошибки |
 | `results/freq_plan/` | Частотный план: Допплер, ITU-зоны, помехи |
 | `results/sdcm/` | СДКМ Mode C: покрытие, UERE-сетка, CEP 0.93 м |
