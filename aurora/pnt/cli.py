@@ -1011,6 +1011,116 @@ def cmd_rtk_ppp(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_pvt_montecarlo(args):
+    """End-to-end Monte-Carlo PVT error budget."""
+    from aurora.pnt.pvt_montecarlo import run_pvt_montecarlo_analysis, print_pvt_montecarlo_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/pvt_montecarlo"
+    print(f"\n  Running PVT Monte-Carlo analysis: {label}")
+    results = run_pvt_montecarlo_analysis(output_dir, label)
+    print_pvt_montecarlo_summary(label, results)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_dop_temporal(args):
+    """Temporal DOP / availability maps over the constellation."""
+    from aurora.pnt.dop_temporal import run_dop_temporal_analysis, print_dop_temporal_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/dop_temporal"
+    print(f"\n  Running temporal DOP analysis: {label}")
+    results = run_dop_temporal_analysis(output_dir, label)
+    print_dop_temporal_summary(label, results)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_pod(args):
+    """Precise orbit determination: force budget, R/A/C accuracy, SLR, observability."""
+    from aurora.pnt.pod_filter import run_pod_analysis, print_pod_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/pod"
+    print(f"\n  Running POD analysis: {label}")
+    results = run_pod_analysis(output_dir, label)
+    print_pod_summary(label, results)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_autonav(args):
+    """Autonomous navigation via ISL ranging: ephemeris growth, rank deficiency."""
+    from aurora.pnt.autonav_isl import run_autonav_analysis, print_autonav_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/autonav"
+    print(f"\n  Running AutoNav ISL analysis: {label}")
+    results = run_autonav_analysis(output_dir, label)
+    print_autonav_summary(label, results)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_araim(args):
+    """ARAIM: solution separation, VPL/HPL, P_HMI risk tree."""
+    from aurora.pnt.araim import run_araim_analysis, print_araim_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/araim"
+    print(f"\n  Running ARAIM analysis: {label}")
+    results = run_araim_analysis(output_dir, label)
+    print_araim_summary(label, results)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_integrity(args):
+    """Integrity budget: Stanford diagram, LPV-200/CAT-I availability, ISM."""
+    from aurora.pnt.integrity_budget import run_integrity_analysis, print_integrity_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/integrity"
+    print(f"\n  Running integrity budget analysis: {label}")
+    results = run_integrity_analysis(output_dir, label)
+    print_integrity_summary(label, results)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_cost(args):
+    """Life-cycle cost model: CAPEX/OPEX, learning curve, LCC, sensitivity."""
+    from aurora.pnt.cost_model import run_cost_analysis, print_cost_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/cost"
+    print(f"\n  Running cost model analysis: {label}")
+    results = run_cost_analysis(output_dir, label)
+    print_cost_summary(label, results)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_production(args):
+    """Production & AIT for 300 sats: flow, rate, throughput, deployment."""
+    from aurora.pnt.production_ait import run_production_analysis, print_production_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/production"
+    print(f"\n  Running production/AIT analysis: {label}")
+    results = run_production_analysis(output_dir, label)
+    print_production_summary(label, results)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_launch_campaign(args):
+    """Launch & deployment: manifest, RAAN phasing, timeline, dV raise budget."""
+    from aurora.pnt.launch_campaign import run_launch_campaign_analysis, print_launch_campaign_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/launch"
+    print(f"\n  Running launch campaign analysis: {label}")
+    results = run_launch_campaign_analysis(output_dir, label)
+    print_launch_campaign_summary(label, results)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_ground_segment(args):
+    """Ground segment (MCS/TT&C): architecture, latency, redundancy."""
+    from aurora.pnt.ground_segment import run_ground_segment_analysis, print_ground_segment_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/ground_segment"
+    print(f"\n  Running ground segment analysis: {label}")
+    results = run_ground_segment_analysis(output_dir, label)
+    print_ground_segment_summary(label, results)
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_system_concept(args):
     """Concept illustrations: system overview, service scenarios, LEO vs MEO, signal flow."""
     from aurora.pnt.system_concept import run_system_concept
@@ -1519,6 +1629,23 @@ def main():
     p_sk.add_argument("-o", "--output", default="results/station_keeping")
     p_sk.add_argument("-l", "--label",  default="phase4")
 
+    # ── Phase 2 expansion modules ──────────────────────────────────────────
+    for _name, _help, _odir in [
+        ("pvt-montecarlo", "End-to-end Monte-Carlo PVT error budget", "results/pvt_montecarlo"),
+        ("dop-temporal",   "Temporal DOP / availability maps",        "results/dop_temporal"),
+        ("pod",            "Precise orbit determination (force budget, R/A/C, SLR)", "results/pod"),
+        ("autonav",        "Autonomous navigation via ISL ranging",   "results/autonav"),
+        ("araim",          "ARAIM: solution separation, VPL/HPL, P_HMI", "results/araim"),
+        ("integrity",      "Integrity budget: Stanford, LPV-200/CAT-I, ISM", "results/integrity"),
+        ("cost",           "Life-cycle cost model (CAPEX/OPEX, LCC)", "results/cost"),
+        ("production",     "Production & AIT for 300 sats",           "results/production"),
+        ("launch-campaign","Launch & deployment campaign",            "results/launch"),
+        ("ground-segment", "Ground segment (MCS/TT&C) architecture",  "results/ground_segment"),
+    ]:
+        _p = sub.add_parser(_name, help=_help)
+        _p.add_argument("-o", "--output", default=_odir)
+        _p.add_argument("-l", "--label",  default="phase5")
+
     # system-concept
     p_sc = sub.add_parser("system-concept",
                           help="Concept illustrations: system overview, service scenarios, LEO vs MEO, signal flow")
@@ -1584,6 +1711,16 @@ def main():
         "user-segment":       cmd_user_segment,
         "itu-coordination":   cmd_itu_coordination,
         "rtk-ppp":            cmd_rtk_ppp,
+        "pvt-montecarlo":     cmd_pvt_montecarlo,
+        "dop-temporal":       cmd_dop_temporal,
+        "pod":                cmd_pod,
+        "autonav":            cmd_autonav,
+        "araim":              cmd_araim,
+        "integrity":          cmd_integrity,
+        "cost":               cmd_cost,
+        "production":         cmd_production,
+        "launch-campaign":    cmd_launch_campaign,
+        "ground-segment":     cmd_ground_segment,
         "signal-design":       cmd_signal_design,
         "competitor-analysis": cmd_competitor_analysis,
         "combined":         cmd_combined,
