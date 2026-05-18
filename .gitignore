@@ -38,5 +38,9 @@ __pycache__/
 Untitled
 .claude/
 
-# Local CesiumJS assets (downloaded via aurora-pnt download-cesium, ~50 MB)
+# MS Office lock/temp files
+~$*
+
+# Vendored offline CesiumJS distribution (downloaded once, ~222 MB)
 assets/cesium/
+
