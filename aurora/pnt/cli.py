@@ -125,6 +125,35 @@ def cmd_cesium(args):
     )
 
 
+def cmd_serve(args):
+    """Start a local HTTP server to view Cesium HTML without file:// restrictions."""
+    import http.server
+    import webbrowser
+    import threading
+
+    port = args.port
+    directory = args.directory or "."
+
+    os.chdir(directory)
+
+    class QuietHandler(http.server.SimpleHTTPRequestHandler):
+        def log_message(self, fmt, *a):
+            pass  # suppress per-request noise
+
+    with http.server.HTTPServer(("", port), QuietHandler) as httpd:
+        url = f"http://localhost:{port}/"
+        print(f"  Serving '{os.path.abspath(directory)}' at {url}")
+        print(f"  Open in browser: {url}")
+        print(f"  Example:  {url}results/phase4/cesium_phase4_global.html")
+        print(f"  Press Ctrl+C to stop.")
+        if args.open:
+            threading.Timer(0.5, lambda: webbrowser.open(url)).start()
+        try:
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            print("\n  Server stopped.")
+
+
 def cmd_download_cesium(args):
     """Download CesiumJS once for offline globe visualization."""
     from aurora.pnt.cesium_pnt import download_cesium, is_cesium_local, _CESIUM_LOCAL_DIR, _CESIUM_VERSION
@@ -673,6 +702,335 @@ def cmd_isl_ranging(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_user_link_budget(args):
+    """User terminal RF link budget: C/N0, pseudorange noise, margins vs elevation."""
+    from aurora.pnt.link_budget import run_link_budget_analysis, print_link_budget_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/user_link_budget"
+    print(f"\n  Running user terminal link budget: {label}  "
+          f"(altitude {args.altitude_km:.0f} km)")
+    result = run_link_budget_analysis(output_dir=output_dir, label=label,
+                                      altitude_m=args.altitude_km * 1000)
+    print_link_budget_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_eclipse(args):
+    """Eclipse / Earth shadow analysis: fraction, duration, battery sizing, OCXO thermal."""
+    from aurora.pnt.eclipse import run_eclipse_analysis, print_eclipse_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/eclipse"
+    print(f"\n  Running eclipse analysis: {label}  "
+          f"(altitude {args.altitude_km:.0f} km, {args.n_sats} sats)")
+    result = run_eclipse_analysis(output_dir=output_dir, label=label,
+                                  altitude_m=args.altitude_km * 1000,
+                                  n_sats=args.n_sats)
+    print_eclipse_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_nav_message(args):
+    """Navigation message structure: bit budget, frame, TTFF, authentication."""
+    from aurora.pnt.nav_message import run_nav_message_analysis, print_nav_message_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/nav_message"
+    print(f"\n  Running navigation message analysis: {label}  "
+          f"({args.data_rate} bps, {args.n_sats} sats)")
+    result = run_nav_message_analysis(output_dir=output_dir, label=label,
+                                      data_rate_bps=args.data_rate,
+                                      n_sats=args.n_sats)
+    print_nav_message_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_iono_correction(args):
+    """Ionospheric correction: Klobuchar vs NeQuick-G vs dual-freq residuals."""
+    from aurora.pnt.iono_correction import run_iono_analysis, print_iono_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/iono_correction"
+    print(f"\n  Running ionospheric correction analysis: {label}")
+    result = run_iono_analysis(output_dir=output_dir, label=label)
+    print_iono_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_user_dynamics(args):
+    """User dynamics: moving platform accuracy (aviation/maritime/land vehicle)."""
+    from aurora.pnt.user_dynamics import run_user_dynamics_analysis, print_user_dynamics_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/user_dynamics"
+    print(f"\n  Running user dynamics analysis: {label}")
+    result = run_user_dynamics_analysis(output_dir=output_dir, label=label)
+    print_user_dynamics_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_ground_od(args):
+    """Ground-only orbit determination: RAC accuracy, prediction degradation."""
+    from aurora.pnt.ground_od import run_ground_od_analysis, print_ground_od_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/ground_od"
+    print(f"\n  Running ground orbit determination analysis: {label}")
+    result = run_ground_od_analysis(output_dir=output_dir, label=label)
+    print_ground_od_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_deployment(args):
+    """Deployment timeline: launch sequence, coverage ramp-up, cost breakdown."""
+    from aurora.pnt.deployment import run_deployment_analysis, print_deployment_summary
+    label      = args.label  or "full"
+    output_dir = args.output or "results/deployment"
+    print(f"\n  Running deployment timeline analysis: {label}")
+    result = run_deployment_analysis(output_dir=output_dir, label=label)
+    print_deployment_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_conjunction(args):
+    """Conjunction probability: Monte Carlo debris collision risk analysis."""
+    from aurora.pnt.conjunction_pc import run_conjunction_analysis, print_conjunction_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/conjunction"
+    print(f"\n  Running conjunction probability analysis: {label}  "
+          f"({args.n_trials:,} trials)")
+    result = run_conjunction_analysis(output_dir=output_dir, label=label,
+                                      n_trials=args.n_trials)
+    print_conjunction_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_coverage_maps(args):
+    """Geographic coverage maps: N_vis and PDOP heatmaps by phase."""
+    from aurora.pnt.coverage_maps import run_coverage_maps_analysis, print_coverage_summary
+    label      = args.label  or "all_phases"
+    output_dir = args.output or "results/coverage_maps"
+    phases = list(range(5)) if args.all_phases else [args.phase]
+    print(f"\n  Running coverage maps analysis: {label}  "
+          f"(phases: {phases})")
+    result = run_coverage_maps_analysis(output_dir=output_dir, label=label,
+                                        phases=phases)
+    print_coverage_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_power_budget(args):
+    """Satellite power budget: solar array, battery, subsystem loads, margins."""
+    from aurora.pnt.power_budget import run_power_budget_analysis, print_power_budget_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/power_budget"
+    print(f"\n  Running power budget analysis: {label}  "
+          f"(altitude {args.altitude_km:.0f} km, {args.n_sats} sats)")
+    result = run_power_budget_analysis(output_dir=output_dir, label=label,
+                                       altitude_m=args.altitude_km * 1000,
+                                       n_sats=args.n_sats)
+    print_power_budget_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_mass_budget(args):
+    """Satellite mass and volume budget: subsystems, propellant, wet mass, fleet totals."""
+    from aurora.pnt.mass_budget import run_mass_budget_analysis, print_mass_budget_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/mass_budget"
+    print(f"\n  Running mass budget analysis: {label}  "
+          f"({args.n_sats} sats, {args.mission_years:.0f} yr mission)")
+    result = run_mass_budget_analysis(output_dir=output_dir, label=label,
+                                      n_sats=args.n_sats,
+                                      mission_years=args.mission_years)
+    print_mass_budget_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_thermal(args):
+    """Satellite thermal analysis: orbital temperature profile, OCXO oven budget."""
+    from aurora.pnt.thermal import run_thermal_analysis, print_thermal_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/thermal"
+    print(f"\n  Running thermal analysis: {label}  "
+          f"(altitude {args.altitude_km:.0f} km)")
+    result = run_thermal_analysis(output_dir=output_dir, label=label,
+                                  altitude_m=args.altitude_km * 1000)
+    print_thermal_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_timing_chain(args):
+    """Timing chain: Cs→Rb→OCXO→user 1PPS ADEV, ISL transfer, holdover."""
+    from aurora.pnt.timing_chain import run_timing_chain_analysis, print_timing_chain_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/timing_chain"
+    print(f"\n  Running timing chain analysis: {label}  "
+          f"(max {args.max_hops} ISL hops)")
+    result = run_timing_chain_analysis(output_dir=output_dir, label=label,
+                                       n_hops_max=args.max_hops)
+    print_timing_chain_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_radiation(args):
+    """Radiation environment: TID, SEU rates, OCXO drift vs Al shielding."""
+    from aurora.pnt.radiation import run_radiation_analysis, print_radiation_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/radiation"
+    print(f"\n  Running radiation analysis: {label}")
+    result = run_radiation_analysis(output_dir=output_dir, label=label)
+    print_radiation_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_relativistic(args):
+    """Relativistic corrections: Sagnac, gravitational redshift, clock bias."""
+    from aurora.pnt.relativistic import run_relativistic_analysis, print_relativistic_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/relativistic"
+    print(f"\n  Running relativistic corrections analysis: {label}")
+    result = run_relativistic_analysis(output_dir=output_dir, label=label)
+    print_relativistic_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_troposphere(args):
+    """Tropospheric delay: ZHD/ZWD Saastamoinen, NMF, seasonal variation."""
+    from aurora.pnt.troposphere import run_troposphere_analysis, print_troposphere_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/troposphere"
+    print(f"\n  Running troposphere analysis: {label}")
+    result = run_troposphere_analysis(output_dir=output_dir, label=label)
+    print_troposphere_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_reliability(args):
+    """Reliability & MTBF: subsystem R(t), fleet degradation, spare satellites."""
+    from aurora.pnt.reliability import run_reliability_analysis, print_reliability_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/reliability"
+    print(f"\n  Running reliability analysis: {label}")
+    result = run_reliability_analysis(output_dir=output_dir, label=label)
+    print_reliability_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_ppp_convergence(args):
+    """PPP convergence: Kalman filter, LEO vs MEO, dual vs single freq."""
+    from aurora.pnt.ppp_convergence import run_ppp_convergence_analysis, print_ppp_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/ppp_convergence"
+    print(f"\n  Running PPP convergence analysis: {label}")
+    result = run_ppp_convergence_analysis(output_dir=output_dir, label=label)
+    print_ppp_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_signal_quality(args):
+    """Signal quality: SISA, SISRA, URE, UERE budget vs GPS/Galileo."""
+    from aurora.pnt.signal_quality import run_signal_quality_analysis, print_signal_quality_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/signal_quality"
+    print(f"\n  Running signal quality analysis: {label}")
+    result = run_signal_quality_analysis(output_dir=output_dir, label=label)
+    print_signal_quality_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_adcs(args):
+    """ADCS requirements: pointing budget, disturbance torques, reaction wheels, ISL."""
+    from aurora.pnt.adcs_requirements import run_adcs_analysis, print_adcs_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/adcs"
+    print(f"\n  Running ADCS requirements analysis: {label}")
+    result = run_adcs_analysis(output_dir=output_dir, label=label)
+    print_adcs_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_ground_network(args):
+    """Ground network optimization: MCS geometry, OD quality, coverage analysis."""
+    from aurora.pnt.ground_network_opt import run_ground_network_analysis, print_ground_network_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/ground_network"
+    print(f"\n  Running ground network analysis: {label}")
+    result = run_ground_network_analysis(output_dir=output_dir, label=label)
+    print_ground_network_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_signal_design(args):
+    """Signal design: modulation (BOC/BPSK/TMBOC), code sequences (Gold/Weil/Memory), nav message."""
+    from aurora.pnt.signal_design import run_signal_design_analysis, print_signal_design_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/signal_design"
+    print(f"\n  Running signal design analysis: {label}")
+    result = run_signal_design_analysis(output_dir=output_dir, label=label)
+    print_signal_design_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_competitor_analysis(args):
+    """Competitor analysis: AURORA vs GLONASS, GPS, Galileo, LEO PNT systems."""
+    from aurora.pnt.competitor_analysis import run_competitor_analysis, print_competitor_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/competitor_analysis"
+    print(f"\n  Running competitor analysis: {label}")
+    result = run_competitor_analysis(output_dir=output_dir, label=label)
+    print_competitor_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_user_segment(args):
+    """User segment: Doppler, PLL bandwidth, channel count, receiver classes."""
+    from aurora.pnt.user_segment import run_user_segment_analysis, print_user_segment_summary
+    label = args.label or "phase4"
+    output_dir = args.output or f"results/user_segment"
+    print(f"\n  Running user segment analysis: {label}")
+    results = run_user_segment_analysis(output_dir, label)
+    print_user_segment_summary(label, results)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_itu_coordination(args):
+    """ITU/МСЭ coordination: PSD, SSC matrix, band plan, OOB emission mask."""
+    from aurora.pnt.itu_coordination import run_itu_coordination_analysis, print_itu_summary
+    label = args.label or "phase4"
+    output_dir = args.output or f"results/itu_coordination"
+    print(f"\n  Running ITU coordination analysis: {label}")
+    results = run_itu_coordination_analysis(output_dir, label)
+    print_itu_summary(label, results)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_rtk_ppp(args):
+    """PPP-RTK architecture: accuracy vs baseline, convergence, latency, RSN map."""
+    from aurora.pnt.rtk_ppp import run_rtk_ppp_analysis, print_rtk_ppp_summary
+    label = args.label or "phase4"
+    output_dir = args.output or f"results/rtk_ppp"
+    print(f"\n  Running PPP-RTK analysis: {label}")
+    results = run_rtk_ppp_analysis(output_dir, label)
+    print_rtk_ppp_summary(label, results)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_system_concept(args):
+    """Concept illustrations: system overview, service scenarios, LEO vs MEO, signal flow."""
+    from aurora.pnt.system_concept import run_system_concept
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/system_concept"
+    results = run_system_concept(output_dir, label)
+    print(f"  Generated {len(results['figures'])} concept figures in {output_dir}/")
+
+
+def cmd_station_keeping(args):
+    """Station keeping: J2 RAAN drift, atmospheric drag, delta-V budget."""
+    from aurora.pnt.station_keeping import run_station_keeping_analysis, print_station_keeping_summary
+    label      = args.label  or "phase4"
+    output_dir = args.output or "results/station_keeping"
+    print(f"\n  Running station keeping analysis: {label}")
+    result = run_station_keeping_analysis(output_dir=output_dir, label=label)
+    print_station_keeping_summary(label, result)
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_resilience(args):
     """Satellite failure resilience analysis."""
     import json, glob as _glob
@@ -750,6 +1108,15 @@ def main():
     p_ces.add_argument("--step", type=float, default=60.0, help="Шаг позиций (секунды, по умолч. 60)")
     p_ces.add_argument("--speed", type=int, default=60, help="Множитель скорости анимации (по умолч. 60x)")
     p_ces.add_argument("--token", default="", help="Cesium Ion access token для текстур Земли")
+
+    # serve
+    p_srv = sub.add_parser(
+        "serve",
+        help="Запустить HTTP-сервер для просмотра Cesium HTML без ограничений file://"
+    )
+    p_srv.add_argument("--port", type=int, default=8765, help="Порт (по умолчанию 8765)")
+    p_srv.add_argument("--directory", default=None, help="Корневая директория (по умолчанию текущая)")
+    p_srv.add_argument("--open", action="store_true", help="Открыть браузер автоматически")
 
     # download-cesium
     p_dlc = sub.add_parser(
@@ -978,6 +1345,186 @@ def main():
     p_mc.add_argument("--n-sats-comb",      type=int,   default=22,
                       help="Visible satellites for combined mode (default: 22)")
 
+    # user-link-budget
+    p_ulb = sub.add_parser("user-link-budget",
+                           help="User terminal link budget: L1/L5 C/N0, pseudorange noise, margins")
+    p_ulb.add_argument("-o", "--output",     default="results/user_link_budget")
+    p_ulb.add_argument("-l", "--label",      default="phase4")
+    p_ulb.add_argument("--altitude-km",  type=float, default=1000.0,
+                       help="Satellite altitude km (default: 1000)")
+
+    # eclipse
+    p_ecl = sub.add_parser("eclipse",
+                           help="Eclipse / Earth shadow: duration, battery sizing, OCXO thermal effect")
+    p_ecl.add_argument("-o", "--output",     default="results/eclipse")
+    p_ecl.add_argument("-l", "--label",      default="phase4")
+    p_ecl.add_argument("--altitude-km",  type=float, default=1000.0)
+    p_ecl.add_argument("--n-sats",       type=int,   default=180)
+
+    # nav-message
+    p_nav = sub.add_parser("nav-message",
+                           help="Navigation message: bit budget, frame structure, TTFF, OSNMA auth")
+    p_nav.add_argument("-o", "--output",     default="results/nav_message")
+    p_nav.add_argument("-l", "--label",      default="phase4")
+    p_nav.add_argument("--data-rate",    type=int,   default=500,
+                       help="Data rate bps (default: 500)")
+    p_nav.add_argument("--n-sats",       type=int,   default=180,
+                       help="Constellation size for almanac budget (default: 180)")
+
+    # iono-correction
+    p_ion = sub.add_parser("iono-correction",
+                           help="Ionospheric correction: Klobuchar vs NeQuick-G vs dual-freq")
+    p_ion.add_argument("-o", "--output",     default="results/iono_correction")
+    p_ion.add_argument("-l", "--label",      default="phase4")
+
+    # user-dynamics
+    p_ud = sub.add_parser("user-dynamics",
+                          help="User dynamics: moving platform accuracy (aviation/maritime/land)")
+    p_ud.add_argument("-o", "--output",     default="results/user_dynamics")
+    p_ud.add_argument("-l", "--label",      default="phase4")
+
+    # ground-od
+    p_god = sub.add_parser("ground-od",
+                           help="Ground orbit determination: RAC accuracy, prediction degradation")
+    p_god.add_argument("-o", "--output",     default="results/ground_od")
+    p_god.add_argument("-l", "--label",      default="phase4")
+
+    # deployment
+    p_dep = sub.add_parser("deployment",
+                           help="Deployment timeline: launch sequence, coverage ramp-up, costs")
+    p_dep.add_argument("-o", "--output",     default="results/deployment")
+    p_dep.add_argument("-l", "--label",      default="full")
+
+    # conjunction
+    p_conj = sub.add_parser("conjunction",
+                            help="Conjunction probability: Monte Carlo debris collision analysis")
+    p_conj.add_argument("-o", "--output",     default="results/conjunction")
+    p_conj.add_argument("-l", "--label",      default="phase4")
+    p_conj.add_argument("--n-trials", type=int, default=50_000,
+                        help="Monte Carlo trials (default: 50000)")
+
+    # coverage-maps
+    p_cov = sub.add_parser("coverage-maps",
+                           help="Geographic coverage maps: N_vis and PDOP heatmaps by phase")
+    p_cov.add_argument("-o", "--output",     default="results/coverage_maps")
+    p_cov.add_argument("-l", "--label",      default="all_phases")
+    p_cov.add_argument("--all-phases", action="store_true", default=True,
+                       help="Generate maps for all phases (default: True)")
+    p_cov.add_argument("--phase", type=int, default=4,
+                       help="Single phase to analyze (ignored if --all-phases)")
+
+    # power-budget
+    p_pb = sub.add_parser("power-budget",
+                          help="Satellite power budget: solar array BOL/EOL, battery, subsystem loads")
+    p_pb.add_argument("-o", "--output",     default="results/power_budget")
+    p_pb.add_argument("-l", "--label",      default="phase4")
+    p_pb.add_argument("--altitude-km",  type=float, default=1000.0)
+    p_pb.add_argument("--n-sats",       type=int,   default=180)
+
+    # mass-budget
+    p_mb = sub.add_parser("mass-budget",
+                          help="Satellite mass & volume budget: subsystems, propellant, fleet totals")
+    p_mb.add_argument("-o", "--output",     default="results/mass_budget")
+    p_mb.add_argument("-l", "--label",      default="phase4")
+    p_mb.add_argument("--n-sats",       type=int,   default=180)
+    p_mb.add_argument("--mission-years", type=float, default=7.0)
+
+    # thermal
+    p_th = sub.add_parser("thermal",
+                          help="Satellite thermal analysis: orbital temp profile, OCXO oven budget")
+    p_th.add_argument("-o", "--output",     default="results/thermal")
+    p_th.add_argument("-l", "--label",      default="phase4")
+    p_th.add_argument("--altitude-km",  type=float, default=1000.0)
+
+    # timing-chain
+    p_tc = sub.add_parser("timing-chain",
+                          help="Timing chain: Cs→Rb→OCXO→user 1PPS, ADEV, ISL transfer, holdover")
+    p_tc.add_argument("-o", "--output",     default="results/timing_chain")
+    p_tc.add_argument("-l", "--label",      default="phase4")
+    p_tc.add_argument("--max-hops",     type=int,   default=12,
+                      help="Maximum ISL hops to analyze (default: 12)")
+
+    # radiation
+    p_rad = sub.add_parser("radiation", help="Radiation environment: TID, SEU, OCXO drift vs Al shielding")
+    p_rad.add_argument("-o", "--output", default="results/radiation")
+    p_rad.add_argument("-l", "--label",  default="phase4")
+
+    # relativistic
+    p_rel = sub.add_parser("relativistic", help="Relativistic corrections: Sagnac, redshift, clock bias LEO vs MEO")
+    p_rel.add_argument("-o", "--output", default="results/relativistic")
+    p_rel.add_argument("-l", "--label",  default="phase4")
+
+    # troposphere
+    p_tro = sub.add_parser("troposphere", help="Tropospheric delay: ZHD/ZWD Saastamoinen, NMF, seasonal")
+    p_tro.add_argument("-o", "--output", default="results/troposphere")
+    p_tro.add_argument("-l", "--label",  default="phase4")
+
+    # reliability
+    p_rel2 = sub.add_parser("reliability", help="Reliability & MTBF: R(t), fleet degradation, spare satellites")
+    p_rel2.add_argument("-o", "--output", default="results/reliability")
+    p_rel2.add_argument("-l", "--label",  default="phase4")
+
+    # ppp-convergence
+    p_ppp = sub.add_parser("ppp-convergence", help="PPP convergence: Kalman, LEO vs MEO, dual/single freq")
+    p_ppp.add_argument("-o", "--output", default="results/ppp_convergence")
+    p_ppp.add_argument("-l", "--label",  default="phase4")
+
+    # signal-quality
+    p_sq = sub.add_parser("signal-quality", help="Signal quality: SISA, URE, UERE budget vs GPS/Galileo")
+    p_sq.add_argument("-o", "--output", default="results/signal_quality")
+    p_sq.add_argument("-l", "--label",  default="phase4")
+
+    # adcs
+    p_adcs = sub.add_parser("adcs", help="ADCS: pointing budget, disturbance torques, reaction wheels, ISL")
+    p_adcs.add_argument("-o", "--output", default="results/adcs")
+    p_adcs.add_argument("-l", "--label",  default="phase4")
+
+    # ground-network
+    p_gn = sub.add_parser("ground-network", help="Ground network: MCS geometry, OD quality, coverage optimization")
+    p_gn.add_argument("-o", "--output", default="results/ground_network")
+    p_gn.add_argument("-l", "--label",  default="phase4")
+
+    # signal-design
+    p_sd = sub.add_parser("signal-design",
+                          help="Signal design: modulation BOC/BPSK/TMBOC, codes Gold/Weil/Memory, nav-msg ANAV")
+    p_sd.add_argument("-o", "--output", default="results/signal_design")
+    p_sd.add_argument("-l", "--label",  default="phase4")
+
+    # competitor-analysis
+    p_comp = sub.add_parser("competitor-analysis",
+                            help="Competitor analysis: AURORA vs GLONASS, GPS, Galileo, LEO PNT systems")
+    p_comp.add_argument("-o", "--output", default="results/competitor_analysis")
+    p_comp.add_argument("-l", "--label",  default="phase4")
+
+    # user-segment
+    p_us = sub.add_parser("user-segment",
+                          help="User segment: Doppler dynamics, PLL bandwidth, channel count, receiver classes")
+    p_us.add_argument("-o", "--output", default="results/user_segment")
+    p_us.add_argument("-l", "--label",  default="phase4")
+
+    # itu-coordination
+    p_itu = sub.add_parser("itu-coordination",
+                           help="ITU/МСЭ coordination: PSD, SSC matrix, RNSS band plan, OOB mask")
+    p_itu.add_argument("-o", "--output", default="results/itu_coordination")
+    p_itu.add_argument("-l", "--label",  default="phase4")
+
+    # rtk-ppp
+    p_rtk = sub.add_parser("rtk-ppp",
+                           help="PPP-RTK architecture: accuracy vs baseline, convergence, latency, RSN map")
+    p_rtk.add_argument("-o", "--output", default="results/rtk_ppp")
+    p_rtk.add_argument("-l", "--label",  default="phase4")
+
+    # station-keeping
+    p_sk = sub.add_parser("station-keeping", help="Station keeping: J2 RAAN drift, drag, delta-V 7yr budget")
+    p_sk.add_argument("-o", "--output", default="results/station_keeping")
+    p_sk.add_argument("-l", "--label",  default="phase4")
+
+    # system-concept
+    p_sc = sub.add_parser("system-concept",
+                          help="Concept illustrations: system overview, service scenarios, LEO vs MEO, signal flow")
+    p_sc.add_argument("-o", "--output", default="results/system_concept")
+    p_sc.add_argument("-l", "--label",  default="phase4")
+
     # resilience
     p_res = sub.add_parser("resilience", help="Constellation resilience: satellite and ISL failure scenarios")
     p_res.add_argument("-c", "--config", required=True)
@@ -1011,11 +1558,40 @@ def main():
         "isl-ranging":    cmd_isl_ranging,
         "monte-carlo":    cmd_monte_carlo,
         "resilience":     cmd_resilience,
+        "user-link-budget": cmd_user_link_budget,
+        "eclipse":          cmd_eclipse,
+        "nav-message":      cmd_nav_message,
+        "power-budget":     cmd_power_budget,
+        "mass-budget":      cmd_mass_budget,
+        "thermal":          cmd_thermal,
+        "timing-chain":     cmd_timing_chain,
+        "iono-correction":  cmd_iono_correction,
+        "user-dynamics":    cmd_user_dynamics,
+        "ground-od":        cmd_ground_od,
+        "deployment":       cmd_deployment,
+        "conjunction":      cmd_conjunction,
+        "coverage-maps":    cmd_coverage_maps,
+        "radiation":        cmd_radiation,
+        "relativistic":     cmd_relativistic,
+        "troposphere":      cmd_troposphere,
+        "reliability":      cmd_reliability,
+        "ppp-convergence":  cmd_ppp_convergence,
+        "signal-quality":   cmd_signal_quality,
+        "adcs":             cmd_adcs,
+        "ground-network":   cmd_ground_network,
+        "station-keeping":    cmd_station_keeping,
+        "system-concept":     cmd_system_concept,
+        "user-segment":       cmd_user_segment,
+        "itu-coordination":   cmd_itu_coordination,
+        "rtk-ppp":            cmd_rtk_ppp,
+        "signal-design":       cmd_signal_design,
+        "competitor-analysis": cmd_competitor_analysis,
         "combined":         cmd_combined,
         "time-scale":       cmd_time_scale,
         "timing-service":   cmd_timing_service,
         "clock-arch":       cmd_clock_arch,
         "download-cesium":  cmd_download_cesium,
+        "serve":            cmd_serve,
     }
     dispatch[args.command](args)
 

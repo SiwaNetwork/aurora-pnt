@@ -40,6 +40,19 @@ _CESIUM_JS_PATH   = _CESIUM_BUILD / "Cesium.js"
 
 _CDN_BASE = f"https://cesium.com/downloads/cesiumjs/releases/{_CESIUM_VERSION}/Build/Cesium"
 
+# Pre-stitched Natural Earth II base64 texture (1024x512 JPEG, ~98 KB).
+# Generated from assets/cesium/Build/Cesium/Assets/Textures/NaturalEarthII zoom-1 tiles.
+# Embedded so the globe renders even when the page is opened via file:///
+# (browsers block XHR/tile-loading from local file:// pages).
+_EARTH_B64_PATH = Path(__file__).resolve().parent.parent.parent / "assets" / "earth_b64.txt"
+
+
+def _earth_data_url() -> str:
+    """Return a data: URL for the embedded Earth texture, or empty string if missing."""
+    if _EARTH_B64_PATH.exists():
+        return "data:image/jpeg;base64," + _EARTH_B64_PATH.read_text(encoding="utf-8").strip()
+    return ""
+
 
 def is_cesium_local() -> bool:
     """Return True if CesiumJS has been downloaded to assets/cesium/."""
@@ -381,28 +394,41 @@ def write_cesium_html(
 
     out = Path(output_path).resolve()
 
+    earth_url = _earth_data_url()
+    if earth_url:
+        # Embedded Earth texture (data: URL) — works with file:// and http://
+        # Browsers block XHR/tile requests from file:// pages, so tile-based
+        # imagery providers fail silently. SingleTileImageryProvider with a
+        # data: URL has no network dependency at all.
+        imagery_js = f"""
+  // Earth texture embedded as data URL — works offline and via file:///
+  var earthDataUrl = '{earth_url}';
+  Cesium.SingleTileImageryProvider.fromUrl(earthDataUrl, {{
+    rectangle: Cesium.Rectangle.fromDegrees(-180.0, -90.0, 180.0, 90.0)
+  }}).then(function(provider) {{
+    viewer.imageryLayers.removeAll();
+    viewer.imageryLayers.addImageryProvider(provider);
+  }}).catch(function(err) {{
+    console.warn('Earth imagery error:', err);
+    viewer.scene.globe.baseColor = Cesium.Color.fromCssColorString('#0d2040');
+  }});"""
+        earth_note = "embedded"
+    else:
+        imagery_js = "\n  // No embedded Earth texture — globe shows solid color\n  viewer.scene.globe.baseColor = Cesium.Color.fromCssColorString('#0d2040');"
+        earth_note = "no-texture"
+
     if is_cesium_local():
         prefix = _rel_or_abs(_CESIUM_BUILD, out)
         js_src  = f"{prefix}/Cesium.js"
         css_src = f"{prefix}/Widgets/widgets.css"
-        # Natural Earth II ships with Cesium in Assets/Textures/NaturalEarthII
-        # Cesium.buildModuleUrl resolves relative to the loaded Cesium.js, so the
-        # path is correct as long as the Assets/ folder is next to Cesium.js.
-        imagery_js = """
-  // Offline: Natural Earth II tiles bundled with CesiumJS (no internet needed)
-  Cesium.TileMapServiceImageryProvider.fromUrl(
-    Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
-  ).then(function(provider) {
-    viewer.imageryLayers.removeAll();
-    viewer.imageryLayers.addImageryProvider(provider);
-  });"""
-        mode_note = "offline"
+        mode_note = f"offline | earth={earth_note}"
         print(f"  [cesium] Using local CesiumJS: {_CESIUM_BUILD}")
     else:
         js_src  = f"{_CDN_BASE}/Cesium.js"
         css_src = f"{_CDN_BASE}/Widgets/widgets.css"
-        imagery_js = f"\n  // Online: imagery loaded via Cesium Ion token\n  Cesium.Ion.defaultAccessToken = '{ion_token}';"
-        mode_note = "CDN"
+        if ion_token:
+            imagery_js = f"\n  Cesium.Ion.defaultAccessToken = '{ion_token}';" + imagery_js
+        mode_note = f"CDN | earth={earth_note}"
         print(f"  [cesium] CesiumJS not found locally — using CDN. Run 'aurora-pnt download-cesium' to enable offline mode.")
 
     html = f"""<!DOCTYPE html>
@@ -448,7 +474,8 @@ var viewer = new Cesium.Viewer('cesiumContainer', {{
 }});
 
 viewer.scene.backgroundColor = Cesium.Color.BLACK;
-viewer.scene.globe.enableLighting = true;
+viewer.scene.globe.enableLighting = false;
+viewer.scene.globe.baseColor = Cesium.Color.fromCssColorString('#0d2040');
 {imagery_js}
 
 // Load CZML

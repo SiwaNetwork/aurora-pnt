@@ -4,6 +4,37 @@ All notable changes to AURORA PNT are documented here.
 
 ---
 
+## [1.1.0] — 2026-05-17
+
+### New analysis modules
+- **User terminal link budget** — `aurora-pnt user-link-budget`
+  - L1/L5 C/N₀ vs elevation (10°–90°) for Handheld / Survey / Maritime / Aviation terminals
+  - Pseudorange thermal noise σ_PR per signal/terminal combination
+  - Link budget waterfall chart (EIRP → FSPL → C/N₀ components)
+  - Navigation margin: Handheld on L1 viable from 10° el (C/N₀ = 37.2 dB-Hz, margin +7.2 dB)
+- **Eclipse / Earth shadow analysis** — `aurora-pnt eclipse`
+  - Worst-case eclipse: 34.9 min (35% of orbit at 1000 km, beta=0°)
+  - Eclipse fraction vs Sun beta angle: no eclipse above |beta| > 25.9°
+  - Battery sizing: 43.6 Wh required, 54.5 Wh capacity (DOD=80%), 0.3 kg Li-ion
+  - OCXO thermal effect: 8 ppb frequency shift (80 K temp swing), thermal oven required
+  - Solar power: BOL 964 W, EOL 836 W (7-yr, 2%/yr GaAs degradation)
+- **Navigation message structure** — `aurora-pnt nav-message`
+  - Bit budget: ephemeris 527b + clock 94b + ionosphere 120b + OSNMA auth 524b + almanac (180 sat) 25920b
+  - Frame: 300 bits/subframe, CRC-24Q, 1/2-rate FEC → 250 bps payload at 500 bps
+  - TTFF: hot 2 s / warm 11 s / cold 149 s at 500 bps
+  - ISL clock correction extension: 22 bits per satellite in clock field
+
+### Bug fixes
+- **CesiumJS HTML crash** — removed invalid `terrain: false` option from Viewer constructor
+  (in Cesium 1.117, `defined(false) == true` causes `scene.setTerrain(false)` → TypeError)
+- Regenerated all 5 phase HTML files (phase0–phase4) with fix applied
+
+### Infrastructure
+- Removed `assets/cesium/` from `.gitignore` — CesiumJS and Earth texture now tracked in repo
+- `assets/earth_b64.txt`: 1024×512 Natural Earth II texture embedded as base64 (100 KB)
+
+---
+
 ## [1.0.0] — 2026-05-14
 
 ### Project
