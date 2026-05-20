@@ -1,0 +1,129 @@
+{
+  "autonomous_sf": {
+    "mode_label": "Autonomous LPT (L1 single-freq)",
+    "pdop": 5.0,
+    "dual_frequency": false,
+    "uere_rss_m": 3.688,
+    "uere_components": {
+      "clock_bias_m": 3.0,
+      "ephemeris_m": 0.5,
+      "ionosphere_m": 2.0,
+      "troposphere_m": 0.5,
+      "multipath_m": 0.3,
+      "thermal_m": 0.1,
+      "isb_residual_m": 0.0,
+      "relativistic_m": 0.02
+    },
+    "cep_50_m": 7.69,
+    "sep_50_m": 9.4,
+    "sigma_3d_m": 18.44,
+    "sigma_v_m": 13.04,
+    "timing_1sigma_ns": 12.3
+  },
+  "autonomous_df": {
+    "mode_label": "Autonomous LPT (L1+L5 dual-freq)",
+    "pdop": 5.0,
+    "dual_frequency": true,
+    "uere_rss_m": 3.099,
+    "uere_components": {
+      "clock_bias_m": 3.0,
+      "ephemeris_m": 0.5,
+      "ionosphere_m": 0.05,
+      "troposphere_m": 0.5,
+      "multipath_m": 0.3,
+      "thermal_m": 0.1,
+      "isb_residual_m": 0.0,
+      "relativistic_m": 0.02
+    },
+    "cep_50_m": 6.46,
+    "sep_50_m": 7.9,
+    "sigma_3d_m": 15.5,
+    "sigma_v_m": 10.96,
+    "timing_1sigma_ns": 10.34
+  },
+  "combined_sf": {
+    "mode_label": "Combined LEO+GLONASS (L1 single-freq)",
+    "pdop": 1.671,
+    "dual_frequency": false,
+    "uere_rss_m": 2.619,
+    "uere_components": {
+      "clock_bias_m": 1.5,
+      "ephemeris_m": 0.1,
+      "ionosphere_m": 2.0,
+      "troposphere_m": 0.5,
+      "multipath_m": 0.3,
+      "thermal_m": 0.1,
+      "isb_residual_m": 0.5,
+      "relativistic_m": 0.02
+    },
+    "cep_50_m": 1.83,
+    "sep_50_m": 2.23,
+    "sigma_3d_m": 4.38,
+    "sigma_v_m": 3.09,
+    "timing_1sigma_ns": 8.74
+  },
+  "combined_df": {
+    "mode_label": "Combined LEO+GLONASS (L1+L5 dual-freq)",
+    "pdop": 1.671,
+    "dual_frequency": true,
+    "uere_rss_m": 1.692,
+    "uere_components": {
+      "clock_bias_m": 1.5,
+      "ephemeris_m": 0.1,
+      "ionosphere_m": 0.05,
+      "troposphere_m": 0.5,
+      "multipath_m": 0.3,
+      "thermal_m": 0.1,
+      "isb_residual_m": 0.5,
+      "relativistic_m": 0.02
+    },
+    "cep_50_m": 1.18,
+    "sep_50_m": 1.44,
+    "sigma_3d_m": 2.83,
+    "sigma_v_m": 2.0,
+    "timing_1sigma_ns": 5.64
+  },
+  "combined_sdcm_df": {
+    "mode_label": "Combined + SDCM (L1+L5 dual-freq)",
+    "pdop": 1.671,
+    "dual_frequency": true,
+    "uere_rss_m": 0.962,
+    "uere_components": {
+      "clock_bias_m": 0.8,
+      "ephemeris_m": 0.05,
+      "ionosphere_m": 0.05,
+      "troposphere_m": 0.3,
+      "multipath_m": 0.3,
+      "thermal_m": 0.1,
+      "isb_residual_m": 0.3,
+      "relativistic_m": 0.02
+    },
+    "cep_50_m": 0.67,
+    "sep_50_m": 0.82,
+    "sigma_3d_m": 1.61,
+    "sigma_v_m": 1.14,
+    "timing_1sigma_ns": 3.21
+  },
+  "lpt_stability_24h": {
+    "OCXO": {
+      "ppb": 1.0,
+      "sigma_lpt_ns": 169.70563,
+      "sigma_lpt_m": 50.87647
+    },
+    "Rb": {
+      "ppb": 0.1,
+      "sigma_lpt_ns": 16.97056,
+      "sigma_lpt_m": 5.08765
+    },
+    "Cs": {
+      "ppb": 0.01,
+      "sigma_lpt_ns": 1.69706,
+      "sigma_lpt_m": 0.50876
+    },
+    "Maser": {
+      "ppb": 0.001,
+      "sigma_lpt_ns": 0.16971,
+      "sigma_lpt_m": 0.05088
+    }
+  }
+}

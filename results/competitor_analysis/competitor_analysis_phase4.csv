@@ -1,0 +1,11 @@
+system,type,orbit_km,inc_deg,n_sats,ure_m,uere_dual_m,pdop_p95_global,ppp_conv_min,time_acc_ns,ioc_year,foc_year,status,operator
+GPS Block III,MEO,20200,55.0,31,0.218,0.461,2.5,25.0,20,1993,1995,Операционный,US DoD / Space Force
+ГЛОНАСС-K2,MEO,19100,64.8,24,0.35,0.52,3.0,30.0,10,1993,1995,Операционный/развитие,Роскосмос / ВКС России
+Galileo (FOC),MEO,23222,56.0,28,0.163,0.363,2.3,22.0,15,2016,2019,Операционный,ESA / EU GSA
+BeiDou-3,MEO,21528,55.0,30,0.2,0.42,2.4,20.0,10,2018,2020,Операционный (2020),CNSA / Китай
+AURORA PNT (этот проект),LEO,1000,75.0,300,0.114,0.279,1.9,1.0,5,2029,2033,Проект,ShiwaNetwork / LEOPath
+Xona PULSAR (США),LEO,700,60.0,300,0.1,0.22,1.8,0.2,3,2027,2030,Демо-спутники (2023),Xona Space Systems (США)
+"Satelles STL (Iridium, 66 КА)",LEO,780,86.4,66,50.0,100.0,,,100,2016,2019,Операционный (PNT-as-a-service),Satelles Inc. / Iridium (США)
+ESA Moonlight (Galileo LEO layer),LEO,1200,63.4,6,0.2,0.35,,5.0,10,2030,2035,Фаза A (исследование),ESA / EU
+"BeiDou-3 LEO (КНР, экспер.)",LEO,1000,55.0,12,0.3,0.45,,5.0,20,2025,2028,Экспериментальный,CNSA / Китай
+SpaceX Starlink (PNT потенциал),LEO,550,53.0,5000,,,,,,,,"FCC заявка (PNT), нет публ. сигналов",SpaceX (США)

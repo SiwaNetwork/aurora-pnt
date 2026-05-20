@@ -1,0 +1,39 @@
+subsystem,mass_kg,volume_l,desc
+Structure & panels,18.0,40.0,"Primary structure, panels, brackets"
+Separation system,2.5,3.0,Clamp band + ADCS springs
+Solar array mechanism,2.0,2.0,Deployment hinges + drives
+"Solar array (GaAs, 3 m²)",6.0,2.0,"3J GaAs, BOL 28%, 3.0 m² deployed"
+Battery (Li-ion),3.5,5.5,54.5 Wh/0.27 kg — sized to eclipse
+EPS (power conditioning),4.0,4.0,"PCDU, regulators, protection"
+Solar array harness,1.5,0.5,Array-to-PCDU wiring
+Star trackers (x2),2.0,1.5,"0.4 kg each, 5 arcsec accuracy"
+IMU (gyroscope),0.8,0.5,"MEMS/FOG, 3-axis"
+Magnetometer,0.3,0.2,3-axis fluxgate
+Reaction wheels (x4),4.0,3.0,"4 Nms, 4 wheels for redundancy"
+AOCS computer,1.0,0.8,Embedded AOCS processor
+PNT signal generator,5.0,4.0,L1+L5 BPSK signal generator
+Navigation antennas (x2),3.0,2.0,L1/L5 nadir patch array
+RF amplifiers + diplexer,2.0,1.5,20 W PA x2 per signal
+On-board GNSS receiver,0.5,0.3,GPS/GLONASS orbit determination
+Cs frequency standard,0.7,0.5,1 per plane anchor (15 total)
+Rb frequency standard,0.4,0.3,3 per plane relay (45 total)
+OCXO oscillator,0.2,0.1,16 per plane terminal (240 total)
+ISL Ka-band transceiver,3.5,2.5,"Ka 26 GHz, 10 W TX, 4 links"
+ISL antennas (x4),2.0,1.0,Steerable Ka phased arrays
+S-band TT&C radio,1.5,1.0,"2 W TX, 2 kbps uplink"
+TT&C antenna,0.3,0.2,Omnidirectional S-band
+On-board computer,1.2,0.8,Main CPU + 64 GB storage
+Software & FPGA,0.5,0.3,Navigation signal processing FPGA
+Radiators,2.0,0.5,Passive radiator panels
+MLI blankets,1.5,1.0,Multi-layer insulation
+Thermal heaters,0.5,0.2,OCXO + cold-face heaters
+Heat pipes,0.8,0.3,Isothermal panel coupling
+Propellant tank,2.5,8.0,"CFRP overwrap, 15 L"
+Thruster (x4 cold-gas/ion),1.5,1.0,4 x 50 mN thrusters
+Feed system + valves,1.0,0.5,"Latch valves, regulators, lines"
+Satellite harness,4.0,2.0,All internal cabling
+Fasteners & adhesives,1.0,0.5,"Screws, brackets, epoxy"
+,,,
+DRY MASS (with margins),87.82,,
+Propellant (nominal+cont),17.60,,
+WET MASS,105.42,,

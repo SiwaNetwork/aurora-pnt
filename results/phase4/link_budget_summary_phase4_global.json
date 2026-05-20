@@ -1,0 +1,202 @@
+{
+  "Vladimir": {
+    "cn0_mean_dbhz": 43.15,
+    "cn0_min_dbhz": 41.25,
+    "cn0_max_dbhz": 44.23,
+    "link_margin_mean_db": 8.15,
+    "link_margin_min_db": 6.25,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Murmansk": {
+    "cn0_mean_dbhz": 43.52,
+    "cn0_min_dbhz": 42.16,
+    "cn0_max_dbhz": 44.21,
+    "link_margin_mean_db": 8.52,
+    "link_margin_min_db": 7.16,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Novosibirsk": {
+    "cn0_mean_dbhz": 43.08,
+    "cn0_min_dbhz": 41.3,
+    "cn0_max_dbhz": 44.25,
+    "link_margin_mean_db": 8.08,
+    "link_margin_min_db": 6.3,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Zheleznogorsk": {
+    "cn0_mean_dbhz": 43.15,
+    "cn0_min_dbhz": 41.0,
+    "cn0_max_dbhz": 44.25,
+    "link_margin_mean_db": 8.15,
+    "link_margin_min_db": 6.0,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Yakutsk": {
+    "cn0_mean_dbhz": 43.21,
+    "cn0_min_dbhz": 41.52,
+    "cn0_max_dbhz": 44.23,
+    "link_margin_mean_db": 8.21,
+    "link_margin_min_db": 6.52,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Khabarovsk": {
+    "cn0_mean_dbhz": 42.83,
+    "cn0_min_dbhz": 40.98,
+    "cn0_max_dbhz": 44.25,
+    "link_margin_mean_db": 7.83,
+    "link_margin_min_db": 5.98,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Vladivostok": {
+    "cn0_mean_dbhz": 42.78,
+    "cn0_min_dbhz": 40.8,
+    "cn0_max_dbhz": 44.24,
+    "link_margin_mean_db": 7.78,
+    "link_margin_min_db": 5.8,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Minsk": {
+    "cn0_mean_dbhz": 43.02,
+    "cn0_min_dbhz": 40.83,
+    "cn0_max_dbhz": 44.26,
+    "link_margin_mean_db": 8.02,
+    "link_margin_min_db": 5.83,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Almaty": {
+    "cn0_mean_dbhz": 42.76,
+    "cn0_min_dbhz": 40.79,
+    "cn0_max_dbhz": 44.26,
+    "link_margin_mean_db": 7.76,
+    "link_margin_min_db": 5.79,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Tehran": {
+    "cn0_mean_dbhz": 42.79,
+    "cn0_min_dbhz": 40.88,
+    "cn0_max_dbhz": 44.26,
+    "link_margin_mean_db": 7.79,
+    "link_margin_min_db": 5.88,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Urumqi": {
+    "cn0_mean_dbhz": 42.82,
+    "cn0_min_dbhz": 40.73,
+    "cn0_max_dbhz": 44.24,
+    "link_margin_mean_db": 7.82,
+    "link_margin_min_db": 5.73,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Delhi": {
+    "cn0_mean_dbhz": 42.48,
+    "cn0_min_dbhz": 39.74,
+    "cn0_max_dbhz": 44.26,
+    "link_margin_mean_db": 7.48,
+    "link_margin_min_db": 4.74,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Yangon": {
+    "cn0_mean_dbhz": 42.16,
+    "cn0_min_dbhz": 39.6,
+    "cn0_max_dbhz": 44.28,
+    "link_margin_mean_db": 7.16,
+    "link_margin_min_db": 4.6,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Jakarta": {
+    "cn0_mean_dbhz": 42.48,
+    "cn0_min_dbhz": 40.11,
+    "cn0_max_dbhz": 44.21,
+    "link_margin_mean_db": 7.48,
+    "link_margin_min_db": 5.11,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Luanda": {
+    "cn0_mean_dbhz": 42.42,
+    "cn0_min_dbhz": 40.12,
+    "cn0_max_dbhz": 44.27,
+    "link_margin_mean_db": 7.42,
+    "link_margin_min_db": 5.12,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Nairobi": {
+    "cn0_mean_dbhz": 42.59,
+    "cn0_min_dbhz": 40.29,
+    "cn0_max_dbhz": 44.31,
+    "link_margin_mean_db": 7.59,
+    "link_margin_min_db": 5.29,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Johannesburg": {
+    "cn0_mean_dbhz": 42.25,
+    "cn0_min_dbhz": 40.03,
+    "cn0_max_dbhz": 44.25,
+    "link_margin_mean_db": 7.25,
+    "link_margin_min_db": 5.03,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Havana": {
+    "cn0_mean_dbhz": 42.12,
+    "cn0_min_dbhz": 39.33,
+    "cn0_max_dbhz": 44.3,
+    "link_margin_mean_db": 7.12,
+    "link_margin_min_db": 4.33,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Caracas": {
+    "cn0_mean_dbhz": 42.43,
+    "cn0_min_dbhz": 39.62,
+    "cn0_max_dbhz": 44.32,
+    "link_margin_mean_db": 7.43,
+    "link_margin_min_db": 4.62,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Buenos_Aires": {
+    "cn0_mean_dbhz": 42.67,
+    "cn0_min_dbhz": 40.82,
+    "cn0_max_dbhz": 44.21,
+    "link_margin_mean_db": 7.67,
+    "link_margin_min_db": 5.82,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  }
+}

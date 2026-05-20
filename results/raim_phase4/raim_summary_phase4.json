@@ -1,0 +1,15 @@
+{
+  "n_timesteps": 144,
+  "uere_m": 4.3,
+  "hpl_req_m": 40.0,
+  "vpl_req_m": 50.0,
+  "raim_detect_availability_pct": 100.0,
+  "raim_isolate_availability_pct": 100.0,
+  "hpl_ok_pct": 0.0,
+  "vpl_ok_pct": 0.0,
+  "both_ok_pct": 0.0,
+  "hpl_mean_m": 81.61,
+  "hpl_p95_m": 92.7,
+  "vpl_mean_m": 81.61,
+  "vpl_p95_m": 92.7
+}

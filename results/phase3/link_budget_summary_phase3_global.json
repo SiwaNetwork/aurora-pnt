@@ -1,0 +1,102 @@
+{
+  "Vladimir": {
+    "cn0_mean_dbhz": 42.69,
+    "cn0_min_dbhz": 40.69,
+    "cn0_max_dbhz": 44.22,
+    "link_margin_mean_db": 7.69,
+    "link_margin_min_db": 5.69,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Murmansk": {
+    "cn0_mean_dbhz": 43.19,
+    "cn0_min_dbhz": 41.16,
+    "cn0_max_dbhz": 44.21,
+    "link_margin_mean_db": 8.19,
+    "link_margin_min_db": 6.16,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Novosibirsk": {
+    "cn0_mean_dbhz": 42.72,
+    "cn0_min_dbhz": 40.91,
+    "cn0_max_dbhz": 44.22,
+    "link_margin_mean_db": 7.72,
+    "link_margin_min_db": 5.91,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Zheleznogorsk": {
+    "cn0_mean_dbhz": 42.7,
+    "cn0_min_dbhz": 40.24,
+    "cn0_max_dbhz": 44.11,
+    "link_margin_mean_db": 7.7,
+    "link_margin_min_db": 5.24,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Yakutsk": {
+    "cn0_mean_dbhz": 41.97,
+    "cn0_min_dbhz": 39.67,
+    "cn0_max_dbhz": 44.16,
+    "link_margin_mean_db": 6.97,
+    "link_margin_min_db": 4.67,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Khabarovsk": {
+    "cn0_mean_dbhz": 42.0,
+    "cn0_min_dbhz": 39.36,
+    "cn0_max_dbhz": 44.26,
+    "link_margin_mean_db": 7.0,
+    "link_margin_min_db": 4.36,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Vladivostok": {
+    "cn0_mean_dbhz": 41.86,
+    "cn0_min_dbhz": 38.94,
+    "cn0_max_dbhz": 44.28,
+    "link_margin_mean_db": 6.86,
+    "link_margin_min_db": 3.94,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Minsk": {
+    "cn0_mean_dbhz": 42.71,
+    "cn0_min_dbhz": 41.0,
+    "cn0_max_dbhz": 44.22,
+    "link_margin_mean_db": 7.71,
+    "link_margin_min_db": 6.0,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Almaty": {
+    "cn0_mean_dbhz": 41.85,
+    "cn0_min_dbhz": 39.56,
+    "cn0_max_dbhz": 44.17,
+    "link_margin_mean_db": 6.85,
+    "link_margin_min_db": 4.56,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Tehran": {
+    "cn0_mean_dbhz": 41.8,
+    "cn0_min_dbhz": 39.24,
+    "cn0_max_dbhz": 44.28,
+    "link_margin_mean_db": 6.8,
+    "link_margin_min_db": 4.24,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  }
+}

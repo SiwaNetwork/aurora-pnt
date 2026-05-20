@@ -1,0 +1,19 @@
+subsystem,mtbf_hours,r_7yr_pct,critical
+Cs-стандарт,50000,29.33,True
+Rb-стандарт,100000,54.16,True
+OCXO,200000,73.59,True
+Бортовой компьютер,300000,81.51,True
+ADCS,100000,54.16,True
+Ресивер L1/L5,150000,66.44,True
+ISL трансивер,120000,59.99,False
+Солнечная батарея,150000,66.44,False
+АКБ (Li-Ion),50000,29.33,False
+Двигатель (ХГ),500000,88.46,False
+Терморегуляция,400000,85.79,False
+Структура,1000000,94.05,False
+
+metric,value
+r_satellite_7yr,3.43%
+constellation_r7yr_ge270,0.000%
+plane_reliability_7yr,0.00%
+spares_needed_95pct,300

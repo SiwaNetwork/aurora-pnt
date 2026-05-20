@@ -258,20 +258,20 @@ def _plot_cdf_comparison(results: Dict, output_dir: str, label: str) -> None:
         ax2.plot(sorted_v, cdf, color=color, lw=2, label=name)
 
     for ax, xlabel, title in [
-        (axes[0], "Horizontal error (m)", "CDF of Horizontal Error (CEP)"),
-        (axes[1], "Vertical error (m)",   "CDF of Vertical Error"),
+        (axes[0], "Горизонтальная ошибка (м)", "ФР (CDF) горизонтальной ошибки (CEP)"),
+        (axes[1], "Вертикальная ошибка (м)",   "ФР (CDF) вертикальной ошибки"),
     ]:
         ax.axhline(0.50, ls=":", color="grey", lw=1)
         ax.axhline(0.95, ls=":", color="grey", lw=1)
         ax.text(ax.get_xlim()[1] if ax.get_xlim()[1] < 1 else 0,
                 0.51, "50%", fontsize=8, color="grey", va="bottom")
         ax.set_xlabel(xlabel)
-        ax.set_ylabel("CDF")
+        ax.set_ylabel("ФР (CDF)")
         ax.set_title(title)
         ax.legend(fontsize=9)
         ax.grid(alpha=0.3)
 
-    fig.suptitle(f"AURORA PNT — Monte Carlo Position Accuracy [{label}]", fontsize=12)
+    fig.suptitle(f"AURORA PNT — Точность позиции Монте-Карло [{label}]", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"mc_cdf_{label}.png"), dpi=150)
     plt.close(fig)
@@ -286,22 +286,22 @@ def _plot_error_histograms(results: Dict, output_dir: str, label: str) -> None:
     for ax, (mode, r) in zip(axes, results.items()):
         color = COLORS.get(mode, "#636e72")
         ax.hist(r["h_errs"], bins=80, color=color, alpha=0.8, edgecolor="white",
-                density=True, label="MC horizontal")
+                density=True, label="МК горизонт.")
         ax.hist(r["v_errs"], bins=80, color="#fdcb6e", alpha=0.6, edgecolor="white",
-                density=True, label="MC vertical")
+                density=True, label="МК вертик.")
         # Analytical CEP line
         cep_a = r["cep_analytical_m"]
         ax.axvline(cep_a, ls="--", color="black", lw=1.5,
-                   label=f"Analytical CEP {cep_a:.2f} m")
+                   label=f"Аналитика CEP {cep_a:.2f} м")
         ax.axvline(r["cep_mc_m"], ls=":", color="red", lw=1.5,
-                   label=f"MC CEP50 {r['cep_mc_m']:.2f} m")
-        ax.set_xlabel("Error (m)")
-        ax.set_ylabel("Probability density")
+                   label=f"МК CEP50 {r['cep_mc_m']:.2f} м")
+        ax.set_xlabel("Ошибка (м)")
+        ax.set_ylabel("Плотность вероятности")
         ax.set_title(r["name"])
         ax.legend(fontsize=8)
         ax.grid(alpha=0.3)
 
-    fig.suptitle(f"AURORA PNT — Error Histograms [{label}]", fontsize=12)
+    fig.suptitle(f"AURORA PNT — Гистограммы ошибок [{label}]", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"mc_hist_{label}.png"), dpi=150)
     plt.close(fig)
@@ -318,17 +318,17 @@ def _plot_analytical_vs_mc(results: Dict, output_dir: str, label: str) -> None:
     w = 0.35
 
     fig, ax = plt.subplots(figsize=(10, 5))
-    b1 = ax.bar(x - w/2, cep_anal, w, label="Analytical (0.59·PDOP·UERE)",
+    b1 = ax.bar(x - w/2, cep_anal, w, label="Аналитика (0,59·PDOP·UERE)",
                 color="#636e72", edgecolor="white", alpha=0.85)
-    b2 = ax.bar(x + w/2, cep_mc,   w, label="Monte Carlo CEP50",
+    b2 = ax.bar(x + w/2, cep_mc,   w, label="Монте-Карло CEP50",
                 color=colors,    edgecolor="white")
-    ax.bar_label(b1, fmt="%.2f m", padding=3, fontsize=9)
-    ax.bar_label(b2, fmt="%.2f m", padding=3, fontsize=9)
+    ax.bar_label(b1, fmt="%.2f м", padding=3, fontsize=9)
+    ax.bar_label(b2, fmt="%.2f м", padding=3, fontsize=9)
 
     ax.set_xticks(x)
     ax.set_xticklabels(names, fontsize=10)
-    ax.set_ylabel("CEP 50% (m)")
-    ax.set_title(f"Analytical vs Monte Carlo CEP [{label}]")
+    ax.set_ylabel("CEP 50% (м)")
+    ax.set_title(f"Аналитика vs Монте-Карло (CEP) [{label}]")
     ax.legend()
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()

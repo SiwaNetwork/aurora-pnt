@@ -1,0 +1,92 @@
+{
+  "Almaty": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.783,
+    "pos_error_mean_m": 189.29,
+    "pos_error_p95_m": 189.29,
+    "time_error_mean_ns": 189.42,
+    "time_error_p95_ns": 189.42,
+    "prop_delay_mean_ms": 4.428
+  },
+  "Vladivostok": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.783,
+    "pos_error_mean_m": 189.29,
+    "pos_error_p95_m": 189.29,
+    "time_error_mean_ns": 189.42,
+    "time_error_p95_ns": 189.42,
+    "prop_delay_mean_ms": 4.426
+  },
+  "Zheleznogorsk": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.783,
+    "pos_error_mean_m": 189.28,
+    "pos_error_p95_m": 189.29,
+    "time_error_mean_ns": 189.42,
+    "time_error_p95_ns": 189.42,
+    "prop_delay_mean_ms": 3.99
+  },
+  "Vladimir": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.783,
+    "pos_error_mean_m": 189.28,
+    "pos_error_p95_m": 189.29,
+    "time_error_mean_ns": 189.42,
+    "time_error_p95_ns": 189.42,
+    "prop_delay_mean_ms": 3.99
+  },
+  "Yakutsk": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.783,
+    "pos_error_mean_m": 189.29,
+    "pos_error_p95_m": 189.29,
+    "time_error_mean_ns": 189.42,
+    "time_error_p95_ns": 189.42,
+    "prop_delay_mean_ms": 4.364
+  },
+  "Novosibirsk": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.783,
+    "pos_error_mean_m": 189.28,
+    "pos_error_p95_m": 189.29,
+    "time_error_mean_ns": 189.42,
+    "time_error_p95_ns": 189.42,
+    "prop_delay_mean_ms": 3.977
+  },
+  "Minsk": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.783,
+    "pos_error_mean_m": 189.28,
+    "pos_error_p95_m": 189.28,
+    "time_error_mean_ns": 189.42,
+    "time_error_p95_ns": 189.42,
+    "prop_delay_mean_ms": 3.978
+  },
+  "Khabarovsk": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.783,
+    "pos_error_mean_m": 189.29,
+    "pos_error_p95_m": 189.29,
+    "time_error_mean_ns": 189.42,
+    "time_error_p95_ns": 189.42,
+    "prop_delay_mean_ms": 4.35
+  },
+  "Murmansk": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.783,
+    "pos_error_mean_m": 189.28,
+    "pos_error_p95_m": 189.28,
+    "time_error_mean_ns": 189.42,
+    "time_error_p95_ns": 189.42,
+    "prop_delay_mean_ms": 3.765
+  },
+  "Tehran": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.783,
+    "pos_error_mean_m": 189.29,
+    "pos_error_p95_m": 189.29,
+    "time_error_mean_ns": 189.42,
+    "time_error_p95_ns": 189.42,
+    "prop_delay_mean_ms": 4.457
+  }
+}

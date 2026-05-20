@@ -10,7 +10,7 @@ cov.xml
 *.pkl
 
 # Organized simulation results
-results/
+# results/  — теперь включены в репозиторий (фазы 0-5, технический проект)
 simulation_output/
 tle_output/
 visualisation_output/

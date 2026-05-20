@@ -1,0 +1,92 @@
+{
+  "Murmansk": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 147.93,
+    "pos_error_p95_m": 147.93,
+    "time_error_mean_ns": 148.04,
+    "time_error_p95_ns": 148.04,
+    "prop_delay_mean_ms": 3.765
+  },
+  "Novosibirsk": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 147.93,
+    "pos_error_p95_m": 147.93,
+    "time_error_mean_ns": 148.04,
+    "time_error_p95_ns": 148.04,
+    "prop_delay_mean_ms": 3.977
+  },
+  "Khabarovsk": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.748,
+    "pos_error_mean_m": 147.93,
+    "pos_error_p95_m": 147.94,
+    "time_error_mean_ns": 148.04,
+    "time_error_p95_ns": 148.04,
+    "prop_delay_mean_ms": 4.35
+  },
+  "Vladimir": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 147.93,
+    "pos_error_p95_m": 147.93,
+    "time_error_mean_ns": 148.04,
+    "time_error_p95_ns": 148.04,
+    "prop_delay_mean_ms": 3.99
+  },
+  "Almaty": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.748,
+    "pos_error_mean_m": 147.93,
+    "pos_error_p95_m": 147.94,
+    "time_error_mean_ns": 148.04,
+    "time_error_p95_ns": 148.04,
+    "prop_delay_mean_ms": 4.428
+  },
+  "Zheleznogorsk": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 147.93,
+    "pos_error_p95_m": 147.93,
+    "time_error_mean_ns": 148.04,
+    "time_error_p95_ns": 148.04,
+    "prop_delay_mean_ms": 3.99
+  },
+  "Minsk": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 147.93,
+    "pos_error_p95_m": 147.93,
+    "time_error_mean_ns": 148.04,
+    "time_error_p95_ns": 148.04,
+    "prop_delay_mean_ms": 3.978
+  },
+  "Tehran": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.748,
+    "pos_error_mean_m": 147.93,
+    "pos_error_p95_m": 147.94,
+    "time_error_mean_ns": 148.04,
+    "time_error_p95_ns": 148.04,
+    "prop_delay_mean_ms": 4.457
+  },
+  "Vladivostok": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.748,
+    "pos_error_mean_m": 147.93,
+    "pos_error_p95_m": 147.94,
+    "time_error_mean_ns": 148.04,
+    "time_error_p95_ns": 148.04,
+    "prop_delay_mean_ms": 4.426
+  },
+  "Yakutsk": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.748,
+    "pos_error_mean_m": 147.93,
+    "pos_error_p95_m": 147.94,
+    "time_error_mean_ns": 148.04,
+    "time_error_p95_ns": 148.04,
+    "prop_delay_mean_ms": 4.364
+  }
+}

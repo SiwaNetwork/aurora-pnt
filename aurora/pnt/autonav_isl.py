@@ -158,50 +158,127 @@ def _plot_rank(output_dir, label):
 
 
 def _plot_isl_geometry(output_dir, label):
-    # Сетка плоскость (X) vs фаза (Y); один спутник и его ISL-соседи
+    """Топология ISL опорного КА в Walker 300/15 (15 плоскостей × 20 КА).
+
+    Решётка «плоскость × фаза». Опорный КА (плоскость 7, фаза 10) и его
+    4 ISL-связи: внутриплоскостные (±1 фаза, та же плоскость) и
+    межплоскостные (±1 плоскость, ближайшая фаза). Дальности считаются
+    из геометрии Walker на h=1000 км:
+      R = R_E + h; хорда при угле θ:  d = 2R·sin(θ/2).
+      внутриплоскостной шаг по орбите: 360/20 = 18°;
+      межплоскостной разнос соседних плоскостей: 360/15 = 24°.
+    """
+    RE_KM = 6378.137
+    H_KM = 1000.0
+    R = RE_KM + H_KM                       # км, радиус орбитального кольца
+
+    def chord(theta_deg):
+        return 2.0 * R * math.sin(math.radians(theta_deg) / 2.0)
+
+    intra_deg = 360.0 / N_PER_PLANE        # 18° между соседями в плоскости
+    inter_deg = 360.0 / N_PLANES           # 24° между соседними плоскостями
+    d_intra = chord(intra_deg)             # ~2306 км
+    d_inter = chord(inter_deg)             # ~3070 км
+
     sat_plane = 7
     sat_phase = 10
 
-    fig, ax = plt.subplots(figsize=(11, 6))
-    # Все спутники созвездия
-    for p in range(N_PLANES):
-        for ph in range(N_PER_PLANE):
-            ax.plot(p, ph, "o", color="#dfe6e9", ms=6, zorder=1)
+    INTRA_C = "#00b894"
+    INTER_C = "#0984e3"
+    REF_C = "#6c5ce7"
+    WRAP_C = "#e17055"
 
-    # Целевой спутник
-    ax.plot(sat_plane, sat_phase, "o", color="#6c5ce7", ms=14, zorder=4,
-            markeredgecolor="white", label="Спутник")
+    fig, ax = plt.subplots(figsize=(13, 8))
 
-    # Внутриплоскостные соседи (±1 по фазе)
+    # ── решётка всех КА ──────────────────────────────────────────────────
+    pg, fg = np.meshgrid(np.arange(N_PLANES), np.arange(N_PER_PLANE))
+    ax.scatter(pg.ravel(), fg.ravel(), s=22, color="#b2bec3",
+               edgecolor="white", linewidth=0.3, zorder=1)
+
+    # ── опорный КА ───────────────────────────────────────────────────────
+    ax.scatter([sat_plane], [sat_phase], s=320, color=REF_C,
+               edgecolor="white", linewidth=1.5, zorder=6)
+    ax.annotate(f"Опорный КА\n(плоск. {sat_plane}, фаза {sat_phase})",
+                xy=(sat_plane, sat_phase), xytext=(sat_plane - 4.2, sat_phase + 4.0),
+                fontsize=9.5, fontweight="bold", color=REF_C,
+                arrowprops=dict(arrowstyle="->", color=REF_C, lw=1.2))
+
+    def link(x0, y0, x1, y1, color, wrap=False):
+        style = "arc3,rad=0.32" if wrap else "arc3,rad=0.0"
+        ax.annotate("", xy=(x1, y1), xytext=(x0, y0),
+                    arrowprops=dict(arrowstyle="<|-|>", color=color,
+                                    lw=3.0 if not wrap else 2.2,
+                                    connectionstyle=style,
+                                    linestyle="--" if wrap else "-"),
+                    zorder=4)
+
+    # ── внутриплоскостные ISL (±1 фаза, та же плоскость) ────────────────
     for dph in (-1, 1):
         nph = (sat_phase + dph) % N_PER_PLANE
-        ax.plot([sat_plane, sat_plane], [sat_phase, nph],
-                color="#00b894", lw=2.5, zorder=2)
-        ax.plot(sat_plane, nph, "o", color="#00b894", ms=10, zorder=3)
-    # Межплоскостные соседи (±1 по плоскости, та же фаза)
+        wrap = (sat_phase + dph) != nph        # перенос фаза 0<->19
+        link(sat_plane, sat_phase, sat_plane, nph, INTRA_C, wrap=wrap)
+        ax.scatter([sat_plane], [nph], s=120, color=INTRA_C,
+                   edgecolor="white", linewidth=1.0, zorder=5)
+    ax.annotate(f"≈ {d_intra:.0f} км",
+                xy=(sat_plane + 0.15, sat_phase + 0.5), fontsize=9,
+                color=INTRA_C, fontweight="bold")
+
+    # ── межплоскостные ISL (±1 плоскость, ближайшая фаза) ───────────────
     for dp in (-1, 1):
         npl = (sat_plane + dp) % N_PLANES
-        ax.plot([sat_plane, npl], [sat_phase, sat_phase],
-                color="#0984e3", lw=2.5, zorder=2)
-        ax.plot(npl, sat_phase, "o", color="#0984e3", ms=10, zorder=3)
+        link(sat_plane, sat_phase, npl, sat_phase, INTER_C)
+        ax.scatter([npl], [sat_phase], s=120, color=INTER_C,
+                   edgecolor="white", linewidth=1.0, zorder=5)
+    ax.annotate(f"≈ {d_inter:.0f} км",
+                xy=(sat_plane + 1.0, sat_phase - 1.4), fontsize=9,
+                color=INTER_C, fontweight="bold")
 
+    # ── иллюстрация переноса фазы 0 <-> 19 (кольцевая топология) ─────────
+    ax.annotate("", xy=(sat_plane, 0), xytext=(sat_plane, N_PER_PLANE - 1),
+                arrowprops=dict(arrowstyle="<|-|>", color=WRAP_C, lw=1.6,
+                                linestyle="--",
+                                connectionstyle="arc3,rad=0.45"), zorder=3)
+    ax.annotate("перенос фазы 0↔19\n(кольцо орбиты)",
+                xy=(sat_plane + 0.6, N_PER_PLANE / 2.0),
+                fontsize=8.5, color=WRAP_C, style="italic")
+
+    # ── легенда ──────────────────────────────────────────────────────────
     from matplotlib.lines import Line2D
     legend_el = [
-        Line2D([0], [0], color="#6c5ce7", marker="o", ls="",
-               ms=10, label="Опорный спутник"),
-        Line2D([0], [0], color="#00b894", lw=2.5,
-               label="Внутриплоскостные ISL (±1 фаза)"),
-        Line2D([0], [0], color="#0984e3", lw=2.5,
-               label="Межплоскостные ISL (±1 плоскость)"),
+        Line2D([0], [0], color=REF_C, marker="o", ls="", ms=11,
+               markeredgecolor="white", label="Опорный КА (плоск.7, фаза 10)"),
+        Line2D([0], [0], color=INTRA_C, lw=3.0,
+               label=f"Внутриплоскостные ISL ±1 фаза  (≈{d_intra:.0f} км)"),
+        Line2D([0], [0], color=INTER_C, lw=3.0,
+               label=f"Межплоскостные ISL ±1 плоскость  (≈{d_inter:.0f} км)"),
+        Line2D([0], [0], color=WRAP_C, lw=1.6, ls="--",
+               label="Кольцевой перенос фазы 0↔19"),
     ]
-    ax.legend(handles=legend_el, fontsize=9, loc="upper right")
-    ax.set_xlabel("Номер орбитальной плоскости")
-    ax.set_ylabel("Фазовый индекс в плоскости")
-    ax.set_title(f"AutoNav — схема ISL-связей спутника "
-                 f"(Walker {N_PLANES*N_PER_PLANE}/{N_PLANES}) [{label}]")
-    ax.set_xlim(-1, N_PLANES)
-    ax.set_ylim(-1, N_PER_PLANE)
-    ax.grid(alpha=0.3)
+    ax.legend(handles=legend_el, fontsize=9, loc="upper right",
+              framealpha=0.95)
+
+    # ── текстовый блок-сводка ────────────────────────────────────────────
+    txt = ("Сводка ISL опорного КА:\n"
+           f"• число ISL-связей на КА: 4\n"
+           f"• тип: 2 внутриплоскостные + 2 межплоскостные\n"
+           f"• дальность внутри плоскости: ≈ {d_intra:.0f} км ({intra_deg:.0f}°)\n"
+           f"• дальность между плоскостями: ≈ {d_inter:.0f} км ({inter_deg:.0f}°)\n"
+           f"• радиус кольца R = R_E+{H_KM:.0f} = {R:.0f} км")
+    ax.text(0.015, 0.025, txt, transform=ax.transAxes, fontsize=8.8,
+            va="bottom", ha="left",
+            bbox=dict(boxstyle="round,pad=0.5", facecolor="#f5f6fa",
+                      edgecolor="#b2bec3", alpha=0.95))
+
+    ax.set_xlabel("Номер орбитальной плоскости (0…14)")
+    ax.set_ylabel("Фазовый индекс КА в плоскости (0…19)")
+    ax.set_title(f"AutoNav — топология ISL опорного КА "
+                 f"(Walker {N_PLANES*N_PER_PLANE}/{N_PLANES}) [{label}]",
+                 fontsize=12)
+    ax.set_xlim(-1.5, N_PLANES + 0.5)
+    ax.set_ylim(-1.5, N_PER_PLANE + 4.0)
+    ax.set_xticks(np.arange(0, N_PLANES))
+    ax.set_yticks(np.arange(0, N_PER_PLANE, 2))
+    ax.grid(alpha=0.25)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"autonav_isl_geometry_{label}.png"), dpi=150)
     plt.close(fig)

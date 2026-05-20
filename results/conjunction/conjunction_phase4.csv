@@ -1,0 +1,10 @@
+metric,value
+n_trials,50000
+n_sats,300
+mission_years,7.0
+rate_lethal_yr,3.750e-04
+cam_per_yr_fleet,90.0
+total_cams_7yr,630
+dv_cams_ms_per_sat,1.05
+p_zero_collision,0.4550
+p_one_plus_collision,5.4502e-01

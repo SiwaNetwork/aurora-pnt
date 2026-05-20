@@ -1,0 +1,128 @@
+<svg width="1400" height="560" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <!-- Фон космос -->
+  <linearGradient id="space_bg" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+    <stop offset="0%" stop-color="#020c1b"/>
+    <stop offset="100%" stop-color="#0a1628"/>
+  </linearGradient>
+  <!-- Земля -->
+  <radialGradient id="earth_grad" cx="42%" cy="38%" r="60%">
+    <stop offset="0%" stop-color="#2d9d78"/>
+    <stop offset="45%" stop-color="#1b6b4a"/>
+    <stop offset="100%" stop-color="#0a2e1f"/>
+  </radialGradient>
+  <!-- Атмосфера -->
+  <radialGradient id="atm_grad" cx="50%" cy="50%" r="50%">
+    <stop offset="80%" stop-color="#74b9ff" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#74b9ff" stop-opacity="0.18"/>
+  </radialGradient>
+  <!-- Свечение сигнала L1 -->
+  <filter id="glow_green" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <!-- Свечение потребителя -->
+  <filter id="glow_user" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <!-- Свечение МКС -->
+  <filter id="glow_mcs" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <!-- Свечение текста -->
+  <filter id="text_glow">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <!-- Маска Земли (полукруг) -->
+  <clipPath id="earth_clip">
+    <rect x="0" y="0" width="1400" height="800"/>
+  </clipPath>
+  
+</defs>
+<rect width="1400" height="560" fill="url(#space_bg)"/>
+<text x="700" y="38" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" font-weight="bold" fill="white">AURORA PNT — Поток сигнала и данных</text>
+<text x="700.0" y="60.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#8b949e" opacity="1.0">от атомных часов КА до навигационного решения потребителя</text>
+<rect x="33" y="140" width="155" height="120" rx="10" fill="#0d1117" stroke="#a29bfe" stroke-width="2"/>
+<rect x="33" y="140" width="155" height="36" rx="10" fill="#a29bfe" opacity="0.25"/>
+<rect x="33" y="166" width="155" height="10" fill="#a29bfe" opacity="0.25"/>
+<text x="110" y="162" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#a29bfe">Cs</text>
+<text x="110" y="190" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">Cs/Rb</text>
+<text x="110" y="210" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">стандарт</text>
+<text x="110.0" y="242.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#a29bfe" opacity="1.0">&lt; 0,01 нс/6ч</text>
+<text x="110.0" y="282.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#8b949e" opacity="1.0">ADEV &lt; 10⁻¹³/с</text>
+<defs><marker id="arr_0" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#a29bfe"/></marker></defs>
+<line x1="191" y1="200" x2="249" y2="200" stroke="#a29bfe" stroke-width="2.2" marker-end="url(#arr_0)"/>
+<rect x="253" y="140" width="155" height="120" rx="10" fill="#0d1117" stroke="#00b894" stroke-width="2"/>
+<rect x="253" y="140" width="155" height="36" rx="10" fill="#00b894" opacity="0.25"/>
+<rect x="253" y="166" width="155" height="10" fill="#00b894" opacity="0.25"/>
+<text x="330" y="162" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#00b894">TX</text>
+<text x="330" y="190" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">ANAV</text>
+<text x="330" y="210" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">передатчик</text>
+<text x="330.0" y="242.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#00b894" opacity="1.0">L1 5Вт · L5 3Вт</text>
+<text x="330.0" y="282.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#8b949e" opacity="1.0">5000 бит/10с · 500 бит/с</text>
+<defs><marker id="arr_1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#00b894"/></marker></defs>
+<line x1="411" y1="200" x2="479" y2="200" stroke="#00b894" stroke-width="2.2" marker-end="url(#arr_1)"/>
+<rect x="483" y="140" width="155" height="120" rx="10" fill="#0d1117" stroke="#6c5ce7" stroke-width="2"/>
+<rect x="483" y="140" width="155" height="36" rx="10" fill="#6c5ce7" opacity="0.25"/>
+<rect x="483" y="166" width="155" height="10" fill="#6c5ce7" opacity="0.25"/>
+<text x="560" y="162" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#6c5ce7">~</text>
+<text x="560" y="190" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">Радиосигнал</text>
+<text x="560" y="210" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">L1 + L5</text>
+<text x="560.0" y="242.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#6c5ce7" opacity="1.0">FSPL −159 дБ</text>
+<text x="560.0" y="282.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#8b949e" opacity="1.0">1000 км · 3,3 мс</text>
+<defs><marker id="arr_2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#6c5ce7"/></marker></defs>
+<line x1="641" y1="200" x2="709" y2="200" stroke="#6c5ce7" stroke-width="2.2" marker-end="url(#arr_2)"/>
+<rect x="713" y="140" width="155" height="120" rx="10" fill="#0d1117" stroke="#fdcb6e" stroke-width="2"/>
+<rect x="713" y="140" width="155" height="36" rx="10" fill="#fdcb6e" opacity="0.25"/>
+<rect x="713" y="166" width="155" height="10" fill="#fdcb6e" opacity="0.25"/>
+<text x="790" y="162" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#fdcb6e">RX</text>
+<text x="790" y="190" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">Приёмник</text>
+<text x="790" y="210" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">AURORA</text>
+<text x="790.0" y="242.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#fdcb6e" opacity="1.0">≥ 45 дБ·Гц</text>
+<text x="790.0" y="282.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#8b949e" opacity="1.0">238 каналов · BW 1,4 Гц</text>
+<defs><marker id="arr_3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#fdcb6e"/></marker></defs>
+<line x1="871" y1="200" x2="939" y2="200" stroke="#fdcb6e" stroke-width="2.2" marker-end="url(#arr_3)"/>
+<rect x="943" y="140" width="155" height="120" rx="10" fill="#0d1117" stroke="#00cec9" stroke-width="2"/>
+<rect x="943" y="140" width="155" height="36" rx="10" fill="#00cec9" opacity="0.25"/>
+<rect x="943" y="166" width="155" height="10" fill="#00cec9" opacity="0.25"/>
+<text x="1020" y="162" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#00cec9">KF</text>
+<text x="1020" y="190" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">Kalman-</text>
+<text x="1020" y="210" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">фильтр</text>
+<text x="1020.0" y="242.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#00cec9" opacity="1.0">IF L1+L5</text>
+<text x="1020.0" y="282.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#8b949e" opacity="1.0">PPP / PPP-RTK · SSR</text>
+<defs><marker id="arr_4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#00cec9"/></marker></defs>
+<line x1="1101" y1="200" x2="1169" y2="200" stroke="#00cec9" stroke-width="2.2" marker-end="url(#arr_4)"/>
+<rect x="1173" y="140" width="155" height="120" rx="10" fill="#0d1117" stroke="#00b894" stroke-width="2"/>
+<rect x="1173" y="140" width="155" height="36" rx="10" fill="#00b894" opacity="0.25"/>
+<rect x="1173" y="166" width="155" height="10" fill="#00b894" opacity="0.25"/>
+<text x="1250" y="162" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#00b894">✓</text>
+<text x="1250" y="190" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">PNT</text>
+<text x="1250" y="210" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">решение</text>
+<text x="1250.0" y="242.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#00b894" opacity="1.0">&lt; 0,5 м · &lt; 5 нс</text>
+<text x="1250.0" y="282.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#8b949e" opacity="1.0">UTC(SU) · H-95%</text>
+<rect x="30" y="382" width="1340" height="130" rx="10" fill="#0d1117" opacity="0.6"/>
+<text x="700" y="402" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#a29bfe">Цепочка синхронизации UTC(SU) → КА → Пользователь</text>
+<text x="110.0" y="432.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="white" opacity="1.0">UTC(SU)</text>
+<text x="110.0" y="452.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#a29bfe" opacity="1.0">± 5 нс</text>
+<line x1="160" y1="438" x2="260" y2="438" stroke="#a29bfe" stroke-width="1.2" opacity="0.45" stroke-dasharray="5,3"/>
+<text x="310.0" y="432.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="white" opacity="1.0">Cs КА</text>
+<text x="310.0" y="452.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#555577" opacity="1.0">± 0,01 нс/6ч</text>
+<line x1="360" y1="438" x2="460" y2="438" stroke="#a29bfe" stroke-width="1.2" opacity="0.45" stroke-dasharray="5,3"/>
+<text x="510.0" y="432.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="white" opacity="1.0">ISL ×1</text>
+<text x="510.0" y="452.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#555577" opacity="1.0">± 0,43 нс/хоп</text>
+<line x1="560" y1="438" x2="660" y2="438" stroke="#a29bfe" stroke-width="1.2" opacity="0.45" stroke-dasharray="5,3"/>
+<text x="710.0" y="432.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="white" opacity="1.0">ISL ×6</text>
+<text x="710.0" y="452.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#555577" opacity="1.0">± 2,58 нс</text>
+<line x1="760" y1="438" x2="870" y2="438" stroke="#a29bfe" stroke-width="1.2" opacity="0.45" stroke-dasharray="5,3"/>
+<text x="920.0" y="432.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="white" opacity="1.0">Тропосф.</text>
+<text x="920.0" y="452.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#555577" opacity="1.0">± ~6 см</text>
+<line x1="970" y1="438" x2="1070" y2="438" stroke="#a29bfe" stroke-width="1.2" opacity="0.45" stroke-dasharray="5,3"/>
+<text x="1120.0" y="432.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="white" opacity="1.0">Приёмник</text>
+<text x="1120.0" y="452.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#555577" opacity="1.0">&lt; 5 нс итого</text>
+<line x1="1170" y1="438" x2="1250" y2="438" stroke="#a29bfe" stroke-width="1.2" opacity="0.45" stroke-dasharray="5,3"/>
+<text x="1300.0" y="432.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="white" opacity="1.0">UTC пользов.</text>
+<text x="1300.0" y="452.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#00b894" opacity="1.0">&lt; 5 нс ✓</text>
+</svg>

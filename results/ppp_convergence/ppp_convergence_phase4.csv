@@ -1,0 +1,5 @@
+scenario,conv_time_min,vis_dur_leo_min,vis_dur_meo_min
+"AURORA FOC (42 сп., dual)",0.00,14.9,284.1
+"AURORA IOC (8 сп., dual)",0.50,14.9,284.1
+"GPS only (9 сп., dual)",0.50,14.9,284.1
+AURORA FOC (single-freq),0.00,14.9,284.1
