@@ -1,0 +1,20 @@
+parameter,BOL,EOL_7yr
+solar_array_w,835.48,725.30
+load_sunlit_w,192.50,192.50
+load_eclipse_w,218.00,218.00
+battery_capacity_wh,184.82,184.82
+battery_mass_kg,0.92,0.92
+margin_w,502.37,392.19
+margin_pct,260.97,203.74
+,,
+subsystem,sunlit_w,eclipse_w
+GNSS navigation payload,80.0,80.0
+ISL transceiver (Ka),30.0,30.0
+Atomic clock (OCXO/Rb/Cs),6.0,6.0
+AOCS (attitude & orbit),25.0,25.0
+On-board computer,15.0,15.0
+TT&C (telemetry),12.0,12.0
+Thermal control heaters,5.0,35.0
+Power conditioning (EPS),10.0,10.0
+Propulsion (ion/cold-gas),4.5,0.0
+GNSS receiver (onboard),5.0,5.0

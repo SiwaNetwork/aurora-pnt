@@ -1,0 +1,19 @@
+{
+  "coverage_4sats_mean_pct": 100.0,
+  "coverage_4sats_min_pct": 100.0,
+  "coverage_4sats_p05_pct": 100.0,
+  "pdop_p95_mean": 4.215,
+  "pdop_p95_worst": 5.996,
+  "pdop_mean_overall": 1.942,
+  "coverage_good_pdop_mean_pct": 98.57,
+  "n_sats_mean_overall": 13.45,
+  "n_timesteps": 144,
+  "label": "sats_240",
+  "n_satellites": 240,
+  "grid": "russia",
+  "grid_step_deg": 3.0,
+  "n_orbits": 12,
+  "n_sats_per_orbit": 20,
+  "altitude_km": 1000.0,
+  "inclination_deg": 75.0
+}

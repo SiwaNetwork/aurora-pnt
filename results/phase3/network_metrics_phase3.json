@@ -1,0 +1,757 @@
+{
+  "label": "phase3",
+  "gsl": {
+    "Vladimir": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Murmansk": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Novosibirsk": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Zheleznogorsk": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Yakutsk": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Khabarovsk": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Vladivostok": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Minsk": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Almaty": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Tehran": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    }
+  },
+  "isl": {
+    "isl_count_mean": 360.0,
+    "isl_count_min": 360,
+    "isl_count_max": 360,
+    "isl_dist_mean_km": 3018.887332409239,
+    "isl_dist_min_km": 502.5314194345215,
+    "isl_dist_max_km": 4434.2746245356675
+  },
+  "latency": {
+    "Vladimir_to_Murmansk": {
+      "latency_mean_ms": 9.9,
+      "latency_min_ms": 8.49,
+      "latency_max_ms": 12.04,
+      "latency_std_ms": 1.027,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Novosibirsk": {
+      "latency_mean_ms": 12.12,
+      "latency_min_ms": 11.56,
+      "latency_max_ms": 13.13,
+      "latency_std_ms": 0.415,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Zheleznogorsk": {
+      "latency_mean_ms": 13.74,
+      "latency_min_ms": 13.3,
+      "latency_max_ms": 14.68,
+      "latency_std_ms": 0.382,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Yakutsk": {
+      "latency_mean_ms": 18.34,
+      "latency_min_ms": 18.19,
+      "latency_max_ms": 18.66,
+      "latency_std_ms": 0.12,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Khabarovsk": {
+      "latency_mean_ms": 23.54,
+      "latency_min_ms": 22.31,
+      "latency_max_ms": 25.93,
+      "latency_std_ms": 1.13,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Vladivostok": {
+      "latency_mean_ms": 24.64,
+      "latency_min_ms": 23.2,
+      "latency_max_ms": 27.03,
+      "latency_std_ms": 1.125,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Minsk": {
+      "latency_mean_ms": 8.45,
+      "latency_min_ms": 7.37,
+      "latency_max_ms": 10.33,
+      "latency_std_ms": 0.709,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Almaty": {
+      "latency_mean_ms": 13.04,
+      "latency_min_ms": 12.46,
+      "latency_max_ms": 14.23,
+      "latency_std_ms": 0.442,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Tehran": {
+      "latency_mean_ms": 12.18,
+      "latency_min_ms": 10.96,
+      "latency_max_ms": 14.74,
+      "latency_std_ms": 0.907,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Novosibirsk": {
+      "latency_mean_ms": 12.92,
+      "latency_min_ms": 12.39,
+      "latency_max_ms": 13.98,
+      "latency_std_ms": 0.435,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Zheleznogorsk": {
+      "latency_mean_ms": 13.71,
+      "latency_min_ms": 13.36,
+      "latency_max_ms": 14.43,
+      "latency_std_ms": 0.289,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Yakutsk": {
+      "latency_mean_ms": 16.04,
+      "latency_min_ms": 15.96,
+      "latency_max_ms": 16.18,
+      "latency_std_ms": 0.057,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Khabarovsk": {
+      "latency_mean_ms": 21.01,
+      "latency_min_ms": 20.75,
+      "latency_max_ms": 22.59,
+      "latency_std_ms": 0.378,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Vladivostok": {
+      "latency_mean_ms": 22.85,
+      "latency_min_ms": 22.14,
+      "latency_max_ms": 24.7,
+      "latency_std_ms": 0.716,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Minsk": {
+      "latency_mean_ms": 10.38,
+      "latency_min_ms": 9.02,
+      "latency_max_ms": 12.39,
+      "latency_std_ms": 0.981,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Almaty": {
+      "latency_mean_ms": 15.52,
+      "latency_min_ms": 15.11,
+      "latency_max_ms": 16.6,
+      "latency_std_ms": 0.367,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Tehran": {
+      "latency_mean_ms": 15.65,
+      "latency_min_ms": 15.34,
+      "latency_max_ms": 16.37,
+      "latency_std_ms": 0.228,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Zheleznogorsk": {
+      "latency_mean_ms": 8.3,
+      "latency_min_ms": 7.08,
+      "latency_max_ms": 10.31,
+      "latency_std_ms": 0.789,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Yakutsk": {
+      "latency_mean_ms": 12.63,
+      "latency_min_ms": 11.93,
+      "latency_max_ms": 14.04,
+      "latency_std_ms": 0.573,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Khabarovsk": {
+      "latency_mean_ms": 14.8,
+      "latency_min_ms": 14.44,
+      "latency_max_ms": 15.41,
+      "latency_std_ms": 0.273,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Vladivostok": {
+      "latency_mean_ms": 15.26,
+      "latency_min_ms": 14.87,
+      "latency_max_ms": 16.07,
+      "latency_std_ms": 0.3,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Minsk": {
+      "latency_mean_ms": 14.53,
+      "latency_min_ms": 14.16,
+      "latency_max_ms": 15.1,
+      "latency_std_ms": 0.263,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Almaty": {
+      "latency_mean_ms": 9.68,
+      "latency_min_ms": 8.28,
+      "latency_max_ms": 12.59,
+      "latency_std_ms": 0.998,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Tehran": {
+      "latency_mean_ms": 14.09,
+      "latency_min_ms": 13.33,
+      "latency_max_ms": 15.61,
+      "latency_std_ms": 0.593,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Yakutsk": {
+      "latency_mean_ms": 11.07,
+      "latency_min_ms": 10.14,
+      "latency_max_ms": 12.46,
+      "latency_std_ms": 0.735,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Khabarovsk": {
+      "latency_mean_ms": 12.85,
+      "latency_min_ms": 12.35,
+      "latency_max_ms": 13.88,
+      "latency_std_ms": 0.368,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Vladivostok": {
+      "latency_mean_ms": 13.39,
+      "latency_min_ms": 12.85,
+      "latency_max_ms": 14.68,
+      "latency_std_ms": 0.444,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Minsk": {
+      "latency_mean_ms": 16.24,
+      "latency_min_ms": 15.95,
+      "latency_max_ms": 16.97,
+      "latency_std_ms": 0.261,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Almaty": {
+      "latency_mean_ms": 10.47,
+      "latency_min_ms": 9.41,
+      "latency_max_ms": 12.4,
+      "latency_std_ms": 0.776,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Tehran": {
+      "latency_mean_ms": 15.91,
+      "latency_min_ms": 15.4,
+      "latency_max_ms": 16.98,
+      "latency_std_ms": 0.381,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Khabarovsk": {
+      "latency_mean_ms": 9.53,
+      "latency_min_ms": 8.64,
+      "latency_max_ms": 11.12,
+      "latency_std_ms": 0.573,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Vladivostok": {
+      "latency_mean_ms": 10.76,
+      "latency_min_ms": 10.05,
+      "latency_max_ms": 11.83,
+      "latency_std_ms": 0.443,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Minsk": {
+      "latency_mean_ms": 20.86,
+      "latency_min_ms": 20.57,
+      "latency_max_ms": 22.94,
+      "latency_std_ms": 0.495,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Almaty": {
+      "latency_mean_ms": 16.03,
+      "latency_min_ms": 15.69,
+      "latency_max_ms": 17.0,
+      "latency_std_ms": 0.284,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Tehran": {
+      "latency_mean_ms": 23.23,
+      "latency_min_ms": 22.26,
+      "latency_max_ms": 25.74,
+      "latency_std_ms": 1.068,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Vladivostok": {
+      "latency_mean_ms": 9.52,
+      "latency_min_ms": 7.06,
+      "latency_max_ms": 12.72,
+      "latency_std_ms": 1.546,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Minsk": {
+      "latency_mean_ms": 27.3,
+      "latency_min_ms": 25.01,
+      "latency_max_ms": 29.26,
+      "latency_std_ms": 0.597,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Almaty": {
+      "latency_mean_ms": 17.58,
+      "latency_min_ms": 17.18,
+      "latency_max_ms": 19.41,
+      "latency_std_ms": 0.433,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Tehran": {
+      "latency_mean_ms": 27.52,
+      "latency_min_ms": 24.72,
+      "latency_max_ms": 29.35,
+      "latency_std_ms": 0.907,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Minsk": {
+      "latency_mean_ms": 28.41,
+      "latency_min_ms": 27.39,
+      "latency_max_ms": 29.97,
+      "latency_std_ms": 0.662,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Almaty": {
+      "latency_mean_ms": 17.79,
+      "latency_min_ms": 16.99,
+      "latency_max_ms": 20.58,
+      "latency_std_ms": 0.817,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Tehran": {
+      "latency_mean_ms": 27.77,
+      "latency_min_ms": 24.88,
+      "latency_max_ms": 29.14,
+      "latency_std_ms": 0.748,
+      "availability_pct": 100.0
+    },
+    "Minsk_to_Almaty": {
+      "latency_mean_ms": 15.32,
+      "latency_min_ms": 14.94,
+      "latency_max_ms": 16.17,
+      "latency_std_ms": 0.303,
+      "availability_pct": 100.0
+    },
+    "Minsk_to_Tehran": {
+      "latency_mean_ms": 12.86,
+      "latency_min_ms": 11.83,
+      "latency_max_ms": 14.32,
+      "latency_std_ms": 0.69,
+      "availability_pct": 100.0
+    },
+    "Almaty_to_Tehran": {
+      "latency_mean_ms": 11.61,
+      "latency_min_ms": 10.67,
+      "latency_max_ms": 13.64,
+      "latency_std_ms": 0.722,
+      "availability_pct": 100.0
+    }
+  },
+  "routing_stability": {
+    "steps_with_any_handover": 143,
+    "steps_total": 144,
+    "topology_change_rate_pct": 100.0
+  },
+  "path_stability": {
+    "Vladimir_to_Murmansk": {
+      "path_lifetime_mean_steps": 1.4,
+      "path_change_count": 100,
+      "path_change_rate_pct": 69.9,
+      "latency_jitter_ms": 1.027,
+      "hop_count_mean": 1.0,
+      "timing_path_uncertainty_ns": 1026920.8
+    },
+    "Vladimir_to_Novosibirsk": {
+      "path_lifetime_mean_steps": 6.5,
+      "path_change_count": 21,
+      "path_change_rate_pct": 14.7,
+      "latency_jitter_ms": 0.415,
+      "hop_count_mean": 1.2,
+      "timing_path_uncertainty_ns": 414510.9
+    },
+    "Vladimir_to_Zheleznogorsk": {
+      "path_lifetime_mean_steps": 8.5,
+      "path_change_count": 16,
+      "path_change_rate_pct": 11.2,
+      "latency_jitter_ms": 0.382,
+      "hop_count_mean": 1.4,
+      "timing_path_uncertainty_ns": 382344.4
+    },
+    "Vladimir_to_Yakutsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.12,
+      "hop_count_mean": 1.8,
+      "timing_path_uncertainty_ns": 119567.9
+    },
+    "Vladimir_to_Khabarovsk": {
+      "path_lifetime_mean_steps": 1.3,
+      "path_change_count": 110,
+      "path_change_rate_pct": 76.9,
+      "latency_jitter_ms": 1.13,
+      "hop_count_mean": 2.3,
+      "timing_path_uncertainty_ns": 1129529.2
+    },
+    "Vladimir_to_Vladivostok": {
+      "path_lifetime_mean_steps": 1.5,
+      "path_change_count": 95,
+      "path_change_rate_pct": 66.4,
+      "latency_jitter_ms": 1.125,
+      "hop_count_mean": 2.4,
+      "timing_path_uncertainty_ns": 1124544.4
+    },
+    "Vladimir_to_Minsk": {
+      "path_lifetime_mean_steps": 1.7,
+      "path_change_count": 83,
+      "path_change_rate_pct": 58.0,
+      "latency_jitter_ms": 0.709,
+      "hop_count_mean": 0.8,
+      "timing_path_uncertainty_ns": 708605.9
+    },
+    "Vladimir_to_Almaty": {
+      "path_lifetime_mean_steps": 5.8,
+      "path_change_count": 24,
+      "path_change_rate_pct": 16.8,
+      "latency_jitter_ms": 0.442,
+      "hop_count_mean": 1.3,
+      "timing_path_uncertainty_ns": 442211.6
+    },
+    "Vladimir_to_Tehran": {
+      "path_lifetime_mean_steps": 2.0,
+      "path_change_count": 70,
+      "path_change_rate_pct": 49.0,
+      "latency_jitter_ms": 0.907,
+      "hop_count_mean": 1.2,
+      "timing_path_uncertainty_ns": 906571.7
+    },
+    "Murmansk_to_Novosibirsk": {
+      "path_lifetime_mean_steps": 4.1,
+      "path_change_count": 34,
+      "path_change_rate_pct": 23.8,
+      "latency_jitter_ms": 0.435,
+      "hop_count_mean": 1.3,
+      "timing_path_uncertainty_ns": 434670.0
+    },
+    "Murmansk_to_Zheleznogorsk": {
+      "path_lifetime_mean_steps": 72.0,
+      "path_change_count": 1,
+      "path_change_rate_pct": 0.7,
+      "latency_jitter_ms": 0.289,
+      "hop_count_mean": 1.4,
+      "timing_path_uncertainty_ns": 289252.9
+    },
+    "Murmansk_to_Yakutsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.057,
+      "hop_count_mean": 1.6,
+      "timing_path_uncertainty_ns": 57252.2
+    },
+    "Murmansk_to_Khabarovsk": {
+      "path_lifetime_mean_steps": 7.2,
+      "path_change_count": 19,
+      "path_change_rate_pct": 13.3,
+      "latency_jitter_ms": 0.378,
+      "hop_count_mean": 2.1,
+      "timing_path_uncertainty_ns": 378391.9
+    },
+    "Murmansk_to_Vladivostok": {
+      "path_lifetime_mean_steps": 1.8,
+      "path_change_count": 80,
+      "path_change_rate_pct": 55.9,
+      "latency_jitter_ms": 0.716,
+      "hop_count_mean": 2.3,
+      "timing_path_uncertainty_ns": 715551.9
+    },
+    "Murmansk_to_Minsk": {
+      "path_lifetime_mean_steps": 1.4,
+      "path_change_count": 100,
+      "path_change_rate_pct": 69.9,
+      "latency_jitter_ms": 0.981,
+      "hop_count_mean": 1.0,
+      "timing_path_uncertainty_ns": 980724.5
+    },
+    "Murmansk_to_Almaty": {
+      "path_lifetime_mean_steps": 9.0,
+      "path_change_count": 15,
+      "path_change_rate_pct": 10.5,
+      "latency_jitter_ms": 0.367,
+      "hop_count_mean": 1.5,
+      "timing_path_uncertainty_ns": 367206.5
+    },
+    "Murmansk_to_Tehran": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.228,
+      "hop_count_mean": 1.6,
+      "timing_path_uncertainty_ns": 227790.0
+    },
+    "Novosibirsk_to_Zheleznogorsk": {
+      "path_lifetime_mean_steps": 1.9,
+      "path_change_count": 75,
+      "path_change_rate_pct": 52.4,
+      "latency_jitter_ms": 0.789,
+      "hop_count_mean": 0.8,
+      "timing_path_uncertainty_ns": 789223.6
+    },
+    "Novosibirsk_to_Yakutsk": {
+      "path_lifetime_mean_steps": 2.4,
+      "path_change_count": 58,
+      "path_change_rate_pct": 40.6,
+      "latency_jitter_ms": 0.573,
+      "hop_count_mean": 1.3,
+      "timing_path_uncertainty_ns": 573052.9
+    },
+    "Novosibirsk_to_Khabarovsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.273,
+      "hop_count_mean": 1.5,
+      "timing_path_uncertainty_ns": 272567.1
+    },
+    "Novosibirsk_to_Vladivostok": {
+      "path_lifetime_mean_steps": 36.0,
+      "path_change_count": 3,
+      "path_change_rate_pct": 2.1,
+      "latency_jitter_ms": 0.3,
+      "hop_count_mean": 1.5,
+      "timing_path_uncertainty_ns": 299584.3
+    },
+    "Novosibirsk_to_Minsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.263,
+      "hop_count_mean": 1.4,
+      "timing_path_uncertainty_ns": 263047.7
+    },
+    "Novosibirsk_to_Almaty": {
+      "path_lifetime_mean_steps": 1.5,
+      "path_change_count": 97,
+      "path_change_rate_pct": 67.8,
+      "latency_jitter_ms": 0.998,
+      "hop_count_mean": 1.0,
+      "timing_path_uncertainty_ns": 998394.9
+    },
+    "Novosibirsk_to_Tehran": {
+      "path_lifetime_mean_steps": 3.0,
+      "path_change_count": 47,
+      "path_change_rate_pct": 32.9,
+      "latency_jitter_ms": 0.593,
+      "hop_count_mean": 1.4,
+      "timing_path_uncertainty_ns": 593415.6
+    },
+    "Zheleznogorsk_to_Yakutsk": {
+      "path_lifetime_mean_steps": 1.7,
+      "path_change_count": 85,
+      "path_change_rate_pct": 59.4,
+      "latency_jitter_ms": 0.735,
+      "hop_count_mean": 1.1,
+      "timing_path_uncertainty_ns": 734846.9
+    },
+    "Zheleznogorsk_to_Khabarovsk": {
+      "path_lifetime_mean_steps": 7.2,
+      "path_change_count": 19,
+      "path_change_rate_pct": 13.3,
+      "latency_jitter_ms": 0.368,
+      "hop_count_mean": 1.3,
+      "timing_path_uncertainty_ns": 368021.2
+    },
+    "Zheleznogorsk_to_Vladivostok": {
+      "path_lifetime_mean_steps": 6.3,
+      "path_change_count": 22,
+      "path_change_rate_pct": 15.4,
+      "latency_jitter_ms": 0.444,
+      "hop_count_mean": 1.3,
+      "timing_path_uncertainty_ns": 443944.6
+    },
+    "Zheleznogorsk_to_Minsk": {
+      "path_lifetime_mean_steps": 36.0,
+      "path_change_count": 3,
+      "path_change_rate_pct": 2.1,
+      "latency_jitter_ms": 0.261,
+      "hop_count_mean": 1.6,
+      "timing_path_uncertainty_ns": 261222.6
+    },
+    "Zheleznogorsk_to_Almaty": {
+      "path_lifetime_mean_steps": 2.4,
+      "path_change_count": 60,
+      "path_change_rate_pct": 42.0,
+      "latency_jitter_ms": 0.776,
+      "hop_count_mean": 1.0,
+      "timing_path_uncertainty_ns": 776391.1
+    },
+    "Zheleznogorsk_to_Tehran": {
+      "path_lifetime_mean_steps": 12.0,
+      "path_change_count": 11,
+      "path_change_rate_pct": 7.7,
+      "latency_jitter_ms": 0.381,
+      "hop_count_mean": 1.6,
+      "timing_path_uncertainty_ns": 380617.5
+    },
+    "Yakutsk_to_Khabarovsk": {
+      "path_lifetime_mean_steps": 3.1,
+      "path_change_count": 45,
+      "path_change_rate_pct": 31.5,
+      "latency_jitter_ms": 0.573,
+      "hop_count_mean": 0.9,
+      "timing_path_uncertainty_ns": 573406.7
+    },
+    "Yakutsk_to_Vladivostok": {
+      "path_lifetime_mean_steps": 4.5,
+      "path_change_count": 31,
+      "path_change_rate_pct": 21.7,
+      "latency_jitter_ms": 0.443,
+      "hop_count_mean": 1.1,
+      "timing_path_uncertainty_ns": 442645.5
+    },
+    "Yakutsk_to_Minsk": {
+      "path_lifetime_mean_steps": 5.8,
+      "path_change_count": 24,
+      "path_change_rate_pct": 16.8,
+      "latency_jitter_ms": 0.495,
+      "hop_count_mean": 2.1,
+      "timing_path_uncertainty_ns": 495101.7
+    },
+    "Yakutsk_to_Almaty": {
+      "path_lifetime_mean_steps": 20.6,
+      "path_change_count": 6,
+      "path_change_rate_pct": 4.2,
+      "latency_jitter_ms": 0.284,
+      "hop_count_mean": 1.6,
+      "timing_path_uncertainty_ns": 284364.1
+    },
+    "Yakutsk_to_Tehran": {
+      "path_lifetime_mean_steps": 2.1,
+      "path_change_count": 68,
+      "path_change_rate_pct": 47.6,
+      "latency_jitter_ms": 1.068,
+      "hop_count_mean": 2.3,
+      "timing_path_uncertainty_ns": 1068209.8
+    },
+    "Khabarovsk_to_Vladivostok": {
+      "path_lifetime_mean_steps": 1.3,
+      "path_change_count": 106,
+      "path_change_rate_pct": 74.1,
+      "latency_jitter_ms": 1.546,
+      "hop_count_mean": 0.9,
+      "timing_path_uncertainty_ns": 1546316.2
+    },
+    "Khabarovsk_to_Minsk": {
+      "path_lifetime_mean_steps": 3.3,
+      "path_change_count": 43,
+      "path_change_rate_pct": 30.1,
+      "latency_jitter_ms": 0.597,
+      "hop_count_mean": 2.7,
+      "timing_path_uncertainty_ns": 597274.5
+    },
+    "Khabarovsk_to_Almaty": {
+      "path_lifetime_mean_steps": 7.2,
+      "path_change_count": 19,
+      "path_change_rate_pct": 13.3,
+      "latency_jitter_ms": 0.433,
+      "hop_count_mean": 1.7,
+      "timing_path_uncertainty_ns": 432699.1
+    },
+    "Khabarovsk_to_Tehran": {
+      "path_lifetime_mean_steps": 3.3,
+      "path_change_count": 42,
+      "path_change_rate_pct": 29.4,
+      "latency_jitter_ms": 0.907,
+      "hop_count_mean": 2.7,
+      "timing_path_uncertainty_ns": 906736.1
+    },
+    "Vladivostok_to_Minsk": {
+      "path_lifetime_mean_steps": 2.1,
+      "path_change_count": 69,
+      "path_change_rate_pct": 48.3,
+      "latency_jitter_ms": 0.662,
+      "hop_count_mean": 2.8,
+      "timing_path_uncertainty_ns": 661667.6
+    },
+    "Vladivostok_to_Almaty": {
+      "path_lifetime_mean_steps": 1.9,
+      "path_change_count": 74,
+      "path_change_rate_pct": 51.7,
+      "latency_jitter_ms": 0.817,
+      "hop_count_mean": 1.8,
+      "timing_path_uncertainty_ns": 816840.0
+    },
+    "Vladivostok_to_Tehran": {
+      "path_lifetime_mean_steps": 9.6,
+      "path_change_count": 14,
+      "path_change_rate_pct": 9.8,
+      "latency_jitter_ms": 0.748,
+      "hop_count_mean": 2.8,
+      "timing_path_uncertainty_ns": 748341.0
+    },
+    "Minsk_to_Almaty": {
+      "path_lifetime_mean_steps": 28.8,
+      "path_change_count": 4,
+      "path_change_rate_pct": 2.8,
+      "latency_jitter_ms": 0.303,
+      "hop_count_mean": 1.5,
+      "timing_path_uncertainty_ns": 302608.8
+    },
+    "Minsk_to_Tehran": {
+      "path_lifetime_mean_steps": 2.4,
+      "path_change_count": 58,
+      "path_change_rate_pct": 40.6,
+      "latency_jitter_ms": 0.69,
+      "hop_count_mean": 1.3,
+      "timing_path_uncertainty_ns": 689764.5
+    },
+    "Almaty_to_Tehran": {
+      "path_lifetime_mean_steps": 4.4,
+      "path_change_count": 32,
+      "path_change_rate_pct": 22.4,
+      "latency_jitter_ms": 0.722,
+      "hop_count_mean": 1.2,
+      "timing_path_uncertainty_ns": 722051.5
+    }
+  }
+}

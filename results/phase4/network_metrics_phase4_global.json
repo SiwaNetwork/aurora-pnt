@@ -1,0 +1,2992 @@
+{
+  "label": "phase4_global",
+  "gsl": {
+    "Vladimir": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Murmansk": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Novosibirsk": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Zheleznogorsk": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Yakutsk": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Khabarovsk": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Vladivostok": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Minsk": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Almaty": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Tehran": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Urumqi": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Delhi": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Yangon": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Jakarta": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Luanda": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Nairobi": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Johannesburg": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Havana": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Caracas": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    },
+    "Buenos_Aires": {
+      "handover_count": 143,
+      "handover_rate_per_h": 6.0,
+      "mean_attachment_duration_min": 10.0,
+      "coverage_pct": 100.0
+    }
+  },
+  "isl": {
+    "isl_count_mean": 600.0,
+    "isl_count_min": 600,
+    "isl_count_max": 600,
+    "isl_dist_mean_km": 2322.60488837054,
+    "isl_dist_min_km": 337.62083078955783,
+    "isl_dist_max_km": 3527.7351067565955
+  },
+  "latency": {
+    "Vladimir_to_Murmansk": {
+      "latency_mean_ms": 9.11,
+      "latency_min_ms": 8.5,
+      "latency_max_ms": 10.5,
+      "latency_std_ms": 0.495,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Novosibirsk": {
+      "latency_mean_ms": 11.92,
+      "latency_min_ms": 11.56,
+      "latency_max_ms": 12.92,
+      "latency_std_ms": 0.279,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Zheleznogorsk": {
+      "latency_mean_ms": 13.52,
+      "latency_min_ms": 13.28,
+      "latency_max_ms": 14.16,
+      "latency_std_ms": 0.186,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Yakutsk": {
+      "latency_mean_ms": 18.28,
+      "latency_min_ms": 18.19,
+      "latency_max_ms": 18.52,
+      "latency_std_ms": 0.066,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Khabarovsk": {
+      "latency_mean_ms": 22.71,
+      "latency_min_ms": 22.31,
+      "latency_max_ms": 24.73,
+      "latency_std_ms": 0.504,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Vladivostok": {
+      "latency_mean_ms": 23.85,
+      "latency_min_ms": 23.2,
+      "latency_max_ms": 25.77,
+      "latency_std_ms": 0.69,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Minsk": {
+      "latency_mean_ms": 8.15,
+      "latency_min_ms": 7.31,
+      "latency_max_ms": 9.69,
+      "latency_std_ms": 0.593,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Almaty": {
+      "latency_mean_ms": 12.87,
+      "latency_min_ms": 12.46,
+      "latency_max_ms": 13.75,
+      "latency_std_ms": 0.315,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Tehran": {
+      "latency_mean_ms": 11.49,
+      "latency_min_ms": 10.9,
+      "latency_max_ms": 12.96,
+      "latency_std_ms": 0.459,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Urumqi": {
+      "latency_mean_ms": 14.65,
+      "latency_min_ms": 14.37,
+      "latency_max_ms": 15.37,
+      "latency_std_ms": 0.227,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Delhi": {
+      "latency_mean_ms": 16.69,
+      "latency_min_ms": 16.43,
+      "latency_max_ms": 17.41,
+      "latency_std_ms": 0.22,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Yangon": {
+      "latency_mean_ms": 24.95,
+      "latency_min_ms": 23.55,
+      "latency_max_ms": 26.79,
+      "latency_std_ms": 0.911,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Jakarta": {
+      "latency_mean_ms": 35.97,
+      "latency_min_ms": 35.43,
+      "latency_max_ms": 37.92,
+      "latency_std_ms": 0.431,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Luanda": {
+      "latency_mean_ms": 29.83,
+      "latency_min_ms": 28.74,
+      "latency_max_ms": 31.83,
+      "latency_std_ms": 0.853,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Nairobi": {
+      "latency_mean_ms": 25.04,
+      "latency_min_ms": 23.56,
+      "latency_max_ms": 27.18,
+      "latency_std_ms": 0.89,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Johannesburg": {
+      "latency_mean_ms": 36.1,
+      "latency_min_ms": 35.28,
+      "latency_max_ms": 37.76,
+      "latency_std_ms": 0.672,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Havana": {
+      "latency_mean_ms": 38.28,
+      "latency_min_ms": 37.0,
+      "latency_max_ms": 39.99,
+      "latency_std_ms": 0.873,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Caracas": {
+      "latency_mean_ms": 40.59,
+      "latency_min_ms": 38.63,
+      "latency_max_ms": 42.34,
+      "latency_std_ms": 1.079,
+      "availability_pct": 100.0
+    },
+    "Vladimir_to_Buenos_Aires": {
+      "latency_mean_ms": 55.3,
+      "latency_min_ms": 53.57,
+      "latency_max_ms": 57.89,
+      "latency_std_ms": 1.14,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Novosibirsk": {
+      "latency_mean_ms": 12.66,
+      "latency_min_ms": 12.39,
+      "latency_max_ms": 13.34,
+      "latency_std_ms": 0.219,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Zheleznogorsk": {
+      "latency_mean_ms": 13.56,
+      "latency_min_ms": 13.35,
+      "latency_max_ms": 14.07,
+      "latency_std_ms": 0.167,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Yakutsk": {
+      "latency_mean_ms": 16.01,
+      "latency_min_ms": 15.96,
+      "latency_max_ms": 16.15,
+      "latency_std_ms": 0.04,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Khabarovsk": {
+      "latency_mean_ms": 20.86,
+      "latency_min_ms": 20.75,
+      "latency_max_ms": 21.49,
+      "latency_std_ms": 0.159,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Vladivostok": {
+      "latency_mean_ms": 22.43,
+      "latency_min_ms": 22.14,
+      "latency_max_ms": 23.58,
+      "latency_std_ms": 0.352,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Minsk": {
+      "latency_mean_ms": 9.54,
+      "latency_min_ms": 9.02,
+      "latency_max_ms": 10.83,
+      "latency_std_ms": 0.393,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Almaty": {
+      "latency_mean_ms": 15.31,
+      "latency_min_ms": 15.11,
+      "latency_max_ms": 15.76,
+      "latency_std_ms": 0.163,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Tehran": {
+      "latency_mean_ms": 15.57,
+      "latency_min_ms": 15.34,
+      "latency_max_ms": 16.12,
+      "latency_std_ms": 0.183,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Urumqi": {
+      "latency_mean_ms": 16.39,
+      "latency_min_ms": 16.22,
+      "latency_max_ms": 16.82,
+      "latency_std_ms": 0.141,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Delhi": {
+      "latency_mean_ms": 20.29,
+      "latency_min_ms": 20.02,
+      "latency_max_ms": 21.45,
+      "latency_std_ms": 0.303,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Yangon": {
+      "latency_mean_ms": 27.99,
+      "latency_min_ms": 27.43,
+      "latency_max_ms": 29.7,
+      "latency_std_ms": 0.56,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Jakarta": {
+      "latency_mean_ms": 38.76,
+      "latency_min_ms": 37.79,
+      "latency_max_ms": 40.25,
+      "latency_std_ms": 0.644,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Luanda": {
+      "latency_mean_ms": 34.43,
+      "latency_min_ms": 33.85,
+      "latency_max_ms": 36.35,
+      "latency_std_ms": 0.509,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Nairobi": {
+      "latency_mean_ms": 30.55,
+      "latency_min_ms": 29.64,
+      "latency_max_ms": 32.94,
+      "latency_std_ms": 0.834,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Johannesburg": {
+      "latency_mean_ms": 42.1,
+      "latency_min_ms": 40.12,
+      "latency_max_ms": 43.45,
+      "latency_std_ms": 0.443,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Havana": {
+      "latency_mean_ms": 33.2,
+      "latency_min_ms": 31.97,
+      "latency_max_ms": 34.17,
+      "latency_std_ms": 0.452,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Caracas": {
+      "latency_mean_ms": 36.32,
+      "latency_min_ms": 35.59,
+      "latency_max_ms": 38.27,
+      "latency_std_ms": 0.732,
+      "availability_pct": 100.0
+    },
+    "Murmansk_to_Buenos_Aires": {
+      "latency_mean_ms": 52.86,
+      "latency_min_ms": 51.94,
+      "latency_max_ms": 54.5,
+      "latency_std_ms": 0.753,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Zheleznogorsk": {
+      "latency_mean_ms": 7.92,
+      "latency_min_ms": 7.08,
+      "latency_max_ms": 9.72,
+      "latency_std_ms": 0.612,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Yakutsk": {
+      "latency_mean_ms": 12.21,
+      "latency_min_ms": 11.92,
+      "latency_max_ms": 12.9,
+      "latency_std_ms": 0.221,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Khabarovsk": {
+      "latency_mean_ms": 14.68,
+      "latency_min_ms": 14.43,
+      "latency_max_ms": 15.58,
+      "latency_std_ms": 0.214,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Vladivostok": {
+      "latency_mean_ms": 15.14,
+      "latency_min_ms": 14.87,
+      "latency_max_ms": 16.01,
+      "latency_std_ms": 0.231,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Minsk": {
+      "latency_mean_ms": 14.38,
+      "latency_min_ms": 14.16,
+      "latency_max_ms": 14.98,
+      "latency_std_ms": 0.18,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Almaty": {
+      "latency_mean_ms": 9.15,
+      "latency_min_ms": 8.26,
+      "latency_max_ms": 10.53,
+      "latency_std_ms": 0.605,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Tehran": {
+      "latency_mean_ms": 13.67,
+      "latency_min_ms": 13.3,
+      "latency_max_ms": 14.56,
+      "latency_std_ms": 0.286,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Urumqi": {
+      "latency_mean_ms": 8.99,
+      "latency_min_ms": 8.09,
+      "latency_max_ms": 10.64,
+      "latency_std_ms": 0.615,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Delhi": {
+      "latency_mean_ms": 12.9,
+      "latency_min_ms": 12.5,
+      "latency_max_ms": 13.65,
+      "latency_std_ms": 0.283,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Yangon": {
+      "latency_mean_ms": 17.18,
+      "latency_min_ms": 16.97,
+      "latency_max_ms": 17.69,
+      "latency_std_ms": 0.159,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Jakarta": {
+      "latency_mean_ms": 27.94,
+      "latency_min_ms": 27.12,
+      "latency_max_ms": 30.23,
+      "latency_std_ms": 0.735,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Luanda": {
+      "latency_mean_ms": 38.31,
+      "latency_min_ms": 36.78,
+      "latency_max_ms": 40.8,
+      "latency_std_ms": 1.068,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Nairobi": {
+      "latency_mean_ms": 29.76,
+      "latency_min_ms": 28.61,
+      "latency_max_ms": 31.82,
+      "latency_std_ms": 0.888,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Johannesburg": {
+      "latency_mean_ms": 41.07,
+      "latency_min_ms": 39.34,
+      "latency_max_ms": 42.43,
+      "latency_std_ms": 0.662,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Havana": {
+      "latency_mean_ms": 43.75,
+      "latency_min_ms": 42.5,
+      "latency_max_ms": 46.02,
+      "latency_std_ms": 0.694,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Caracas": {
+      "latency_mean_ms": 47.2,
+      "latency_min_ms": 46.02,
+      "latency_max_ms": 48.62,
+      "latency_std_ms": 0.655,
+      "availability_pct": 100.0
+    },
+    "Novosibirsk_to_Buenos_Aires": {
+      "latency_mean_ms": 64.47,
+      "latency_min_ms": 62.74,
+      "latency_max_ms": 65.33,
+      "latency_std_ms": 0.475,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Yakutsk": {
+      "latency_mean_ms": 10.52,
+      "latency_min_ms": 10.13,
+      "latency_max_ms": 11.46,
+      "latency_std_ms": 0.297,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Khabarovsk": {
+      "latency_mean_ms": 12.7,
+      "latency_min_ms": 12.34,
+      "latency_max_ms": 13.94,
+      "latency_std_ms": 0.304,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Vladivostok": {
+      "latency_mean_ms": 13.22,
+      "latency_min_ms": 12.84,
+      "latency_max_ms": 14.16,
+      "latency_std_ms": 0.298,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Minsk": {
+      "latency_mean_ms": 16.1,
+      "latency_min_ms": 15.94,
+      "latency_max_ms": 16.41,
+      "latency_std_ms": 0.116,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Almaty": {
+      "latency_mean_ms": 10.12,
+      "latency_min_ms": 9.41,
+      "latency_max_ms": 11.46,
+      "latency_std_ms": 0.502,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Tehran": {
+      "latency_mean_ms": 15.68,
+      "latency_min_ms": 15.4,
+      "latency_max_ms": 16.37,
+      "latency_std_ms": 0.225,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Urumqi": {
+      "latency_mean_ms": 9.28,
+      "latency_min_ms": 8.45,
+      "latency_max_ms": 11.0,
+      "latency_std_ms": 0.603,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Delhi": {
+      "latency_mean_ms": 13.99,
+      "latency_min_ms": 13.62,
+      "latency_max_ms": 14.78,
+      "latency_std_ms": 0.287,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Yangon": {
+      "latency_mean_ms": 17.15,
+      "latency_min_ms": 16.96,
+      "latency_max_ms": 17.62,
+      "latency_std_ms": 0.128,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Jakarta": {
+      "latency_mean_ms": 27.55,
+      "latency_min_ms": 26.86,
+      "latency_max_ms": 29.41,
+      "latency_std_ms": 0.611,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Luanda": {
+      "latency_mean_ms": 40.76,
+      "latency_min_ms": 38.93,
+      "latency_max_ms": 42.7,
+      "latency_std_ms": 1.073,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Nairobi": {
+      "latency_mean_ms": 32.38,
+      "latency_min_ms": 30.82,
+      "latency_max_ms": 33.84,
+      "latency_std_ms": 0.73,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Johannesburg": {
+      "latency_mean_ms": 43.67,
+      "latency_min_ms": 42.94,
+      "latency_max_ms": 45.85,
+      "latency_std_ms": 0.667,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Havana": {
+      "latency_mean_ms": 44.51,
+      "latency_min_ms": 43.51,
+      "latency_max_ms": 46.86,
+      "latency_std_ms": 0.716,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Caracas": {
+      "latency_mean_ms": 47.94,
+      "latency_min_ms": 46.76,
+      "latency_max_ms": 49.17,
+      "latency_std_ms": 0.58,
+      "availability_pct": 100.0
+    },
+    "Zheleznogorsk_to_Buenos_Aires": {
+      "latency_mean_ms": 65.37,
+      "latency_min_ms": 64.1,
+      "latency_max_ms": 67.27,
+      "latency_std_ms": 0.489,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Khabarovsk": {
+      "latency_mean_ms": 9.25,
+      "latency_min_ms": 8.65,
+      "latency_max_ms": 10.41,
+      "latency_std_ms": 0.437,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Vladivostok": {
+      "latency_mean_ms": 10.64,
+      "latency_min_ms": 10.06,
+      "latency_max_ms": 11.98,
+      "latency_std_ms": 0.435,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Minsk": {
+      "latency_mean_ms": 20.65,
+      "latency_min_ms": 20.57,
+      "latency_max_ms": 21.12,
+      "latency_std_ms": 0.105,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Almaty": {
+      "latency_mean_ms": 15.9,
+      "latency_min_ms": 15.69,
+      "latency_max_ms": 16.5,
+      "latency_std_ms": 0.178,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Tehran": {
+      "latency_mean_ms": 22.77,
+      "latency_min_ms": 22.26,
+      "latency_max_ms": 24.71,
+      "latency_std_ms": 0.597,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Urumqi": {
+      "latency_mean_ms": 14.08,
+      "latency_min_ms": 13.8,
+      "latency_max_ms": 14.83,
+      "latency_std_ms": 0.231,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Delhi": {
+      "latency_mean_ms": 20.32,
+      "latency_min_ms": 20.01,
+      "latency_max_ms": 22.45,
+      "latency_std_ms": 0.436,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Yangon": {
+      "latency_mean_ms": 21.73,
+      "latency_min_ms": 21.18,
+      "latency_max_ms": 23.68,
+      "latency_std_ms": 0.63,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Jakarta": {
+      "latency_mean_ms": 30.52,
+      "latency_min_ms": 29.41,
+      "latency_max_ms": 32.45,
+      "latency_std_ms": 0.786,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Luanda": {
+      "latency_mean_ms": 47.32,
+      "latency_min_ms": 45.72,
+      "latency_max_ms": 48.82,
+      "latency_std_ms": 0.834,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Nairobi": {
+      "latency_mean_ms": 39.85,
+      "latency_min_ms": 39.18,
+      "latency_max_ms": 41.04,
+      "latency_std_ms": 0.514,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Johannesburg": {
+      "latency_mean_ms": 51.1,
+      "latency_min_ms": 49.88,
+      "latency_max_ms": 53.53,
+      "latency_std_ms": 0.86,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Havana": {
+      "latency_mean_ms": 39.1,
+      "latency_min_ms": 38.2,
+      "latency_max_ms": 40.4,
+      "latency_std_ms": 0.624,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Caracas": {
+      "latency_mean_ms": 46.07,
+      "latency_min_ms": 45.11,
+      "latency_max_ms": 47.73,
+      "latency_std_ms": 0.666,
+      "availability_pct": 100.0
+    },
+    "Yakutsk_to_Buenos_Aires": {
+      "latency_mean_ms": 65.18,
+      "latency_min_ms": 64.16,
+      "latency_max_ms": 67.08,
+      "latency_std_ms": 0.529,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Vladivostok": {
+      "latency_mean_ms": 8.2,
+      "latency_min_ms": 7.01,
+      "latency_max_ms": 10.63,
+      "latency_std_ms": 0.854,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Minsk": {
+      "latency_mean_ms": 26.45,
+      "latency_min_ms": 24.97,
+      "latency_max_ms": 27.47,
+      "latency_std_ms": 0.514,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Almaty": {
+      "latency_mean_ms": 17.36,
+      "latency_min_ms": 17.17,
+      "latency_max_ms": 17.91,
+      "latency_std_ms": 0.159,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Tehran": {
+      "latency_mean_ms": 26.31,
+      "latency_min_ms": 24.71,
+      "latency_max_ms": 28.04,
+      "latency_std_ms": 0.708,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Urumqi": {
+      "latency_mean_ms": 14.87,
+      "latency_min_ms": 14.61,
+      "latency_max_ms": 15.58,
+      "latency_std_ms": 0.215,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Delhi": {
+      "latency_mean_ms": 20.55,
+      "latency_min_ms": 20.18,
+      "latency_max_ms": 23.27,
+      "latency_std_ms": 0.523,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Yangon": {
+      "latency_mean_ms": 19.13,
+      "latency_min_ms": 18.89,
+      "latency_max_ms": 20.0,
+      "latency_std_ms": 0.248,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Jakarta": {
+      "latency_mean_ms": 26.22,
+      "latency_min_ms": 24.49,
+      "latency_max_ms": 29.01,
+      "latency_std_ms": 0.756,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Luanda": {
+      "latency_mean_ms": 51.12,
+      "latency_min_ms": 48.27,
+      "latency_max_ms": 53.53,
+      "latency_std_ms": 1.054,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Nairobi": {
+      "latency_mean_ms": 41.61,
+      "latency_min_ms": 40.62,
+      "latency_max_ms": 44.33,
+      "latency_std_ms": 0.841,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Johannesburg": {
+      "latency_mean_ms": 52.92,
+      "latency_min_ms": 51.0,
+      "latency_max_ms": 54.26,
+      "latency_std_ms": 0.799,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Havana": {
+      "latency_mean_ms": 43.88,
+      "latency_min_ms": 42.79,
+      "latency_max_ms": 45.68,
+      "latency_std_ms": 0.617,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Caracas": {
+      "latency_mean_ms": 50.72,
+      "latency_min_ms": 49.74,
+      "latency_max_ms": 52.59,
+      "latency_std_ms": 0.569,
+      "availability_pct": 100.0
+    },
+    "Khabarovsk_to_Buenos_Aires": {
+      "latency_mean_ms": 69.89,
+      "latency_min_ms": 69.01,
+      "latency_max_ms": 71.37,
+      "latency_std_ms": 0.605,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Minsk": {
+      "latency_mean_ms": 27.7,
+      "latency_min_ms": 26.63,
+      "latency_max_ms": 29.36,
+      "latency_std_ms": 0.582,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Almaty": {
+      "latency_mean_ms": 17.2,
+      "latency_min_ms": 16.98,
+      "latency_max_ms": 18.01,
+      "latency_std_ms": 0.192,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Tehran": {
+      "latency_mean_ms": 26.44,
+      "latency_min_ms": 24.69,
+      "latency_max_ms": 27.86,
+      "latency_std_ms": 0.715,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Urumqi": {
+      "latency_mean_ms": 14.59,
+      "latency_min_ms": 14.28,
+      "latency_max_ms": 15.29,
+      "latency_std_ms": 0.244,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Delhi": {
+      "latency_mean_ms": 19.6,
+      "latency_min_ms": 19.32,
+      "latency_max_ms": 20.46,
+      "latency_std_ms": 0.278,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Yangon": {
+      "latency_mean_ms": 17.5,
+      "latency_min_ms": 17.19,
+      "latency_max_ms": 18.57,
+      "latency_std_ms": 0.289,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Jakarta": {
+      "latency_mean_ms": 23.61,
+      "latency_min_ms": 22.37,
+      "latency_max_ms": 25.73,
+      "latency_std_ms": 0.99,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Luanda": {
+      "latency_mean_ms": 51.13,
+      "latency_min_ms": 48.22,
+      "latency_max_ms": 54.05,
+      "latency_std_ms": 1.113,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Nairobi": {
+      "latency_mean_ms": 40.79,
+      "latency_min_ms": 39.73,
+      "latency_max_ms": 44.02,
+      "latency_std_ms": 0.927,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Johannesburg": {
+      "latency_mean_ms": 52.02,
+      "latency_min_ms": 50.31,
+      "latency_max_ms": 53.91,
+      "latency_std_ms": 0.995,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Havana": {
+      "latency_mean_ms": 46.47,
+      "latency_min_ms": 45.46,
+      "latency_max_ms": 48.12,
+      "latency_std_ms": 0.74,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Caracas": {
+      "latency_mean_ms": 53.26,
+      "latency_min_ms": 52.3,
+      "latency_max_ms": 54.76,
+      "latency_std_ms": 0.716,
+      "availability_pct": 100.0
+    },
+    "Vladivostok_to_Buenos_Aires": {
+      "latency_mean_ms": 72.43,
+      "latency_min_ms": 71.17,
+      "latency_max_ms": 74.16,
+      "latency_std_ms": 0.533,
+      "availability_pct": 100.0
+    },
+    "Minsk_to_Almaty": {
+      "latency_mean_ms": 15.22,
+      "latency_min_ms": 14.93,
+      "latency_max_ms": 15.97,
+      "latency_std_ms": 0.233,
+      "availability_pct": 100.0
+    },
+    "Minsk_to_Tehran": {
+      "latency_mean_ms": 12.31,
+      "latency_min_ms": 11.83,
+      "latency_max_ms": 13.54,
+      "latency_std_ms": 0.366,
+      "availability_pct": 100.0
+    },
+    "Minsk_to_Urumqi": {
+      "latency_mean_ms": 17.24,
+      "latency_min_ms": 17.05,
+      "latency_max_ms": 17.88,
+      "latency_std_ms": 0.169,
+      "availability_pct": 100.0
+    },
+    "Minsk_to_Delhi": {
+      "latency_mean_ms": 18.83,
+      "latency_min_ms": 18.59,
+      "latency_max_ms": 19.89,
+      "latency_std_ms": 0.242,
+      "availability_pct": 100.0
+    },
+    "Minsk_to_Yangon": {
+      "latency_mean_ms": 28.14,
+      "latency_min_ms": 27.04,
+      "latency_max_ms": 29.81,
+      "latency_std_ms": 0.654,
+      "availability_pct": 100.0
+    },
+    "Minsk_to_Jakarta": {
+      "latency_mean_ms": 38.23,
+      "latency_min_ms": 37.58,
+      "latency_max_ms": 39.53,
+      "latency_std_ms": 0.541,
+      "availability_pct": 100.0
+    },
+    "Minsk_to_Luanda": {
+      "latency_mean_ms": 27.76,
+      "latency_min_ms": 27.0,
+      "latency_max_ms": 29.66,
+      "latency_std_ms": 0.681,
+      "availability_pct": 100.0
+    },
+    "Minsk_to_Nairobi": {
+      "latency_mean_ms": 24.14,
+      "latency_min_ms": 22.9,
+      "latency_max_ms": 26.18,
+      "latency_std_ms": 0.895,
+      "availability_pct": 100.0
+    },
+    "Minsk_to_Johannesburg": {
+      "latency_mean_ms": 35.13,
+      "latency_min_ms": 34.68,
+      "latency_max_ms": 37.01,
+      "latency_std_ms": 0.511,
+      "availability_pct": 100.0
+    },
+    "Minsk_to_Havana": {
+      "latency_mean_ms": 36.95,
+      "latency_min_ms": 35.3,
+      "latency_max_ms": 39.79,
+      "latency_std_ms": 1.034,
+      "availability_pct": 100.0
+    },
+    "Minsk_to_Caracas": {
+      "latency_mean_ms": 38.1,
+      "latency_min_ms": 36.46,
+      "latency_max_ms": 40.78,
+      "latency_std_ms": 1.346,
+      "availability_pct": 100.0
+    },
+    "Minsk_to_Buenos_Aires": {
+      "latency_mean_ms": 51.92,
+      "latency_min_ms": 50.39,
+      "latency_max_ms": 54.64,
+      "latency_std_ms": 0.835,
+      "availability_pct": 100.0
+    },
+    "Almaty_to_Tehran": {
+      "latency_mean_ms": 11.27,
+      "latency_min_ms": 10.67,
+      "latency_max_ms": 12.75,
+      "latency_std_ms": 0.464,
+      "availability_pct": 100.0
+    },
+    "Almaty_to_Urumqi": {
+      "latency_mean_ms": 8.43,
+      "latency_min_ms": 7.3,
+      "latency_max_ms": 10.34,
+      "latency_std_ms": 0.775,
+      "availability_pct": 100.0
+    },
+    "Almaty_to_Delhi": {
+      "latency_mean_ms": 9.6,
+      "latency_min_ms": 8.82,
+      "latency_max_ms": 10.99,
+      "latency_std_ms": 0.537,
+      "availability_pct": 100.0
+    },
+    "Almaty_to_Yangon": {
+      "latency_mean_ms": 14.42,
+      "latency_min_ms": 13.98,
+      "latency_max_ms": 15.47,
+      "latency_std_ms": 0.358,
+      "availability_pct": 100.0
+    },
+    "Almaty_to_Jakarta": {
+      "latency_mean_ms": 24.62,
+      "latency_min_ms": 23.16,
+      "latency_max_ms": 26.42,
+      "latency_std_ms": 0.942,
+      "availability_pct": 100.0
+    },
+    "Almaty_to_Luanda": {
+      "latency_mean_ms": 35.49,
+      "latency_min_ms": 33.01,
+      "latency_max_ms": 38.77,
+      "latency_std_ms": 1.1,
+      "availability_pct": 100.0
+    },
+    "Almaty_to_Nairobi": {
+      "latency_mean_ms": 25.33,
+      "latency_min_ms": 23.48,
+      "latency_max_ms": 27.77,
+      "latency_std_ms": 1.071,
+      "availability_pct": 100.0
+    },
+    "Almaty_to_Johannesburg": {
+      "latency_mean_ms": 36.72,
+      "latency_min_ms": 35.65,
+      "latency_max_ms": 38.75,
+      "latency_std_ms": 0.962,
+      "availability_pct": 100.0
+    },
+    "Almaty_to_Havana": {
+      "latency_mean_ms": 47.76,
+      "latency_min_ms": 46.57,
+      "latency_max_ms": 48.96,
+      "latency_std_ms": 0.606,
+      "availability_pct": 100.0
+    },
+    "Almaty_to_Caracas": {
+      "latency_mean_ms": 51.38,
+      "latency_min_ms": 50.75,
+      "latency_max_ms": 53.29,
+      "latency_std_ms": 0.629,
+      "availability_pct": 100.0
+    },
+    "Almaty_to_Buenos_Aires": {
+      "latency_mean_ms": 65.8,
+      "latency_min_ms": 63.29,
+      "latency_max_ms": 68.55,
+      "latency_std_ms": 1.139,
+      "availability_pct": 100.0
+    },
+    "Tehran_to_Urumqi": {
+      "latency_mean_ms": 13.63,
+      "latency_min_ms": 13.23,
+      "latency_max_ms": 14.6,
+      "latency_std_ms": 0.328,
+      "availability_pct": 100.0
+    },
+    "Tehran_to_Delhi": {
+      "latency_mean_ms": 11.9,
+      "latency_min_ms": 11.26,
+      "latency_max_ms": 13.39,
+      "latency_std_ms": 0.471,
+      "availability_pct": 100.0
+    },
+    "Tehran_to_Yangon": {
+      "latency_mean_ms": 18.96,
+      "latency_min_ms": 18.61,
+      "latency_max_ms": 20.93,
+      "latency_std_ms": 0.397,
+      "availability_pct": 100.0
+    },
+    "Tehran_to_Jakarta": {
+      "latency_mean_ms": 29.9,
+      "latency_min_ms": 28.72,
+      "latency_max_ms": 32.05,
+      "latency_std_ms": 0.774,
+      "availability_pct": 100.0
+    },
+    "Tehran_to_Luanda": {
+      "latency_mean_ms": 25.4,
+      "latency_min_ms": 23.46,
+      "latency_max_ms": 28.07,
+      "latency_std_ms": 1.24,
+      "availability_pct": 100.0
+    },
+    "Tehran_to_Nairobi": {
+      "latency_mean_ms": 17.45,
+      "latency_min_ms": 16.91,
+      "latency_max_ms": 18.83,
+      "latency_std_ms": 0.512,
+      "availability_pct": 100.0
+    },
+    "Tehran_to_Johannesburg": {
+      "latency_mean_ms": 28.54,
+      "latency_min_ms": 27.61,
+      "latency_max_ms": 31.19,
+      "latency_std_ms": 0.774,
+      "availability_pct": 100.0
+    },
+    "Tehran_to_Havana": {
+      "latency_mean_ms": 48.17,
+      "latency_min_ms": 46.35,
+      "latency_max_ms": 49.53,
+      "latency_std_ms": 0.678,
+      "availability_pct": 100.0
+    },
+    "Tehran_to_Caracas": {
+      "latency_mean_ms": 49.02,
+      "latency_min_ms": 46.4,
+      "latency_max_ms": 52.46,
+      "latency_std_ms": 1.316,
+      "availability_pct": 100.0
+    },
+    "Tehran_to_Buenos_Aires": {
+      "latency_mean_ms": 56.75,
+      "latency_min_ms": 52.91,
+      "latency_max_ms": 60.55,
+      "latency_std_ms": 2.175,
+      "availability_pct": 100.0
+    },
+    "Urumqi_to_Delhi": {
+      "latency_mean_ms": 10.26,
+      "latency_min_ms": 9.55,
+      "latency_max_ms": 11.52,
+      "latency_std_ms": 0.5,
+      "availability_pct": 100.0
+    },
+    "Urumqi_to_Yangon": {
+      "latency_mean_ms": 13.39,
+      "latency_min_ms": 12.9,
+      "latency_max_ms": 14.66,
+      "latency_std_ms": 0.392,
+      "availability_pct": 100.0
+    },
+    "Urumqi_to_Jakarta": {
+      "latency_mean_ms": 22.87,
+      "latency_min_ms": 21.87,
+      "latency_max_ms": 25.36,
+      "latency_std_ms": 0.86,
+      "availability_pct": 100.0
+    },
+    "Urumqi_to_Luanda": {
+      "latency_mean_ms": 38.55,
+      "latency_min_ms": 36.71,
+      "latency_max_ms": 41.3,
+      "latency_std_ms": 1.055,
+      "availability_pct": 100.0
+    },
+    "Urumqi_to_Nairobi": {
+      "latency_mean_ms": 28.63,
+      "latency_min_ms": 27.79,
+      "latency_max_ms": 30.91,
+      "latency_std_ms": 0.808,
+      "availability_pct": 100.0
+    },
+    "Urumqi_to_Johannesburg": {
+      "latency_mean_ms": 40.08,
+      "latency_min_ms": 38.3,
+      "latency_max_ms": 41.54,
+      "latency_std_ms": 0.996,
+      "availability_pct": 100.0
+    },
+    "Urumqi_to_Havana": {
+      "latency_mean_ms": 48.79,
+      "latency_min_ms": 47.51,
+      "latency_max_ms": 49.95,
+      "latency_std_ms": 0.481,
+      "availability_pct": 100.0
+    },
+    "Urumqi_to_Caracas": {
+      "latency_mean_ms": 52.25,
+      "latency_min_ms": 51.48,
+      "latency_max_ms": 54.01,
+      "latency_std_ms": 0.689,
+      "availability_pct": 100.0
+    },
+    "Urumqi_to_Buenos_Aires": {
+      "latency_mean_ms": 68.29,
+      "latency_min_ms": 66.17,
+      "latency_max_ms": 70.51,
+      "latency_std_ms": 0.766,
+      "availability_pct": 100.0
+    },
+    "Delhi_to_Yangon": {
+      "latency_mean_ms": 11.62,
+      "latency_min_ms": 10.66,
+      "latency_max_ms": 13.37,
+      "latency_std_ms": 0.705,
+      "availability_pct": 100.0
+    },
+    "Delhi_to_Jakarta": {
+      "latency_mean_ms": 19.48,
+      "latency_min_ms": 18.97,
+      "latency_max_ms": 21.49,
+      "latency_std_ms": 0.587,
+      "availability_pct": 100.0
+    },
+    "Delhi_to_Luanda": {
+      "latency_mean_ms": 32.39,
+      "latency_min_ms": 30.45,
+      "latency_max_ms": 36.05,
+      "latency_std_ms": 1.374,
+      "availability_pct": 100.0
+    },
+    "Delhi_to_Nairobi": {
+      "latency_mean_ms": 21.22,
+      "latency_min_ms": 20.41,
+      "latency_max_ms": 24.22,
+      "latency_std_ms": 0.952,
+      "availability_pct": 100.0
+    },
+    "Delhi_to_Johannesburg": {
+      "latency_mean_ms": 32.79,
+      "latency_min_ms": 30.8,
+      "latency_max_ms": 35.67,
+      "latency_std_ms": 1.08,
+      "availability_pct": 100.0
+    },
+    "Delhi_to_Havana": {
+      "latency_mean_ms": 53.34,
+      "latency_min_ms": 52.15,
+      "latency_max_ms": 54.35,
+      "latency_std_ms": 0.531,
+      "availability_pct": 100.0
+    },
+    "Delhi_to_Caracas": {
+      "latency_mean_ms": 56.18,
+      "latency_min_ms": 55.08,
+      "latency_max_ms": 58.19,
+      "latency_std_ms": 0.784,
+      "availability_pct": 100.0
+    },
+    "Delhi_to_Buenos_Aires": {
+      "latency_mean_ms": 62.97,
+      "latency_min_ms": 60.02,
+      "latency_max_ms": 67.28,
+      "latency_std_ms": 1.585,
+      "availability_pct": 100.0
+    },
+    "Yangon_to_Jakarta": {
+      "latency_mean_ms": 12.58,
+      "latency_min_ms": 12.03,
+      "latency_max_ms": 13.92,
+      "latency_std_ms": 0.404,
+      "availability_pct": 100.0
+    },
+    "Yangon_to_Luanda": {
+      "latency_mean_ms": 39.26,
+      "latency_min_ms": 35.63,
+      "latency_max_ms": 41.23,
+      "latency_std_ms": 1.029,
+      "availability_pct": 100.0
+    },
+    "Yangon_to_Nairobi": {
+      "latency_mean_ms": 27.7,
+      "latency_min_ms": 26.38,
+      "latency_max_ms": 30.6,
+      "latency_std_ms": 1.158,
+      "availability_pct": 100.0
+    },
+    "Yangon_to_Johannesburg": {
+      "latency_mean_ms": 37.24,
+      "latency_min_ms": 33.15,
+      "latency_max_ms": 41.84,
+      "latency_std_ms": 2.586,
+      "availability_pct": 100.0
+    },
+    "Yangon_to_Havana": {
+      "latency_mean_ms": 60.17,
+      "latency_min_ms": 59.41,
+      "latency_max_ms": 61.63,
+      "latency_std_ms": 0.522,
+      "availability_pct": 100.0
+    },
+    "Yangon_to_Caracas": {
+      "latency_mean_ms": 63.79,
+      "latency_min_ms": 62.29,
+      "latency_max_ms": 65.07,
+      "latency_std_ms": 0.586,
+      "availability_pct": 100.0
+    },
+    "Yangon_to_Buenos_Aires": {
+      "latency_mean_ms": 67.37,
+      "latency_min_ms": 63.81,
+      "latency_max_ms": 69.97,
+      "latency_std_ms": 1.223,
+      "availability_pct": 100.0
+    },
+    "Jakarta_to_Luanda": {
+      "latency_mean_ms": 40.82,
+      "latency_min_ms": 39.91,
+      "latency_max_ms": 43.04,
+      "latency_std_ms": 0.527,
+      "availability_pct": 100.0
+    },
+    "Jakarta_to_Nairobi": {
+      "latency_mean_ms": 30.88,
+      "latency_min_ms": 29.65,
+      "latency_max_ms": 33.04,
+      "latency_std_ms": 0.608,
+      "availability_pct": 100.0
+    },
+    "Jakarta_to_Johannesburg": {
+      "latency_mean_ms": 35.04,
+      "latency_min_ms": 32.25,
+      "latency_max_ms": 37.79,
+      "latency_std_ms": 1.761,
+      "availability_pct": 100.0
+    },
+    "Jakarta_to_Havana": {
+      "latency_mean_ms": 69.1,
+      "latency_min_ms": 67.62,
+      "latency_max_ms": 71.03,
+      "latency_std_ms": 0.969,
+      "availability_pct": 100.0
+    },
+    "Jakarta_to_Caracas": {
+      "latency_mean_ms": 74.32,
+      "latency_min_ms": 73.26,
+      "latency_max_ms": 76.89,
+      "latency_std_ms": 0.672,
+      "availability_pct": 100.0
+    },
+    "Jakarta_to_Buenos_Aires": {
+      "latency_mean_ms": 59.07,
+      "latency_min_ms": 58.29,
+      "latency_max_ms": 61.45,
+      "latency_std_ms": 0.744,
+      "availability_pct": 100.0
+    },
+    "Luanda_to_Nairobi": {
+      "latency_mean_ms": 12.47,
+      "latency_min_ms": 11.81,
+      "latency_max_ms": 13.92,
+      "latency_std_ms": 0.488,
+      "availability_pct": 100.0
+    },
+    "Luanda_to_Johannesburg": {
+      "latency_mean_ms": 11.99,
+      "latency_min_ms": 11.07,
+      "latency_max_ms": 13.84,
+      "latency_std_ms": 0.696,
+      "availability_pct": 100.0
+    },
+    "Luanda_to_Havana": {
+      "latency_mean_ms": 46.2,
+      "latency_min_ms": 42.32,
+      "latency_max_ms": 49.44,
+      "latency_std_ms": 1.471,
+      "availability_pct": 100.0
+    },
+    "Luanda_to_Caracas": {
+      "latency_mean_ms": 37.4,
+      "latency_min_ms": 34.15,
+      "latency_max_ms": 39.47,
+      "latency_std_ms": 1.41,
+      "availability_pct": 100.0
+    },
+    "Luanda_to_Buenos_Aires": {
+      "latency_mean_ms": 31.5,
+      "latency_min_ms": 29.45,
+      "latency_max_ms": 35.45,
+      "latency_std_ms": 1.842,
+      "availability_pct": 100.0
+    },
+    "Nairobi_to_Johannesburg": {
+      "latency_mean_ms": 13.08,
+      "latency_min_ms": 12.34,
+      "latency_max_ms": 14.49,
+      "latency_std_ms": 0.564,
+      "availability_pct": 100.0
+    },
+    "Nairobi_to_Havana": {
+      "latency_mean_ms": 54.02,
+      "latency_min_ms": 51.66,
+      "latency_max_ms": 57.85,
+      "latency_std_ms": 1.794,
+      "availability_pct": 100.0
+    },
+    "Nairobi_to_Caracas": {
+      "latency_mean_ms": 46.64,
+      "latency_min_ms": 43.85,
+      "latency_max_ms": 49.68,
+      "latency_std_ms": 1.306,
+      "availability_pct": 100.0
+    },
+    "Nairobi_to_Buenos_Aires": {
+      "latency_mean_ms": 42.86,
+      "latency_min_ms": 40.18,
+      "latency_max_ms": 45.17,
+      "latency_std_ms": 1.042,
+      "availability_pct": 100.0
+    },
+    "Johannesburg_to_Havana": {
+      "latency_mean_ms": 56.62,
+      "latency_min_ms": 52.78,
+      "latency_max_ms": 58.9,
+      "latency_std_ms": 1.137,
+      "availability_pct": 100.0
+    },
+    "Johannesburg_to_Caracas": {
+      "latency_mean_ms": 47.03,
+      "latency_min_ms": 43.17,
+      "latency_max_ms": 50.24,
+      "latency_std_ms": 1.318,
+      "availability_pct": 100.0
+    },
+    "Johannesburg_to_Buenos_Aires": {
+      "latency_mean_ms": 32.08,
+      "latency_min_ms": 30.46,
+      "latency_max_ms": 34.51,
+      "latency_std_ms": 0.966,
+      "availability_pct": 100.0
+    },
+    "Havana_to_Caracas": {
+      "latency_mean_ms": 11.21,
+      "latency_min_ms": 10.15,
+      "latency_max_ms": 13.13,
+      "latency_std_ms": 0.749,
+      "availability_pct": 100.0
+    },
+    "Havana_to_Buenos_Aires": {
+      "latency_mean_ms": 27.1,
+      "latency_min_ms": 26.3,
+      "latency_max_ms": 30.25,
+      "latency_std_ms": 0.695,
+      "availability_pct": 100.0
+    },
+    "Caracas_to_Buenos_Aires": {
+      "latency_mean_ms": 19.72,
+      "latency_min_ms": 19.23,
+      "latency_max_ms": 21.79,
+      "latency_std_ms": 0.547,
+      "availability_pct": 100.0
+    }
+  },
+  "routing_stability": {
+    "steps_with_any_handover": 143,
+    "steps_total": 144,
+    "topology_change_rate_pct": 100.0
+  },
+  "path_stability": {
+    "Vladimir_to_Murmansk": {
+      "path_lifetime_mean_steps": 72.0,
+      "path_change_count": 1,
+      "path_change_rate_pct": 0.7,
+      "latency_jitter_ms": 0.495,
+      "hop_count_mean": 1.2,
+      "timing_path_uncertainty_ns": 495386.0
+    },
+    "Vladimir_to_Novosibirsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.279,
+      "hop_count_mean": 1.5,
+      "timing_path_uncertainty_ns": 279012.4
+    },
+    "Vladimir_to_Zheleznogorsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.186,
+      "hop_count_mean": 1.7,
+      "timing_path_uncertainty_ns": 185514.0
+    },
+    "Vladimir_to_Yakutsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.066,
+      "hop_count_mean": 2.4,
+      "timing_path_uncertainty_ns": 65736.3
+    },
+    "Vladimir_to_Khabarovsk": {
+      "path_lifetime_mean_steps": 8.0,
+      "path_change_count": 17,
+      "path_change_rate_pct": 11.9,
+      "latency_jitter_ms": 0.504,
+      "hop_count_mean": 2.9,
+      "timing_path_uncertainty_ns": 503725.1
+    },
+    "Vladimir_to_Vladivostok": {
+      "path_lifetime_mean_steps": 4.2,
+      "path_change_count": 33,
+      "path_change_rate_pct": 23.1,
+      "latency_jitter_ms": 0.69,
+      "hop_count_mean": 3.1,
+      "timing_path_uncertainty_ns": 690271.6
+    },
+    "Vladimir_to_Minsk": {
+      "path_lifetime_mean_steps": 36.0,
+      "path_change_count": 3,
+      "path_change_rate_pct": 2.1,
+      "latency_jitter_ms": 0.593,
+      "hop_count_mean": 1.1,
+      "timing_path_uncertainty_ns": 592801.0
+    },
+    "Vladimir_to_Almaty": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.315,
+      "hop_count_mean": 1.7,
+      "timing_path_uncertainty_ns": 314714.3
+    },
+    "Vladimir_to_Tehran": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.459,
+      "hop_count_mean": 1.5,
+      "timing_path_uncertainty_ns": 458949.0
+    },
+    "Vladimir_to_Urumqi": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.227,
+      "hop_count_mean": 1.9,
+      "timing_path_uncertainty_ns": 227136.3
+    },
+    "Vladimir_to_Delhi": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.22,
+      "hop_count_mean": 2.2,
+      "timing_path_uncertainty_ns": 219705.9
+    },
+    "Vladimir_to_Yangon": {
+      "path_lifetime_mean_steps": 3.3,
+      "path_change_count": 43,
+      "path_change_rate_pct": 30.1,
+      "latency_jitter_ms": 0.911,
+      "hop_count_mean": 3.2,
+      "timing_path_uncertainty_ns": 911328.1
+    },
+    "Vladimir_to_Jakarta": {
+      "path_lifetime_mean_steps": 13.1,
+      "path_change_count": 10,
+      "path_change_rate_pct": 7.0,
+      "latency_jitter_ms": 0.431,
+      "hop_count_mean": 4.6,
+      "timing_path_uncertainty_ns": 430713.4
+    },
+    "Vladimir_to_Luanda": {
+      "path_lifetime_mean_steps": 4.0,
+      "path_change_count": 35,
+      "path_change_rate_pct": 24.5,
+      "latency_jitter_ms": 0.853,
+      "hop_count_mean": 3.9,
+      "timing_path_uncertainty_ns": 852573.0
+    },
+    "Vladimir_to_Nairobi": {
+      "path_lifetime_mean_steps": 4.0,
+      "path_change_count": 35,
+      "path_change_rate_pct": 24.5,
+      "latency_jitter_ms": 0.89,
+      "hop_count_mean": 3.2,
+      "timing_path_uncertainty_ns": 890093.7
+    },
+    "Vladimir_to_Johannesburg": {
+      "path_lifetime_mean_steps": 6.9,
+      "path_change_count": 20,
+      "path_change_rate_pct": 14.0,
+      "latency_jitter_ms": 0.672,
+      "hop_count_mean": 4.7,
+      "timing_path_uncertainty_ns": 672040.3
+    },
+    "Vladimir_to_Havana": {
+      "path_lifetime_mean_steps": 3.9,
+      "path_change_count": 36,
+      "path_change_rate_pct": 25.2,
+      "latency_jitter_ms": 0.873,
+      "hop_count_mean": 4.9,
+      "timing_path_uncertainty_ns": 873071.5
+    },
+    "Vladimir_to_Caracas": {
+      "path_lifetime_mean_steps": 3.0,
+      "path_change_count": 47,
+      "path_change_rate_pct": 32.9,
+      "latency_jitter_ms": 1.079,
+      "hop_count_mean": 5.2,
+      "timing_path_uncertainty_ns": 1079298.4
+    },
+    "Vladimir_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 3.4,
+      "path_change_count": 41,
+      "path_change_rate_pct": 28.7,
+      "latency_jitter_ms": 1.14,
+      "hop_count_mean": 7.1,
+      "timing_path_uncertainty_ns": 1140400.5
+    },
+    "Murmansk_to_Novosibirsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.219,
+      "hop_count_mean": 1.6,
+      "timing_path_uncertainty_ns": 218918.3
+    },
+    "Murmansk_to_Zheleznogorsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.167,
+      "hop_count_mean": 1.8,
+      "timing_path_uncertainty_ns": 167246.3
+    },
+    "Murmansk_to_Yakutsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.04,
+      "hop_count_mean": 2.1,
+      "timing_path_uncertainty_ns": 39978.3
+    },
+    "Murmansk_to_Khabarovsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.159,
+      "hop_count_mean": 2.7,
+      "timing_path_uncertainty_ns": 159044.0
+    },
+    "Murmansk_to_Vladivostok": {
+      "path_lifetime_mean_steps": 36.0,
+      "path_change_count": 3,
+      "path_change_rate_pct": 2.1,
+      "latency_jitter_ms": 0.352,
+      "hop_count_mean": 2.9,
+      "timing_path_uncertainty_ns": 351839.8
+    },
+    "Murmansk_to_Minsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.393,
+      "hop_count_mean": 1.2,
+      "timing_path_uncertainty_ns": 392775.6
+    },
+    "Murmansk_to_Almaty": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.163,
+      "hop_count_mean": 2.0,
+      "timing_path_uncertainty_ns": 162970.6
+    },
+    "Murmansk_to_Tehran": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.183,
+      "hop_count_mean": 2.0,
+      "timing_path_uncertainty_ns": 183061.8
+    },
+    "Murmansk_to_Urumqi": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.141,
+      "hop_count_mean": 2.1,
+      "timing_path_uncertainty_ns": 141268.5
+    },
+    "Murmansk_to_Delhi": {
+      "path_lifetime_mean_steps": 28.8,
+      "path_change_count": 4,
+      "path_change_rate_pct": 2.8,
+      "latency_jitter_ms": 0.303,
+      "hop_count_mean": 2.6,
+      "timing_path_uncertainty_ns": 303046.3
+    },
+    "Murmansk_to_Yangon": {
+      "path_lifetime_mean_steps": 4.4,
+      "path_change_count": 32,
+      "path_change_rate_pct": 22.4,
+      "latency_jitter_ms": 0.56,
+      "hop_count_mean": 3.6,
+      "timing_path_uncertainty_ns": 560043.7
+    },
+    "Murmansk_to_Jakarta": {
+      "path_lifetime_mean_steps": 6.3,
+      "path_change_count": 22,
+      "path_change_rate_pct": 15.4,
+      "latency_jitter_ms": 0.644,
+      "hop_count_mean": 5.0,
+      "timing_path_uncertainty_ns": 643985.2
+    },
+    "Murmansk_to_Luanda": {
+      "path_lifetime_mean_steps": 36.0,
+      "path_change_count": 3,
+      "path_change_rate_pct": 2.1,
+      "latency_jitter_ms": 0.509,
+      "hop_count_mean": 4.4,
+      "timing_path_uncertainty_ns": 509120.9
+    },
+    "Murmansk_to_Nairobi": {
+      "path_lifetime_mean_steps": 5.3,
+      "path_change_count": 26,
+      "path_change_rate_pct": 18.2,
+      "latency_jitter_ms": 0.834,
+      "hop_count_mean": 3.9,
+      "timing_path_uncertainty_ns": 833794.7
+    },
+    "Murmansk_to_Johannesburg": {
+      "path_lifetime_mean_steps": 16.0,
+      "path_change_count": 8,
+      "path_change_rate_pct": 5.6,
+      "latency_jitter_ms": 0.443,
+      "hop_count_mean": 5.4,
+      "timing_path_uncertainty_ns": 442804.0
+    },
+    "Murmansk_to_Havana": {
+      "path_lifetime_mean_steps": 4.6,
+      "path_change_count": 30,
+      "path_change_rate_pct": 21.0,
+      "latency_jitter_ms": 0.452,
+      "hop_count_mean": 4.3,
+      "timing_path_uncertainty_ns": 452295.4
+    },
+    "Murmansk_to_Caracas": {
+      "path_lifetime_mean_steps": 3.5,
+      "path_change_count": 40,
+      "path_change_rate_pct": 28.0,
+      "latency_jitter_ms": 0.732,
+      "hop_count_mean": 4.7,
+      "timing_path_uncertainty_ns": 731606.8
+    },
+    "Murmansk_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 3.5,
+      "path_change_count": 40,
+      "path_change_rate_pct": 28.0,
+      "latency_jitter_ms": 0.753,
+      "hop_count_mean": 6.8,
+      "timing_path_uncertainty_ns": 752639.1
+    },
+    "Novosibirsk_to_Zheleznogorsk": {
+      "path_lifetime_mean_steps": 24.0,
+      "path_change_count": 5,
+      "path_change_rate_pct": 3.5,
+      "latency_jitter_ms": 0.612,
+      "hop_count_mean": 1.0,
+      "timing_path_uncertainty_ns": 612188.2
+    },
+    "Novosibirsk_to_Yakutsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.221,
+      "hop_count_mean": 1.6,
+      "timing_path_uncertainty_ns": 220879.0
+    },
+    "Novosibirsk_to_Khabarovsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.214,
+      "hop_count_mean": 1.9,
+      "timing_path_uncertainty_ns": 213565.8
+    },
+    "Novosibirsk_to_Vladivostok": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.231,
+      "hop_count_mean": 2.0,
+      "timing_path_uncertainty_ns": 231444.9
+    },
+    "Novosibirsk_to_Minsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.18,
+      "hop_count_mean": 1.9,
+      "timing_path_uncertainty_ns": 179815.3
+    },
+    "Novosibirsk_to_Almaty": {
+      "path_lifetime_mean_steps": 16.0,
+      "path_change_count": 8,
+      "path_change_rate_pct": 5.6,
+      "latency_jitter_ms": 0.605,
+      "hop_count_mean": 1.2,
+      "timing_path_uncertainty_ns": 605430.2
+    },
+    "Novosibirsk_to_Tehran": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.286,
+      "hop_count_mean": 1.8,
+      "timing_path_uncertainty_ns": 286141.0
+    },
+    "Novosibirsk_to_Urumqi": {
+      "path_lifetime_mean_steps": 16.0,
+      "path_change_count": 8,
+      "path_change_rate_pct": 5.6,
+      "latency_jitter_ms": 0.615,
+      "hop_count_mean": 1.2,
+      "timing_path_uncertainty_ns": 615269.0
+    },
+    "Novosibirsk_to_Delhi": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.283,
+      "hop_count_mean": 1.7,
+      "timing_path_uncertainty_ns": 283269.6
+    },
+    "Novosibirsk_to_Yangon": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.159,
+      "hop_count_mean": 2.2,
+      "timing_path_uncertainty_ns": 158990.7
+    },
+    "Novosibirsk_to_Jakarta": {
+      "path_lifetime_mean_steps": 4.5,
+      "path_change_count": 31,
+      "path_change_rate_pct": 21.7,
+      "latency_jitter_ms": 0.735,
+      "hop_count_mean": 3.6,
+      "timing_path_uncertainty_ns": 735156.4
+    },
+    "Novosibirsk_to_Luanda": {
+      "path_lifetime_mean_steps": 3.3,
+      "path_change_count": 42,
+      "path_change_rate_pct": 29.4,
+      "latency_jitter_ms": 1.068,
+      "hop_count_mean": 4.9,
+      "timing_path_uncertainty_ns": 1068198.1
+    },
+    "Novosibirsk_to_Nairobi": {
+      "path_lifetime_mean_steps": 3.6,
+      "path_change_count": 39,
+      "path_change_rate_pct": 27.3,
+      "latency_jitter_ms": 0.888,
+      "hop_count_mean": 3.8,
+      "timing_path_uncertainty_ns": 888161.5
+    },
+    "Novosibirsk_to_Johannesburg": {
+      "path_lifetime_mean_steps": 4.6,
+      "path_change_count": 30,
+      "path_change_rate_pct": 21.0,
+      "latency_jitter_ms": 0.662,
+      "hop_count_mean": 5.3,
+      "timing_path_uncertainty_ns": 662312.7
+    },
+    "Novosibirsk_to_Havana": {
+      "path_lifetime_mean_steps": 4.1,
+      "path_change_count": 34,
+      "path_change_rate_pct": 23.8,
+      "latency_jitter_ms": 0.694,
+      "hop_count_mean": 5.6,
+      "timing_path_uncertainty_ns": 693699.3
+    },
+    "Novosibirsk_to_Caracas": {
+      "path_lifetime_mean_steps": 4.6,
+      "path_change_count": 30,
+      "path_change_rate_pct": 21.0,
+      "latency_jitter_ms": 0.655,
+      "hop_count_mean": 6.1,
+      "timing_path_uncertainty_ns": 655405.2
+    },
+    "Novosibirsk_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 12.0,
+      "path_change_count": 11,
+      "path_change_rate_pct": 7.7,
+      "latency_jitter_ms": 0.475,
+      "hop_count_mean": 8.3,
+      "timing_path_uncertainty_ns": 475251.5
+    },
+    "Zheleznogorsk_to_Yakutsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.297,
+      "hop_count_mean": 1.4,
+      "timing_path_uncertainty_ns": 296979.3
+    },
+    "Zheleznogorsk_to_Khabarovsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.304,
+      "hop_count_mean": 1.6,
+      "timing_path_uncertainty_ns": 303794.8
+    },
+    "Zheleznogorsk_to_Vladivostok": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.298,
+      "hop_count_mean": 1.7,
+      "timing_path_uncertainty_ns": 297535.6
+    },
+    "Zheleznogorsk_to_Minsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.116,
+      "hop_count_mean": 2.1,
+      "timing_path_uncertainty_ns": 115651.1
+    },
+    "Zheleznogorsk_to_Almaty": {
+      "path_lifetime_mean_steps": 48.0,
+      "path_change_count": 2,
+      "path_change_rate_pct": 1.4,
+      "latency_jitter_ms": 0.502,
+      "hop_count_mean": 1.3,
+      "timing_path_uncertainty_ns": 501898.3
+    },
+    "Zheleznogorsk_to_Tehran": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.225,
+      "hop_count_mean": 2.0,
+      "timing_path_uncertainty_ns": 224663.6
+    },
+    "Zheleznogorsk_to_Urumqi": {
+      "path_lifetime_mean_steps": 16.0,
+      "path_change_count": 8,
+      "path_change_rate_pct": 5.6,
+      "latency_jitter_ms": 0.603,
+      "hop_count_mean": 1.2,
+      "timing_path_uncertainty_ns": 602965.3
+    },
+    "Zheleznogorsk_to_Delhi": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.287,
+      "hop_count_mean": 1.8,
+      "timing_path_uncertainty_ns": 287306.0
+    },
+    "Zheleznogorsk_to_Yangon": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.128,
+      "hop_count_mean": 2.2,
+      "timing_path_uncertainty_ns": 127548.3
+    },
+    "Zheleznogorsk_to_Jakarta": {
+      "path_lifetime_mean_steps": 18.0,
+      "path_change_count": 7,
+      "path_change_rate_pct": 4.9,
+      "latency_jitter_ms": 0.611,
+      "hop_count_mean": 3.6,
+      "timing_path_uncertainty_ns": 610612.7
+    },
+    "Zheleznogorsk_to_Luanda": {
+      "path_lifetime_mean_steps": 4.0,
+      "path_change_count": 35,
+      "path_change_rate_pct": 24.5,
+      "latency_jitter_ms": 1.073,
+      "hop_count_mean": 5.3,
+      "timing_path_uncertainty_ns": 1072942.4
+    },
+    "Zheleznogorsk_to_Nairobi": {
+      "path_lifetime_mean_steps": 4.4,
+      "path_change_count": 32,
+      "path_change_rate_pct": 22.4,
+      "latency_jitter_ms": 0.73,
+      "hop_count_mean": 4.2,
+      "timing_path_uncertainty_ns": 730043.2
+    },
+    "Zheleznogorsk_to_Johannesburg": {
+      "path_lifetime_mean_steps": 3.9,
+      "path_change_count": 36,
+      "path_change_rate_pct": 25.2,
+      "latency_jitter_ms": 0.667,
+      "hop_count_mean": 5.6,
+      "timing_path_uncertainty_ns": 667316.2
+    },
+    "Zheleznogorsk_to_Havana": {
+      "path_lifetime_mean_steps": 7.2,
+      "path_change_count": 19,
+      "path_change_rate_pct": 13.3,
+      "latency_jitter_ms": 0.716,
+      "hop_count_mean": 5.7,
+      "timing_path_uncertainty_ns": 715810.2
+    },
+    "Zheleznogorsk_to_Caracas": {
+      "path_lifetime_mean_steps": 5.3,
+      "path_change_count": 26,
+      "path_change_rate_pct": 18.2,
+      "latency_jitter_ms": 0.58,
+      "hop_count_mean": 6.2,
+      "timing_path_uncertainty_ns": 580112.4
+    },
+    "Zheleznogorsk_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 7.6,
+      "path_change_count": 18,
+      "path_change_rate_pct": 12.6,
+      "latency_jitter_ms": 0.489,
+      "hop_count_mean": 8.4,
+      "timing_path_uncertainty_ns": 489088.6
+    },
+    "Yakutsk_to_Khabarovsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.437,
+      "hop_count_mean": 1.2,
+      "timing_path_uncertainty_ns": 436756.1
+    },
+    "Yakutsk_to_Vladivostok": {
+      "path_lifetime_mean_steps": 72.0,
+      "path_change_count": 1,
+      "path_change_rate_pct": 0.7,
+      "latency_jitter_ms": 0.435,
+      "hop_count_mean": 1.4,
+      "timing_path_uncertainty_ns": 434933.7
+    },
+    "Yakutsk_to_Minsk": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.105,
+      "hop_count_mean": 2.7,
+      "timing_path_uncertainty_ns": 104552.7
+    },
+    "Yakutsk_to_Almaty": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.178,
+      "hop_count_mean": 2.1,
+      "timing_path_uncertainty_ns": 177639.5
+    },
+    "Yakutsk_to_Tehran": {
+      "path_lifetime_mean_steps": 8.0,
+      "path_change_count": 17,
+      "path_change_rate_pct": 11.9,
+      "latency_jitter_ms": 0.597,
+      "hop_count_mean": 2.9,
+      "timing_path_uncertainty_ns": 596581.2
+    },
+    "Yakutsk_to_Urumqi": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.231,
+      "hop_count_mean": 1.8,
+      "timing_path_uncertainty_ns": 231481.6
+    },
+    "Yakutsk_to_Delhi": {
+      "path_lifetime_mean_steps": 13.1,
+      "path_change_count": 10,
+      "path_change_rate_pct": 7.0,
+      "latency_jitter_ms": 0.436,
+      "hop_count_mean": 2.6,
+      "timing_path_uncertainty_ns": 435569.1
+    },
+    "Yakutsk_to_Yangon": {
+      "path_lifetime_mean_steps": 7.2,
+      "path_change_count": 19,
+      "path_change_rate_pct": 13.3,
+      "latency_jitter_ms": 0.63,
+      "hop_count_mean": 2.8,
+      "timing_path_uncertainty_ns": 630361.8
+    },
+    "Yakutsk_to_Jakarta": {
+      "path_lifetime_mean_steps": 4.6,
+      "path_change_count": 30,
+      "path_change_rate_pct": 21.0,
+      "latency_jitter_ms": 0.786,
+      "hop_count_mean": 3.9,
+      "timing_path_uncertainty_ns": 786212.1
+    },
+    "Yakutsk_to_Luanda": {
+      "path_lifetime_mean_steps": 4.5,
+      "path_change_count": 31,
+      "path_change_rate_pct": 21.7,
+      "latency_jitter_ms": 0.834,
+      "hop_count_mean": 6.1,
+      "timing_path_uncertainty_ns": 834184.7
+    },
+    "Yakutsk_to_Nairobi": {
+      "path_lifetime_mean_steps": 10.3,
+      "path_change_count": 13,
+      "path_change_rate_pct": 9.1,
+      "latency_jitter_ms": 0.514,
+      "hop_count_mean": 5.1,
+      "timing_path_uncertainty_ns": 513790.5
+    },
+    "Yakutsk_to_Johannesburg": {
+      "path_lifetime_mean_steps": 4.6,
+      "path_change_count": 30,
+      "path_change_rate_pct": 21.0,
+      "latency_jitter_ms": 0.86,
+      "hop_count_mean": 6.6,
+      "timing_path_uncertainty_ns": 860198.3
+    },
+    "Yakutsk_to_Havana": {
+      "path_lifetime_mean_steps": 5.1,
+      "path_change_count": 27,
+      "path_change_rate_pct": 18.9,
+      "latency_jitter_ms": 0.624,
+      "hop_count_mean": 5.0,
+      "timing_path_uncertainty_ns": 624415.0
+    },
+    "Yakutsk_to_Caracas": {
+      "path_lifetime_mean_steps": 4.6,
+      "path_change_count": 30,
+      "path_change_rate_pct": 21.0,
+      "latency_jitter_ms": 0.666,
+      "hop_count_mean": 5.9,
+      "timing_path_uncertainty_ns": 666393.6
+    },
+    "Yakutsk_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 11.1,
+      "path_change_count": 12,
+      "path_change_rate_pct": 8.4,
+      "latency_jitter_ms": 0.529,
+      "hop_count_mean": 8.4,
+      "timing_path_uncertainty_ns": 529317.6
+    },
+    "Khabarovsk_to_Vladivostok": {
+      "path_lifetime_mean_steps": 5.3,
+      "path_change_count": 26,
+      "path_change_rate_pct": 18.2,
+      "latency_jitter_ms": 0.854,
+      "hop_count_mean": 1.1,
+      "timing_path_uncertainty_ns": 853540.9
+    },
+    "Khabarovsk_to_Minsk": {
+      "path_lifetime_mean_steps": 8.5,
+      "path_change_count": 16,
+      "path_change_rate_pct": 11.2,
+      "latency_jitter_ms": 0.514,
+      "hop_count_mean": 3.4,
+      "timing_path_uncertainty_ns": 513972.3
+    },
+    "Khabarovsk_to_Almaty": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.159,
+      "hop_count_mean": 2.2,
+      "timing_path_uncertainty_ns": 159320.1
+    },
+    "Khabarovsk_to_Tehran": {
+      "path_lifetime_mean_steps": 6.0,
+      "path_change_count": 23,
+      "path_change_rate_pct": 16.1,
+      "latency_jitter_ms": 0.708,
+      "hop_count_mean": 3.4,
+      "timing_path_uncertainty_ns": 707883.7
+    },
+    "Khabarovsk_to_Urumqi": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.215,
+      "hop_count_mean": 1.9,
+      "timing_path_uncertainty_ns": 214859.9
+    },
+    "Khabarovsk_to_Delhi": {
+      "path_lifetime_mean_steps": 11.1,
+      "path_change_count": 12,
+      "path_change_rate_pct": 8.4,
+      "latency_jitter_ms": 0.523,
+      "hop_count_mean": 2.7,
+      "timing_path_uncertainty_ns": 522661.5
+    },
+    "Khabarovsk_to_Yangon": {
+      "path_lifetime_mean_steps": 72.0,
+      "path_change_count": 1,
+      "path_change_rate_pct": 0.7,
+      "latency_jitter_ms": 0.248,
+      "hop_count_mean": 2.5,
+      "timing_path_uncertainty_ns": 247841.7
+    },
+    "Khabarovsk_to_Jakarta": {
+      "path_lifetime_mean_steps": 6.5,
+      "path_change_count": 21,
+      "path_change_rate_pct": 14.7,
+      "latency_jitter_ms": 0.756,
+      "hop_count_mean": 3.4,
+      "timing_path_uncertainty_ns": 755656.4
+    },
+    "Khabarovsk_to_Luanda": {
+      "path_lifetime_mean_steps": 3.1,
+      "path_change_count": 45,
+      "path_change_rate_pct": 31.5,
+      "latency_jitter_ms": 1.054,
+      "hop_count_mean": 6.6,
+      "timing_path_uncertainty_ns": 1053907.3
+    },
+    "Khabarovsk_to_Nairobi": {
+      "path_lifetime_mean_steps": 3.8,
+      "path_change_count": 37,
+      "path_change_rate_pct": 25.9,
+      "latency_jitter_ms": 0.841,
+      "hop_count_mean": 5.4,
+      "timing_path_uncertainty_ns": 840655.3
+    },
+    "Khabarovsk_to_Johannesburg": {
+      "path_lifetime_mean_steps": 3.2,
+      "path_change_count": 44,
+      "path_change_rate_pct": 30.8,
+      "latency_jitter_ms": 0.799,
+      "hop_count_mean": 6.8,
+      "timing_path_uncertainty_ns": 799025.4
+    },
+    "Khabarovsk_to_Havana": {
+      "path_lifetime_mean_steps": 4.5,
+      "path_change_count": 31,
+      "path_change_rate_pct": 21.7,
+      "latency_jitter_ms": 0.617,
+      "hop_count_mean": 5.7,
+      "timing_path_uncertainty_ns": 616945.0
+    },
+    "Khabarovsk_to_Caracas": {
+      "path_lifetime_mean_steps": 4.8,
+      "path_change_count": 29,
+      "path_change_rate_pct": 20.3,
+      "latency_jitter_ms": 0.569,
+      "hop_count_mean": 6.5,
+      "timing_path_uncertainty_ns": 569087.1
+    },
+    "Khabarovsk_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 4.5,
+      "path_change_count": 31,
+      "path_change_rate_pct": 21.7,
+      "latency_jitter_ms": 0.605,
+      "hop_count_mean": 9.0,
+      "timing_path_uncertainty_ns": 604980.3
+    },
+    "Vladivostok_to_Minsk": {
+      "path_lifetime_mean_steps": 8.0,
+      "path_change_count": 17,
+      "path_change_rate_pct": 11.9,
+      "latency_jitter_ms": 0.582,
+      "hop_count_mean": 3.6,
+      "timing_path_uncertainty_ns": 581987.4
+    },
+    "Vladivostok_to_Almaty": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.192,
+      "hop_count_mean": 2.2,
+      "timing_path_uncertainty_ns": 191820.7
+    },
+    "Vladivostok_to_Tehran": {
+      "path_lifetime_mean_steps": 6.5,
+      "path_change_count": 21,
+      "path_change_rate_pct": 14.7,
+      "latency_jitter_ms": 0.715,
+      "hop_count_mean": 3.4,
+      "timing_path_uncertainty_ns": 715293.4
+    },
+    "Vladivostok_to_Urumqi": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.244,
+      "hop_count_mean": 1.9,
+      "timing_path_uncertainty_ns": 244076.3
+    },
+    "Vladivostok_to_Delhi": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.278,
+      "hop_count_mean": 2.5,
+      "timing_path_uncertainty_ns": 278341.9
+    },
+    "Vladivostok_to_Yangon": {
+      "path_lifetime_mean_steps": 72.0,
+      "path_change_count": 1,
+      "path_change_rate_pct": 0.7,
+      "latency_jitter_ms": 0.289,
+      "hop_count_mean": 2.3,
+      "timing_path_uncertainty_ns": 289261.8
+    },
+    "Vladivostok_to_Jakarta": {
+      "path_lifetime_mean_steps": 4.5,
+      "path_change_count": 31,
+      "path_change_rate_pct": 21.7,
+      "latency_jitter_ms": 0.99,
+      "hop_count_mean": 3.0,
+      "timing_path_uncertainty_ns": 990106.7
+    },
+    "Vladivostok_to_Luanda": {
+      "path_lifetime_mean_steps": 2.9,
+      "path_change_count": 49,
+      "path_change_rate_pct": 34.3,
+      "latency_jitter_ms": 1.113,
+      "hop_count_mean": 6.6,
+      "timing_path_uncertainty_ns": 1112689.1
+    },
+    "Vladivostok_to_Nairobi": {
+      "path_lifetime_mean_steps": 3.9,
+      "path_change_count": 36,
+      "path_change_rate_pct": 25.2,
+      "latency_jitter_ms": 0.927,
+      "hop_count_mean": 5.3,
+      "timing_path_uncertainty_ns": 926500.3
+    },
+    "Vladivostok_to_Johannesburg": {
+      "path_lifetime_mean_steps": 3.3,
+      "path_change_count": 43,
+      "path_change_rate_pct": 30.1,
+      "latency_jitter_ms": 0.995,
+      "hop_count_mean": 6.7,
+      "timing_path_uncertainty_ns": 994711.4
+    },
+    "Vladivostok_to_Havana": {
+      "path_lifetime_mean_steps": 4.1,
+      "path_change_count": 34,
+      "path_change_rate_pct": 23.8,
+      "latency_jitter_ms": 0.74,
+      "hop_count_mean": 6.0,
+      "timing_path_uncertainty_ns": 739718.6
+    },
+    "Vladivostok_to_Caracas": {
+      "path_lifetime_mean_steps": 4.2,
+      "path_change_count": 33,
+      "path_change_rate_pct": 23.1,
+      "latency_jitter_ms": 0.716,
+      "hop_count_mean": 6.9,
+      "timing_path_uncertainty_ns": 716210.4
+    },
+    "Vladivostok_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 11.1,
+      "path_change_count": 12,
+      "path_change_rate_pct": 8.4,
+      "latency_jitter_ms": 0.533,
+      "hop_count_mean": 9.3,
+      "timing_path_uncertainty_ns": 533056.9
+    },
+    "Minsk_to_Almaty": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.233,
+      "hop_count_mean": 2.0,
+      "timing_path_uncertainty_ns": 233436.7
+    },
+    "Minsk_to_Tehran": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.366,
+      "hop_count_mean": 1.6,
+      "timing_path_uncertainty_ns": 366022.5
+    },
+    "Minsk_to_Urumqi": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.169,
+      "hop_count_mean": 2.2,
+      "timing_path_uncertainty_ns": 169096.9
+    },
+    "Minsk_to_Delhi": {
+      "path_lifetime_mean_steps": 72.0,
+      "path_change_count": 1,
+      "path_change_rate_pct": 0.7,
+      "latency_jitter_ms": 0.242,
+      "hop_count_mean": 2.4,
+      "timing_path_uncertainty_ns": 242493.9
+    },
+    "Minsk_to_Yangon": {
+      "path_lifetime_mean_steps": 12.0,
+      "path_change_count": 11,
+      "path_change_rate_pct": 7.7,
+      "latency_jitter_ms": 0.654,
+      "hop_count_mean": 3.6,
+      "timing_path_uncertainty_ns": 653961.1
+    },
+    "Minsk_to_Jakarta": {
+      "path_lifetime_mean_steps": 13.1,
+      "path_change_count": 10,
+      "path_change_rate_pct": 7.0,
+      "latency_jitter_ms": 0.541,
+      "hop_count_mean": 4.9,
+      "timing_path_uncertainty_ns": 540973.7
+    },
+    "Minsk_to_Luanda": {
+      "path_lifetime_mean_steps": 8.0,
+      "path_change_count": 17,
+      "path_change_rate_pct": 11.9,
+      "latency_jitter_ms": 0.681,
+      "hop_count_mean": 3.6,
+      "timing_path_uncertainty_ns": 680994.5
+    },
+    "Minsk_to_Nairobi": {
+      "path_lifetime_mean_steps": 3.3,
+      "path_change_count": 43,
+      "path_change_rate_pct": 30.1,
+      "latency_jitter_ms": 0.895,
+      "hop_count_mean": 3.1,
+      "timing_path_uncertainty_ns": 894774.0
+    },
+    "Minsk_to_Johannesburg": {
+      "path_lifetime_mean_steps": 13.1,
+      "path_change_count": 10,
+      "path_change_rate_pct": 7.0,
+      "latency_jitter_ms": 0.511,
+      "hop_count_mean": 4.5,
+      "timing_path_uncertainty_ns": 511313.4
+    },
+    "Minsk_to_Havana": {
+      "path_lifetime_mean_steps": 4.1,
+      "path_change_count": 34,
+      "path_change_rate_pct": 23.8,
+      "latency_jitter_ms": 1.034,
+      "hop_count_mean": 4.8,
+      "timing_path_uncertainty_ns": 1034374.2
+    },
+    "Minsk_to_Caracas": {
+      "path_lifetime_mean_steps": 3.6,
+      "path_change_count": 39,
+      "path_change_rate_pct": 27.3,
+      "latency_jitter_ms": 1.346,
+      "hop_count_mean": 4.9,
+      "timing_path_uncertainty_ns": 1345968.5
+    },
+    "Minsk_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 4.8,
+      "path_change_count": 29,
+      "path_change_rate_pct": 20.3,
+      "latency_jitter_ms": 0.835,
+      "hop_count_mean": 6.7,
+      "timing_path_uncertainty_ns": 835471.5
+    },
+    "Almaty_to_Tehran": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.464,
+      "hop_count_mean": 1.5,
+      "timing_path_uncertainty_ns": 463837.6
+    },
+    "Almaty_to_Urumqi": {
+      "path_lifetime_mean_steps": 6.9,
+      "path_change_count": 20,
+      "path_change_rate_pct": 14.0,
+      "latency_jitter_ms": 0.775,
+      "hop_count_mean": 1.1,
+      "timing_path_uncertainty_ns": 774641.5
+    },
+    "Almaty_to_Delhi": {
+      "path_lifetime_mean_steps": 14.4,
+      "path_change_count": 9,
+      "path_change_rate_pct": 6.3,
+      "latency_jitter_ms": 0.537,
+      "hop_count_mean": 1.2,
+      "timing_path_uncertainty_ns": 536959.7
+    },
+    "Almaty_to_Yangon": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.358,
+      "hop_count_mean": 1.9,
+      "timing_path_uncertainty_ns": 358358.2
+    },
+    "Almaty_to_Jakarta": {
+      "path_lifetime_mean_steps": 4.1,
+      "path_change_count": 34,
+      "path_change_rate_pct": 23.8,
+      "latency_jitter_ms": 0.942,
+      "hop_count_mean": 3.2,
+      "timing_path_uncertainty_ns": 942399.4
+    },
+    "Almaty_to_Luanda": {
+      "path_lifetime_mean_steps": 2.9,
+      "path_change_count": 48,
+      "path_change_rate_pct": 33.6,
+      "latency_jitter_ms": 1.1,
+      "hop_count_mean": 4.6,
+      "timing_path_uncertainty_ns": 1099759.3
+    },
+    "Almaty_to_Nairobi": {
+      "path_lifetime_mean_steps": 3.2,
+      "path_change_count": 44,
+      "path_change_rate_pct": 30.8,
+      "latency_jitter_ms": 1.071,
+      "hop_count_mean": 3.3,
+      "timing_path_uncertainty_ns": 1071317.4
+    },
+    "Almaty_to_Johannesburg": {
+      "path_lifetime_mean_steps": 3.3,
+      "path_change_count": 43,
+      "path_change_rate_pct": 30.1,
+      "latency_jitter_ms": 0.962,
+      "hop_count_mean": 4.7,
+      "timing_path_uncertainty_ns": 961625.9
+    },
+    "Almaty_to_Havana": {
+      "path_lifetime_mean_steps": 4.0,
+      "path_change_count": 35,
+      "path_change_rate_pct": 24.5,
+      "latency_jitter_ms": 0.606,
+      "hop_count_mean": 6.2,
+      "timing_path_uncertainty_ns": 605605.1
+    },
+    "Almaty_to_Caracas": {
+      "path_lifetime_mean_steps": 4.8,
+      "path_change_count": 29,
+      "path_change_rate_pct": 20.3,
+      "latency_jitter_ms": 0.629,
+      "hop_count_mean": 6.6,
+      "timing_path_uncertainty_ns": 628924.0
+    },
+    "Almaty_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 3.9,
+      "path_change_count": 36,
+      "path_change_rate_pct": 25.2,
+      "latency_jitter_ms": 1.139,
+      "hop_count_mean": 8.5,
+      "timing_path_uncertainty_ns": 1138772.8
+    },
+    "Tehran_to_Urumqi": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.328,
+      "hop_count_mean": 1.8,
+      "timing_path_uncertainty_ns": 327658.1
+    },
+    "Tehran_to_Delhi": {
+      "path_lifetime_mean_steps": 36.0,
+      "path_change_count": 3,
+      "path_change_rate_pct": 2.1,
+      "latency_jitter_ms": 0.471,
+      "hop_count_mean": 1.5,
+      "timing_path_uncertainty_ns": 471479.9
+    },
+    "Tehran_to_Yangon": {
+      "path_lifetime_mean_steps": 16.0,
+      "path_change_count": 8,
+      "path_change_rate_pct": 5.6,
+      "latency_jitter_ms": 0.397,
+      "hop_count_mean": 2.4,
+      "timing_path_uncertainty_ns": 397350.9
+    },
+    "Tehran_to_Jakarta": {
+      "path_lifetime_mean_steps": 5.5,
+      "path_change_count": 25,
+      "path_change_rate_pct": 17.5,
+      "latency_jitter_ms": 0.774,
+      "hop_count_mean": 3.9,
+      "timing_path_uncertainty_ns": 773869.7
+    },
+    "Tehran_to_Luanda": {
+      "path_lifetime_mean_steps": 3.0,
+      "path_change_count": 47,
+      "path_change_rate_pct": 32.9,
+      "latency_jitter_ms": 1.24,
+      "hop_count_mean": 3.3,
+      "timing_path_uncertainty_ns": 1239997.9
+    },
+    "Tehran_to_Nairobi": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.512,
+      "hop_count_mean": 2.3,
+      "timing_path_uncertainty_ns": 511640.8
+    },
+    "Tehran_to_Johannesburg": {
+      "path_lifetime_mean_steps": 5.8,
+      "path_change_count": 24,
+      "path_change_rate_pct": 16.8,
+      "latency_jitter_ms": 0.774,
+      "hop_count_mean": 3.7,
+      "timing_path_uncertainty_ns": 773956.6
+    },
+    "Tehran_to_Havana": {
+      "path_lifetime_mean_steps": 4.4,
+      "path_change_count": 32,
+      "path_change_rate_pct": 22.4,
+      "latency_jitter_ms": 0.678,
+      "hop_count_mean": 6.2,
+      "timing_path_uncertainty_ns": 677804.0
+    },
+    "Tehran_to_Caracas": {
+      "path_lifetime_mean_steps": 4.4,
+      "path_change_count": 32,
+      "path_change_rate_pct": 22.4,
+      "latency_jitter_ms": 1.316,
+      "hop_count_mean": 6.3,
+      "timing_path_uncertainty_ns": 1315548.0
+    },
+    "Tehran_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 2.2,
+      "path_change_count": 63,
+      "path_change_rate_pct": 44.1,
+      "latency_jitter_ms": 2.175,
+      "hop_count_mean": 7.3,
+      "timing_path_uncertainty_ns": 2175252.0
+    },
+    "Urumqi_to_Delhi": {
+      "path_lifetime_mean_steps": 16.0,
+      "path_change_count": 8,
+      "path_change_rate_pct": 5.6,
+      "latency_jitter_ms": 0.5,
+      "hop_count_mean": 1.3,
+      "timing_path_uncertainty_ns": 499710.1
+    },
+    "Urumqi_to_Yangon": {
+      "path_lifetime_mean_steps": 144.0,
+      "path_change_count": 0,
+      "path_change_rate_pct": 0.0,
+      "latency_jitter_ms": 0.392,
+      "hop_count_mean": 1.7,
+      "timing_path_uncertainty_ns": 391584.5
+    },
+    "Urumqi_to_Jakarta": {
+      "path_lifetime_mean_steps": 5.5,
+      "path_change_count": 25,
+      "path_change_rate_pct": 17.5,
+      "latency_jitter_ms": 0.86,
+      "hop_count_mean": 3.0,
+      "timing_path_uncertainty_ns": 860468.6
+    },
+    "Urumqi_to_Luanda": {
+      "path_lifetime_mean_steps": 3.4,
+      "path_change_count": 41,
+      "path_change_rate_pct": 28.7,
+      "latency_jitter_ms": 1.055,
+      "hop_count_mean": 5.0,
+      "timing_path_uncertainty_ns": 1055373.1
+    },
+    "Urumqi_to_Nairobi": {
+      "path_lifetime_mean_steps": 4.6,
+      "path_change_count": 30,
+      "path_change_rate_pct": 21.0,
+      "latency_jitter_ms": 0.808,
+      "hop_count_mean": 3.7,
+      "timing_path_uncertainty_ns": 808369.5
+    },
+    "Urumqi_to_Johannesburg": {
+      "path_lifetime_mean_steps": 2.6,
+      "path_change_count": 55,
+      "path_change_rate_pct": 38.5,
+      "latency_jitter_ms": 0.996,
+      "hop_count_mean": 5.2,
+      "timing_path_uncertainty_ns": 996405.3
+    },
+    "Urumqi_to_Havana": {
+      "path_lifetime_mean_steps": 9.0,
+      "path_change_count": 15,
+      "path_change_rate_pct": 10.5,
+      "latency_jitter_ms": 0.481,
+      "hop_count_mean": 6.3,
+      "timing_path_uncertainty_ns": 481358.5
+    },
+    "Urumqi_to_Caracas": {
+      "path_lifetime_mean_steps": 4.8,
+      "path_change_count": 29,
+      "path_change_rate_pct": 20.3,
+      "latency_jitter_ms": 0.689,
+      "hop_count_mean": 6.7,
+      "timing_path_uncertainty_ns": 688547.9
+    },
+    "Urumqi_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 4.1,
+      "path_change_count": 34,
+      "path_change_rate_pct": 23.8,
+      "latency_jitter_ms": 0.766,
+      "hop_count_mean": 8.8,
+      "timing_path_uncertainty_ns": 765753.8
+    },
+    "Delhi_to_Yangon": {
+      "path_lifetime_mean_steps": 14.4,
+      "path_change_count": 9,
+      "path_change_rate_pct": 6.3,
+      "latency_jitter_ms": 0.705,
+      "hop_count_mean": 1.5,
+      "timing_path_uncertainty_ns": 705416.6
+    },
+    "Delhi_to_Jakarta": {
+      "path_lifetime_mean_steps": 9.6,
+      "path_change_count": 14,
+      "path_change_rate_pct": 9.8,
+      "latency_jitter_ms": 0.587,
+      "hop_count_mean": 2.5,
+      "timing_path_uncertainty_ns": 586883.5
+    },
+    "Delhi_to_Luanda": {
+      "path_lifetime_mean_steps": 3.7,
+      "path_change_count": 38,
+      "path_change_rate_pct": 26.6,
+      "latency_jitter_ms": 1.374,
+      "hop_count_mean": 4.2,
+      "timing_path_uncertainty_ns": 1373842.4
+    },
+    "Delhi_to_Nairobi": {
+      "path_lifetime_mean_steps": 4.0,
+      "path_change_count": 35,
+      "path_change_rate_pct": 24.5,
+      "latency_jitter_ms": 0.952,
+      "hop_count_mean": 2.7,
+      "timing_path_uncertainty_ns": 952056.7
+    },
+    "Delhi_to_Johannesburg": {
+      "path_lifetime_mean_steps": 2.8,
+      "path_change_count": 50,
+      "path_change_rate_pct": 35.0,
+      "latency_jitter_ms": 1.08,
+      "hop_count_mean": 4.2,
+      "timing_path_uncertainty_ns": 1079766.1
+    },
+    "Delhi_to_Havana": {
+      "path_lifetime_mean_steps": 7.6,
+      "path_change_count": 18,
+      "path_change_rate_pct": 12.6,
+      "latency_jitter_ms": 0.531,
+      "hop_count_mean": 6.9,
+      "timing_path_uncertainty_ns": 530550.5
+    },
+    "Delhi_to_Caracas": {
+      "path_lifetime_mean_steps": 4.0,
+      "path_change_count": 35,
+      "path_change_rate_pct": 24.5,
+      "latency_jitter_ms": 0.784,
+      "hop_count_mean": 7.3,
+      "timing_path_uncertainty_ns": 783540.3
+    },
+    "Delhi_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 2.7,
+      "path_change_count": 53,
+      "path_change_rate_pct": 37.1,
+      "latency_jitter_ms": 1.585,
+      "hop_count_mean": 8.1,
+      "timing_path_uncertainty_ns": 1585141.7
+    },
+    "Yangon_to_Jakarta": {
+      "path_lifetime_mean_steps": 72.0,
+      "path_change_count": 1,
+      "path_change_rate_pct": 0.7,
+      "latency_jitter_ms": 0.404,
+      "hop_count_mean": 1.6,
+      "timing_path_uncertainty_ns": 404315.4
+    },
+    "Yangon_to_Luanda": {
+      "path_lifetime_mean_steps": 7.6,
+      "path_change_count": 18,
+      "path_change_rate_pct": 12.6,
+      "latency_jitter_ms": 1.029,
+      "hop_count_mean": 5.1,
+      "timing_path_uncertainty_ns": 1029318.6
+    },
+    "Yangon_to_Nairobi": {
+      "path_lifetime_mean_steps": 10.3,
+      "path_change_count": 13,
+      "path_change_rate_pct": 9.1,
+      "latency_jitter_ms": 1.158,
+      "hop_count_mean": 3.6,
+      "timing_path_uncertainty_ns": 1158356.5
+    },
+    "Yangon_to_Johannesburg": {
+      "path_lifetime_mean_steps": 2.5,
+      "path_change_count": 56,
+      "path_change_rate_pct": 39.2,
+      "latency_jitter_ms": 2.586,
+      "hop_count_mean": 4.8,
+      "timing_path_uncertainty_ns": 2585591.9
+    },
+    "Yangon_to_Havana": {
+      "path_lifetime_mean_steps": 11.1,
+      "path_change_count": 12,
+      "path_change_rate_pct": 8.4,
+      "latency_jitter_ms": 0.522,
+      "hop_count_mean": 7.8,
+      "timing_path_uncertainty_ns": 521665.5
+    },
+    "Yangon_to_Caracas": {
+      "path_lifetime_mean_steps": 5.1,
+      "path_change_count": 27,
+      "path_change_rate_pct": 18.9,
+      "latency_jitter_ms": 0.586,
+      "hop_count_mean": 8.2,
+      "timing_path_uncertainty_ns": 586170.5
+    },
+    "Yangon_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 3.3,
+      "path_change_count": 42,
+      "path_change_rate_pct": 29.4,
+      "latency_jitter_ms": 1.223,
+      "hop_count_mean": 8.7,
+      "timing_path_uncertainty_ns": 1222607.8
+    },
+    "Jakarta_to_Luanda": {
+      "path_lifetime_mean_steps": 11.1,
+      "path_change_count": 12,
+      "path_change_rate_pct": 8.4,
+      "latency_jitter_ms": 0.527,
+      "hop_count_mean": 5.3,
+      "timing_path_uncertainty_ns": 527096.1
+    },
+    "Jakarta_to_Nairobi": {
+      "path_lifetime_mean_steps": 8.0,
+      "path_change_count": 17,
+      "path_change_rate_pct": 11.9,
+      "latency_jitter_ms": 0.608,
+      "hop_count_mean": 4.0,
+      "timing_path_uncertainty_ns": 608348.3
+    },
+    "Jakarta_to_Johannesburg": {
+      "path_lifetime_mean_steps": 3.7,
+      "path_change_count": 38,
+      "path_change_rate_pct": 26.6,
+      "latency_jitter_ms": 1.761,
+      "hop_count_mean": 4.5,
+      "timing_path_uncertainty_ns": 1761193.1
+    },
+    "Jakarta_to_Havana": {
+      "path_lifetime_mean_steps": 3.7,
+      "path_change_count": 38,
+      "path_change_rate_pct": 26.6,
+      "latency_jitter_ms": 0.969,
+      "hop_count_mean": 8.9,
+      "timing_path_uncertainty_ns": 969072.0
+    },
+    "Jakarta_to_Caracas": {
+      "path_lifetime_mean_steps": 5.3,
+      "path_change_count": 26,
+      "path_change_rate_pct": 18.2,
+      "latency_jitter_ms": 0.672,
+      "hop_count_mean": 9.6,
+      "timing_path_uncertainty_ns": 672420.8
+    },
+    "Jakarta_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 4.2,
+      "path_change_count": 33,
+      "path_change_rate_pct": 23.1,
+      "latency_jitter_ms": 0.744,
+      "hop_count_mean": 7.6,
+      "timing_path_uncertainty_ns": 743638.0
+    },
+    "Luanda_to_Nairobi": {
+      "path_lifetime_mean_steps": 72.0,
+      "path_change_count": 1,
+      "path_change_rate_pct": 0.7,
+      "latency_jitter_ms": 0.488,
+      "hop_count_mean": 1.6,
+      "timing_path_uncertainty_ns": 488164.8
+    },
+    "Luanda_to_Johannesburg": {
+      "path_lifetime_mean_steps": 18.0,
+      "path_change_count": 7,
+      "path_change_rate_pct": 4.9,
+      "latency_jitter_ms": 0.696,
+      "hop_count_mean": 1.5,
+      "timing_path_uncertainty_ns": 695943.7
+    },
+    "Luanda_to_Havana": {
+      "path_lifetime_mean_steps": 2.5,
+      "path_change_count": 56,
+      "path_change_rate_pct": 39.2,
+      "latency_jitter_ms": 1.471,
+      "hop_count_mean": 6.0,
+      "timing_path_uncertainty_ns": 1470557.3
+    },
+    "Luanda_to_Caracas": {
+      "path_lifetime_mean_steps": 4.0,
+      "path_change_count": 35,
+      "path_change_rate_pct": 24.5,
+      "latency_jitter_ms": 1.41,
+      "hop_count_mean": 4.8,
+      "timing_path_uncertainty_ns": 1409591.2
+    },
+    "Luanda_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 4.0,
+      "path_change_count": 35,
+      "path_change_rate_pct": 24.5,
+      "latency_jitter_ms": 1.842,
+      "hop_count_mean": 4.1,
+      "timing_path_uncertainty_ns": 1842180.3
+    },
+    "Nairobi_to_Johannesburg": {
+      "path_lifetime_mean_steps": 28.8,
+      "path_change_count": 4,
+      "path_change_rate_pct": 2.8,
+      "latency_jitter_ms": 0.564,
+      "hop_count_mean": 1.7,
+      "timing_path_uncertainty_ns": 564289.7
+    },
+    "Nairobi_to_Havana": {
+      "path_lifetime_mean_steps": 3.3,
+      "path_change_count": 42,
+      "path_change_rate_pct": 29.4,
+      "latency_jitter_ms": 1.794,
+      "hop_count_mean": 7.0,
+      "timing_path_uncertainty_ns": 1794200.3
+    },
+    "Nairobi_to_Caracas": {
+      "path_lifetime_mean_steps": 2.1,
+      "path_change_count": 68,
+      "path_change_rate_pct": 47.6,
+      "latency_jitter_ms": 1.306,
+      "hop_count_mean": 6.0,
+      "timing_path_uncertainty_ns": 1305948.0
+    },
+    "Nairobi_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 3.7,
+      "path_change_count": 38,
+      "path_change_rate_pct": 26.6,
+      "latency_jitter_ms": 1.042,
+      "hop_count_mean": 5.5,
+      "timing_path_uncertainty_ns": 1042479.8
+    },
+    "Johannesburg_to_Havana": {
+      "path_lifetime_mean_steps": 2.4,
+      "path_change_count": 60,
+      "path_change_rate_pct": 42.0,
+      "latency_jitter_ms": 1.137,
+      "hop_count_mean": 7.3,
+      "timing_path_uncertainty_ns": 1137194.5
+    },
+    "Johannesburg_to_Caracas": {
+      "path_lifetime_mean_steps": 2.5,
+      "path_change_count": 56,
+      "path_change_rate_pct": 39.2,
+      "latency_jitter_ms": 1.318,
+      "hop_count_mean": 6.1,
+      "timing_path_uncertainty_ns": 1318267.0
+    },
+    "Johannesburg_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 3.8,
+      "path_change_count": 37,
+      "path_change_rate_pct": 25.9,
+      "latency_jitter_ms": 0.966,
+      "hop_count_mean": 4.1,
+      "timing_path_uncertainty_ns": 966174.1
+    },
+    "Havana_to_Caracas": {
+      "path_lifetime_mean_steps": 9.6,
+      "path_change_count": 14,
+      "path_change_rate_pct": 9.8,
+      "latency_jitter_ms": 0.749,
+      "hop_count_mean": 1.4,
+      "timing_path_uncertainty_ns": 748856.0
+    },
+    "Havana_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 7.2,
+      "path_change_count": 19,
+      "path_change_rate_pct": 13.3,
+      "latency_jitter_ms": 0.695,
+      "hop_count_mean": 3.5,
+      "timing_path_uncertainty_ns": 695484.3
+    },
+    "Caracas_to_Buenos_Aires": {
+      "path_lifetime_mean_steps": 12.0,
+      "path_change_count": 11,
+      "path_change_rate_pct": 7.7,
+      "latency_jitter_ms": 0.547,
+      "hop_count_mean": 2.5,
+      "timing_path_uncertainty_ns": 546896.8
+    }
+  }
+}

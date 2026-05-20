@@ -1,0 +1,29 @@
+{
+  "Khabarovsk": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.784,
+    "pos_error_mean_m": 367.83,
+    "pos_error_p95_m": 367.84,
+    "time_error_mean_ns": 368.09,
+    "time_error_p95_ns": 368.1,
+    "prop_delay_mean_ms": 5.17
+  },
+  "Vladimir": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.784,
+    "pos_error_mean_m": 367.83,
+    "pos_error_p95_m": 367.84,
+    "time_error_mean_ns": 368.09,
+    "time_error_p95_ns": 368.1,
+    "prop_delay_mean_ms": 5.776
+  },
+  "Zheleznogorsk": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.784,
+    "pos_error_mean_m": 367.83,
+    "pos_error_p95_m": 367.84,
+    "time_error_mean_ns": 368.09,
+    "time_error_p95_ns": 368.1,
+    "prop_delay_mean_ms": 5.807
+  }
+}

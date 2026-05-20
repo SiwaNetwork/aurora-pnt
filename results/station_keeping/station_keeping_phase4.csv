@@ -1,0 +1,14 @@
+parameter,value,unit
+orbit_alt_km,1000.0,км
+inclination_deg,75.0,°
+raan_drift_rate,-1.5508,°/сут
+alt_decay_mean,0.1,м/год
+drag_min_m_s,0.00,м/с
+drag_mean_m_s,0.00,м/с
+drag_max_m_s,0.00,м/с
+raan_m_s,21.00,м/с
+disposal_m_s,7.35,м/с
+total_mean_m_s,28.35,м/с
+total_max_m_s,28.35,м/с
+propellant_mean_kg,1.57,кг
+propellant_max_kg,1.57,кг

@@ -1,0 +1,161 @@
+{
+  "label": "phase4",
+  "n_isl_hops": 8,
+  "sync_interval_s": 60.0,
+  "aurora_t_frame": {
+    "broadcast_interval_s": 10,
+    "frame_bits": 500,
+    "data_rate_bps": 50,
+    "fields": {
+      "preamble": 24,
+      "satellite_id": 8,
+      "lpt_week": 16,
+      "lpt_tow_ms": 20,
+      "lpt_subsec_ns": 30,
+      "lpt_utc_offset_ns": 32,
+      "leap_seconds": 8,
+      "clock_a0_ns": 32,
+      "clock_a1_ppb": 24,
+      "clock_a2": 16,
+      "sigma_t_log": 8,
+      "tesla_mac": 128,
+      "crc24": 24
+    },
+    "notes": "TESLA MAC: delayed key disclosure (Galileo OSNMA-compatible). Authentication latency = 1 frame (10 s). Keys broadcast in alternating frames; subscriber holds key for verification."
+  },
+  "output_protocols": {
+    "pps_1hz": {
+      "name": "1PPS output",
+      "standard": "PTTI 1000-2011",
+      "accuracy_note": "Hardware edge, < 5 ns with Cs master"
+    },
+    "ptp": {
+      "name": "PTP Grandmaster (IEEE 1588-2019)",
+      "profile_telecom": "ITU-T G.8265.1 (frequency sync)",
+      "profile_phase": "ITU-T G.8275.1 (phase/time sync)",
+      "sync_rate_hz": 16,
+      "delay_mechanism": "E2E",
+      "domain_number": 44
+    },
+    "ntp": {
+      "name": "NTP Stratum-1 (RFC 5905)",
+      "refid": "AURA",
+      "poll_interval_s": 16,
+      "precision_ns": 2
+    }
+  },
+  "budgets": {
+    "ocxo": {
+      "autonomous": {
+        "clock_key": "ocxo",
+        "clock_label": "OCXO    (1 ppb)",
+        "sigma_isl_ns": 169.706,
+        "sigma_prop_ns": 1.034,
+        "sigma_rcvr_ns": 0.8,
+        "sigma_atm_ns": 0.17,
+        "sigma_mp_ns": 0.5,
+        "sigma_total_ns": 169.711,
+        "ptp_class": "PTP Class 33  (< 250 ns)  - Secondary reference",
+        "ntp_eligible": true
+      },
+      "combined": {
+        "clock_key": "ocxo",
+        "clock_label": "OCXO    (1 ppb)",
+        "sigma_isl_ns": 169.706,
+        "sigma_prop_ns": 0.5637,
+        "sigma_rcvr_ns": 0.8,
+        "sigma_atm_ns": 0.17,
+        "sigma_mp_ns": 0.5,
+        "sigma_total_ns": 169.709,
+        "ptp_class": "PTP Class 33  (< 250 ns)  - Secondary reference",
+        "ntp_eligible": true
+      }
+    },
+    "rb": {
+      "autonomous": {
+        "clock_key": "rb",
+        "clock_label": "Rb      (0.1 ppb)",
+        "sigma_isl_ns": 16.971,
+        "sigma_prop_ns": 1.034,
+        "sigma_rcvr_ns": 0.8,
+        "sigma_atm_ns": 0.17,
+        "sigma_mp_ns": 0.5,
+        "sigma_total_ns": 17.029,
+        "ptp_class": "PTP Class 25  (< 25 ns)   - Stratum-0 grandmaster",
+        "ntp_eligible": true
+      },
+      "combined": {
+        "clock_key": "rb",
+        "clock_label": "Rb      (0.1 ppb)",
+        "sigma_isl_ns": 16.971,
+        "sigma_prop_ns": 0.5637,
+        "sigma_rcvr_ns": 0.8,
+        "sigma_atm_ns": 0.17,
+        "sigma_mp_ns": 0.5,
+        "sigma_total_ns": 17.007,
+        "ptp_class": "PTP Class 25  (< 25 ns)   - Stratum-0 grandmaster",
+        "ntp_eligible": true
+      }
+    },
+    "cs": {
+      "autonomous": {
+        "clock_key": "cs",
+        "clock_label": "Cs      (0.01 ppb)",
+        "sigma_isl_ns": 1.697,
+        "sigma_prop_ns": 1.034,
+        "sigma_rcvr_ns": 0.8,
+        "sigma_atm_ns": 0.17,
+        "sigma_mp_ns": 0.5,
+        "sigma_total_ns": 2.206,
+        "ptp_class": "PTP Class 25  (< 25 ns)   - Stratum-0 grandmaster",
+        "ntp_eligible": true
+      },
+      "combined": {
+        "clock_key": "cs",
+        "clock_label": "Cs      (0.01 ppb)",
+        "sigma_isl_ns": 1.697,
+        "sigma_prop_ns": 0.5637,
+        "sigma_rcvr_ns": 0.8,
+        "sigma_atm_ns": 0.17,
+        "sigma_mp_ns": 0.5,
+        "sigma_total_ns": 2.029,
+        "ptp_class": "PTP Class 25  (< 25 ns)   - Stratum-0 grandmaster",
+        "ntp_eligible": true
+      }
+    },
+    "maser": {
+      "autonomous": {
+        "clock_key": "maser",
+        "clock_label": "H-Maser (0.001 ppb)",
+        "sigma_isl_ns": 0.17,
+        "sigma_prop_ns": 1.034,
+        "sigma_rcvr_ns": 0.8,
+        "sigma_atm_ns": 0.17,
+        "sigma_mp_ns": 0.5,
+        "sigma_total_ns": 1.42,
+        "ptp_class": "PTP Class 25  (< 25 ns)   - Stratum-0 grandmaster",
+        "ntp_eligible": true
+      },
+      "combined": {
+        "clock_key": "maser",
+        "clock_label": "H-Maser (0.001 ppb)",
+        "sigma_isl_ns": 0.17,
+        "sigma_prop_ns": 0.5637,
+        "sigma_rcvr_ns": 0.8,
+        "sigma_atm_ns": 0.17,
+        "sigma_mp_ns": 0.5,
+        "sigma_total_ns": 1.125,
+        "ptp_class": "PTP Class 25  (< 25 ns)   - Stratum-0 grandmaster",
+        "ntp_eligible": true
+      }
+    }
+  },
+  "twstt": {
+    "method": "TWSTT (MCS ground stations only)",
+    "sigma_equipment_ns": 0.2,
+    "sigma_asymmetry_ns": 0.1,
+    "sigma_mp_ns": 0.3,
+    "sigma_total_ns": 0.374,
+    "note": "TWSTT used only at MCS uplink stations; user terminals use one-way AURORA-T"
+  }
+}

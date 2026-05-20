@@ -1,0 +1,74 @@
+{
+  "Vladimir": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.784,
+    "pos_error_mean_m": 1272.44,
+    "pos_error_p95_m": 1272.46,
+    "time_error_mean_ns": 1273.32,
+    "time_error_p95_ns": 1273.34,
+    "prop_delay_mean_ms": 4.899
+  },
+  "Minsk": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.784,
+    "pos_error_mean_m": 1272.44,
+    "pos_error_p95_m": 1272.46,
+    "time_error_mean_ns": 1273.32,
+    "time_error_p95_ns": 1273.34,
+    "prop_delay_mean_ms": 4.888
+  },
+  "Murmansk": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.783,
+    "pos_error_mean_m": 1272.43,
+    "pos_error_p95_m": 1272.44,
+    "time_error_mean_ns": 1273.31,
+    "time_error_p95_ns": 1273.32,
+    "prop_delay_mean_ms": 4.142
+  },
+  "Vladivostok": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.784,
+    "pos_error_mean_m": 1272.44,
+    "pos_error_p95_m": 1272.46,
+    "time_error_mean_ns": 1273.32,
+    "time_error_p95_ns": 1273.34,
+    "prop_delay_mean_ms": 4.988
+  },
+  "Zheleznogorsk": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.784,
+    "pos_error_mean_m": 1272.44,
+    "pos_error_p95_m": 1272.46,
+    "time_error_mean_ns": 1273.32,
+    "time_error_p95_ns": 1273.34,
+    "prop_delay_mean_ms": 4.812
+  },
+  "Khabarovsk": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.784,
+    "pos_error_mean_m": 1272.44,
+    "pos_error_p95_m": 1272.46,
+    "time_error_mean_ns": 1273.32,
+    "time_error_p95_ns": 1273.34,
+    "prop_delay_mean_ms": 4.712
+  },
+  "Novosibirsk": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.784,
+    "pos_error_mean_m": 1272.44,
+    "pos_error_p95_m": 1272.46,
+    "time_error_mean_ns": 1273.32,
+    "time_error_p95_ns": 1273.34,
+    "prop_delay_mean_ms": 4.828
+  },
+  "Almaty": {
+    "uere_mean_m": 36.783,
+    "uere_p95_m": 36.784,
+    "pos_error_mean_m": 1272.44,
+    "pos_error_p95_m": 1272.46,
+    "time_error_mean_ns": 1273.32,
+    "time_error_p95_ns": 1273.34,
+    "prop_delay_mean_ms": 5.103
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "coverage_4sats_mean_pct": 71.38,
+  "coverage_4sats_min_pct": 69.31,
+  "coverage_4sats_p05_pct": 69.88,
+  "pdop_p95_mean": 278.99,
+  "pdop_p95_worst": 17277.967,
+  "pdop_mean_overall": 138.368,
+  "coverage_good_pdop_mean_pct": 42.99,
+  "n_sats_mean_overall": 4.8,
+  "n_timesteps": 144,
+  "label": "inc_65",
+  "n_satellites": 240,
+  "grid": "global",
+  "grid_step_deg": 5.0,
+  "n_orbits": 12,
+  "n_sats_per_orbit": 20,
+  "altitude_km": 700.0,
+  "inclination_deg": 65.0
+}

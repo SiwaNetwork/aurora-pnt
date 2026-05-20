@@ -1,0 +1,182 @@
+{
+  "Zheleznogorsk": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 3.777
+  },
+  "Jakarta": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 4.097
+  },
+  "Yakutsk": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 3.753
+  },
+  "Yangon": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.748,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 4.266
+  },
+  "Havana": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.748,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 4.284
+  },
+  "Buenos_Aires": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 4.001
+  },
+  "Johannesburg": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.748,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 4.214
+  },
+  "Tehran": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 3.945
+  },
+  "Minsk": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 3.838
+  },
+  "Novosibirsk": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 3.807
+  },
+  "Almaty": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 3.962
+  },
+  "Nairobi": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 4.043
+  },
+  "Vladivostok": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 3.952
+  },
+  "Luanda": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 4.128
+  },
+  "Murmansk": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 3.618
+  },
+  "Khabarovsk": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 3.927
+  },
+  "Urumqi": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 3.932
+  },
+  "Caracas": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 4.13
+  },
+  "Vladimir": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 3.779
+  },
+  "Delhi": {
+    "uere_mean_m": 28.747,
+    "uere_p95_m": 28.747,
+    "pos_error_mean_m": 144.77,
+    "pos_error_p95_m": 144.77,
+    "time_error_mean_ns": 144.87,
+    "time_error_p95_ns": 144.87,
+    "prop_delay_mean_ms": 4.1
+  }
+}

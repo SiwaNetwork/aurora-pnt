@@ -161,6 +161,12 @@ def _plot_auth_timeline(timeline: List[Dict], vuln: Dict,
         "MAC_RECEIVED":    "#74b9ff",
         "AUTHENTICATED":   "#00b894",
     }
+    state_ru = {
+        "UNAUTHENTICATED": "НЕ АУТЕНТИФ.",
+        "TRACKING":        "СОПРОВОЖДЕНИЕ",
+        "MAC_RECEIVED":    "MAC ПОЛУЧЕН",
+        "AUTHENTICATED":   "АУТЕНТИФИЦИРОВАН",
+    }
     t_max = 120.0
     prev_t = 0.0
     for i, ev in enumerate(timeline):
@@ -168,21 +174,23 @@ def _plot_auth_timeline(timeline: List[Dict], vuln: Dict,
         t_end = min(t_end, t_max)
         col = colors.get(ev["state"], "#aaa")
         ax.barh(0, t_end - prev_t, left=prev_t, height=0.5,
-                color=col, edgecolor="white", label=ev["state"])
+                color=col, edgecolor="white",
+                label=state_ru.get(ev["state"], ev["state"]))
         mid = (prev_t + t_end) / 2
         if t_end - prev_t > 5:
-            ax.text(mid, 0, ev["state"], ha="center", va="center",
+            ax.text(mid, 0, state_ru.get(ev["state"], ev["state"]),
+                    ha="center", va="center",
                     fontsize=8, fontweight="bold", color="white")
         prev_t = t_end
 
     ax.axvline(vuln["acquisition_s"], ls="--", color="#636e72", lw=1)
     ax.axvline(vuln["total_vulnerability_s"], ls="--", color="#6c5ce7", lw=1.5,
-               label=f"Auth complete ({vuln['total_vulnerability_s']:.0f}s)")
+               label=f"Аутентификация завершена ({vuln['total_vulnerability_s']:.0f} с)")
     ax.set_xlim(0, t_max)
     ax.set_ylim(-0.5, 0.5)
-    ax.set_xlabel("Time from cold start (s)")
+    ax.set_xlabel("Время от холодного старта (с)")
     ax.set_yticks([])
-    ax.set_title(f"AURORA-T TESLA MAC — Authentication Timeline [{label}]")
+    ax.set_title(f"AURORA-T TESLA MAC — Хронология аутентификации [{label}]")
     ax.legend(loc="lower right", fontsize=8)
     ax.grid(axis="x", alpha=0.3)
     plt.tight_layout()
@@ -200,13 +208,12 @@ def _plot_attack_summary(detects: List[Dict], output_dir: str, label: str) -> No
     ax.set_yticklabels(attacks)
     ax.set_xlim(0, 1.4)
     ax.set_xticks([0, 1])
-    ax.set_xticklabels(["Blocked by TESLA", "Not blocked"])
-    # Actually flip — show as blocked/not
+    ax.set_xticklabels(["Блокировано TESLA", "Не блокировано"])
     for i, (b, d) in enumerate(zip(blocked, detects)):
-        txt = "BLOCKED" if b else "RISK"
+        txt = "БЛОК." if b else "РИСК"
         col = "white" if b else "#e17055"
         ax.text(0.05, i, txt, va="center", fontsize=9, fontweight="bold", color=col)
-    ax.set_title(f"AURORA-T TESLA MAC — Attack Mitigation [{label}]")
+    ax.set_title(f"AURORA-T TESLA MAC — защита от атак [{label}]")
     ax.grid(axis="x", alpha=0.2)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"tesla_attacks_{label}.png"), dpi=150)

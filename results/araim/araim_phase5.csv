@@ -1,0 +1,16 @@
+parameter,value,unit
+VPL,9.872,m
+HPL,4.903,m
+VAL,35.0,m
+HAL,40.0,m
+sigma_v_allinview,0.4213,m
+sigma_h_allinview,0.2321,m
+N_visible,12,sats
+sigma_URA,0.50,m
+sigma_URE,0.30,m
+P_HMI_total,1.00e-07,1/approach
+P_HMI_vert,9.80e-08,1/approach
+P_HMI_horz,2.00e-09,1/approach
+P_sat_fault,1.00e-05,prob
+P_const,1.00e-04,prob
+lpv200_available_fraction,1.00000,fraction

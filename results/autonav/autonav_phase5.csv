@@ -1,0 +1,12 @@
+scenario,eph_err_1d_m,eph_err_7d_m,eph_err_14d_m
+Без наземной привязки,1.100,7.100,14.100
+Наземная привязка раз в 7 сут,1.100,0.100,0.100
+Наземная привязка раз в 3 сут,1.100,1.100,2.100
+Наземная привязка раз в 1 сут,0.100,0.100,0.100
+
+param,value
+isl_range_sigma_m,0.050
+isl_freq_ghz,26.0
+drift_m_per_day,1.00
+dof_total,6
+rank_deficit_isl_only,3

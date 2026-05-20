@@ -201,15 +201,15 @@ def _plot_sdcm_coverage(rows: List[Dict], output_dir: str, label: str) -> None:
         ax.text(st["lon"], st["lat"] + 1.2, st["name"], fontsize=6.5,
                 ha="center", color="#0984e3")
     cb = plt.colorbar(sc, ax=ax)
-    cb.set_label("SDCM correction quality (0=none, 1=full)")
-    ax.set_xlabel("Longitude")
-    ax.set_ylabel("Latitude")
-    ax.set_title(f"SDCM Coverage Zone [{label}]")
+    cb.set_label("Качество коррекции SDCM (0=нет, 1=полная)")
+    ax.set_xlabel("Долгота")
+    ax.set_ylabel("Широта")
+    ax.set_title(f"Зона покрытия SDCM [{label}]")
     ax.grid(alpha=0.3)
 
     # Right: CEP comparison bar chart
     ax2 = axes[1]
-    modes = ["Autonomous\n(Mode A)", "Combined\n(Mode B)", "SDCM zone\n(Mode C)"]
+    modes = ["Автономный\n(Режим A)", "Комбинированный\n(Режим B)", "Зона SDCM\n(Режим C)"]
     ueres = [
         uere_rss(UERE_BUDGET["autonomous"]),
         uere_rss(UERE_BUDGET["combined"]),
@@ -219,9 +219,9 @@ def _plot_sdcm_coverage(rows: List[Dict], output_dir: str, label: str) -> None:
     ceps  = [cep_50(u, p) for u, p in zip(ueres, pdops)]
     colors = ["#e17055", "#0984e3", "#00b894"]
     bars = ax2.bar(modes, ceps, color=colors, edgecolor="white", width=0.5)
-    ax2.bar_label(bars, fmt="%.2f m", padding=3, fontsize=10, fontweight="bold")
-    ax2.set_ylabel("CEP 50% (m)")
-    ax2.set_title(f"CEP by Mode [{label}]")
+    ax2.bar_label(bars, fmt="%.2f м", padding=3, fontsize=10, fontweight="bold")
+    ax2.set_ylabel("CEP 50% (м)")
+    ax2.set_title(f"CEP по режимам [{label}]")
     ax2.grid(axis="y", alpha=0.3)
     ax2.set_ylim(0, max(ceps) * 1.3)
 
@@ -231,9 +231,9 @@ def _plot_sdcm_coverage(rows: List[Dict], output_dir: str, label: str) -> None:
 
 
 def _plot_uere_breakdown(output_dir: str, label: str) -> None:
-    modes   = ["Autonomous", "Combined", "SDCM core", "SDCM edge"]
+    modes   = ["Автономный", "Комбинированный", "Ядро SDCM", "Край SDCM"]
     keys    = ["clock_m", "eph_m", "iono_m", "tropo_m", "multipath_m", "isb_m"]
-    labels  = ["Clock", "Ephemeris", "Iono", "Tropo", "Multipath", "ISB"]
+    labels  = ["Часы", "Эфемериды", "Ионосфера", "Тропосфера", "Многолучёвость", "ISB"]
     colors  = ["#e17055", "#fdcb6e", "#74b9ff", "#55efc4", "#a29bfe", "#fd79a8"]
 
     data = [[UERE_BUDGET[m.lower().replace(" ", "_")].get(k, 0.0) for m in
@@ -248,12 +248,12 @@ def _plot_uere_breakdown(output_dir: str, label: str) -> None:
 
     totals = [uere_rss(UERE_BUDGET[m]) for m in ["autonomous","combined","sdcm_core","sdcm_edge"]]
     for xi, tot in zip(x, totals):
-        ax.text(xi, tot + 0.05, f"{tot:.2f} m", ha="center", fontsize=9, fontweight="bold")
+        ax.text(xi, tot + 0.05, f"{tot:.2f} м", ha="center", fontsize=9, fontweight="bold")
 
     ax.set_xticks(x)
     ax.set_xticklabels(modes)
-    ax.set_ylabel("UERE component (m, 1-sigma)")
-    ax.set_title(f"UERE Budget Breakdown by Mode [{label}]")
+    ax.set_ylabel("Компонента UERE (м, 1σ)")
+    ax.set_title(f"Состав бюджета UERE по режимам [{label}]")
     ax.legend(loc="upper right", fontsize=8)
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()

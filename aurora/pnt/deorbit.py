@@ -196,19 +196,19 @@ def _plot_decay_curves(alt_range, lifetimes, output_dir, label) -> None:
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.semilogy(alt_range, lifetimes, "o-", color="#00b894", lw=2, ms=7)
     ax.axhline(IADC_DEORBIT_YEARS, ls="--", color="#e17055", lw=1.5,
-               label=f"IADC 25-year limit")
-    ax.axvline(1000, ls=":", color="#6c5ce7", lw=1.2, label="AURORA altitude 1000 km")
+               label="Лимит IADC: 25 лет")
+    ax.axvline(1000, ls=":", color="#6c5ce7", lw=1.2, label="Высота AURORA 1000 км")
 
     # Mark where 25-year limit is crossed
     for i in range(len(lifetimes) - 1):
         if lifetimes[i] <= IADC_DEORBIT_YEARS < lifetimes[i+1]:
             ax.plot(alt_range[i], lifetimes[i], "r^", ms=12, zorder=5)
-            ax.text(alt_range[i], lifetimes[i]*1.5, f"~{alt_range[i]} km\n25yr limit",
+            ax.text(alt_range[i], lifetimes[i]*1.5, f"~{alt_range[i]} км\nлимит 25 лет",
                     ha="center", fontsize=8, color="#e17055")
 
-    ax.set_xlabel("Orbital altitude (km)")
-    ax.set_ylabel("Natural decay lifetime (years)")
-    ax.set_title(f"AURORA — Orbital Decay Lifetime [{label}]")
+    ax.set_xlabel("Высота орбиты (км)")
+    ax.set_ylabel("Время естественного схода (лет)")
+    ax.set_title(f"AURORA — время естественного схода орбиты [{label}]")
     ax.legend()
     ax.grid(True, which="both", alpha=0.3)
     plt.tight_layout()
@@ -224,19 +224,19 @@ def _plot_deorbit_dv_vs_altitude(output_dir: str, label: str, sat: Dict) -> None
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
     axes[0].plot(alts, dvs, color="#0984e3", lw=2)
     axes[0].axvline(1000, ls=":", color="#6c5ce7", lw=1.2)
-    axes[0].set_xlabel("Altitude (km)")
-    axes[0].set_ylabel("Delta-V for deorbit (m/s)")
-    axes[0].set_title("Deorbit Delta-V")
+    axes[0].set_xlabel("Высота (км)")
+    axes[0].set_ylabel("ΔV для схода с орбиты (м/с)")
+    axes[0].set_title("ΔV схода с орбиты")
     axes[0].grid(alpha=0.3)
 
     axes[1].plot(alts, props, color="#e17055", lw=2)
     axes[1].axvline(1000, ls=":", color="#6c5ce7", lw=1.2)
-    axes[1].set_xlabel("Altitude (km)")
-    axes[1].set_ylabel("Propellant mass for deorbit (kg)")
-    axes[1].set_title(f"Deorbit Propellant ({sat['mass_kg']:.0f} kg sat, Isp=220s)")
+    axes[1].set_xlabel("Высота (км)")
+    axes[1].set_ylabel("Масса топлива для схода (кг)")
+    axes[1].set_title(f"Топливо для схода (КА {sat['mass_kg']:.0f} кг, Isp = 220 с)")
     axes[1].grid(alpha=0.3)
 
-    fig.suptitle(f"AURORA — Deorbit Requirements [{label}]", fontsize=12)
+    fig.suptitle(f"AURORA — требования к сходу с орбиты [{label}]", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"deorbit_dv_{label}.png"), dpi=150)
     plt.close(fig)

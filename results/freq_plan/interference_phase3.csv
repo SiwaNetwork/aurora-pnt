@@ -1,0 +1,5 @@
+pair,victim,interferer,spectral_overlap,cn0_degradation_db,compatible
+AURORA_L1_to_GPS_L1,GPS_L1,AURORA_L1,1.0000,0.3647,False
+AURORA_L5_to_GPS_L5,GPS_L5,AURORA_L5,1.0000,0.0677,True
+GPS_L1_to_AURORA_L1,AURORA_L1,GPS_L1,1.0000,0.0003,True
+GLO_G1_to_AURORA_L1,AURORA_L1,GLO_G1,0.0000,0.0000,True

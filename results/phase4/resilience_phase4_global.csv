@@ -1,0 +1,10 @@
+failure_pct,n_surviving,n_vis_mean,pdop_p95_est,coverage_est_pct,raim_detect_ok,raim_isolate_ok,operational
+0,300,13.87,5.04,100.0,True,True,True
+5,285,13.18,5.17,98.08,True,True,True
+10,270,12.48,5.31,95.94,True,True,True
+15,255,11.79,5.46,93.58,True,True,False
+20,240,11.1,5.63,90.97,True,True,False
+25,225,10.4,5.82,88.11,True,True,False
+30,210,9.71,6.02,85.01,True,True,False
+40,180,8.32,6.5,78.11,True,True,False
+50,150,6.93,7.12,70.39,True,True,False

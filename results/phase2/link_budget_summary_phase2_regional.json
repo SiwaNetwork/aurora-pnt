@@ -1,0 +1,82 @@
+{
+  "Vladimir": {
+    "cn0_mean_dbhz": 41.05,
+    "cn0_min_dbhz": 37.43,
+    "cn0_max_dbhz": 44.18,
+    "link_margin_mean_db": 6.05,
+    "link_margin_min_db": 2.43,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Murmansk": {
+    "cn0_mean_dbhz": 42.42,
+    "cn0_min_dbhz": 39.26,
+    "cn0_max_dbhz": 44.2,
+    "link_margin_mean_db": 7.42,
+    "link_margin_min_db": 4.26,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Novosibirsk": {
+    "cn0_mean_dbhz": 41.17,
+    "cn0_min_dbhz": 36.93,
+    "cn0_max_dbhz": 44.22,
+    "link_margin_mean_db": 6.17,
+    "link_margin_min_db": 1.93,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Zheleznogorsk": {
+    "cn0_mean_dbhz": 41.22,
+    "cn0_min_dbhz": 37.19,
+    "cn0_max_dbhz": 44.15,
+    "link_margin_mean_db": 6.22,
+    "link_margin_min_db": 2.19,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Khabarovsk": {
+    "cn0_mean_dbhz": 41.4,
+    "cn0_min_dbhz": 37.09,
+    "cn0_max_dbhz": 44.2,
+    "link_margin_mean_db": 6.4,
+    "link_margin_min_db": 2.09,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Vladivostok": {
+    "cn0_mean_dbhz": 40.92,
+    "cn0_min_dbhz": 36.61,
+    "cn0_max_dbhz": 44.19,
+    "link_margin_mean_db": 5.92,
+    "link_margin_min_db": 1.61,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Minsk": {
+    "cn0_mean_dbhz": 41.06,
+    "cn0_min_dbhz": 36.92,
+    "cn0_max_dbhz": 44.22,
+    "link_margin_mean_db": 6.06,
+    "link_margin_min_db": 1.92,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  },
+  "Almaty": {
+    "cn0_mean_dbhz": 40.73,
+    "cn0_min_dbhz": 36.92,
+    "cn0_max_dbhz": 44.27,
+    "link_margin_mean_db": 5.73,
+    "link_margin_min_db": 1.92,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 38643.9,
+    "elevation_mean_deg": 0.0
+  }
+}

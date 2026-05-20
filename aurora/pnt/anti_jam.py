@@ -73,15 +73,15 @@ SYSTEMS = {
 
 # Jammer models
 JAMMERS = {
-    "Handheld (0.1 W)": {
+    "Носимый (0.1 Вт)": {
         "power_w": 0.1,  "gain_dbi": 0.0,  "type": "broadband"},
-    "Portable (1 W)":   {
+    "Портативный (1 Вт)":   {
         "power_w": 1.0,  "gain_dbi": 3.0,  "type": "broadband"},
-    "Vehicle (10 W)":   {
+    "Возимый (10 Вт)":   {
         "power_w": 10.0, "gain_dbi": 6.0,  "type": "broadband"},
-    "Fixed (100 W)":    {
+    "Стационарный (100 Вт)":    {
         "power_w": 100.0,"gain_dbi": 10.0, "type": "broadband"},
-    "DRFM spoofer":     {
+    "DRFM-спуфер":     {
         "power_w": 5.0,  "gain_dbi": 6.0,  "type": "spoof"},
 }
 
@@ -212,10 +212,10 @@ def _plot_signal_comparison(sig_powers: Dict, output_dir: str, label: str) -> No
     powers = [sig_powers[n] for n in names]
     colors = [SYSTEMS[n]["color"] for n in names]
     bars   = ax.bar(names, powers, color=colors, edgecolor="white", width=0.55)
-    ax.bar_label(bars, fmt="%.1f dBW", padding=3, fontsize=9)
+    ax.bar_label(bars, fmt="%.1f дБВт", padding=3, fontsize=9)
     ax.axhline(min(powers), ls="--", color="#e17055", lw=0.8, alpha=0.7)
-    ax.set_ylabel("Received signal power (dBW)")
-    ax.set_title(f"Signal Power at Receiver (elev={label} deg) [{label}]")
+    ax.set_ylabel("Принимаемая мощность сигнала (дБВт)")
+    ax.set_title(f"Мощность сигнала на приёмнике [{label}]")
     ax.set_xticklabels(names, rotation=15, ha="right", fontsize=9)
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
@@ -239,8 +239,8 @@ def _plot_jamming_radii(jam_radii: Dict, output_dir: str, label: str) -> None:
 
     ax.set_xticks(x + width * (len(systems) - 1) / 2)
     ax.set_xticklabels(jammers, fontsize=8, rotation=10)
-    ax.set_ylabel("Effective jamming radius (km)")
-    ax.set_title(f"Jamming Radius by System and Jammer Type [{label}]")
+    ax.set_ylabel("Эффективный радиус подавления (км)")
+    ax.set_title(f"Радиус подавления по системе и типу джаммера [{label}]")
     ax.legend(fontsize=8)
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
@@ -261,8 +261,8 @@ def _plot_advantage(advantage: Dict, output_dir: str, label: str) -> None:
     ax.bar_label(bars, fmt="%.0f%%", padding=3, fontsize=9)
     ax.set_xticks(range(len(jammers)))
     ax.set_xticklabels(jammers, rotation=10, ha="right", fontsize=9)
-    ax.set_ylabel("Jamming radius reduction (%)")
-    ax.set_title("AURORA vs GPS: Jamming Radius Reduction")
+    ax.set_ylabel("Снижение радиуса подавления (%)")
+    ax.set_title("AURORA и GPS: снижение радиуса подавления")
     ax.set_ylim(0, 110)
     ax.grid(axis="y", alpha=0.3)
 
@@ -272,12 +272,12 @@ def _plot_advantage(advantage: Dict, output_dir: str, label: str) -> None:
     ax2.bar_label(bars2, fmt="%.0f%%", padding=3, fontsize=9)
     ax2.set_xticks(range(len(jammers)))
     ax2.set_xticklabels(jammers, rotation=10, ha="right", fontsize=9)
-    ax2.set_ylabel("Jammed area reduction (%)")
-    ax2.set_title("AURORA vs GPS: Jammed Area Reduction")
+    ax2.set_ylabel("Снижение площади подавления (%)")
+    ax2.set_title("AURORA и GPS: снижение площади подавления")
     ax2.set_ylim(0, 110)
     ax2.grid(axis="y", alpha=0.3)
 
-    fig.suptitle(f"AURORA Anti-Jamming Advantage [{label}]", fontsize=12)
+    fig.suptitle(f"AURORA: преимущество в помехозащищённости [{label}]", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"antijam_advantage_{label}.png"), dpi=150)
     plt.close(fig)
@@ -301,20 +301,20 @@ def print_anti_jam_summary(label: str, result: Dict) -> None:
     sep = "=" * 72
 
     print(f"\n{sep}")
-    print(f"  Anti-Jamming Analysis -- {label}  "
-          f"(elevation {result['elevation_deg']} deg)")
+    print(f"  Анализ помехозащищённости -- {label}  "
+          f"(угол места {result['elevation_deg']} град)")
     print(sep)
-    print(f"  Signal power at receiver:")
-    print(f"  {'System':<22} {'Altitude':>9} {'Signal dBW':>11} {'vs GPS L1':>10}")
+    print(f"  Мощность сигнала на приёмнике:")
+    print(f"  {'Система':<22} {'Высота':>9} {'Сигнал дБВт':>11} {'к GPS L1':>10}")
     print("  " + "-" * 56)
     gps_ref = result["signal_powers"].get("GPS_L1", -160.0)
     for sys_name, pwr in result["signal_powers"].items():
         alt = SYSTEMS[sys_name]["altitude_km"]
         diff = pwr - gps_ref
-        print(f"  {sys_name:<22} {alt:>8.0f}km {pwr:>10.1f}  {diff:>+9.1f} dB")
+        print(f"  {sys_name:<22} {alt:>8.0f}км {pwr:>10.1f}  {diff:>+9.1f} дБ")
 
     print()
-    print(f"  Effective jamming radius (km) by system and jammer:")
+    print(f"  Эффективный радиус подавления (км) по системе и джаммеру:")
     jammers = list(JAMMERS.keys())
     print(f"  {'System':<22} " + "  ".join(f"{j[:10]:>12}" for j in jammers))
     print("  " + "-" * (22 + 14 * len(jammers)))
@@ -324,13 +324,13 @@ def print_anti_jam_summary(label: str, result: Dict) -> None:
         print(row)
 
     print()
-    print(f"  AURORA L1 vs GPS L1 advantage:")
-    print(f"  {'Jammer':<22} {'GPS radius':>12} {'AURORA radius':>14} "
-          f"{'Radius -':>10} {'Area -':>8}")
+    print(f"  Преимущество AURORA L1 над GPS L1:")
+    print(f"  {'Джаммер':<22} {'Радиус GPS':>12} {'Радиус AURORA':>14} "
+          f"{'Радиус -':>10} {'Площадь -':>8}")
     print("  " + "-" * 70)
     for jam_name, adv in result["advantage"].items():
-        print(f"  {jam_name:<22} {adv['r_gps_km']:>10.1f}km "
-              f"{adv['r_aurora_km']:>12.1f}km "
+        print(f"  {jam_name:<22} {adv['r_gps_km']:>10.1f}км "
+              f"{adv['r_aurora_km']:>12.1f}км "
               f"{adv['radius_reduction_pct']:>9.0f}% "
               f"{adv['area_reduction_pct']:>7.0f}%")
     print(sep)

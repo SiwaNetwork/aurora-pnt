@@ -1,0 +1,17 @@
+parameter,value,unit
+pointing_Звёздный датчик (3-sigma),15.000,мДег (3sigma)
+pointing_Волоконный гироскоп,10.000,мДег (3sigma)
+pointing_Ошибка управления (контроллер),10.000,мДег (3sigma)
+pointing_Термоупругая деформация,20.000,мДег (3sigma)
+pointing_Гибкость конструкции,15.000,мДег (3sigma)
+pointing_Неточность монтажа антенны,10.000,мДег (3sigma)
+pointing_Резерв,10.000,мДег (3sigma)
+total_pointing_rss,35.355,мДег (3sigma)
+gain_loss,-0.0000,dB
+isl_point_ahead,49.1,мкрад
+rw_H_required,0.0692,Н·м·с
+rw_torque_required,87.839,мкН·м
+gg_torque,2084.150,нН·м
+srp_torque,3078.000,нН·м
+aero_torque,14.2763,нН·м
+mag_torque,38743.141,нН·м

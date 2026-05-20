@@ -1,0 +1,32 @@
+{
+  "Vladimir": {
+    "cn0_mean_dbhz": 39.87,
+    "cn0_min_dbhz": 35.63,
+    "cn0_max_dbhz": 47.87,
+    "link_margin_mean_db": 4.87,
+    "link_margin_min_db": 0.63,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 39455.2,
+    "elevation_mean_deg": 0.0
+  },
+  "Zheleznogorsk": {
+    "cn0_mean_dbhz": 39.8,
+    "cn0_min_dbhz": 35.62,
+    "cn0_max_dbhz": 47.3,
+    "link_margin_mean_db": 4.8,
+    "link_margin_min_db": 0.62,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 39455.2,
+    "elevation_mean_deg": 0.0
+  },
+  "Khabarovsk": {
+    "cn0_mean_dbhz": 40.93,
+    "cn0_min_dbhz": 35.97,
+    "cn0_max_dbhz": 47.89,
+    "link_margin_mean_db": 5.93,
+    "link_margin_min_db": 0.97,
+    "pct_margin_positive": 100.0,
+    "doppler_max_hz": 39455.2,
+    "elevation_mean_deg": 0.0
+  }
+}

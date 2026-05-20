@@ -1,0 +1,12 @@
+component,bits,delivery_s
+ephemeris,418,1.7
+clock,100,0.4
+ionosphere,105,0.4
+timing,73,-
+auth,524,2.1
+almanac,32040,128.2
+,,
+ttff_scenario,seconds
+hot_start,2.0
+warm_start,10.7
+cold_start,148.8

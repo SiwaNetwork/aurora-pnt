@@ -1,0 +1,17 @@
+parameter,value,unit
+doppler_max_l1_khz,38.65,
+doppler_max_l5_khz,28.86,
+doppler_rate_l1_hz_s,38.56,
+doppler_rate_l5_hz_s,28.79,
+pll_bw_min_hz,1.43,
+acq_bins_cold,3150840,
+acq_bins_warm,0,
+channels_foc_l1l5,238,
+class_Геодезический / PPP_channels,256,кан.
+class_Геодезический / PPP_dual_freq,True,
+class_Авиационный (DO-229)_channels,64,кан.
+class_Авиационный (DO-229)_dual_freq,True,
+class_Автомобильный_channels,32,кан.
+class_Автомобильный_dual_freq,False,
+class_Носимый (смартфон)_channels,16,кан.
+class_Носимый (смартфон)_dual_freq,False,

@@ -161,26 +161,77 @@ def _plot_launch_manifest(manifest, output_dir, label):
 
 
 def _plot_raan_phasing(d_rate, days_per_plane, output_dir, label):
-    days = np.linspace(0, days_per_plane * (N_PLANES - 1), 400)
+    """Фазирование 15 плоскостей дифференциальным J2-дрейфом.
 
-    fig, ax = plt.subplots(figsize=(11, 6))
+    Каждая плоскость k должна набрать относительный RAAN = k·24°.
+    Все КА после общего пуска находятся на низкой дрейфовой орбите
+    (~300 км), где Ω̇ отличается от рабочей (1000 км) на |Δ| °/сут.
+    Плоскость k остаётся на дрейфовой орбите, пока не накопит k·24°,
+    затем поднимается на рабочую орбиту и фиксирует свой RAAN (плато).
+    Последняя плоскость (k=14) набирает 14·24°=336° — это и есть
+    реальная длительность кампании ≈ 336/|Δ| ≈ 520 сут.
+    """
+    rate = abs(d_rate)                              # °/сут, относит. дрейф
+    targets = np.arange(N_PLANES) * DRAAN_BETWEEN_DEG   # 0,24,...,336°
+    t_full = targets[-1] / rate                     # сут до последней плоскости
+    one_step_days = DRAAN_BETWEEN_DEG / rate        # ~37 сут на один шаг 24°
+
+    days = np.linspace(0, t_full * 1.05, 1200)
+
+    fig, ax = plt.subplots(figsize=(12, 7))
+    cmap = plt.get_cmap("viridis")
+
     for k in range(N_PLANES):
-        t_release = k * days_per_plane
-        raan = np.where(days >= t_release,
-                        np.minimum((days - t_release) * abs(d_rate),
-                                   k * DRAAN_BETWEEN_DEG), 0.0)
-        color = PALETTE[k % len(PALETTE)]
-        ax.plot(days, raan, lw=1.6, color=color, alpha=0.85)
-    ax.set_xlabel("Время с начала фазирования (сут)")
+        target = targets[k]
+        # на дрейфовой орбите RAAN растёт линейно до target, затем плато
+        raan = np.minimum(days * rate, target)
+        col = cmap(k / (N_PLANES - 1))
+        ax.plot(days, raan, lw=1.4, color=col, alpha=0.95, zorder=2)
+        # маркер момента подъёма на рабочую орбиту (выход на плато)
+        t_done = target / rate
+        ax.plot(t_done, target, "o", color=col, ms=5, zorder=3,
+                markeredgecolor="white", markeredgewidth=0.6)
+
+    # подписи только для первой и последней плоскости
+    ax.annotate(f"Плоскость 1\n(24°, ~{one_step_days:.0f} сут)",
+                xy=(targets[1] / rate, targets[1]),
+                xytext=(t_full * 0.16, 70), fontsize=9,
+                arrowprops=dict(arrowstyle="->", color="#2d3436", lw=1.0))
+    ax.annotate(f"Плоскость 14\n(336°, ~{t_full:.0f} сут)",
+                xy=(t_full, targets[-1]),
+                xytext=(t_full * 0.50, 250), fontsize=9,
+                arrowprops=dict(arrowstyle="->", color="#2d3436", lw=1.0))
+
+    # опорная линия полного разноса 336°
+    ax.axhline(targets[-1], ls="--", color="#e17055", lw=1.6, zorder=1,
+               label=f"Полный разнос {N_PLANES} плоскостей "
+                     f"({targets[-1]:.0f}° = 14×24°)")
+    # вертикаль полного развёртывания
+    ax.axvline(t_full, ls=":", color="#636e72", lw=1.3, zorder=1,
+               label=f"Полное фазирование ≈ {t_full:.0f} сут")
+
+    ax.set_xlabel("Время с момента общего пуска (сут)")
     ax.set_ylabel("Относительный RAAN плоскости (°)")
+    ax.set_xlim(0, t_full * 1.05)
+    ax.set_ylim(0, 360)
+    ax.set_yticks(np.arange(0, 361, 24))
     ax.set_title(
-        f"Фазирование плоскостей дифференциальным дрейфом J2 [{label}]\n"
-        f"Дрейфовая орбита {H_PARK:.0f} км, отн. скорость "
-        f"{abs(d_rate):.3f}°/сут, {days_per_plane:.0f} сут на 24°")
-    ax.axhline(360.0 - DRAAN_BETWEEN_DEG, ls="--", color=PALETTE[7], lw=1.3,
-               label=f"Разнос {N_PLANES} плоскостей ({360-DRAAN_BETWEEN_DEG:.0f}°)")
-    ax.legend(fontsize=9)
+        f"Фазирование 15 плоскостей дифференциальным J2-дрейфом [{label}]\n"
+        f"Ω̇_дрейф−Ω̇_раб = {rate:.3f}°/сут, шаг 24° "
+        f"(~{one_step_days:.0f} сут/шаг), полное развёртывание "
+        f"≈ {t_full:.0f} сут", fontsize=11)
+    ax.legend(fontsize=9, loc="lower right")
     ax.grid(alpha=0.3)
+
+    # колорбар по индексу плоскости
+    sm = plt.cm.ScalarMappable(cmap=cmap,
+                               norm=plt.Normalize(vmin=0, vmax=N_PLANES - 1))
+    sm.set_array([])
+    cbar = fig.colorbar(sm, ax=ax, pad=0.015)
+    cbar.set_label("Индекс орбитальной плоскости k (цель = k×24°)",
+                   fontsize=9)
+    cbar.set_ticks(np.arange(0, N_PLANES, 2))
+
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"raan_phasing_{label}.png"), dpi=150)
     plt.close(fig)

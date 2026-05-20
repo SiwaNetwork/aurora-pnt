@@ -357,14 +357,14 @@ def _plot_ephemeris_holdover(
     label: str,
 ) -> None:
     fig, ax = plt.subplots(figsize=(10, 5))
-    ax.semilogy(hours, eph_no,  color="#e74c3c", lw=2,  label="Without ISL OD")
-    ax.semilogy(hours, eph_isl, color="#00b894", lw=2,  label="With ISL OD (AURORA)")
-    ax.axhline(0.5,  ls="--", color="#7f8c8d", lw=0.8, alpha=0.8, label="0.5 m")
-    ax.axhline(5.0,  ls="--", color="#e67e22", lw=0.8, alpha=0.8, label="5 m")
-    ax.axvline(OD_CONVERGENCE_MIN / 60.0, ls=":", color="#6c5ce7", lw=1.2, label="OD convergence")
-    ax.set_xlabel("Holdover time (hours since last MCS contact)")
-    ax.set_ylabel("Ephemeris 1-sigma error (m)")
-    ax.set_title(f"AURORA PNT — Ephemeris Holdover Quality [{label}]")
+    ax.semilogy(hours, eph_no,  color="#e74c3c", lw=2,  label="Без ISL-OD")
+    ax.semilogy(hours, eph_isl, color="#00b894", lw=2,  label="С ISL-OD (AURORA)")
+    ax.axhline(0.5,  ls="--", color="#7f8c8d", lw=0.8, alpha=0.8, label="0,5 м")
+    ax.axhline(5.0,  ls="--", color="#e67e22", lw=0.8, alpha=0.8, label="5 м")
+    ax.axvline(OD_CONVERGENCE_MIN / 60.0, ls=":", color="#6c5ce7", lw=1.2, label="Сходимость OD")
+    ax.set_xlabel("Время удержания (ч с последнего сеанса MCS)")
+    ax.set_ylabel("Ошибка эфемерид 1σ (м)")
+    ax.set_title(f"AURORA PNT — Качество удержания эфемерид [{label}]")
     ax.legend(fontsize=9)
     ax.grid(True, which="both", alpha=0.3)
     ax.set_xlim(0, max(hours))
@@ -382,13 +382,13 @@ def _plot_cep_degradation(
     label: str,
 ) -> None:
     fig, ax = plt.subplots(figsize=(10, 5))
-    ax.plot(hours, cep_no,  color="#e74c3c", lw=2, label="Without ISL OD")
-    ax.plot(hours, cep_isl, color="#00b894", lw=2, label="With ISL OD (AURORA)")
-    ax.axhline(10.0, ls="--", color="#7f8c8d", lw=0.8, alpha=0.8, label="10 m CEP")
-    ax.axhline(50.0, ls="--", color="#e67e22", lw=0.8, alpha=0.8, label="50 m CEP")
-    ax.set_xlabel("Holdover time (hours since last MCS contact)")
-    ax.set_ylabel("CEP 50% (m)")
-    ax.set_title(f"AURORA PNT — CEP Degradation vs MCS Holdover [{label}]")
+    ax.plot(hours, cep_no,  color="#e74c3c", lw=2, label="Без ISL-OD")
+    ax.plot(hours, cep_isl, color="#00b894", lw=2, label="С ISL-OD (AURORA)")
+    ax.axhline(10.0, ls="--", color="#7f8c8d", lw=0.8, alpha=0.8, label="CEP 10 м")
+    ax.axhline(50.0, ls="--", color="#e67e22", lw=0.8, alpha=0.8, label="CEP 50 м")
+    ax.set_xlabel("Время удержания (ч с последнего сеанса MCS)")
+    ax.set_ylabel("CEP 50% (м)")
+    ax.set_title(f"AURORA PNT — Деградация CEP при удержании без MCS [{label}]")
     ax.legend(fontsize=9)
     ax.grid(True, alpha=0.3)
     ax.set_xlim(0, max(hours))
@@ -405,7 +405,7 @@ def _plot_isl_geometry(geom: Dict, output_dir: str, label: str) -> None:
 
     # Left: link distances
     ax = axes[0]
-    dist_labels = ["In-plane\nISL (km)", "Cross-plane\nISL (km)", "Horizon\nrange (km)"]
+    dist_labels = ["Внутри-\nплоскостной\nISL (км)", "Меж-\nплоскостной\nISL (км)", "Дальность\nдо горизонта\n(км)"]
     dist_vals   = [
         geom["d_inplane_km"],
         geom["d_crossplane_eq_km"],
@@ -413,15 +413,15 @@ def _plot_isl_geometry(geom: Dict, output_dir: str, label: str) -> None:
     ]
     colors = ["#0984e3", "#6c5ce7", "#00b894"]
     bars = ax.bar(dist_labels, dist_vals, color=colors, edgecolor="white", width=0.55)
-    ax.bar_label(bars, fmt="%.0f km", padding=3, fontsize=9)
-    ax.set_ylabel("Distance (km)")
-    ax.set_title("ISL Link Ranges")
+    ax.bar_label(bars, fmt="%.0f км", padding=3, fontsize=9)
+    ax.set_ylabel("Расстояние (км)")
+    ax.set_title("Дальности ISL-линий")
     ax.set_ylim(0, max(dist_vals) * 1.2)
     ax.grid(axis="y", alpha=0.3)
 
     # Right: OD metrics
     ax2 = axes[1]
-    od_labels = ["Links/sat", "OD over-\ndetermination", "ISL OD\nGDOP x10"]
+    od_labels = ["Линий/КА", "Переопределён-\nность OD", "ISL-OD\nGDOP x10"]
     od_vals   = [
         geom["links_per_sat"],
         geom["od_overdetermination"],
@@ -430,10 +430,10 @@ def _plot_isl_geometry(geom: Dict, output_dir: str, label: str) -> None:
     colors2 = ["#e17055", "#fdcb6e", "#55efc4"]
     bars2 = ax2.bar(od_labels, od_vals, color=colors2, edgecolor="white", width=0.55)
     ax2.bar_label(bars2, fmt="%.2f", padding=3, fontsize=9)
-    ax2.set_title("ISL OD Geometry")
+    ax2.set_title("Геометрия ISL-OD")
     ax2.grid(axis="y", alpha=0.3)
 
-    fig.suptitle(f"AURORA ISL Ranging Geometry — {label}", fontsize=12, y=1.01)
+    fig.suptitle(f"AURORA — Геометрия ISL-измерений — {label}", fontsize=12, y=1.01)
     plt.tight_layout()
     path = os.path.join(output_dir, f"isl_geometry_{label}.png")
     fig.savefig(path, dpi=150, bbox_inches="tight")

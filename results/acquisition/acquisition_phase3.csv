@@ -1,0 +1,4 @@
+signal,max_doppler_khz,doppler_rate_hz_s,freq_bins,code_bins,total_cells,coh_integration_ms,ttff_cold_s,ttff_warm_s,ttff_hot_s
+AURORA_L1,38.6,38.55,159,2046,325314,20.00,222.3,21.0,1.5
+AURORA_L5,28.9,28.79,13,20460,265980,20.00,185.2,21.0,1.5
+GPS_L1,20.4,2.97,87,2046,178002,20.00,130.3,21.0,1.5
