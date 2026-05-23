@@ -43,16 +43,21 @@ DESIGN_LIFE_Y = 7
 RUB_PER_USD   = 90.0
 
 # ── Параметрические оценки стоимости (млн ₽) ──────────────────────────────────
-# Эквиваленты по курсу 90 ₽/$ (см. ниже). Это оценочные параметрические
-# величины для проектного бюджета (порядок величины), уточняются при ОКР.
+# Источники цен:
+#   - T1 без часов: оценка по аналогам OneWeb-class бус + Ka-ISL + L1/L5 ПН
+#   - atomic_clock_block: РИРВ/«Время-Ч», российские бортовые стандарты частоты
+#     (Cs+Rb+OCXO+делители+контроллер) — внутренний прайс 5 млн ₽/комплект.
+#     COTS-позиция, не под кривой обучения (мелкая серия у поставщика).
+#   - Курс 90 ₽/$ — справочно.
 COST_ASSUMPTIONS = {
-    "NRE_design_qual_Mrub":   10_800.0,   # 120 $M × 90 ₽/$ = 10,8 млрд ₽
-    "recurring_T1_Mrub":      360.0,      # 4,0 $M = 360 млн ₽ (первый КА)
-    "learning_b":             0.85,       # кривая обучения Райта
-    "n_launches":             25,
-    "launch_cost_per_Mrub":   1_080.0,    # 12 $M = 1,08 млрд ₽ за пуск
-    "ground_capex_Mrub":      7_200.0,    # 80 $M = 7,2 млрд ₽
-    "opex_per_year_Mrub":     3_600.0,    # 40 $M = 3,6 млрд ₽/год
+    "NRE_design_qual_Mrub":     10_800.0,  # 120 $M × 90 ₽/$
+    "recurring_T1_Mrub":        292.0,     # T1 без часов (≈ $3,25M): бус+ПН+ISL+AIT
+    "atomic_clock_block_Mrub":  5.0,       # бортовой стандарт частоты, РФ (за КА)
+    "learning_b":               0.85,      # кривая Райта (применяется к T1, не к часам)
+    "n_launches":               25,
+    "launch_cost_per_Mrub":     1_080.0,   # 12 $M (rideshare-цены)
+    "ground_capex_Mrub":        7_200.0,   # 80 $M
+    "opex_per_year_Mrub":       3_600.0,   # 40 $M/год
 }
 
 
@@ -70,13 +75,18 @@ def cumulative_recurring(n_sats: int, t1: float, b: float) -> float:
 def lcc(years: int, a: Dict) -> Dict:
     nre      = a["NRE_design_qual_Mrub"]
     recur    = cumulative_recurring(N_SATS, a["recurring_T1_Mrub"], a["learning_b"])
+    clocks   = a["atomic_clock_block_Mrub"] * N_SATS  # COTS, без learning curve
     launch   = a["n_launches"] * a["launch_cost_per_Mrub"]
     ground   = a["ground_capex_Mrub"]
     opex     = a["opex_per_year_Mrub"] * years
-    total    = nre + recur + launch + ground + opex
+    total    = nre + recur + clocks + launch + ground + opex
     return {
-        "NRE": nre, "Серия (300 КА)": recur, "Запуски": launch,
-        "Наземный сегмент": ground, f"OPEX × {years} лет": opex,
+        "NRE": nre,
+        "Серия 300 КА (бус+ПН+ISL)": recur,
+        "Атомные часы (РФ)": clocks,
+        "Запуски": launch,
+        "Наземный сегмент": ground,
+        f"OPEX × {years} лет": opex,
         "_total": total, "_years": years,
     }
 
@@ -202,11 +212,12 @@ def _plot_lcc_vs_years(a, output_dir, label):
 def _plot_cost_sensitivity(a, output_dir, label):
     base = lcc(DESIGN_LIFE_Y, a)["_total"]
     factors = {
-        "T₁ (стоим. 1-го КА)":   "recurring_T1_Mrub",
-        "Кривая обучения b":     "learning_b",
-        "Стоимость пуска":       "launch_cost_per_Mrub",
-        "OPEX в год":            "opex_per_year_Mrub",
-        "NRE":                   "NRE_design_qual_Mrub",
+        "T₁ (стоим. 1-го КА без часов)":   "recurring_T1_Mrub",
+        "Кривая обучения b":               "learning_b",
+        "Атомные часы (за 1 КА)":          "atomic_clock_block_Mrub",
+        "Стоимость пуска":                 "launch_cost_per_Mrub",
+        "OPEX в год":                      "opex_per_year_Mrub",
+        "NRE":                             "NRE_design_qual_Mrub",
     }
     names, los, his = [], [], []
     for nm, key in factors.items():
