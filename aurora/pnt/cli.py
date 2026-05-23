@@ -1011,6 +1011,46 @@ def cmd_rtk_ppp(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_risks(args):
+    """Реестр рисков AURORA PNT (P×S матрица)."""
+    from aurora.pnt.risks import run_risks_analysis, print_risks_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/risks"
+    print(f"\n  Running risk register analysis: {label}")
+    r = run_risks_analysis(output_dir, label); print_risks_summary(label, r)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_schedule(args):
+    """График работ AURORA PNT (Gantt + критический путь)."""
+    from aurora.pnt.schedule import run_schedule_analysis, print_schedule_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/schedule"
+    print(f"\n  Running schedule analysis: {label}")
+    r = run_schedule_analysis(output_dir, label); print_schedule_summary(label, r)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_cybersec(args):
+    """Модель угроз (STRIDE/PASTA): угрозы, риск-матрица, меры."""
+    from aurora.pnt.cybersec_threat import run_cybersec_analysis, print_cybersec_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/cybersec"
+    print(f"\n  Running cybersec threat analysis: {label}")
+    r = run_cybersec_analysis(output_dir, label); print_cybersec_summary(label, r)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_e2e_pipeline(args):
+    """Сквозная end-to-end PVT симуляция 24 ч для 4 пользователей."""
+    from aurora.pnt.e2e_pipeline import run_e2e_pipeline_analysis, print_e2e_pipeline_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/e2e"
+    print(f"\n  Running end-to-end PVT pipeline: {label}")
+    r = run_e2e_pipeline_analysis(output_dir, label); print_e2e_pipeline_summary(label, r)
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_pvt_montecarlo(args):
     """End-to-end Monte-Carlo PVT error budget."""
     from aurora.pnt.pvt_montecarlo import run_pvt_montecarlo_analysis, print_pvt_montecarlo_summary
@@ -1629,6 +1669,17 @@ def main():
     p_sk.add_argument("-o", "--output", default="results/station_keeping")
     p_sk.add_argument("-l", "--label",  default="phase4")
 
+    # ── Phase 3 expansion modules (risk/schedule/cyber/e2e) ────────────────
+    for _name, _help, _odir in [
+        ("risks",      "Реестр рисков и матрица P×S",              "results/risks"),
+        ("schedule",   "График работ (Gantt) и критический путь",  "results/schedule"),
+        ("cybersec",   "Модель угроз и меры (STRIDE/PASTA)",       "results/cybersec"),
+        ("e2e",        "Сквозная PVT-симуляция 24 ч",              "results/e2e"),
+    ]:
+        _p = sub.add_parser(_name, help=_help)
+        _p.add_argument("-o", "--output", default=_odir)
+        _p.add_argument("-l", "--label",  default="phase5")
+
     # ── Phase 2 expansion modules ──────────────────────────────────────────
     for _name, _help, _odir in [
         ("pvt-montecarlo", "End-to-end Monte-Carlo PVT error budget", "results/pvt_montecarlo"),
@@ -1721,6 +1772,10 @@ def main():
         "production":         cmd_production,
         "launch-campaign":    cmd_launch_campaign,
         "ground-segment":     cmd_ground_segment,
+        "risks":              cmd_risks,
+        "schedule":           cmd_schedule,
+        "cybersec":           cmd_cybersec,
+        "e2e":                cmd_e2e_pipeline,
         "signal-design":       cmd_signal_design,
         "competitor-analysis": cmd_competitor_analysis,
         "combined":         cmd_combined,
