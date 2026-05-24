@@ -4,6 +4,47 @@ All notable changes to AURORA PNT are documented here.
 
 ---
 
+## [1.5.0] — 2026-05-24
+
+### Качество репо: тестовая инфраструктура + CI/CD
+- **`tests/`** — pytest-инфраструктура (`pytest.ini`, `conftest.py`)
+  - 5 файлов с **149 новыми тестами** (148 PASS + 2 xfail предсуществующих)
+  - `test_constellation_physics.py` — орбитальные формулы (11 тестов)
+  - `test_link_budget.py` — FSPL, C/N₀, маржи (8 тестов)
+  - `test_clock_budget.py` — σ_t White FM, ISL-цепочка (8 тестов)
+  - `test_relativistic.py` — Δf/f, Sagnac, LEO offset (6 тестов)
+  - `test_modules_smoke.py` — smoke 16 ключевых модулей (16 тестов)
+  - Время прохождения полного suite: ~45 с
+- **`.github/workflows/ci-pnt.yml`** — лёгкий PNT-специфичный workflow
+  - matrix: Python 3.10/3.11/3.12 на Ubuntu
+  - lint (ruff E9/F63/F7/F82)
+  - сборка AURORA_PNT_GOST.docx как артефакт
+- **CONTRIBUTING.md** — гайд для разработчиков
+- Маркеры pytest: `smoke`, `slow`, `integration`
+
+### Реальные данные и валидация (B)
+- `aurora-pnt real-data` — IGS GIM, RINEX, VMF3, SLR + embedded sample
+- `aurora-pnt validate` — численная валидация Klobuchar/Saastamoinen/POD
+  - Klobuchar RMSE 1.66 м (порог 5 м) — PASS
+  - Saastamoinen RMSE 14.3 мм (порог 30 мм) — PASS
+  - POD RMSE 0.97 см (порог 10 см) — PASS
+
+### ОКР-документация (E)
+- `docs/SAD_AURORA.md` — Software Architecture Document (506 стр.)
+- `docs/ICD_SIS_AURORA-001.md` — Signal-in-Space ICD (427 стр.)
+- `docs/ICD_ISL_AURORA-002.md` — Inter-Satellite Link ICD (397 стр.)
+- `docs/ICD_TTC_AURORA-003.md` — TT&C ICD (429 стр.)
+- `docs/TZ_AURORA.md` — Техническое задание ГОСТ 19.201-78 (450 стр.)
+- Итого: 2209 строк формальной конструкторской документации
+
+### Документ техпроекта
+- §59.5 — результаты валидации моделей на эталонных данных
+- §61.5 — связанные ОКР-документы со ссылками на `docs/`
+- DOCX: 176 рис., 113 табл., 15.8 МБ
+- PDF: 14.9 МБ
+
+---
+
 ## [1.4.0] — 2026-05-24
 
 ### Прототипирование сигнала
