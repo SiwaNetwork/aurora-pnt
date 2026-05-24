@@ -3400,6 +3400,43 @@ FDIR на борту → SAF Mode; уведомление MCS через TT&C; �
 - AIT/AIV plan — план интеграционных работ
 - TRR (Test Readiness Reviews) — перед каждым крупным тестом
 
+### 59.5 Валидация моделей на эталонных данных
+
+Аналитические модели проверены численно против эталонов: встроенная карта
+TEC по типу IGS GIM, стандартная атмосфера ICAO ISA + Niell mapping function,
+имитированные SLR-residuals. Реализовано модулями `aurora.pnt.real_data` и
+`aurora.pnt.validate_models`.
+
+| Модель | Эталон | RMSE | R | Порог | Статус |
+|---|---|---|---|---|---|
+| Klobuchar (§11) | embedded GIM | **1,66 м** | 0,842 | 5,0 м | ✅ PASS |
+| Saastamoinen + NMF (§34) | ICAO ISA | **14,3 мм** | 0,9999 | 30 мм | ✅ PASS |
+| POD (§47) | SLR (σ=1 см шум) | **0,97 см** | 0,982 | 10 см | ✅ PASS |
+
+**Источники реальных данных** (для будущей замены embedded на live):
+
+| Источник | URL/протокол | Формат | Назначение |
+|---|---|---|---|
+| IGS GIM | ftp://cddis.gsfc.nasa.gov/gnss/products/ionex/ | IONEX | Карты TEC для валидации §11 |
+| RINEX broadcast | ftp://cddis.gsfc.nasa.gov/gnss/data/daily/ | RINEX 3 | Эфемериды для §47 |
+| VMF3 тропо | https://vmf.geo.tuwien.ac.at/ | NetCDF | Гриды mapping func §34 |
+| SLR NPT | ftp://cddis.gsfc.nasa.gov/slr/ | NPT/CRD | Валидация POD §47 |
+| GLONASS PZ-90.11 | МАК «Радионавигация» | — | Геодезические параметры |
+
+![Klobuchar §11 vs эталонная карта TEC](results/validate/validate_iono_klobuchar_phase5.png)
+
+![Saastamoinen + NMF vs ICAO ISA](results/validate/validate_tropo_saastamoinen_phase5.png)
+
+![POD §47 vs имитированные SLR-residuals](results/validate/validate_pod_slr_phase5.png)
+
+![Сводная таблица валидации моделей](results/validate/validate_summary_phase5.png)
+
+**Команды CLI для воспроизведения:**
+```
+aurora-pnt real-data -l phase5
+aurora-pnt validate  -l phase5
+```
+
 ---
 
 ## 60. Кибербезопасность
@@ -3535,13 +3572,26 @@ FDIR на борту → SAF Mode; уведомление MCS через TT&C; �
 
 ### 61.4 План разработки
 
-| Этап ПО | Длительность | Параллельно с |
+| Этап ПО | Длительность | Параллельно с | Артефакты |
+|---|---|---|---|
+| Архитектура (SAD, SDS) | 6 мес. | ТП | **[docs/SAD_AURORA.md](docs/SAD_AURORA.md)** ✅ |
+| Кодирование BSW | 18 мес. | ОКР рабоч. док. | Source, unit tests |
+| Unit + integration tests | 12 мес. | Производство ОП | Test reports |
+| Качественные испытания | 12 мес. | Квалиф. КА | QR report |
+| Сопровождение в эксплуатации | 7+ лет | Штатная эксплуатация | Patches, hot-fixes |
+
+### 61.5 Связанные ОКР-документы
+
+Детальные интерфейсные и архитектурные документы для перехода
+от ТП к ОКР:
+
+| Документ | Назначение | Статус |
 |---|---|---|
-| Архитектура (SAD, SDS) | 6 мес. | ТП |
-| Кодирование BSW | 18 мес. | ОКР рабоч. док. |
-| Unit + integration tests | 12 мес. | Производство ОП |
-| Качественные испытания | 12 мес. | Квалиф. КА |
-| Сопровождение в эксплуатации | 7+ лет | Штатная эксплуатация |
+| **[docs/SAD_AURORA.md](docs/SAD_AURORA.md)** | Software Architecture Document (детальная арх. БС+НС, 506 стр.) | Draft v0.9 |
+| **[docs/ICD_SIS_AURORA-001.md](docs/ICD_SIS_AURORA-001.md)** | Signal-in-Space ICD (РЧ, модуляция, ANAV, TESLA, 427 стр.) | Draft v0.9 |
+| **[docs/ICD_ISL_AURORA-002.md](docs/ICD_ISL_AURORA-002.md)** | Inter-Satellite Link ICD (Ka 26,5 ГГц, TWTFT, 397 стр.) | Draft v0.9 |
+| **[docs/ICD_TTC_AURORA-003.md](docs/ICD_TTC_AURORA-003.md)** | TT&C ICD (S-band, CCSDS, ГОСТ-крипто, 429 стр.) | Draft v0.9 |
+| **[docs/TZ_AURORA.md](docs/TZ_AURORA.md)** | Техническое задание (ГОСТ 19.201-78, 450 стр.) | Draft v0.9 |
 
 ---
 

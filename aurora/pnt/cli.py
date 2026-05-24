@@ -1011,6 +1011,26 @@ def cmd_rtk_ppp(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_real_data(args):
+    """Интеграция с реальными источниками данных (IGS, VMF3, SLR)."""
+    from aurora.pnt.real_data import run_real_data_analysis, print_real_data_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/real_data"
+    print(f"\n  Running real data integration: {label}")
+    r = run_real_data_analysis(output_dir, label); print_real_data_summary(label, r)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_validate(args):
+    """Валидация моделей (Klobuchar §11, Saastamoinen §34, POD §47) на реальных данных."""
+    from aurora.pnt.validate_models import run_validate_analysis, print_validate_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/validate"
+    print(f"\n  Running model validation: {label}")
+    r = run_validate_analysis(output_dir, label); print_validate_summary(label, r)
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_code_gen(args):
     """Генератор Weil/Gold/Extended Memory кодов для L1/L5."""
     from aurora.pnt.code_gen import run_code_gen_analysis, print_code_gen_summary
@@ -1689,6 +1709,15 @@ def main():
     p_sk.add_argument("-o", "--output", default="results/station_keeping")
     p_sk.add_argument("-l", "--label",  default="phase4")
 
+    # ── Phase 5: Реальные данные и валидация ───────────────────────────────
+    for _name, _help, _odir in [
+        ("real-data", "Интеграция реальных данных (IGS, VMF3, SLR)", "results/real_data"),
+        ("validate",  "Валидация моделей на реальных/embedded данных", "results/validate"),
+    ]:
+        _p = sub.add_parser(_name, help=_help)
+        _p.add_argument("-o", "--output", default=_odir)
+        _p.add_argument("-l", "--label",  default="phase5")
+
     # ── Phase 4: Прототипирование сигнала ──────────────────────────────────
     for _name, _help, _odir in [
         ("code-gen",     "Генератор Weil/Gold/Extended Memory кодов",  "results/code_gen"),
@@ -1801,6 +1830,8 @@ def main():
         "production":         cmd_production,
         "launch-campaign":    cmd_launch_campaign,
         "ground-segment":     cmd_ground_segment,
+        "real-data":          cmd_real_data,
+        "validate":           cmd_validate,
         "code-gen":           cmd_code_gen,
         "sdr-receiver":       cmd_sdr_receiver,
         "risks":              cmd_risks,

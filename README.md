@@ -24,6 +24,16 @@ AURORA PNT — собственная LEO-навигационная и врем
 - 🗓️ [**PLAN_PNT_EXPANSION_PHASE2.md**](PLAN_PNT_EXPANSION_PHASE2.md) — план расширения моделирования
 - 🌍 [**Cesium 3D-демо**](results/phase4/cesium_phase4_global.html) — интерактивная визуализация группировки (откройте в браузере)
 
+**Дополнительные документы ОКР** (для перехода от ТП к рабочей конструкторской документации) — в папке [`docs/`](docs/):
+
+| Документ | Назначение | Объём |
+|---|---|---|
+| [SAD_AURORA.md](docs/SAD_AURORA.md) | Software Architecture Document | 506 строк |
+| [ICD_SIS_AURORA-001.md](docs/ICD_SIS_AURORA-001.md) | Signal-in-Space ICD | 427 строк |
+| [ICD_ISL_AURORA-002.md](docs/ICD_ISL_AURORA-002.md) | Inter-Satellite Link ICD | 397 строк |
+| [ICD_TTC_AURORA-003.md](docs/ICD_TTC_AURORA-003.md) | TT&C ICD | 429 строк |
+| [TZ_AURORA.md](docs/TZ_AURORA.md) | Техническое задание (ГОСТ 19.201-78) | 450 строк |
+
 **Покрытие техпроекта по разделам:**
 - **§3–§31** — Базовая системная инженерия (концепция, сигнал, орбита, бюджеты)
 - **§32–§44** — Радиация, релятивистика, тропосфера, надёжность, PPP, ADCS, PPP-RTK
