@@ -1011,6 +1011,26 @@ def cmd_rtk_ppp(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_code_gen(args):
+    """Генератор Weil/Gold/Extended Memory кодов для L1/L5."""
+    from aurora.pnt.code_gen import run_code_gen_analysis, print_code_gen_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/code_gen"
+    print(f"\n  Running code generator analysis: {label}")
+    r = run_code_gen_analysis(output_dir, label); print_code_gen_summary(label, r)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_sdr_receiver(args):
+    """Software-defined receiver: захват, слежение, TTFF."""
+    from aurora.pnt.sdr_receiver import run_sdr_receiver_analysis, print_sdr_receiver_summary
+    label = args.label or "phase5"
+    output_dir = args.output or "results/sdr"
+    print(f"\n  Running SDR receiver analysis: {label}")
+    r = run_sdr_receiver_analysis(output_dir, label); print_sdr_receiver_summary(label, r)
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_risks(args):
     """Реестр рисков AURORA PNT (P×S матрица)."""
     from aurora.pnt.risks import run_risks_analysis, print_risks_summary
@@ -1669,6 +1689,15 @@ def main():
     p_sk.add_argument("-o", "--output", default="results/station_keeping")
     p_sk.add_argument("-l", "--label",  default="phase4")
 
+    # ── Phase 4: Прототипирование сигнала ──────────────────────────────────
+    for _name, _help, _odir in [
+        ("code-gen",     "Генератор Weil/Gold/Extended Memory кодов",  "results/code_gen"),
+        ("sdr-receiver", "SDR-приёмник: захват, слежение, TTFF",       "results/sdr"),
+    ]:
+        _p = sub.add_parser(_name, help=_help)
+        _p.add_argument("-o", "--output", default=_odir)
+        _p.add_argument("-l", "--label",  default="phase5")
+
     # ── Phase 3 expansion modules (risk/schedule/cyber/e2e) ────────────────
     for _name, _help, _odir in [
         ("risks",      "Реестр рисков и матрица P×S",              "results/risks"),
@@ -1772,6 +1801,8 @@ def main():
         "production":         cmd_production,
         "launch-campaign":    cmd_launch_campaign,
         "ground-segment":     cmd_ground_segment,
+        "code-gen":           cmd_code_gen,
+        "sdr-receiver":       cmd_sdr_receiver,
         "risks":              cmd_risks,
         "schedule":           cmd_schedule,
         "cybersec":           cmd_cybersec,
