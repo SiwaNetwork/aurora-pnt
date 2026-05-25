@@ -136,18 +136,18 @@ def run_mass_budget_analysis(
     wet_mass = dry_mass_total + prop["mp_total_kg"]
     total_volume = sum(vol_by_sub.values())
 
-    # Group by category for pie chart
+    # Group by category for pie chart (русские названия для графиков)
     categories = {
-        "Structure & Mechanisms": ["Structure & panels", "Separation system", "Solar array mechanism"],
-        "Power (EPS + SA + Battery)": ["Solar array (GaAs, 3 m²)", "Battery (Li-ion)", "EPS (power conditioning)", "Solar array harness"],
-        "AOCS": ["Star trackers (x2)", "IMU (gyroscope)", "Magnetometer", "Reaction wheels (x4)", "AOCS computer"],
-        "Navigation payload": ["PNT signal generator", "Navigation antennas (x2)", "RF amplifiers + diplexer", "On-board GNSS receiver"],
-        "Atomic clocks": ["Cs frequency standard", "Rb frequency standard", "OCXO oscillator"],
-        "ISL": ["ISL Ka-band transceiver", "ISL antennas (x4)"],
-        "TT&C + OBC": ["S-band TT&C radio", "TT&C antenna", "On-board computer", "Software & FPGA"],
-        "Thermal": ["Radiators", "MLI blankets", "Thermal heaters", "Heat pipes"],
-        "Propulsion (dry)": ["Propellant tank", "Thruster (x4 cold-gas/ion)", "Feed system + valves"],
-        "Harness & misc": ["Satellite harness", "Fasteners & adhesives"],
+        "Конструкция и механизмы": ["Structure & panels", "Separation system", "Solar array mechanism"],
+        "СЭП (солн. бат. + АКБ)": ["Solar array (GaAs, 3 m²)", "Battery (Li-ion)", "EPS (power conditioning)", "Solar array harness"],
+        "СОС (ADCS)": ["Star trackers (x2)", "IMU (gyroscope)", "Magnetometer", "Reaction wheels (x4)", "AOCS computer"],
+        "Навигационная ПН": ["PNT signal generator", "Navigation antennas (x2)", "RF amplifiers + diplexer", "On-board GNSS receiver"],
+        "Атомные часы": ["Cs frequency standard", "Rb frequency standard", "OCXO oscillator"],
+        "ISL (Ka)": ["ISL Ka-band transceiver", "ISL antennas (x4)"],
+        "ТМ/КУ + БЦВМ": ["S-band TT&C radio", "TT&C antenna", "On-board computer", "Software & FPGA"],
+        "Терморегулирование": ["Radiators", "MLI blankets", "Thermal heaters", "Heat pipes"],
+        "Двиг. установка (сухая)": ["Propellant tank", "Thruster (x4 cold-gas/ion)", "Feed system + valves"],
+        "Кабельная сеть и крепёж": ["Satellite harness", "Fasteners & adhesives"],
     }
     cat_mass = {}
     for cat, subs in categories.items():
@@ -185,7 +185,7 @@ def _plot_mass_breakdown(cat_mass, dry_mass, wet_mass, prop, output_dir, label):
     ax.axvline(0, color="black", lw=0.8)
     for bar, v in zip(bars, masses):
         ax.text(v + 0.3, bar.get_y() + bar.get_height()/2,
-                f"{v:.1f} kg", va="center", fontsize=8)
+                f"{v:.1f} кг", va="center", fontsize=8)
 
     ax.set_xlabel("Масса (кг)")
     ax.set_title(f"AURORA — Бюджет массы спутника [{label}]\n"
@@ -200,7 +200,7 @@ def _plot_mass_breakdown(cat_mass, dry_mass, wet_mass, prop, output_dir, label):
 
 def _plot_mass_pie(cat_mass, output_dir, label):
     fig, ax = plt.subplots(figsize=(10, 7))
-    labels = [f"{k}\n{v:.1f} kg" for k, v in cat_mass.items()]
+    labels = [f"{k}\n{v:.1f} кг" for k, v in cat_mass.items()]
     colors = plt.cm.Set3(np.linspace(0, 1, len(cat_mass)))
     ax.pie(list(cat_mass.values()), labels=labels, colors=colors,
            autopct="%1.0f%%", startangle=90, pctdistance=0.75, textprops={"fontsize": 8})

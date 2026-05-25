@@ -1,0 +1,6 @@
+name,purpose,url,format,update,size_mb,validates,embedded_sample
+IGS GIM,Глобальная карта TEC (ионосфера),ftp://cddis.gsfc.nasa.gov/gnss/products/ionex/,IONEX v1,2 ч,2.000,§11 Klobuchar,YES
+Broadcast Nav (RINEX),Эфемериды GNSS (Keplerian),ftp://cddis.gsfc.nasa.gov/gnss/data/daily/YYYY/brdc/,RINEX nav 3.05,15 мин,0.300,§47 POD,YES
+VMF3 grid,"Коэффициенты тропосферы (ZHD, mapping)",https://vmf.geo.tuwien.ac.at/trop_products/GRID/,ASCII GRID 1°×1°,6 ч,0.500,§34 Saastamoinen,YES
+SLR (ILRS NPT),Лазерная локация — валидация орбит,ftp://cddis.gsfc.nasa.gov/slr/data/npt_crd/,CRD v2 ASCII,сутки,0.100,§47 POD (SISRE),YES
+GLONASS PZ-90.11,Параметры земной модели,https://mak-rusnav.ru/ (МАК «Радионавигация»),ИКД GLONASS 5.1,редко,0.010,система координат,YES

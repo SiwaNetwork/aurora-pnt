@@ -1,0 +1,4 @@
+model,reference,n,rmse,bias,max_abs,corr_R,unit,target,status
+Klobuchar §11,embedded IGS GIM,100,1.6593,+0.1134,4.9996,0.8421,м,5.00,PASS
+Saastamoinen §34,ICAO ISA + NMF,100,14.3134,+0.5166,88.5898,1.0000,мм,30.00,PASS
+POD §47,SLR (имит.),100,0.9673,-0.0765,2.7432,0.9816,см,10.00,PASS
