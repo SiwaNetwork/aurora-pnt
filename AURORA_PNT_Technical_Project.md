@@ -299,10 +299,13 @@ $$T_{orb} = 2\pi\sqrt{\frac{a^3}{\mu}} = 2\pi\sqrt{\frac{(7{,}371 \times 10^6)^3
 Орбитальная скорость:
 $$v_{orb} = \sqrt{\frac{\mu}{a}} = \sqrt{\frac{3{,}986 \times 10^{14}}{7{,}371 \times 10^6}} \approx 7{,}35 \text{ км/с}$$
 
-Угловая скорость относительно наблюдателя на Земле:
-$$\dot\theta_{rel} \approx \frac{v_{orb}}{a} \cdot \frac{180°}{\pi} \approx 57{,}1 \text{ °/мин}$$
+Орбитальная угловая скорость (среднее движение вокруг центра Земли):
+$$\dot\theta_{orb} = \frac{v_{orb}}{a} \cdot \frac{180°}{\pi} \approx 3{,}43 \text{ °/мин}$$
 
-Это означает, что спутник AURORA пересекает небосвод примерно за **3,1 минуты** (сравнить: GPS — неподвижен, проход за горизонт займёт часы).
+Видимая угловая скорость для наземного наблюдателя максимальна в зените (дальность ≈ $h$):
+$$\dot\theta_{app,max} \approx \frac{v_{orb}}{h} \cdot \frac{180°}{\pi} \approx 25 \text{ °/мин}$$
+
+Это означает, что спутник AURORA проходит видимую часть небосвода за **10–13 минут** (высокий проход, маска 10°), тогда как MEO-спутник GPS остаётся в зоне видимости несколько часов. Высокая динамика определяет требования к ширине полосы следящих фильтров и к частоте смены рабочих спутников.
 
 **Эффект Доплера:**
 
@@ -931,8 +934,10 @@ $$\text{FSPL} = 20\log_{10}\!\left(\frac{4\pi d f}{c}\right) = 32{,}45 + 20\log(
 **Кодовый режим (BPSK, 10 Мчип/с, C/N₀ = 67,5 дБ-Гц, T_int = 0,1 с):**
 $$\sigma_{range,code} = \frac{c}{f_{chip}} \cdot \frac{1}{\sqrt{2 \cdot C/N_0 \cdot T_{int}}} \approx \frac{30 \text{ м}}{\sqrt{2 \times 10^{6{,}75} \times 0{,}1}} \approx 0{,}028 \text{ м} \approx 3 \text{ см}$$
 
-**Фазовый режим (несущая, λ = 11,3 мм):**
-$$\sigma_{range,phase} = \frac{\lambda}{2\pi} \cdot \frac{1}{\sqrt{C/N_0 \cdot T_{int}}} = \frac{0{,}0113}{2\pi\sqrt{10^{6{,}75} \times 0{,}1}} \approx 0{,}25 \text{ мм}$$
+**Фазовый режим (несущая, λ = 11,3 мм), тепловой предел:**
+$$\sigma_{range,phase} = \frac{\lambda}{2\pi} \cdot \frac{1}{\sqrt{C/N_0 \cdot T_{int}}} = \frac{0{,}0113}{2\pi\sqrt{10^{6{,}75} \times 0{,}1}} \approx 2 \text{ мкм}$$
+
+Тепловой шум ограничивает фазовое измерение единицами микрометров; реально достижимая точность фазовой ISL-дальности определяется многолучёвостью, стабильностью фазового центра антенны и разрешением неоднозначности и составляет **0,2–0,5 мм** (≈ 1–2 пс по времени), что и используется в бюджете синхронизации (§8.3).
 
 ![ISL геометрия](results/isl_ranging/isl_geometry_phase3.png)
 
@@ -3918,7 +3923,7 @@ aurora-pnt validate  -l phase5
 11. Zhu, S., et al. (2022). Precise orbit determination of LEO satellites using GNSS ground networks. *GPS Solutions*, 26(2), 1–18.
 12. Kaplan, E.D., Hegarty, C.J. (2017). *Understanding GPS/GNSS: Principles and Applications*. Artech House.
 13. ИТУ-R M.1787 (2007). Описание и характеристики систем RNSS.
-14. RTCA DO-229E (2017). MOPS for GNSS Airborne Antenna Equipment.
+14. RTCA DO-229E (2016). MOPS for GPS/SBAS Airborne Equipment. RTCA Inc.
 15. Foster, J.L., Estes, H.S. (1992). A Parametric Analysis of Orbital Debris Collision Probability and Maneuver Rate for Space Vehicles. *NASA JSC-25898*, Johnson Space Center.
 16. Перов, А.И., Харисов, В.Н. (ред.) (2010). *ГЛОНАСС. Принципы построения и функционирования*. 4-е изд. М.: Радиотехника. ISBN 978-5-88070-251-0.
 17. Allan, D.W. (1966). Statistics of Atomic Frequency Standards. *Proceedings of the IEEE*, 54(2), 221–230.
@@ -3939,17 +3944,17 @@ aurora-pnt validate  -l phase5
 32. ГЛОНАСС ИКД (2016). Интерфейсный контрольный документ, версия 5.1. АО «Российские космические системы».
 33. Xona Space Systems (2023). PULSAR LEO Navigation Constellation — Technical White Paper. Xona Space Systems Inc.
 34. Joerger, M., Gratton, L., Pervan, B., Cohen, C.E. (2010). Analysis of Iridium-Augmented GPS for Floating Carrier Phase Positioning. *Navigation*, 57(2), 137–160.
-35. ESA (2022). Moonlight Initiative: LEO Navigation Augmentation Phase A Study. ESA/ESTEC.
+35. ESA (2024). LEO-PNT In-Orbit Demonstration Mission (созвездие Pathfinder A/B, 12 КА). ESA Directorate of Navigation, ESA/ESTEC.
 36. Tang, C., et al. (2018). Initial results of centralized autonomous orbit determination of the new-generation BDS satellites with inter-satellite link measurements. *Journal of Geodesy*, 92(10), 1155–1169.
-37. SpaceX (2020). FCC Application for GPS-like PNT Services from Starlink Constellation. Federal Communications Commission Filing.
-38. ITU-R M.2092-0 (2015). Technical characteristics of alternative positioning, navigation and timing (APNT) systems for global use.
+37. SpaceX (2025). Reply Comments on Starlink PNT Capabilities. FCC Notice of Inquiry, WT Docket No. 25-110.
+38. Prol, F.S., Ferre, R.M., et al. (2022). Position, Navigation, and Timing (PNT) Through Low Earth Orbit (LEO) Satellites: A Survey on Current Status, Challenges, and Opportunities. *IEEE Access*, 10, 83971–84002.
 39. Ge, H., Li, B., Ge, M., Zang, N., Nie, L., Shen, Y., Schuh, H. (2018). Initial Assessment of Precise Point Positioning with LEO Enhanced Global Navigation Satellite Systems (LeGNSS). *Remote Sensing*, 10(7), 984.
 40. Reid, T.G.R., et al. (2016). Broadband LEO Constellations for Navigation. *Proceedings of ION GNSS+ 2016*, 2366–2378.
 41. Betz, J.W. (2016). *Engineering Satellite-Based Navigation and Timing*. Wiley-IEEE Press, Ch. 3 (Spectral Separation Coefficients).
 42. Teunissen, P.J.G., Khodabandeh, A. (2015). Review and Principles of PPP-RTK Methods. *Journal of Geodesy*, 89(3), 217–240.
 43. Wübbena, G., et al. (2005). PPP-RTK: Precise Point Positioning Using State-Space Representation in RTK Networks. *Proceedings of ION GNSS 2005*, 2584–2594.
 44. Galileo HAS ICD (2022). Galileo High Accuracy Service Interface Control Document. European Commission.
-45. IS-GPS-200L (2020). Navstar GPS Space Segment/Navigation User Segment Interfaces. US DoD.
+45. IS-GPS-705J (2021). Navstar GPS Space Segment/User Segment L5 Interfaces. US DoD.
 46. ICD-GPS-800F (2022). Navstar GPS Space Segment/User Segment L1C Interface. US DoD.
 
 ---
