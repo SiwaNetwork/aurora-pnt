@@ -79,6 +79,9 @@ jobs:
         run: |
           pip install python-docx pyyaml
 
+      - name: Проверка связности документов (эмодзи / старые числа / версии)
+        run: python check_tp.py
+
       - name: Build AURORA_PNT_GOST.docx
         run: python convert_gost.py
 
