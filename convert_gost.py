@@ -848,8 +848,9 @@ def main():
     md_text = open(MD_IN, encoding="utf-8").read()
     n_fig = len(re.findall(r'^!\[', md_text, re.M))
     n_tbl = len(re.findall(r'^\|[\s:|\-]+\|\s*$', md_text, re.M))
-    m64 = re.search(r'^## 64\..*?(?=^## |\Z)', md_text, re.M | re.S)
-    n_src = len(re.findall(r'^\d+\.', m64.group(0), re.M)) if m64 else 0
+    msrc = re.search(r'^## \d+\.\s+Список литературы.*?(?=^## |\Z)',
+                     md_text, re.M | re.S)
+    n_src = len(re.findall(r'^\d+\.', msrc.group(0), re.M)) if msrc else 0
 
     print("  Титульный лист...")
     add_title_page(doc)

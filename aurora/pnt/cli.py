@@ -797,6 +797,16 @@ def cmd_agps_server(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_accuracy_paths(args):
+    """Пути повышения точности: UERE/H-95 при SSR-коррекциях, тропо, PPP-RTK."""
+    from aurora.pnt.accuracy_paths import run_accuracy_paths_analysis
+    output_dir = args.output or "results/accuracy_paths"
+    label      = args.label  or "phase4"
+    print(f"\n  Running accuracy-paths analysis: {label}")
+    run_accuracy_paths_analysis(output_dir=output_dir, label=label)
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_conjunction(args):
     """Conjunction probability: Monte Carlo debris collision risk analysis."""
     from aurora.pnt.conjunction_pc import run_conjunction_analysis, print_conjunction_summary
@@ -1609,6 +1619,12 @@ def main():
     p_agps.add_argument("-o", "--output",     default="results/acquisition")
     p_agps.add_argument("-l", "--label",      default="phase4")
 
+    # accuracy-paths
+    p_accpaths = sub.add_parser("accuracy-paths",
+                                help="Пути повышения точности: UERE/H-95 (SSR, тропо, PPP-RTK)")
+    p_accpaths.add_argument("-o", "--output", default="results/accuracy_paths")
+    p_accpaths.add_argument("-l", "--label",  default="phase4")
+
     # coverage-maps
     p_cov = sub.add_parser("coverage-maps",
                            help="Geographic coverage maps: N_vis and PDOP heatmaps by phase")
@@ -1823,6 +1839,7 @@ def main():
         "deployment":       cmd_deployment,
         "conjunction":      cmd_conjunction,
         "agps":             cmd_agps_server,
+        "accuracy-paths":   cmd_accuracy_paths,
         "coverage-maps":    cmd_coverage_maps,
         "radiation":        cmd_radiation,
         "relativistic":     cmd_relativistic,
