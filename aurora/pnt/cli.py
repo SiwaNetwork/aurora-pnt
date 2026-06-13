@@ -807,6 +807,16 @@ def cmd_accuracy_paths(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_crypto_auth(args):
+    """Криптозащита нав-сообщения на ГОСТ (Стрибог/34.10/Кузнечик): оверхед, стойкость."""
+    from aurora.pnt.crypto_auth import run_crypto_auth_analysis
+    output_dir = args.output or "results/crypto_auth"
+    label      = args.label  or "phase4"
+    print(f"\n  Running crypto-auth (ГОСТ) analysis: {label}")
+    run_crypto_auth_analysis(output_dir=output_dir, label=label)
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_conjunction(args):
     """Conjunction probability: Monte Carlo debris collision risk analysis."""
     from aurora.pnt.conjunction_pc import run_conjunction_analysis, print_conjunction_summary
@@ -1625,6 +1635,12 @@ def main():
     p_accpaths.add_argument("-o", "--output", default="results/accuracy_paths")
     p_accpaths.add_argument("-l", "--label",  default="phase4")
 
+    # crypto-auth
+    p_crypto = sub.add_parser("crypto-auth",
+                              help="Криптозащита нав-сообщения на ГОСТ (Стрибог/34.10/Кузнечик)")
+    p_crypto.add_argument("-o", "--output", default="results/crypto_auth")
+    p_crypto.add_argument("-l", "--label",  default="phase4")
+
     # coverage-maps
     p_cov = sub.add_parser("coverage-maps",
                            help="Geographic coverage maps: N_vis and PDOP heatmaps by phase")
@@ -1840,6 +1856,7 @@ def main():
         "conjunction":      cmd_conjunction,
         "agps":             cmd_agps_server,
         "accuracy-paths":   cmd_accuracy_paths,
+        "crypto-auth":      cmd_crypto_auth,
         "coverage-maps":    cmd_coverage_maps,
         "radiation":        cmd_radiation,
         "relativistic":     cmd_relativistic,
