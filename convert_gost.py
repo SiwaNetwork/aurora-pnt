@@ -365,10 +365,8 @@ class Counters:
 # Элементы документа ГОСТ
 # ═══════════════════════════════════════════════════════════════════════════════
 
-_UNNUMBERED = {
-    "список сокращений", "введение", "выводы", "заключение",
-    "список литературы", "реферат", "аннотация", "содержание",
-}
+# Разделы нумеруются сквозно (1…64), как в исходнике и кросс-ссылках §N.
+_UNNUMBERED = set()
 
 def add_heading(doc, raw_text, level, cnt):
     text = re.sub(r'\[([^\]]+)\]\([^)]*\)', r'\1', raw_text)  # убрать ссылки
@@ -380,7 +378,9 @@ def add_heading(doc, raw_text, level, cnt):
     # → нет, используем обычный пробел:
     full = (f"{num}  {text}" if num else text)
 
-    p = doc.add_paragraph()
+    # Стиль «Заголовок N» обязателен: по нему поле TOC собирает оглавление
+    # (Ctrl+A → F9). Визуальное оформление ниже переопределяет стиль вручную.
+    p = doc.add_paragraph(style=f"Heading {level}")
     p.paragraph_format.keep_with_next = True
     p.paragraph_format.first_line_indent = Cm(0)
 
@@ -603,7 +603,6 @@ def add_title_page(doc):
     _cp(doc, "")
     _cp(doc, "ТЕХНИЧЕСКИЙ ПРОЕКТ", size=Pt(18), bold=True, before=12)
     _cp(doc, "Документ: AURORA-ТП-001", bold=True, before=8)
-    _cp(doc, "Версия 1.0")
     _cp(doc, "")
     _cp(doc, "Составлен в соответствии с ГОСТ 7.32-2017,", size=SZ_SM, italic=True, before=40)
     _cp(doc, "ГОСТ 2.105-2019, ГОСТ Р 7.0.97-2016", size=SZ_SM, italic=True)
@@ -641,16 +640,16 @@ def add_toc(doc):
     p.paragraph_format.first_line_indent = Cm(0)
     set_spacing(p, line=1.5, before=0, after=0)
     run = p.add_run()
-    for tag, text in (("begin",""),(" TOC \\o \"1-3\" \\h \\z \\u ",""),("end","")):
-        if tag.startswith(" TOC"):
-            instr = OxmlElement("w:instrText")
-            instr.set(qn("xml:space"), "preserve"); instr.text = tag
-            fc = OxmlElement("w:fldChar"); fc.set(qn("w:fldCharType"), "separate")
-            run._r.append(instr)
-        else:
-            fc = OxmlElement("w:fldChar")
-            fc.set(qn("w:fldCharType"), "begin" if tag == "begin" else "end")
-            run._r.append(fc)
+    fb = OxmlElement("w:fldChar"); fb.set(qn("w:fldCharType"), "begin")
+    instr = OxmlElement("w:instrText"); instr.set(qn("xml:space"), "preserve")
+    instr.text = 'TOC \\o "1-3" \\h \\z \\u'
+    fs = OxmlElement("w:fldChar"); fs.set(qn("w:fldCharType"), "separate")
+    run._r.append(fb); run._r.append(instr); run._r.append(fs)
+    ph = p.add_run("Оглавление формируется в Word: выделить всё (Ctrl+A) и нажать F9.")
+    fmt_run(ph, size=Pt(11), italic=True, color=GRAY)
+    fe_run = p.add_run()
+    fe = OxmlElement("w:fldChar"); fe.set(qn("w:fldCharType"), "end")
+    fe_run._r.append(fe)
     note = doc.add_paragraph()
     note.paragraph_format.first_line_indent = Cm(0)
     set_spacing(note, line=1.0, before=8, after=0)
@@ -679,6 +678,13 @@ def parse(md_path, doc, cnt):
         nonlocal tbl_rows, tbl_cap, in_table
         add_table(doc, tbl_rows, tbl_cap, cnt)
         tbl_rows = []; tbl_cap = ""; in_table = False
+
+    # Преамбула исходника (заголовок, подзаголовок, статус, ручное «Содержание»)
+    # в DOCX не нужна: титульный лист, реферат и автособираемое оглавление
+    # добавляются конвертером отдельно. Парсинг начинаем с первого
+    # нумерованного раздела «## N. …».
+    while i < len(lines) and not re.match(r'^##\s+\d+\.', lines[i].strip()):
+        i += 1
 
     while i < len(lines):
         raw     = lines[i].rstrip("\n")
@@ -736,7 +742,9 @@ def parse(md_path, doc, cnt):
         # ── Заголовки ─────────────────────────────────────────────────────────
         hm = re.match(r'^(#{1,6})\s+(.*)', stripped)
         if hm:
-            lvl  = min(len(hm.group(1)), 3)
+            # В исходнике разделы — «## N.» (главные) и «### N.M» (подразделы);
+            # «#» — заголовок документа. Сдвигаем: ## → уровень 1, ### → уровень 2.
+            lvl  = max(1, min(len(hm.group(1)) - 1, 3))
             text = hm.group(2)
             if text.strip().lower() == "содержание":
                 i += 1; continue  # уже добавлено

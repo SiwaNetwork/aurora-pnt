@@ -296,15 +296,23 @@ def _plot_bit_allocation(capacity: Dict, output_dir: str, label: str):
 
     fig, axes = plt.subplots(1, 2, figsize=(14, 6))
 
-    # Pie chart
-    wedges, texts, autotexts = axes[0].pie(
-        sizes, labels=None, colors=colors, autopct="%1.0f%%",
-        startangle=90, pctdistance=0.75,
-    )
-    axes[0].legend(wedges, [f"{n} ({s} b)" for n, s in zip(names, sizes)],
-                   loc="lower left", fontsize=9)
+    # Горизонтальный bar в лог-масштабе вместо пирога: при доле Альманаха ~96 %
+    # круговая диаграмма нечитаема (подписи долей сталкиваются), а лог-бар
+    # показывает все компоненты, различающиеся на 2 порядка.
+    order    = sorted(range(len(sizes)), key=lambda i: sizes[i])
+    s_names  = [names[i]  for i in order]
+    s_sizes  = [sizes[i]  for i in order]
+    s_colors = [colors[i] for i in order]
+    total    = sum(sizes)
+    axes[0].barh(s_names, s_sizes, color=s_colors, edgecolor="white", linewidth=0.6)
+    axes[0].set_xscale("log")
+    axes[0].set_xlabel("Биты сообщения (лог. шкала)")
+    axes[0].grid(axis="x", alpha=0.3, which="both")
+    axes[0].set_xlim(right=max(s_sizes) * 4)
+    for i, sz in enumerate(s_sizes):
+        axes[0].text(sz * 1.15, i, f"{sz} б · {100*sz/total:.0f}%", va="center", fontsize=9)
     axes[0].set_title(f"Распределение битов навигационного сообщения\n"
-                      f"Всего: {sum(sizes):,} бит  ({sum(sizes)/8/1024:.1f} кБ)")
+                      f"Всего: {total:,} бит  ({total/8/1024:.1f} кБ)")
 
     # Bar: delivery time
     del_times = [

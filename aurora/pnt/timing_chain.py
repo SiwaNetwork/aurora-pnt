@@ -34,38 +34,38 @@ NS_PER_M = 1e9 / C_LIGHT   # ns / m (≈ 3.336 ns/m)
 #   OCXO: white PM + flicker FM: ADEV ~ 1e-10 at τ=1s → 3e-11 at 100s (aging limited)
 
 CLOCKS = {
-    "Cs (крейзер)": {
-        "label":       "Cs",
-        "color":       "#0984e3",
-        "adev_1s":     5e-12,    # Allan deviation at 1 s
-        "exponent":    -0.5,     # slope in log-log: -0.5 = white FM
-        "holdover_ppb_per_day": 0.001,  # ultra-stable, no aging
-        "mass_kg":     0.7,
-        "power_w":     4.0,
-        "desc":        "Cs beam, 1 per plane anchor",
+    "H-мазер Ч1-1008 (земля)": {
+        "label":       "H-мазер",
+        "color":       "#6c5ce7",
+        "adev_1s":     1.5e-13,  # активный водородный мазер
+        "exponent":    -0.5,
+        "holdover_ppb_per_day": 0.0001,
+        "mass_kg":     0.0,      # наземный эталон (не на борту)
+        "power_w":     0.0,
+        "desc":        "Активный H-мазер Ч1-1008 (ВРЕМЯ-Ч), наземный эталон UTC(SU)",
+        "n_per_fleet": 0,
+    },
+    "space-Rb (якорь)": {
+        "label":       "space-Rb",
+        "color":       "#00b894",
+        "adev_1s":     1e-11,
+        "exponent":    -0.5,
+        "holdover_ppb_per_day": 0.001,
+        "mass_kg":     1.8,
+        "power_w":     35.0,
+        "desc":        "Космический Rb Quantum-18 (ШИВА НЕТВОРК), якорный, 1 на плоскость",
         "n_per_fleet": 15,
     },
-    "Rb (ретранслятор)": {
-        "label":       "Rb",
-        "color":       "#00b894",
-        "adev_1s":     3e-11,
+    "CSAC (терминал)": {
+        "label":       "CSAC",
+        "color":       "#0984e3",
+        "adev_1s":     3e-10,
         "exponent":    -0.5,
-        "holdover_ppb_per_day": 0.05,
-        "mass_kg":     0.4,
-        "power_w":     3.0,
-        "desc":        "Rb vapor cell, 3 per plane relay",
-        "n_per_fleet": 45,
-    },
-    "OCXO (терминал)": {
-        "label":       "OCXO",
-        "color":       "#e17055",
-        "adev_1s":     1e-10,
-        "exponent":    -0.5,
-        "holdover_ppb_per_day": 0.5,
-        "mass_kg":     0.2,
-        "power_w":     2.5,
-        "desc":        "Oven-controlled XO, 16 per plane terminal",
-        "n_per_fleet": 240,
+        "holdover_ppb_per_day": 0.03,
+        "mass_kg":     0.035,
+        "power_w":     0.12,
+        "desc":        "Миниат. CSAC (класс SA.45s), терминальный, на всех КА",
+        "n_per_fleet": 285,
     },
     "TCXO (сравн.)": {
         "label":       "TCXO",
@@ -91,35 +91,35 @@ ISL = {
 
 # ── Timing chain levels ───────────────────────────────────────────────────────
 CHAIN = {
-    "Cs (master)": {
-        "clock":       "Cs (крейзер)",
+    "H-мазер (эталон)": {
+        "clock":       "H-мазер Ч1-1008 (земля)",
         "isl_hops":    0,
         "sync_interval_s": 0.0,
-        "desc": "Master time scale; defines AURORA Time (ATS)",
+        "desc": "Наземный эталон UTC(SU); определяет шкалу AURORA Time (AT)",
     },
-    "Rb (relay, 1 hop)": {
-        "clock":       "Rb (ретранслятор)",
+    "space-Rb (якорь, TWSTT)": {
+        "clock":       "space-Rb (якорь)",
+        "isl_hops":    0,
+        "sync_interval_s": 0.0,
+        "desc": "Якорный КА; синхрон с наземным эталоном по TWSTT",
+    },
+    "CSAC (терминал, 1 хоп)": {
+        "clock":       "CSAC (терминал)",
         "isl_hops":    1,
-        "sync_interval_s": 60.0,
-        "desc": "Rb relay satellite; synced to Cs via 1 ISL hop",
-    },
-    "Rb (relay, 3 hops)": {
-        "clock":       "Rb (ретранслятор)",
-        "isl_hops":    3,
-        "sync_interval_s": 60.0,
-        "desc": "Rb relay at far end of plane; 3 ISL hops from Cs",
-    },
-    "OCXO (terminal, 2 hops)": {
-        "clock":       "OCXO (терминал)",
-        "isl_hops":    2,
         "sync_interval_s": 10.0,
-        "desc": "OCXO terminal synced via 2 ISL hops",
+        "desc": "CSAC терминал; 1 ISL-хоп от якоря",
     },
-    "OCXO (terminal, 6 hops)": {
-        "clock":       "OCXO (терминал)",
+    "CSAC (терминал, 3 хопа)": {
+        "clock":       "CSAC (терминал)",
+        "isl_hops":    3,
+        "sync_interval_s": 10.0,
+        "desc": "CSAC терминал; 3 ISL-хопа",
+    },
+    "CSAC (терминал, 6 хопов)": {
+        "clock":       "CSAC (терминал)",
         "isl_hops":    6,
         "sync_interval_s": 10.0,
-        "desc": "OCXO terminal at worst-case 6 ISL hops from Cs",
+        "desc": "CSAC терминал; худший случай 6 ISL-хопов от якоря",
     },
 }
 

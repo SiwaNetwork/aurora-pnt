@@ -29,6 +29,7 @@ except ImportError:
 
 # ── Утилиты ───────────────────────────────────────────────────────────────────
 def _stars(n=160, w=1400, h=800, seed=42):
+    return ""  # светлая тема (ГОСТ-печать): звёздный фон убран
     rng = random.Random(seed)
     out = []
     for _ in range(n):
@@ -174,8 +175,8 @@ def _sanitize_svg(svg: str) -> str:
         # escape bare < and > but preserve already-escaped entities
         content = content.replace("&lt;", "\x00LT\x00").replace("&gt;", "\x00GT\x00")
         content = content.replace("&amp;", "\x00AMP\x00")
-        content = content.replace("<", "&lt;").replace(">", "&gt;")
-        content = content.replace("&", "&amp;")
+        content = content.replace("&", "&amp;")                       # сначала bare '&'
+        content = content.replace("<", "&lt;").replace(">", "&gt;")   # затем '<','>'
         content = content.replace("\x00LT\x00", "&lt;").replace("\x00GT\x00", "&gt;")
         content = content.replace("\x00AMP\x00", "&amp;")
         return f"{tag_open}>{content}</text>"
@@ -196,8 +197,8 @@ def _defs(extra=""):
     return f"""<defs>
   <!-- Фон космос -->
   <linearGradient id="space_bg" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
-    <stop offset="0%" stop-color="#020c1b"/>
-    <stop offset="100%" stop-color="#0a1628"/>
+    <stop offset="0%" stop-color="#f6f8fb"/>
+    <stop offset="100%" stop-color="#e7eef6"/>
   </linearGradient>
   <!-- Земля -->
   <radialGradient id="earth_grad" cx="42%" cy="38%" r="60%">
@@ -391,7 +392,7 @@ def _svg_service_scenarios():
             "ttff":  "Горячий старт: 1,5 с",
             "color": "#0984e3",
             "icon":  "plane",
-            "details": ["TIR &lt; 10⁻⁷/ч", "TTPR &lt; 6 с", "N_vis &ge; 36", "RAIM активен", "Совм. DO-229"],
+            "details": ["TIR < 1e-7 /ч", "TTPR < 6 с", "N_vis ≈ 14", "RAIM активен", "Совм. DO-229"],
         },
         {
             "title": "Геодезия / точн. земледелие (PPP-RTK)",
@@ -540,7 +541,7 @@ def _svg_leo_vs_meo():
                 ("Макс. Доплер L1",         "±38,6 кГц / 38,6 Гц/с", "#fdcb6e"),
                 ("TTFF (PPP-RTK)",           "5 с", "#00b894"),
                 ("Задержка сигнала LOS",    "3,3 мс", "#00b894"),
-                ("Геометрия (PDOP p95)",    "< 1,8  (N_vis ≈ 36)", "#00b894"),
+                ("Геометрия (PDOP p95)",    "1,7 комб. · N_vis ≈ 14", "#00b894"),
             ],
         },
         {
@@ -670,9 +671,9 @@ def _svg_signal_flow():
 
     stages = [
         {
-            "x": 110, "label": "Cs/Rb\nстандарт", "sub": "< 0,01 нс/6ч",
-            "color": "#a29bfe", "tag": "Cs",
-            "desc": "ADEV < 10⁻¹³/с",
+            "x": 110, "label": "Атомный\nстандарт", "sub": "H-мазер → CSAC",
+            "color": "#a29bfe", "tag": "T0",
+            "desc": "ADEV < 1e-13 /с (мазер)",
         },
         {
             "x": 330, "label": "ANAV\nпередатчик", "sub": "L1 5Вт · L5 3Вт",
@@ -681,7 +682,7 @@ def _svg_signal_flow():
         },
         {
             "x": 560, "label": "Радиосигнал\nL1 + L5", "sub": "FSPL −159 дБ",
-            "color": "#6c5ce7", "tag": "~",
+            "color": "#6c5ce7", "tag": "RF",
             "desc": "1000 км · 3,3 мс",
         },
         {
@@ -696,7 +697,7 @@ def _svg_signal_flow():
         },
         {
             "x": 1250, "label": "PNT\nрешение", "sub": "< 0,5 м · < 5 нс",
-            "color": "#00b894", "tag": "✓",
+            "color": "#00b894", "tag": "OUT",
             "desc": "UTC(SU) · H-95%",
         },
     ]
@@ -771,7 +772,7 @@ def _svg_signal_flow():
         (710,  "ISL ×6",  "± 2,58 нс"),
         (920,  "Тропосф.", "± ~6 см"),
         (1120, "Приёмник", "< 5 нс итого"),
-        (1300, "UTC пользов.", "< 5 нс ✓"),
+        (1300, "UTC пользов.", "< 5 нс"),
     ]
     for i, (cx2, lbl, val) in enumerate(chain):
         col2 = "#a29bfe" if i == 0 else ("#00b894" if i == len(chain) - 1 else "#555577")
@@ -791,6 +792,119 @@ def _svg_signal_flow():
 # ──────────────────────────────────────────────────────────────────────────────
 # PUBLIC API
 # ──────────────────────────────────────────────────────────────────────────────
+def _svg_time_dissemination():
+    """Двухуровневая синхронизация: LPT (космос) + SHIWA TIME mesh (земля)."""
+    W, H = 1400, 820
+    parts = [f'<svg width="{W}" height="{H}" xmlns="http://www.w3.org/2000/svg">']
+    parts.append(_defs())
+    parts.append(f'<rect width="{W}" height="{H}" fill="url(#space_bg)"/>')
+    parts.append(f'<text x="{W//2}" y="40" text-anchor="middle" '
+                 f'font-family="Arial,sans-serif" font-size="20" font-weight="bold" '
+                 f'fill="white">AURORA + SHIWA TIME — двухуровневая синхронизация времени</text>')
+
+    parts.append(f'<defs><marker id="amk" markerWidth="9" markerHeight="9" refX="7" refY="3" '
+                 f'orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#566072"/></marker></defs>')
+
+    def box(x, y, w, h, col):
+        return (f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="10" '
+                f'fill="#0d1117" stroke="{col}" stroke-width="2"/>'
+                f'<rect x="{x}" y="{y}" width="{w}" height="28" rx="10" fill="{col}" opacity="0.22"/>'
+                f'<rect x="{x}" y="{y+18}" width="{w}" height="10" fill="{col}" opacity="0.22"/>')
+
+    # Разделитель сегментов
+    seg_y = 472
+    parts.append(f'<line x1="40" y1="{seg_y}" x2="{W-40}" y2="{seg_y}" '
+                 f'stroke="#30363d" stroke-width="1.5" stroke-dasharray="10,6"/>')
+    parts.append(_label(70, seg_y-12, "Космический сегмент · LPT (радиоканал)", 13, "#00b894", anchor="start", bold=True))
+    parts.append(_label(70, seg_y+24, "Наземный сегмент · SHIWA TIME (P2P-mesh)", 13, "#6c5ce7", anchor="start", bold=True))
+
+    # UTC(SU)
+    ux0, uy0 = 95, 110
+    parts.append(box(ux0, uy0, 200, 90, "#0984e3"))
+    parts.append(_label(ux0+100, uy0+22, "UTC(SU)", 14, "white", bold=True))
+    parts.append(_label(ux0+100, uy0+48, "H-мазер МКС", 12, "#0984e3"))
+    parts.append(_label(ux0+100, uy0+72, "эталон шкалы", 10, "#8b949e"))
+    parts.append(f'<line x1="{ux0+200}" y1="{uy0+45}" x2="612" y2="135" '
+                 f'stroke="#0984e3" stroke-width="2.2" marker-end="url(#amk)"/>')
+    parts.append(_label(445, 110, "загрузка шкалы (ТМ/ТК)", 10, "#8b949e"))
+
+    # Спутник AURORA
+    sat_x, sat_y = 700, 160
+    parts.append(_sat_icon(sat_x, sat_y, 36, "#00b894", 0))
+    parts.append(_label(sat_x, sat_y-52, "AURORA КА", 14, "#00b894", bold=True))
+    parts.append(_label(sat_x, sat_y+60, "Cs/Rb · бортовая шкала (§8)", 11, "#00b894"))
+
+    # Луч LPT
+    ref_x, ref_y = 700, 388
+    parts.append(_beam_cone(sat_x, sat_y+22, ref_x, ref_y-34, 8, "#00b894", 0.15))
+    parts.append(f'<line x1="{sat_x}" y1="{sat_y+22}" x2="{ref_x}" y2="{ref_y-36}" '
+                 f'stroke="#00b894" stroke-width="2" stroke-dasharray="6,4" opacity="0.8"/>')
+    parts.append(_label(sat_x+135, 285, "LPT · одностороннее", 11, "#00b894"))
+    parts.append(_label(sat_x+135, 303, "время, < 10 нс", 11, "#00b894"))
+
+    # Опорный узел SHIWA
+    parts.append(box(ref_x-135, ref_y-28, 270, 86, "#6c5ce7"))
+    parts.append(_label(ref_x, ref_y-4, "Опорный узел SHIWA", 13, "white", bold=True))
+    parts.append(_label(ref_x, ref_y+20, "LPT-приёмник → источник mesh", 10, "#6c5ce7"))
+    parts.append(_label(ref_x, ref_y+42, "UTC < 10 нс", 11, "#8b949e"))
+
+    # Потребители
+    consumers = [
+        (330,  "ЦОД / LAN",      "профиль A · ±5 нс",   "итого ≈ 7–11 нс", "#0984e3"),
+        (700,  "Оператор / WAN", "профиль B · ±50 нс",  "итого ≈ 50 нс",   "#00b894"),
+        (1070, "Мобильный / LTE","профиль C · ±200 нс", "итого ≈ 200 нс",  "#fdcb6e"),
+    ]
+    cons_y = 660
+    xs = []
+    for cx, title, prof, total, col in consumers:
+        parts.append(box(cx-120, cons_y-30, 240, 92, col))
+        parts.append(_label(cx, cons_y-8, title, 13, "white", bold=True))
+        parts.append(_label(cx, cons_y+16, prof, 11, col))
+        parts.append(_label(cx, cons_y+40, total, 11, "#8b949e"))
+        xs.append(cx)
+        parts.append(f'<line x1="{ref_x}" y1="{ref_y+58}" x2="{cx}" y2="{cons_y-30}" '
+                     f'stroke="{col}" stroke-width="2" opacity="0.7" marker-end="url(#amk)"/>')
+    for a in range(len(xs)):
+        for b in range(a+1, len(xs)):
+            parts.append(f'<line x1="{xs[a]}" y1="{cons_y+64}" x2="{xs[b]}" y2="{cons_y+64}" '
+                         f'stroke="#6c5ce7" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.5"/>')
+    parts.append(_label(W//2, cons_y+92, "P2P-mesh (libp2p · «счастливый пакет» · без Grandmaster)", 11, "#6c5ce7"))
+
+    parts.append("</svg>")
+    return "\n".join(parts)
+
+
+def _lighten(svg: str) -> str:
+    """Пост-процессор: тёмная 'космическая' палитра → светлая (для печати по ГОСТ).
+
+    Меняет только значения атрибутов (fill/stroke/filter), текст не трогает.
+    Фон space_bg переопределён в _defs; звёзды убраны в _stars.
+    """
+    reps = [
+        # тёмные карточки/панели → белые
+        ('fill="#0d1117"', 'fill="#ffffff"'),
+        ('fill="#1a1a2e"', 'fill="#2c3e50"'),
+        # текст и обводки «white» → тёмные / серые (на белом фоне)
+        ('fill="white"', 'fill="#1a2433"'),
+        ('stroke="white"', 'stroke="#5a6678"'),
+        # убрать «свечения» — на белом дают грязный ореол
+        ('filter="url(#text_glow)"', ''),
+        ('filter="url(#glow_green)"', ''),
+        ('filter="url(#glow_user)"', ''),
+        ('filter="url(#glow_mcs)"', ''),
+        # низкоконтрастные акценты → темнее (читаемость на белом)
+        ('fill="#fdcb6e"', 'fill="#b8860b"'),   # жёлтый → тёмное золото
+        ('fill="#c9d1d9"', 'fill="#2c3e50"'),   # светло-серый текст → тёмный
+        ('fill="#8b949e"', 'fill="#566072"'),   # серый → темнее
+        ('fill="#00cec9"', 'fill="#0a8f8a"'),   # циан → тёмный бирюз.
+        ('stroke="#30363d"', 'stroke="#aeb8c4"'),
+        ('stroke="#555577"', 'stroke="#9aa3b5"'),
+    ]
+    for a, b in reps:
+        svg = svg.replace(a, b)
+    return svg
+
+
 def run_concept_svg(output_dir: str, label: str) -> dict:
     os.makedirs(output_dir, exist_ok=True)
     figures = []
@@ -800,10 +914,11 @@ def run_concept_svg(output_dir: str, label: str) -> dict:
         ("service_scenarios", _svg_service_scenarios),
         ("leo_vs_meo",        _svg_leo_vs_meo),
         ("signal_flow",       _svg_signal_flow),
+        ("time_dissemination", _svg_time_dissemination),
     ]
 
     for name, fn in generators:
-        svg_data = _sanitize_svg(fn())
+        svg_data = _sanitize_svg(_lighten(fn()))
         svg_path = os.path.join(output_dir, f"concept_{name}_{label}.svg")
         with open(svg_path, "w", encoding="utf-8") as f:
             f.write(svg_data)

@@ -1,0 +1,87 @@
+<svg width="1400" height="820" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <!-- Фон космос -->
+  <linearGradient id="space_bg" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+    <stop offset="0%" stop-color="#f6f8fb"/>
+    <stop offset="100%" stop-color="#e7eef6"/>
+  </linearGradient>
+  <!-- Земля -->
+  <radialGradient id="earth_grad" cx="42%" cy="38%" r="60%">
+    <stop offset="0%" stop-color="#2d9d78"/>
+    <stop offset="45%" stop-color="#1b6b4a"/>
+    <stop offset="100%" stop-color="#0a2e1f"/>
+  </radialGradient>
+  <!-- Атмосфера -->
+  <radialGradient id="atm_grad" cx="50%" cy="50%" r="50%">
+    <stop offset="80%" stop-color="#74b9ff" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#74b9ff" stop-opacity="0.18"/>
+  </radialGradient>
+  <!-- Свечение сигнала L1 -->
+  <filter id="glow_green" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <!-- Свечение потребителя -->
+  <filter id="glow_user" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <!-- Свечение МКС -->
+  <filter id="glow_mcs" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <!-- Свечение текста -->
+  <filter id="text_glow">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <!-- Маска Земли (полукруг) -->
+  <clipPath id="earth_clip">
+    <rect x="0" y="0" width="1400" height="800"/>
+  </clipPath>
+  
+</defs>
+<rect width="1400" height="820" fill="url(#space_bg)"/>
+<text x="700" y="40" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="bold" fill="#1a2433">AURORA + SHIWA TIME — двухуровневая синхронизация времени</text>
+<defs><marker id="amk" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#566072"/></marker></defs>
+<line x1="40" y1="472" x2="1360" y2="472" stroke="#aeb8c4" stroke-width="1.5" stroke-dasharray="10,6"/>
+<text x="70.0" y="460.0" text-anchor="start" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#00b894" opacity="1.0">Космический сегмент · LPT (радиоканал)</text>
+<text x="70.0" y="496.0" text-anchor="start" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#6c5ce7" opacity="1.0">Наземный сегмент · SHIWA TIME (P2P-mesh)</text>
+<rect x="95" y="110" width="200" height="90" rx="10" fill="#ffffff" stroke="#0984e3" stroke-width="2"/><rect x="95" y="110" width="200" height="28" rx="10" fill="#0984e3" opacity="0.22"/><rect x="95" y="128" width="200" height="10" fill="#0984e3" opacity="0.22"/>
+<text x="195.0" y="132.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#1a2433" opacity="1.0">UTC(SU)</text>
+<text x="195.0" y="158.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0984e3" opacity="1.0">H-мазер МКС</text>
+<text x="195.0" y="182.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#566072" opacity="1.0">эталон шкалы</text>
+<line x1="295" y1="155" x2="612" y2="135" stroke="#0984e3" stroke-width="2.2" marker-end="url(#amk)"/>
+<text x="445.0" y="110.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#566072" opacity="1.0">загрузка шкалы (ТМ/ТК)</text>
+<g transform="translate(700,160) rotate(0)" ><rect x="-9.9" y="-12.6" width="19.8" height="25.2" rx="3" fill="#00b894" stroke="#5a6678" stroke-width="1.2"/><rect x="-44.3" y="-4.0" width="32.4" height="7.9" rx="2" fill="#0984e3" stroke="#5a6678" stroke-width="0.8"/><line x1="-33.5" y1="-4.0" x2="-33.5" y2="4.0" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="-22.7" y1="-4.0" x2="-22.7" y2="4.0" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><rect x="11.9" y="-4.0" width="32.4" height="7.9" rx="2" fill="#0984e3" stroke="#5a6678" stroke-width="0.8"/><line x1="22.7" y1="-4.0" x2="22.7" y2="4.0" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="33.5" y1="-4.0" x2="33.5" y2="4.0" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="0" y1="-12.6" x2="0" y2="-25.2" stroke="#5a6678" stroke-width="1.5"/><ellipse cx="0" cy="-26.3" rx="7.9" ry="3.6" fill="none" stroke="#00b894" stroke-width="1.5"/><circle cx="0" cy="0" r="3" fill="#1a2433" opacity="0.9"/></g>
+<text x="700.0" y="108.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#00b894" opacity="1.0">AURORA КА</text>
+<text x="700.0" y="220.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#00b894" opacity="1.0">Cs/Rb · бортовая шкала (§8)</text>
+<polygon points="696.0,182.0 704.0,182.0 730.0,354.0 670.0,354.0" fill="#00b894" opacity="0.15" /><line x1="700.0" y1="182.0" x2="700.0" y2="354.0" stroke="#00b894" stroke-width="1.8" opacity="0.75" stroke-dasharray="6,3"/>
+<line x1="700" y1="182" x2="700" y2="352" stroke="#00b894" stroke-width="2" stroke-dasharray="6,4" opacity="0.8"/>
+<text x="835.0" y="285.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#00b894" opacity="1.0">LPT · одностороннее</text>
+<text x="835.0" y="303.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#00b894" opacity="1.0">время, &lt; 10 нс</text>
+<rect x="565" y="360" width="270" height="86" rx="10" fill="#ffffff" stroke="#6c5ce7" stroke-width="2"/><rect x="565" y="360" width="270" height="28" rx="10" fill="#6c5ce7" opacity="0.22"/><rect x="565" y="378" width="270" height="10" fill="#6c5ce7" opacity="0.22"/>
+<text x="700.0" y="384.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a2433" opacity="1.0">Опорный узел SHIWA</text>
+<text x="700.0" y="408.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#6c5ce7" opacity="1.0">LPT-приёмник → источник mesh</text>
+<text x="700.0" y="430.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#566072" opacity="1.0">UTC &lt; 10 нс</text>
+<rect x="210" y="630" width="240" height="92" rx="10" fill="#ffffff" stroke="#0984e3" stroke-width="2"/><rect x="210" y="630" width="240" height="28" rx="10" fill="#0984e3" opacity="0.22"/><rect x="210" y="648" width="240" height="10" fill="#0984e3" opacity="0.22"/>
+<text x="330.0" y="652.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a2433" opacity="1.0">ЦОД / LAN</text>
+<text x="330.0" y="676.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#0984e3" opacity="1.0">профиль A · ±5 нс</text>
+<text x="330.0" y="700.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#566072" opacity="1.0">итого ≈ 7–11 нс</text>
+<line x1="700" y1="446" x2="330" y2="630" stroke="#0984e3" stroke-width="2" opacity="0.7" marker-end="url(#amk)"/>
+<rect x="580" y="630" width="240" height="92" rx="10" fill="#ffffff" stroke="#00b894" stroke-width="2"/><rect x="580" y="630" width="240" height="28" rx="10" fill="#00b894" opacity="0.22"/><rect x="580" y="648" width="240" height="10" fill="#00b894" opacity="0.22"/>
+<text x="700.0" y="652.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a2433" opacity="1.0">Оператор / WAN</text>
+<text x="700.0" y="676.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#00b894" opacity="1.0">профиль B · ±50 нс</text>
+<text x="700.0" y="700.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#566072" opacity="1.0">итого ≈ 50 нс</text>
+<line x1="700" y1="446" x2="700" y2="630" stroke="#00b894" stroke-width="2" opacity="0.7" marker-end="url(#amk)"/>
+<rect x="950" y="630" width="240" height="92" rx="10" fill="#ffffff" stroke="#fdcb6e" stroke-width="2"/><rect x="950" y="630" width="240" height="28" rx="10" fill="#b8860b" opacity="0.22"/><rect x="950" y="648" width="240" height="10" fill="#b8860b" opacity="0.22"/>
+<text x="1070.0" y="652.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a2433" opacity="1.0">Мобильный / LTE</text>
+<text x="1070.0" y="676.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#b8860b" opacity="1.0">профиль C · ±200 нс</text>
+<text x="1070.0" y="700.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#566072" opacity="1.0">итого ≈ 200 нс</text>
+<line x1="700" y1="446" x2="1070" y2="630" stroke="#fdcb6e" stroke-width="2" opacity="0.7" marker-end="url(#amk)"/>
+<line x1="330" y1="724" x2="700" y2="724" stroke="#6c5ce7" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.5"/>
+<line x1="330" y1="724" x2="1070" y2="724" stroke="#6c5ce7" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.5"/>
+<line x1="700" y1="724" x2="1070" y2="724" stroke="#6c5ce7" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.5"/>
+<text x="700.0" y="752.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#6c5ce7" opacity="1.0">P2P-mesh (libp2p · «счастливый пакет» · без Grandmaster)</text>
+</svg>

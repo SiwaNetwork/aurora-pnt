@@ -1,0 +1,77 @@
+# ═══════════════════════════════════════════════════════════════
+# AURORA PNT — Фаза 2 (вариант 15-плоскостной сетки): 15×6 = 90
+# ═══════════════════════════════════════════════════════════════
+# 15 орбит × 6 спутников = 90 спутников (та же численность, что 9×10)
+# Высота: 1000 км, Наклонение: 75°
+# Цель: сравнить с 9×10 при вложенной 15-плоскостной сетке RAAN
+constellation:
+  name: "AURORA-Phase2-15x6"
+  num_orbits: 15
+  num_sats_per_orbit: 6
+  phase_diff: true
+  inclination_degree: 75.0
+  eccentricity: 0.0000001
+  arg_of_perigee_degree: 0.0
+  mean_motion_rev_per_day: 13.74   # ~1000 км
+
+satellite:
+  altitude_m: 1000000
+  cone_angle_degrees: 10.0
+
+earth:
+  radius_m: 6378135.0
+  isl_min_altitude_m: 80000
+
+simulation:
+  dynamic_state_algorithm: shortest_path_link_state
+  end_time_hours: 24
+  time_step_minutes: 10
+  offset_ns: 0
+
+pnt:
+  grid: "russia"
+  grid_step_deg: 3.0
+  min_elevation_deg: 10.0
+
+ground_stations:
+  - name: "Vladimir"
+    latitude: 56.1294
+    longitude: 40.4067
+    elevation_m: 177.0
+  - name: "Murmansk"
+    latitude: 68.9585
+    longitude: 33.0827
+    elevation_m: 50.0
+  - name: "Novosibirsk"
+    latitude: 54.9884
+    longitude: 82.9357
+    elevation_m: 162.0
+  - name: "Zheleznogorsk"
+    latitude: 56.2505
+    longitude: 93.5319
+    elevation_m: 305.0
+  - name: "Khabarovsk"
+    latitude: 48.4802
+    longitude: 135.0719
+    elevation_m: 68.0
+  - name: "Vladivostok"
+    latitude: 43.1198
+    longitude: 131.8869
+    elevation_m: 28.0
+  - name: "Minsk"
+    latitude: 53.9045
+    longitude: 27.5615
+    elevation_m: 220.0
+  - name: "Almaty"
+    latitude: 43.2567
+    longitude: 76.9286
+    elevation_m: 773.0
+
+network:
+  gsl_interfaces:
+    number_of_interfaces: 4
+    aggregate_max_bandwidth: 10.0
+
+logging:
+  is_debug: false
+  file_name: "aurora_phase2_15x6.log"

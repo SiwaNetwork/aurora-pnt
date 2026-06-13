@@ -176,11 +176,32 @@ def _plot_constellation_scatter(output_dir, label):
     """Scatter: число КА vs высота орбиты — позиционирование всех систем."""
     fig, ax = plt.subplots(figsize=(13, 7))
 
+    # Смещения подписей (pt) — разводим слипающиеся точки
+    # (Xona/AURORA на ~1000 км; кластер MEO на ~20 000 км)
+    _OFF = {
+        "AURORA":   (12, -17, "left"),
+        "Xona":     (-12, 13, "right"),
+        "Starlink": (12, 6,   "left"),
+        "Satelles": (12, 4,   "left"),
+        "BeiDou-3": (12, 4,   "left"),
+        "Moonlight":(12, 4,   "left"),
+        "GPS":      (10, 15,  "left"),
+        "Galileo":  (10, -17, "left"),
+        "BeiDou":   (10, 1,   "left"),
+        "ГЛОНАСС":  (-10,-17, "right"),
+    }
+    def _off(name):
+        for k, v in _OFF.items():
+            if k in name:
+                return v
+        return (8, 3, "left")
+
     for name, s in MEO_SYSTEMS.items():
         ax.scatter(s["orbit_km"], s["n_sats"], s=180, color=s["color"],
                    marker="o", zorder=5, edgecolors="white", linewidths=1.5)
+        dx, dy, ha = _off(name)
         ax.annotate(name, (s["orbit_km"], s["n_sats"]),
-                    textcoords="offset points", xytext=(8, 3), fontsize=8)
+                    textcoords="offset points", xytext=(dx, dy), fontsize=8, ha=ha)
 
     for name, s in LEO_SYSTEMS.items():
         if s["n_sats"]:
@@ -189,8 +210,9 @@ def _plot_constellation_scatter(output_dir, label):
             ax.scatter(s["orbit_km"], s["n_sats"], s=size, color=s["color"],
                        marker=marker, zorder=5, edgecolors="white", linewidths=1.5)
             n = name.replace("\n", " ")
+            dx, dy, ha = _off(n)
             ax.annotate(n, (s["orbit_km"], s["n_sats"]),
-                        textcoords="offset points", xytext=(8, 3), fontsize=8)
+                        textcoords="offset points", xytext=(dx, dy), fontsize=8, ha=ha)
 
     ax.axvspan(500, 2000, alpha=0.05, color="#00b894", label="Зона LEO PNT (500–2000 км)")
     ax.axvspan(18000, 26000, alpha=0.05, color="#e17055", label="Зона MEO GNSS (18–26 тыс. км)")
@@ -254,19 +276,23 @@ def _plot_spider_chart(output_dir, label):
     for sys_name, (sys_data, color, ls) in systems_to_plot.items():
         values = score(sys_name, sys_data)
         values += values[:1]
-        ax.plot(angles, values, color=color, linewidth=2, linestyle=ls,
-                label=sys_name.replace("\n", " "))
-        ax.fill(angles, values, color=color, alpha=0.08)
+        lw = 2.8 if "AURORA" in sys_name else 1.8
+        ax.plot(angles, values, color=color, linewidth=lw, linestyle=ls,
+                marker="o", markersize=4, label=sys_name.replace("\n", " "))
+        ax.fill(angles, values, color=color, alpha=0.06)
 
     ax.set_xticks(angles[:-1])
     ax.set_xticklabels(categories, fontsize=9)
+    ax.tick_params(axis="x", pad=14)           # отодвинуть подписи категорий от края
     ax.set_ylim(0, 10)
     ax.set_yticks([2, 4, 6, 8, 10])
     ax.set_yticklabels(["2", "4", "6", "8", "10"], fontsize=7)
     ax.set_title(f"AURORA PNT — Spider-диаграмма сравнения систем [{label}]",
-                 pad=20, fontsize=11)
-    ax.legend(loc="upper right", bbox_to_anchor=(1.35, 1.1), fontsize=9)
-    plt.tight_layout()
+                 pad=24, fontsize=12)
+    # легенда снизу в 3 колонки — не перекрывает диаграмму и не обрезается
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.06), ncol=3,
+              fontsize=9, frameon=True)
+    fig.subplots_adjust(left=0.12, right=0.88, top=0.86, bottom=0.16)
     fig.savefig(os.path.join(output_dir, f"comp_spider_{label}.png"), dpi=150)
     plt.close(fig)
 

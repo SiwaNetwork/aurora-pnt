@@ -2,8 +2,8 @@
 <defs>
   <!-- Фон космос -->
   <linearGradient id="space_bg" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
-    <stop offset="0%" stop-color="#020c1b"/>
-    <stop offset="100%" stop-color="#0a1628"/>
+    <stop offset="0%" stop-color="#f6f8fb"/>
+    <stop offset="100%" stop-color="#e7eef6"/>
   </linearGradient>
   <!-- Земля -->
   <radialGradient id="earth_grad" cx="42%" cy="38%" r="60%">
@@ -43,105 +43,105 @@
   
 </defs>
 <rect width="1400" height="820" fill="url(#space_bg)"/>
-<text x="700" y="38" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="bold" fill="white" filter="url(#text_glow)">AURORA PNT — Сценарии применения</text>
-<rect x="30" y="58" width="660" height="355" rx="12" fill="#0d1117" stroke="#0984e3" stroke-width="2" opacity="0.95"/>
+<text x="700" y="38" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="bold" fill="#1a2433" >AURORA PNT — Сценарии применения</text>
+<rect x="30" y="58" width="660" height="355" rx="12" fill="#ffffff" stroke="#0984e3" stroke-width="2" opacity="0.95"/>
 <rect x="30" y="58" width="660" height="48" rx="12" fill="#0984e3" opacity="0.22"/>
 <rect x="30" y="94" width="660" height="12" fill="#0984e3" opacity="0.22"/>
-<text x="360" y="88" text-anchor="middle" font-family="Arial,sans-serif" font-size="14.5" font-weight="bold" fill="white">Авиация — заход на посадку (LPV-200)</text>
+<text x="360" y="88" text-anchor="middle" font-family="Arial,sans-serif" font-size="14.5" font-weight="bold" fill="#1a2433">Авиация — заход на посадку (LPV-200)</text>
 <circle cx="200" cy="443" r="160" fill="url(#earth_grad)" clip-path="url(#panel_clip_30_58)"/>
 <clipPath id="panel_clip_30_58"><rect x="30" y="58" width="660" height="355"/></clipPath>
 <circle cx="200" cy="443" r="172" fill="none" stroke="#74b9ff" stroke-width="5" opacity="0.12" clip-path="url(#panel_clip_30_58)"/>
-<g transform="translate(195,168) rotate(0)" filter="url(#glow_green)"><rect x="-6.1" y="-7.7" width="12.1" height="15.4" rx="3" fill="#0984e3" stroke="white" stroke-width="1.2"/><rect x="-27.9" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="white" stroke-width="0.8"/><line x1="-21.2" y1="-2.4" x2="-21.2" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><line x1="-14.7" y1="-2.4" x2="-14.7" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><rect x="8.1" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="white" stroke-width="0.8"/><line x1="14.7" y1="-2.4" x2="14.7" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><line x1="21.2" y1="-2.4" x2="21.2" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><line x1="0" y1="-7.7" x2="0" y2="-15.4" stroke="white" stroke-width="1.5"/><ellipse cx="0" cy="-16.1" rx="4.8" ry="2.2" fill="none" stroke="#0984e3" stroke-width="1.5"/><circle cx="0" cy="0" r="3" fill="white" opacity="0.9"/></g>
-<g filter="url(#glow_user)"><path d="M235.8,331.2 L274.2,331.2 L267.8,337.6 L242.2,337.6 Z" fill="#fdcb6e" opacity="0.85"/><path d="M255,312.0 L259.8,328 L255,332.8 L250.2,328 Z" fill="#fdcb6e"/><path d="M249.24,331.2 L255,342.4 L260.76,331.2" fill="#fdcb6e" opacity="0.7"/></g>
+<g transform="translate(195,168) rotate(0)" ><rect x="-6.1" y="-7.7" width="12.1" height="15.4" rx="3" fill="#0984e3" stroke="#5a6678" stroke-width="1.2"/><rect x="-27.9" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="#5a6678" stroke-width="0.8"/><line x1="-21.2" y1="-2.4" x2="-21.2" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="-14.7" y1="-2.4" x2="-14.7" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><rect x="8.1" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="#5a6678" stroke-width="0.8"/><line x1="14.7" y1="-2.4" x2="14.7" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="21.2" y1="-2.4" x2="21.2" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="0" y1="-7.7" x2="0" y2="-15.4" stroke="#5a6678" stroke-width="1.5"/><ellipse cx="0" cy="-16.1" rx="4.8" ry="2.2" fill="none" stroke="#0984e3" stroke-width="1.5"/><circle cx="0" cy="0" r="3" fill="#1a2433" opacity="0.9"/></g>
+<g ><path d="M235.8,331.2 L274.2,331.2 L267.8,337.6 L242.2,337.6 Z" fill="#b8860b" opacity="0.85"/><path d="M255,312.0 L259.8,328 L255,332.8 L250.2,328 Z" fill="#b8860b"/><path d="M249.24,331.2 L255,342.4 L260.76,331.2" fill="#b8860b" opacity="0.7"/></g>
 <polygon points="193.2,186.9 196.8,185.1 281.9,294.8 228.1,321.2" fill="#0984e3" opacity="0.15" /><line x1="195.0" y1="186.0" x2="255.0" y2="308.0" stroke="#0984e3" stroke-width="1.8" opacity="0.75" stroke-dasharray="6,3"/>
 <line x1="200" y1="186" x2="263" y2="310" stroke="#0984e3" stroke-width="2" opacity="0.7" stroke-dasharray="5,3" clip-path="url(#panel_clip_30_58)"/>
-<text x="390" y="148" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#0984e3" filter="url(#text_glow)">&amp;lt; 1 м вертикально</text>
-<text x="390.0" y="176.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#8b949e" opacity="1.0">Горячий старт: 1,5 с</text>
+<text x="390" y="148" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#0984e3" >&lt; 1 м вертикально</text>
+<text x="390.0" y="176.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#566072" opacity="1.0">Горячий старт: 1,5 с</text>
 <text x="390" y="200" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0984e3">AURORA PPP + СДКМ</text>
 <line x1="260" y1="213" x2="520" y2="213" stroke="#0984e3" stroke-width="0.8" opacity="0.35"/>
 <circle cx="265" cy="229" r="4" fill="#0984e3" opacity="0.8"/>
-<text x="275.0" y="233.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">TIR &amp;lt; 10⁻⁷/ч</text>
+<text x="275.0" y="233.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">TIR &lt; 1e-7 /ч</text>
 <circle cx="265" cy="263" r="4" fill="#0984e3" opacity="0.8"/>
-<text x="275.0" y="267.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">TTPR &amp;lt; 6 с</text>
+<text x="275.0" y="267.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">TTPR &lt; 6 с</text>
 <circle cx="265" cy="297" r="4" fill="#0984e3" opacity="0.8"/>
-<text x="275.0" y="301.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">N_vis &amp;ge; 36</text>
+<text x="275.0" y="301.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">N_vis ≈ 14</text>
 <circle cx="265" cy="331" r="4" fill="#0984e3" opacity="0.8"/>
-<text x="275.0" y="335.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">RAIM активен</text>
+<text x="275.0" y="335.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">RAIM активен</text>
 <circle cx="265" cy="365" r="4" fill="#0984e3" opacity="0.8"/>
-<text x="275.0" y="369.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">Совм. DO-229</text>
-<rect x="710" y="58" width="660" height="355" rx="12" fill="#0d1117" stroke="#00b894" stroke-width="2" opacity="0.95"/>
+<text x="275.0" y="369.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">Совм. DO-229</text>
+<rect x="710" y="58" width="660" height="355" rx="12" fill="#ffffff" stroke="#00b894" stroke-width="2" opacity="0.95"/>
 <rect x="710" y="58" width="660" height="48" rx="12" fill="#00b894" opacity="0.22"/>
 <rect x="710" y="94" width="660" height="12" fill="#00b894" opacity="0.22"/>
-<text x="1040" y="88" text-anchor="middle" font-family="Arial,sans-serif" font-size="14.5" font-weight="bold" fill="white">Геодезия / точн. земледелие (PPP-RTK)</text>
+<text x="1040" y="88" text-anchor="middle" font-family="Arial,sans-serif" font-size="14.5" font-weight="bold" fill="#1a2433">Геодезия / точн. земледелие (PPP-RTK)</text>
 <circle cx="880" cy="443" r="160" fill="url(#earth_grad)" clip-path="url(#panel_clip_710_58)"/>
 <clipPath id="panel_clip_710_58"><rect x="710" y="58" width="660" height="355"/></clipPath>
 <circle cx="880" cy="443" r="172" fill="none" stroke="#74b9ff" stroke-width="5" opacity="0.12" clip-path="url(#panel_clip_710_58)"/>
-<g transform="translate(875,168) rotate(0)" filter="url(#glow_green)"><rect x="-6.1" y="-7.7" width="12.1" height="15.4" rx="3" fill="#00b894" stroke="white" stroke-width="1.2"/><rect x="-27.9" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="white" stroke-width="0.8"/><line x1="-21.2" y1="-2.4" x2="-21.2" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><line x1="-14.7" y1="-2.4" x2="-14.7" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><rect x="8.1" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="white" stroke-width="0.8"/><line x1="14.7" y1="-2.4" x2="14.7" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><line x1="21.2" y1="-2.4" x2="21.2" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><line x1="0" y1="-7.7" x2="0" y2="-15.4" stroke="white" stroke-width="1.5"/><ellipse cx="0" cy="-16.1" rx="4.8" ry="2.2" fill="none" stroke="#00b894" stroke-width="1.5"/><circle cx="0" cy="0" r="3" fill="white" opacity="0.9"/></g>
-<g filter="url(#glow_user)"><path d="M935,310.0 L917.0,340.0 M935,310.0 L953.0,340.0 M935,310.0 L935,341.5 M929.0,340.0 L941.0,340.0" stroke="#00b894" stroke-width="2.5" fill="none" stroke-linecap="round"/><rect x="928.4" y="301.0" width="13.2" height="10.5" rx="3" fill="#00b894"/><circle cx="935.0" cy="305.8" r="3.0" fill="white"/></g>
+<g transform="translate(875,168) rotate(0)" ><rect x="-6.1" y="-7.7" width="12.1" height="15.4" rx="3" fill="#00b894" stroke="#5a6678" stroke-width="1.2"/><rect x="-27.9" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="#5a6678" stroke-width="0.8"/><line x1="-21.2" y1="-2.4" x2="-21.2" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="-14.7" y1="-2.4" x2="-14.7" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><rect x="8.1" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="#5a6678" stroke-width="0.8"/><line x1="14.7" y1="-2.4" x2="14.7" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="21.2" y1="-2.4" x2="21.2" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="0" y1="-7.7" x2="0" y2="-15.4" stroke="#5a6678" stroke-width="1.5"/><ellipse cx="0" cy="-16.1" rx="4.8" ry="2.2" fill="none" stroke="#00b894" stroke-width="1.5"/><circle cx="0" cy="0" r="3" fill="#1a2433" opacity="0.9"/></g>
+<g ><path d="M935,310.0 L917.0,340.0 M935,310.0 L953.0,340.0 M935,310.0 L935,341.5 M929.0,340.0 L941.0,340.0" stroke="#00b894" stroke-width="2.5" fill="none" stroke-linecap="round"/><rect x="928.4" y="301.0" width="13.2" height="10.5" rx="3" fill="#00b894"/><circle cx="935.0" cy="305.8" r="3.0" fill="#1a2433"/></g>
 <polygon points="873.2,186.9 876.8,185.1 961.9,294.8 908.1,321.2" fill="#00b894" opacity="0.15" /><line x1="875.0" y1="186.0" x2="935.0" y2="308.0" stroke="#00b894" stroke-width="1.8" opacity="0.75" stroke-dasharray="6,3"/>
 <line x1="880" y1="186" x2="943" y2="310" stroke="#00b894" stroke-width="2" opacity="0.7" stroke-dasharray="5,3" clip-path="url(#panel_clip_710_58)"/>
-<text x="1070" y="148" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#00b894" filter="url(#text_glow)">0,5–1 см (H-68%)</text>
-<text x="1070.0" y="176.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#8b949e" opacity="1.0">Сходимость: 5 с</text>
+<text x="1070" y="148" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#00b894" >0,5–1 см (H-68%)</text>
+<text x="1070.0" y="176.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#566072" opacity="1.0">Сходимость: 5 с</text>
 <text x="1070" y="200" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#00b894">AURORA PPP-RTK + RSN 300 км</text>
 <line x1="940" y1="213" x2="1200" y2="213" stroke="#00b894" stroke-width="0.8" opacity="0.35"/>
 <circle cx="945" cy="229" r="4" fill="#00b894" opacity="0.8"/>
-<text x="955.0" y="233.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">RSN шаг 300 км</text>
+<text x="955.0" y="233.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">RSN шаг 300 км</text>
 <circle cx="945" cy="263" r="4" fill="#00b894" opacity="0.8"/>
-<text x="955.0" y="267.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">E2E задержка 70 мс</text>
+<text x="955.0" y="267.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">E2E задержка 70 мс</text>
 <circle cx="945" cy="297" r="4" fill="#00b894" opacity="0.8"/>
-<text x="955.0" y="301.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">IF-комб. L1+L5</text>
+<text x="955.0" y="301.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">IF-комб. L1+L5</text>
 <circle cx="945" cy="331" r="4" fill="#00b894" opacity="0.8"/>
-<text x="955.0" y="335.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">TESLA MAC защита</text>
+<text x="955.0" y="335.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">TESLA MAC защита</text>
 <circle cx="945" cy="365" r="4" fill="#00b894" opacity="0.8"/>
-<text x="955.0" y="369.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">ГЛОНАСС совм.</text>
-<rect x="30" y="432" width="660" height="355" rx="12" fill="#0d1117" stroke="#fdcb6e" stroke-width="2" opacity="0.95"/>
-<rect x="30" y="432" width="660" height="48" rx="12" fill="#fdcb6e" opacity="0.22"/>
-<rect x="30" y="468" width="660" height="12" fill="#fdcb6e" opacity="0.22"/>
-<text x="360" y="462" text-anchor="middle" font-family="Arial,sans-serif" font-size="14.5" font-weight="bold" fill="white">Автомобиль / БПЛА (lane-level)</text>
+<text x="955.0" y="369.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">ГЛОНАСС совм.</text>
+<rect x="30" y="432" width="660" height="355" rx="12" fill="#ffffff" stroke="#fdcb6e" stroke-width="2" opacity="0.95"/>
+<rect x="30" y="432" width="660" height="48" rx="12" fill="#b8860b" opacity="0.22"/>
+<rect x="30" y="468" width="660" height="12" fill="#b8860b" opacity="0.22"/>
+<text x="360" y="462" text-anchor="middle" font-family="Arial,sans-serif" font-size="14.5" font-weight="bold" fill="#1a2433">Автомобиль / БПЛА (lane-level)</text>
 <circle cx="200" cy="817" r="160" fill="url(#earth_grad)" clip-path="url(#panel_clip_30_432)"/>
 <clipPath id="panel_clip_30_432"><rect x="30" y="432" width="660" height="355"/></clipPath>
 <circle cx="200" cy="817" r="172" fill="none" stroke="#74b9ff" stroke-width="5" opacity="0.12" clip-path="url(#panel_clip_30_432)"/>
-<g transform="translate(195,542) rotate(0)" filter="url(#glow_green)"><rect x="-6.1" y="-7.7" width="12.1" height="15.4" rx="3" fill="#fdcb6e" stroke="white" stroke-width="1.2"/><rect x="-27.9" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="white" stroke-width="0.8"/><line x1="-21.2" y1="-2.4" x2="-21.2" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><line x1="-14.7" y1="-2.4" x2="-14.7" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><rect x="8.1" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="white" stroke-width="0.8"/><line x1="14.7" y1="-2.4" x2="14.7" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><line x1="21.2" y1="-2.4" x2="21.2" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><line x1="0" y1="-7.7" x2="0" y2="-15.4" stroke="white" stroke-width="1.5"/><ellipse cx="0" cy="-16.1" rx="4.8" ry="2.2" fill="none" stroke="#fdcb6e" stroke-width="1.5"/><circle cx="0" cy="0" r="3" fill="white" opacity="0.9"/></g>
-<g filter="url(#glow_user)"><rect x="231.0" y="693.0" width="48.0" height="18.0" rx="5" fill="#fdcb6e"/><rect x="240.0" y="676.5" width="30.0" height="20.5" rx="6" fill="#fdcb6e" opacity="0.85"/><circle cx="240.6" cy="711.0" r="6.6" fill="#1a1a2e" stroke="white" stroke-width="1"/><circle cx="269.4" cy="711.0" r="6.6" fill="#1a1a2e" stroke="white" stroke-width="1"/><rect x="244.0" y="679.5" width="22.0" height="10.5" rx="4" fill="#0d1117" opacity="0.5"/></g>
-<polygon points="193.2,560.9 196.8,559.1 281.9,668.8 228.1,695.2" fill="#fdcb6e" opacity="0.15" /><line x1="195.0" y1="560.0" x2="255.0" y2="682.0" stroke="#fdcb6e" stroke-width="1.8" opacity="0.75" stroke-dasharray="6,3"/>
+<g transform="translate(195,542) rotate(0)" ><rect x="-6.1" y="-7.7" width="12.1" height="15.4" rx="3" fill="#b8860b" stroke="#5a6678" stroke-width="1.2"/><rect x="-27.9" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="#5a6678" stroke-width="0.8"/><line x1="-21.2" y1="-2.4" x2="-21.2" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="-14.7" y1="-2.4" x2="-14.7" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><rect x="8.1" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="#5a6678" stroke-width="0.8"/><line x1="14.7" y1="-2.4" x2="14.7" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="21.2" y1="-2.4" x2="21.2" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="0" y1="-7.7" x2="0" y2="-15.4" stroke="#5a6678" stroke-width="1.5"/><ellipse cx="0" cy="-16.1" rx="4.8" ry="2.2" fill="none" stroke="#fdcb6e" stroke-width="1.5"/><circle cx="0" cy="0" r="3" fill="#1a2433" opacity="0.9"/></g>
+<g ><rect x="231.0" y="693.0" width="48.0" height="18.0" rx="5" fill="#b8860b"/><rect x="240.0" y="676.5" width="30.0" height="20.5" rx="6" fill="#b8860b" opacity="0.85"/><circle cx="240.6" cy="711.0" r="6.6" fill="#2c3e50" stroke="#5a6678" stroke-width="1"/><circle cx="269.4" cy="711.0" r="6.6" fill="#2c3e50" stroke="#5a6678" stroke-width="1"/><rect x="244.0" y="679.5" width="22.0" height="10.5" rx="4" fill="#ffffff" opacity="0.5"/></g>
+<polygon points="193.2,560.9 196.8,559.1 281.9,668.8 228.1,695.2" fill="#b8860b" opacity="0.15" /><line x1="195.0" y1="560.0" x2="255.0" y2="682.0" stroke="#fdcb6e" stroke-width="1.8" opacity="0.75" stroke-dasharray="6,3"/>
 <line x1="200" y1="560" x2="263" y2="684" stroke="#fdcb6e" stroke-width="2" opacity="0.7" stroke-dasharray="5,3" clip-path="url(#panel_clip_30_432)"/>
-<text x="390" y="522" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#fdcb6e" filter="url(#text_glow)">&amp;lt; 0,5 м (H-95%)</text>
-<text x="390.0" y="550.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#8b949e" opacity="1.0">Тёплый старт: 5 с</text>
-<text x="390" y="574" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#fdcb6e">AURORA PPP / PPP-RTK</text>
+<text x="390" y="522" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#b8860b" >&lt; 0,5 м (H-95%)</text>
+<text x="390.0" y="550.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#566072" opacity="1.0">Тёплый старт: 5 с</text>
+<text x="390" y="574" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#b8860b">AURORA PPP / PPP-RTK</text>
 <line x1="260" y1="587" x2="520" y2="587" stroke="#fdcb6e" stroke-width="0.8" opacity="0.35"/>
-<circle cx="265" cy="603" r="4" fill="#fdcb6e" opacity="0.8"/>
-<text x="275.0" y="607.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">Полосная точность</text>
-<circle cx="265" cy="637" r="4" fill="#fdcb6e" opacity="0.8"/>
-<text x="275.0" y="641.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">Устойч. +23 дБ vs GPS</text>
-<circle cx="265" cy="671" r="4" fill="#fdcb6e" opacity="0.8"/>
-<text x="275.0" y="675.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">CRPA-антенна</text>
-<circle cx="265" cy="705" r="4" fill="#fdcb6e" opacity="0.8"/>
-<text x="275.0" y="709.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">32 канала</text>
-<circle cx="265" cy="739" r="4" fill="#fdcb6e" opacity="0.8"/>
-<text x="275.0" y="743.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">BW 18 Гц</text>
-<rect x="710" y="432" width="660" height="355" rx="12" fill="#0d1117" stroke="#a29bfe" stroke-width="2" opacity="0.95"/>
+<circle cx="265" cy="603" r="4" fill="#b8860b" opacity="0.8"/>
+<text x="275.0" y="607.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">Полосная точность</text>
+<circle cx="265" cy="637" r="4" fill="#b8860b" opacity="0.8"/>
+<text x="275.0" y="641.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">Устойч. +23 дБ vs GPS</text>
+<circle cx="265" cy="671" r="4" fill="#b8860b" opacity="0.8"/>
+<text x="275.0" y="675.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">CRPA-антенна</text>
+<circle cx="265" cy="705" r="4" fill="#b8860b" opacity="0.8"/>
+<text x="275.0" y="709.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">32 канала</text>
+<circle cx="265" cy="739" r="4" fill="#b8860b" opacity="0.8"/>
+<text x="275.0" y="743.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">BW 18 Гц</text>
+<rect x="710" y="432" width="660" height="355" rx="12" fill="#ffffff" stroke="#a29bfe" stroke-width="2" opacity="0.95"/>
 <rect x="710" y="432" width="660" height="48" rx="12" fill="#a29bfe" opacity="0.22"/>
 <rect x="710" y="468" width="660" height="12" fill="#a29bfe" opacity="0.22"/>
-<text x="1040" y="462" text-anchor="middle" font-family="Arial,sans-serif" font-size="14.5" font-weight="bold" fill="white">Синхронизация / LPT-сервис</text>
+<text x="1040" y="462" text-anchor="middle" font-family="Arial,sans-serif" font-size="14.5" font-weight="bold" fill="#1a2433">Синхронизация / LPT-сервис</text>
 <circle cx="880" cy="817" r="160" fill="url(#earth_grad)" clip-path="url(#panel_clip_710_432)"/>
 <clipPath id="panel_clip_710_432"><rect x="710" y="432" width="660" height="355"/></clipPath>
 <circle cx="880" cy="817" r="172" fill="none" stroke="#74b9ff" stroke-width="5" opacity="0.12" clip-path="url(#panel_clip_710_432)"/>
-<g transform="translate(875,542) rotate(0)" filter="url(#glow_green)"><rect x="-6.1" y="-7.7" width="12.1" height="15.4" rx="3" fill="#a29bfe" stroke="white" stroke-width="1.2"/><rect x="-27.9" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="white" stroke-width="0.8"/><line x1="-21.2" y1="-2.4" x2="-21.2" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><line x1="-14.7" y1="-2.4" x2="-14.7" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><rect x="8.1" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="white" stroke-width="0.8"/><line x1="14.7" y1="-2.4" x2="14.7" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><line x1="21.2" y1="-2.4" x2="21.2" y2="2.4" stroke="white" stroke-width="0.4" opacity="0.5"/><line x1="0" y1="-7.7" x2="0" y2="-15.4" stroke="white" stroke-width="1.5"/><ellipse cx="0" cy="-16.1" rx="4.8" ry="2.2" fill="none" stroke="#a29bfe" stroke-width="1.5"/><circle cx="0" cy="0" r="3" fill="white" opacity="0.9"/></g>
-<g><line x1="935.0" y1="702.0" x2="935.0" y2="676.4" stroke="#a29bfe" stroke-width="3" stroke-linecap="round"/><line x1="922.2" y1="702.0" x2="947.8" y2="702.0" stroke="#a29bfe" stroke-width="3" stroke-linecap="round"/><path d="M919.0,684.4 Q935.0,663.6 951.0,684.4" stroke="#a29bfe" stroke-width="2.5" fill="none" filter="url(#glow_mcs)"/></g>
+<g transform="translate(875,542) rotate(0)" ><rect x="-6.1" y="-7.7" width="12.1" height="15.4" rx="3" fill="#a29bfe" stroke="#5a6678" stroke-width="1.2"/><rect x="-27.9" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="#5a6678" stroke-width="0.8"/><line x1="-21.2" y1="-2.4" x2="-21.2" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="-14.7" y1="-2.4" x2="-14.7" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><rect x="8.1" y="-2.4" width="19.8" height="4.8" rx="2" fill="#0984e3" stroke="#5a6678" stroke-width="0.8"/><line x1="14.7" y1="-2.4" x2="14.7" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="21.2" y1="-2.4" x2="21.2" y2="2.4" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="0" y1="-7.7" x2="0" y2="-15.4" stroke="#5a6678" stroke-width="1.5"/><ellipse cx="0" cy="-16.1" rx="4.8" ry="2.2" fill="none" stroke="#a29bfe" stroke-width="1.5"/><circle cx="0" cy="0" r="3" fill="#1a2433" opacity="0.9"/></g>
+<g><line x1="935.0" y1="702.0" x2="935.0" y2="676.4" stroke="#a29bfe" stroke-width="3" stroke-linecap="round"/><line x1="922.2" y1="702.0" x2="947.8" y2="702.0" stroke="#a29bfe" stroke-width="3" stroke-linecap="round"/><path d="M919.0,684.4 Q935.0,663.6 951.0,684.4" stroke="#a29bfe" stroke-width="2.5" fill="none" /></g>
 <polygon points="873.2,560.9 876.8,559.1 961.9,668.8 908.1,695.2" fill="#a29bfe" opacity="0.15" /><line x1="875.0" y1="560.0" x2="935.0" y2="682.0" stroke="#a29bfe" stroke-width="1.8" opacity="0.75" stroke-dasharray="6,3"/>
 <line x1="880" y1="560" x2="943" y2="684" stroke="#a29bfe" stroke-width="2" opacity="0.7" stroke-dasharray="5,3" clip-path="url(#panel_clip_710_432)"/>
-<text x="1070" y="522" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#a29bfe" filter="url(#text_glow)">&amp;lt; 5 нс UTC(SU)</text>
-<text x="1070.0" y="550.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#8b949e" opacity="1.0">Удержание: 72 ч автономно</text>
+<text x="1070" y="522" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#a29bfe" >&lt; 5 нс UTC(SU)</text>
+<text x="1070.0" y="550.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#566072" opacity="1.0">Удержание: 72 ч автономно</text>
 <text x="1070" y="574" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#a29bfe">AURORA LPT · ISL-сетка</text>
 <line x1="940" y1="587" x2="1200" y2="587" stroke="#a29bfe" stroke-width="0.8" opacity="0.35"/>
 <circle cx="945" cy="603" r="4" fill="#a29bfe" opacity="0.8"/>
-<text x="955.0" y="607.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">Cs: 0,01 нс/6ч</text>
+<text x="955.0" y="607.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">Cs: 0,01 нс/6ч</text>
 <circle cx="945" cy="637" r="4" fill="#a29bfe" opacity="0.8"/>
-<text x="955.0" y="641.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">6 ISL-хопов: 2,58 нс</text>
+<text x="955.0" y="641.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">6 ISL-хопов: 2,58 нс</text>
 <circle cx="945" cy="671" r="4" fill="#a29bfe" opacity="0.8"/>
-<text x="955.0" y="675.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">PTP IEEE 1588</text>
+<text x="955.0" y="675.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">PTP IEEE 1588</text>
 <circle cx="945" cy="705" r="4" fill="#a29bfe" opacity="0.8"/>
-<text x="955.0" y="709.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">Замена GPS-синхрон.</text>
+<text x="955.0" y="709.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">Замена GPS-синхрон.</text>
 <circle cx="945" cy="739" r="4" fill="#a29bfe" opacity="0.8"/>
-<text x="955.0" y="743.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#c9d1d9" opacity="1.0">UTC(SU) &lt; 5 нс</text>
+<text x="955.0" y="743.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">UTC(SU) &lt; 5 нс</text>
 </svg>

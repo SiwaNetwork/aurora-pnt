@@ -213,8 +213,8 @@ def _plot_debris_flux(alt_km, flux_profile, output_dir, label):
 def _plot_miss_distance_hist(mc, output_dir, label):
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
-    axes[0].hist(mc["miss_dists_km"], bins=80, color="#0984e3", alpha=0.7,
-                 edgecolor="white", density=True)
+    axes[0].hist(mc["miss_dists_km"], bins=np.linspace(0, 100, 51), color="#0984e3",
+                 alpha=0.75, edgecolor="white", linewidth=0.4, density=True)
     axes[0].axvline(1.0, ls="--", color="#e17055", lw=1.5, label="1 км (манёвр порог)")
     axes[0].axvline(5.0, ls=":", color="#fdcb6e", lw=1.2, label="5 км (предупреждение)")
     axes[0].set_xlabel("Расстояние сближения (км)")

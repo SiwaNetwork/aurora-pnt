@@ -7,10 +7,15 @@
   "n_planes": 15,
   "sats_per_plane": 20,
   "sync_interval_s": 60.0,
+  "ocxo_sync_interval_s": 10.0,
   "isl_chain": {
     "cs_anchor_sigma_ns": 0.6,
     "rb_relay_sigma_ns": 6.03,
-    "ocxo_terminal_sigma_ns": 6.03
+    "ocxo_terminal_sigma_ns": 10.05,
+    "ocxo_self_drift_ns": 10.0,
+    "ocxo_ptp_class": "PTP Class 25  (< 25 ns)   - Stratum-0 grandmaster",
+    "rb_ptp_class": "PTP Class 25  (< 25 ns)   - Stratum-0 grandmaster",
+    "cs_ptp_class": "PTP Class 25  (< 25 ns)   - Stratum-0 grandmaster"
   },
   "holdover": {
     "ocxo": {
@@ -39,6 +44,32 @@
       "holdover_min": 16.666666666666668,
       "target_ns": 10.0,
       "target_range_m": 3.0
+    }
+  },
+  "autonomous_nav": {
+    "ocxo": {
+      "clock_key": "ocxo",
+      "drift_rate_m_per_s": 0.29979245800000004,
+      "drift_rate_m_per_hr": 1079.2528488,
+      "limit_s": 3.33564095198152,
+      "limit_min": 0.05559401586635867,
+      "target_m": 1.0
+    },
+    "rb": {
+      "clock_key": "rb",
+      "drift_rate_m_per_s": 0.029979245800000005,
+      "drift_rate_m_per_hr": 107.92528488000002,
+      "limit_s": 33.3564095198152,
+      "limit_min": 0.5559401586635867,
+      "target_m": 1.0
+    },
+    "cs": {
+      "clock_key": "cs",
+      "drift_rate_m_per_s": 0.00299792458,
+      "drift_rate_m_per_hr": 10.792528488,
+      "limit_s": 333.564095198152,
+      "limit_min": 5.559401586635867,
+      "target_m": 1.0
     }
   },
   "hardware_budget": {
