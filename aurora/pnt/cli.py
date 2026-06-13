@@ -787,6 +787,16 @@ def cmd_deployment(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_agps_server(args):
+    """A-GNSS server: TTFF reduction from assistance data (cold 149s -> <15s)."""
+    from aurora.pnt.agps_server import run_agps_server_analysis
+    output_dir = args.output or "results/acquisition"
+    label      = args.label  or "phase4"
+    print(f"\n  Running A-GNSS server analysis: {label}")
+    run_agps_server_analysis(output_dir=output_dir, label=label)
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_conjunction(args):
     """Conjunction probability: Monte Carlo debris collision risk analysis."""
     from aurora.pnt.conjunction_pc import run_conjunction_analysis, print_conjunction_summary
@@ -1593,6 +1603,12 @@ def main():
     p_conj.add_argument("--n-trials", type=int, default=50_000,
                         help="Monte Carlo trials (default: 50000)")
 
+    # agps
+    p_agps = sub.add_parser("agps",
+                            help="A-GNSS server: TTFF reduction (cold 149s -> <15s)")
+    p_agps.add_argument("-o", "--output",     default="results/acquisition")
+    p_agps.add_argument("-l", "--label",      default="phase4")
+
     # coverage-maps
     p_cov = sub.add_parser("coverage-maps",
                            help="Geographic coverage maps: N_vis and PDOP heatmaps by phase")
@@ -1806,6 +1822,7 @@ def main():
         "ground-od":        cmd_ground_od,
         "deployment":       cmd_deployment,
         "conjunction":      cmd_conjunction,
+        "agps":             cmd_agps_server,
         "coverage-maps":    cmd_coverage_maps,
         "radiation":        cmd_radiation,
         "relativistic":     cmd_relativistic,
