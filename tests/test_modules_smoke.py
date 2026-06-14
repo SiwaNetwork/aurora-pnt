@@ -164,3 +164,50 @@ def test_validate_runs(tmp_results):
     assert r is not None
     pngs = list(Path(tmp_results).glob("*.png"))
     assert len(pngs) >= 3
+
+
+# ── Phase 6 modules (A-GNSS, точность, криптозащита) ──────────────────────────
+
+
+@pytest.mark.smoke
+def test_agps_server_runs(tmp_results):
+    from aurora.pnt.agps_server import run_agps_server_analysis
+    r = run_agps_server_analysis(tmp_results, "test")
+    assert r is not None
+    assert_png_exists(tmp_results, "agps_ttff_test.png")
+    assert_csv_valid(tmp_results, "agps_server_test.csv")
+    # A-GNSS должен ускорять холодный старт минимум на порядок
+    assert r["agps"]["total_s"] < r["cold"]["total_s"]
+    assert r["speedup"] > 10, f"ускорение TTFF {r['speedup']:.1f}x < 10x"
+
+
+@pytest.mark.smoke
+def test_accuracy_paths_runs(tmp_results):
+    from aurora.pnt.accuracy_paths import run_accuracy_paths_analysis
+    r = run_accuracy_paths_analysis(tmp_results, "test")
+    assert r is not None
+    assert_png_exists(tmp_results, "accuracy_paths_test.png")
+    assert_csv_valid(tmp_results, "accuracy_paths_test.csv")
+    rows = r["rows"]
+    # UERE и H-95 монотонно убывают от базового к улучшенному сценарию
+    ueres = [x["uere"] for x in rows]
+    assert ueres == sorted(ueres, reverse=True), f"UERE не убывает: {ueres}"
+    assert rows[-1]["uere"] < rows[0]["uere"]
+    # фазовый PPP-RTK — отдельный «этаж» точнее любого псевдодальностного H-95
+    assert r["ppp_rtk_h95"] < rows[-1]["h95"]
+
+
+@pytest.mark.smoke
+def test_crypto_auth_runs(tmp_results):
+    from aurora.pnt.crypto_auth import run_crypto_auth_analysis
+    r = run_crypto_auth_analysis(tmp_results, "test")
+    assert r is not None
+    assert_png_exists(tmp_results, "crypto_auth_test.png")
+    assert_csv_valid(tmp_results, "crypto_auth_test.csv")
+    # базовый профиль (тег 128 б, интервал 30 с): оверхед мал относительно канала
+    base = next(x for x in r["rows"]
+                if x["tag_bits"] == 128 and x["interval_s"] == 30)
+    assert base["pct_nav"] < 10.0, f"оверхед {base['pct_nav']:.1f}% > 10% канала"
+    assert base["forge_prob_log2"] == -128
+    # связка ГОСТ покрывает все пять криптофункций
+    assert len(r["suite"]) == 5
