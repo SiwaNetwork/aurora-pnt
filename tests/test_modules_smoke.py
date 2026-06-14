@@ -238,3 +238,20 @@ def test_tgd_dcb_runs(tmp_results):
     assert r["dual_uere_m"] < 0.20, f"двухчастотный вклад TGD {r['dual_uere_m']:.2f} м > 0,20 м"
     # сама задержка существенно больше остатка → учёт обязателен
     assert r["tgd_range_m"] > r["dual_uere_m"]
+
+
+@pytest.mark.smoke
+def test_dual_service_runs(tmp_results):
+    from aurora.pnt.dual_service import run_dual_service_analysis
+    r = run_dual_service_analysis(tmp_results, "test")
+    assert r is not None
+    assert_png_exists(tmp_results, "dual_service_test.png")
+    assert_csv_valid(tmp_results, "dual_service_test.csv")
+    a = r["А (открытый, RNSS)"]
+    b = r["Б (защищённый, своя полоса)"]
+    # Сервис А — комплаентен маске ПФП МСЭ; Сервис Б — мощнее (но в своей полосе)
+    assert a["itu_ok"], f"Сервис А ПФП {a['pfd']:.1f} нарушает маску МСЭ"
+    assert b["adv_db"] > a["adv_db"], "Сервис Б должен быть сильнее А"
+    # Сервис Б достигает целевого преимущества ≈ +23 дБ (×~200)
+    assert 21.0 <= b["adv_db"] <= 25.0, f"Сервис Б преимущество {b['adv_db']:.1f} дБ вне [21,25]"
+    assert b["jam_x"] > 100, f"Сервис Б помехозащита ×{b['jam_x']:.0f} < 100"

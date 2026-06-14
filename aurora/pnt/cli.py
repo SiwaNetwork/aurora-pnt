@@ -837,6 +837,16 @@ def cmd_tgd_dcb(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_dual_service(args):
+    """Двухсервисная архитектура: открытый А (+10 дБ) и защищённый Б (+23 дБ)."""
+    from aurora.pnt.dual_service import run_dual_service_analysis
+    output_dir = args.output or "results/dual_service"
+    label      = args.label  or "phase4"
+    print(f"\n  Running dual-service (А+Б) analysis: {label}")
+    run_dual_service_analysis(output_dir=output_dir, label=label)
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_conjunction(args):
     """Conjunction probability: Monte Carlo debris collision risk analysis."""
     from aurora.pnt.conjunction_pc import run_conjunction_analysis, print_conjunction_summary
@@ -1673,6 +1683,12 @@ def main():
     p_tgd.add_argument("-o", "--output", default="results/tgd_dcb")
     p_tgd.add_argument("-l", "--label",  default="phase4")
 
+    # dual-service
+    p_dual = sub.add_parser("dual-service",
+                            help="Двухсервисная архитектура: открытый А + защищённый Б")
+    p_dual.add_argument("-o", "--output", default="results/dual_service")
+    p_dual.add_argument("-l", "--label",  default="phase4")
+
     # coverage-maps
     p_cov = sub.add_parser("coverage-maps",
                            help="Geographic coverage maps: N_vis and PDOP heatmaps by phase")
@@ -1891,6 +1907,7 @@ def main():
         "crypto-auth":      cmd_crypto_auth,
         "reference-frame":  cmd_reference_frame,
         "tgd-dcb":          cmd_tgd_dcb,
+        "dual-service":     cmd_dual_service,
         "coverage-maps":    cmd_coverage_maps,
         "radiation":        cmd_radiation,
         "relativistic":     cmd_relativistic,

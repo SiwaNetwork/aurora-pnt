@@ -41,45 +41,49 @@ SOLAR_ARRAY = {
 # ── Subsystem power budget ────────────────────────────────────────────────────
 # (all values in Watts; sunlit / eclipse modes)
 SUBSYSTEMS = {
-    "GNSS navigation payload": {
+    "Нав. ПН Сервис А (L1/L5)": {
+        "sunlit_w": 45.0,   "eclipse_w": 45.0,  "duty": 1.0,
+        "desc": "Открытый RNSS-сигнал L1/L5, ~5 Вт РЧ (§65)",
+    },
+    "Нав. ПН Сервис Б (выдел. L)": {
         "sunlit_w": 80.0,   "eclipse_w": 80.0,  "duty": 1.0,
-        "desc": "L1/L5 signal generator, amplifiers, diplexer",
+        "desc": "Защищённый сигнал, 30 Вт РЧ, +23 дБ (§65)",
     },
-    "ISL transceiver (Ka)": {
-        "sunlit_w": 30.0,   "eclipse_w": 30.0,  "duty": 1.0,
-        "desc": "Ka-band 26 GHz ISL, 10 W TX",
+    "ISL приёмопередатчик (Ka)": {
+        "sunlit_w": 20.0,   "eclipse_w": 20.0,  "duty": 1.0,
+        "desc": "Ka-диапазон 26 ГГц, 2 канала ISL",
     },
-    "Atomic clock (OCXO/Rb/Cs)": {
+    "Атомные часы (CSAC/space-Rb)": {
         "sunlit_w": 6.0,    "eclipse_w": 6.0,   "duty": 1.0,
-        "desc": "Weighted average: 240 OCXO + 45 Rb + 15 Cs per fleet",
+        "desc": "CSAC (чип-цезий) на всех КА + space-Rb на якорях",
     },
-    "AOCS (attitude & orbit)": {
-        "sunlit_w": 25.0,   "eclipse_w": 25.0,  "duty": 1.0,
-        "desc": "Star trackers, magnetometers, reaction wheels, thrusters",
-    },
-    "On-board computer": {
-        "sunlit_w": 15.0,   "eclipse_w": 15.0,  "duty": 1.0,
-        "desc": "Main processor + memory + storage",
-    },
-    "TT&C (telemetry)": {
-        "sunlit_w": 12.0,   "eclipse_w": 12.0,  "duty": 1.0,
-        "desc": "S-band telemetry and command transceiver",
-    },
-    "Thermal control heaters": {
-        "sunlit_w":  5.0,   "eclipse_w": 35.0,  "duty": 1.0,
-        "desc": "OCXO oven + cold-face heaters (higher in eclipse)",
-    },
-    "Power conditioning (EPS)": {
+    "СУОС (ориентация и орбита)": {
         "sunlit_w": 10.0,   "eclipse_w": 10.0,  "duty": 1.0,
-        "desc": "Regulators, protection, distribution (5% overhead)",
+        "desc": "Звёздные датчики, маховики, магнитометры",
     },
-    "Propulsion (ion/cold-gas)": {
+    "Бортовой компьютер": {
+        "sunlit_w": 15.0,   "eclipse_w": 15.0,  "duty": 1.0,
+        "desc": "Процессор + память + хранилище",
+    },
+    "ТКС (телеметрия)": {
+        "sunlit_w":  8.0,   "eclipse_w":  8.0,  "duty": 1.0,
+        "desc": "S-диапазон, приём команд и телеметрия",
+    },
+    "Терморегулирование (нагрев.)": {
+        "sunlit_w":  5.0,   "eclipse_w": 15.0,  "duty": 1.0,
+        "desc": "Нагреватели (выше в тени)",
+    },
+    "Кондиционирование питания": {
+        "sunlit_w": 10.0,   "eclipse_w": 10.0,  "duty": 1.0,
+        "desc": "Регуляторы, защита, распределение",
+    },
+    "Двигательная установка": {
         "sunlit_w": 15.0,   "eclipse_w":  0.0,  "duty": 0.3,
-        "desc": "Station-keeping burns (sunlit only, ~30% duty)",
+        "desc": "Поддержание орбиты (только на свету)",
     },
-    "GNSS receiver (onboard)": {
+    "Бортовой GNSS-приёмник": {
         "sunlit_w":  5.0,   "eclipse_w":  5.0,  "duty": 1.0,
-        "desc": "Orbit determination GNSS receiver",
+        "desc": "Определение орбиты",
     },
 }
 

@@ -1,20 +1,21 @@
 parameter,BOL,EOL_7yr
 solar_array_w,835.48,725.30
-load_sunlit_w,192.50,192.50
-load_eclipse_w,218.00,218.00
-battery_capacity_wh,184.82,184.82
-battery_mass_kg,0.92,0.92
-margin_w,502.37,392.19
-margin_pct,260.97,203.74
+load_sunlit_w,208.50,208.50
+load_eclipse_w,214.00,214.00
+battery_capacity_wh,181.43,181.43
+battery_mass_kg,0.91,0.91
+margin_w,488.95,378.77
+margin_pct,234.51,181.67
 ,,
 subsystem,sunlit_w,eclipse_w
-GNSS navigation payload,80.0,80.0
-ISL transceiver (Ka),30.0,30.0
-Atomic clock (OCXO/Rb/Cs),6.0,6.0
-AOCS (attitude & orbit),25.0,25.0
-On-board computer,15.0,15.0
-TT&C (telemetry),12.0,12.0
-Thermal control heaters,5.0,35.0
-Power conditioning (EPS),10.0,10.0
-Propulsion (ion/cold-gas),4.5,0.0
-GNSS receiver (onboard),5.0,5.0
+Нав. ПН Сервис А (L1/L5),45.0,45.0
+Нав. ПН Сервис Б (выдел. L),80.0,80.0
+ISL приёмопередатчик (Ka),20.0,20.0
+Атомные часы (CSAC/space-Rb),6.0,6.0
+СУОС (ориентация и орбита),10.0,10.0
+Бортовой компьютер,15.0,15.0
+ТКС (телеметрия),8.0,8.0
+Терморегулирование (нагрев.),5.0,15.0
+Кондиционирование питания,10.0,10.0
+Двигательная установка,4.5,0.0
+Бортовой GNSS-приёмник,5.0,5.0
