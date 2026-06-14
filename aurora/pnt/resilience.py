@@ -97,29 +97,29 @@ def _plot_resilience(results: list[dict], n_total: int, output_dir: str, label: 
     ops     = [r["operational"] for r in results]
 
     fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-    fig.suptitle(f"Resilience Analysis — {label}  ({n_total} satellites baseline)",
+    fig.suptitle(f"Анализ живучести — {label}  (базовая группировка {n_total} КА)",
                  fontweight="bold")
 
     # PDOP
     ax = axes[0]
     ax.plot(pcts, pdops, "o-", color="#1565C0", linewidth=2)
-    ax.axhline(6.0, color="red", linestyle="--", linewidth=1.5, label="PDOP=6 limit")
+    ax.axhline(6.0, color="red", linestyle="--", linewidth=1.5, label="Предел PDOP=6")
     ax.fill_between(pcts, pdops, 6.0,
                     where=[p > 6 for p in pdops], alpha=0.2, color="red")
-    ax.set_xlabel("Satellite failure (%)")
-    ax.set_ylabel("PDOP p95 (estimated)")
-    ax.set_title("PDOP Degradation")
+    ax.set_xlabel("Отказ спутников (%)")
+    ax.set_ylabel("PDOP p95 (оценка)")
+    ax.set_title("Деградация PDOP")
     ax.legend(fontsize=9)
     ax.grid(True, alpha=0.3)
 
     # Coverage
     ax = axes[1]
     ax.plot(pcts, covs, "o-", color="#2E7D32", linewidth=2)
-    ax.axhline(95.0, color="red",    linestyle="--", linewidth=1.5, label="95% req")
-    ax.axhline(99.0, color="orange", linestyle="--", linewidth=1,   label="99% target")
-    ax.set_xlabel("Satellite failure (%)")
-    ax.set_ylabel("4-sat coverage (%)")
-    ax.set_title("Coverage Degradation")
+    ax.axhline(95.0, color="red",    linestyle="--", linewidth=1.5, label="95% требование")
+    ax.axhline(99.0, color="orange", linestyle="--", linewidth=1,   label="99% цель")
+    ax.set_xlabel("Отказ спутников (%)")
+    ax.set_ylabel("Покрытие ≥4 КА (%)")
+    ax.set_title("Деградация покрытия")
     ax.legend(fontsize=9)
     ax.grid(True, alpha=0.3)
     ax.set_ylim(0, 105)
@@ -129,12 +129,12 @@ def _plot_resilience(results: list[dict], n_total: int, output_dir: str, label: 
     ax.bar(pcts, [r["n_vis_mean"] for r in results],
            color=["#43A047" if r["operational"] else "#E53935" for r in results],
            alpha=0.8, width=3.5)
-    ax.axhline(4, color="grey",   linestyle="--", linewidth=1, label="4 sat (nav)")
-    ax.axhline(5, color="orange", linestyle="--", linewidth=1, label="5 sat (RAIM detect)")
-    ax.axhline(6, color="green",  linestyle="--", linewidth=1, label="6 sat (RAIM isolate)")
-    ax.set_xlabel("Satellite failure (%)")
-    ax.set_ylabel("Mean visible satellites")
-    ax.set_title("Visibility & Operational Status\n(green=operational, red=degraded)")
+    ax.axhline(4, color="grey",   linestyle="--", linewidth=1, label="4 КА (навигация)")
+    ax.axhline(5, color="orange", linestyle="--", linewidth=1, label="5 КА (RAIM обнаружение)")
+    ax.axhline(6, color="green",  linestyle="--", linewidth=1, label="6 КА (RAIM исключение)")
+    ax.set_xlabel("Отказ спутников (%)")
+    ax.set_ylabel("Среднее число видимых КА")
+    ax.set_title("Видимость и операционный статус\n(зелёный=рабочий, красный=деградация)")
     ax.legend(fontsize=8)
     ax.grid(True, alpha=0.3, axis="y")
 
