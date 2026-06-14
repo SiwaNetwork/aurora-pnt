@@ -3671,7 +3671,10 @@ aurora-pnt validate  -l phase5
 | Точность UERE / CEP | §8.6, §12, §25 | `timing_chain`, `pvt_montecarlo`, `monte_carlo` |
 | Целостность RAIM / ARAIM | §14, §49, §50 | `raim`, `araim`, `integrity_budget` |
 | Помехозащищённость | §15 | `anti_jam` |
-| Аутентификация TESLA MAC | §16 | `tesla_mac` |
+| Аутентификация TESLA MAC | §16.2 | `tesla_mac` |
+| Криптозащита нав-сообщения (ГОСТ) | §16.4–16.7 | `crypto_auth` (Стрибог/34.10/Кузнечик) |
+| Сокращение холодного TTFF (A-GNSS) | §27.3 | `agps_server` |
+| Пути повышения точности (SSR/PPP-RTK) | §63 | `accuracy_paths` |
 | Энергетика / масса / тепло | §18–20 | `power_budget`, `mass_budget`, `thermal` |
 | Деорбит / конъюнкции (IADC) | §22, §23 | `deorbit`, `conjunction_pc` |
 | Радиационная стойкость | §32 | `radiation` |

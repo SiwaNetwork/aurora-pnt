@@ -21,7 +21,7 @@ References:
 
 import os
 import csv
-from typing import Dict, List
+from typing import Dict
 
 import matplotlib
 matplotlib.use("Agg")
@@ -126,12 +126,12 @@ def run_crypto_auth_analysis(output_dir: str, label: str) -> Dict:
 
     base = next(r for r in rows if r["tag_bits"] == 128 and r["interval_s"] == 30)
     print(f"  Криптозащита сообщения (ГОСТ) -- {label}")
-    print(f"    Связка: Стрибог-256 (цепочка) + HMAC-Стрибог (MAC) + "
-          f"ГОСТ Р 34.10-2012 (ЭП) + Кузнечик (TT&C)")
+    print("    Связка: Стрибог-256 (цепочка) + HMAC-Стрибог (MAC) + "
+          "ГОСТ Р 34.10-2012 (ЭП) + Кузнечик (TT&C)")
     print(f"    Базовый профиль (тег 128 б, интервал 30 с): "
           f"MAC {base['mac_bps']:.2f} + ключ {base['key_bps']:.2f} = "
           f"{base['total_bps']:.2f} бит/с ({base['pct_nav']:.1f}% нав-канала)")
-    print(f"    Вероятность подделки тега: 2^-128; подделка цепочки: 2^-256")
+    print("    Вероятность подделки тега: 2^-128; подделка цепочки: 2^-256")
     return res
 
 
