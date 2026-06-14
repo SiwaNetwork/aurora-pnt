@@ -166,6 +166,8 @@ aurora-pnt ranging          # Бюджет UERE, точность позицио
 aurora-pnt link-budget      # Линк-бюджет (FSPL, Doppler, C/N0)
 aurora-pnt multipath        # Многолучёвость по типам среды (6 сценариев)
 aurora-pnt acquisition      # Захват сигнала, TTFF (холодный/тёплый/горячий старт)
+aurora-pnt agps             # A-GNSS сервер: сокращение холодного TTFF 149→7 с
+aurora-pnt accuracy-paths   # Пути повышения точности: UERE/H-95 (SSR, тропо, PPP-RTK)
 aurora-pnt freq-plan        # Частотный план (МСЭ, совместимость с GPS/ГЛОНАСС)
 aurora-pnt anti-jam         # Помехозащищённость J/S, радиус глушения vs GPS
 ```
@@ -174,9 +176,10 @@ aurora-pnt anti-jam         # Помехозащищённость J/S, ради
 ```bash
 aurora-pnt time-scale       # Анализ шкалы времени LPT (стабильность, UERE по режимам)
 aurora-pnt timing-service   # AURORA-T: точность PTP/NTP Grandmaster
-aurora-pnt clock-arch       # Архитектура часов OCXO/Rb/Cs: ISL-цепочка, удержание
-aurora-pnt clock-analysis   # Сравнение типов часов (TCXO/Rb/Cs/Maser)
+aurora-pnt clock-arch       # Архитектура часов CSAC/space-Rb/H-мазер: ISL-цепочка, удержание
+aurora-pnt clock-analysis   # Референс-сравнение типов часов (TCXO/OCXO/Rb/Cs/Maser)
 aurora-pnt tesla-mac        # Аутентификация TESLA MAC, anti-spoofing
+aurora-pnt crypto-auth      # Криптозащита нав-сообщения на ГОСТ (Стрибог/34.10/Кузнечик)
 ```
 
 ### ISL и сеть
@@ -218,7 +221,7 @@ aurora/
 │   ├── raim.py             # Целостность RAIM (HPL/VPL)
 │   ├── resilience.py       # Анализ отказов спутников
 │   ├── deorbit.py          # Срок жизни орбиты, деорбит
-│   └── cli.py              # Точка входа CLI aurora-pnt (20 команд)
+│   └── cli.py              # Точка входа CLI aurora-pnt (75 команд)
 ├── link_budget/            # FSPL, Doppler, C/N0 по парам НС-спутник
 ├── network_metrics/        # Топология ISL/GSL, стабильность маршрутов (Hypatia)
 ├── ranging/                # UERE, точность позиции, анализ часов
