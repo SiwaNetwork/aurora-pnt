@@ -49,7 +49,6 @@ class TestMainSimulationIntegration(unittest.TestCase):
             "logging": {"is_debug": False, "file_name": "test_simulation.log"},
         }
 
-    @pytest.mark.xfail(reason="Pre-existing: synthetic constellation violates max-ISL constraint; needs refactor")
     def test_end_to_end_simulation_execution(self):
         """Test that the main simulation runs successfully with a minimal topology."""
         with tempfile.TemporaryDirectory() as temp_dir:

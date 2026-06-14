@@ -253,6 +253,7 @@ def _plot_model_compare(residuals, output_dir, label):
     ax.axhline(0.01, ls="--", color="#2d3436", lw=1.2, label="1 см (цель PPP)")
     ax.set_ylabel("Остаточная ошибка в UERE (м, 1σ)")
     ax.set_title(f"AURORA PNT — Остаток тропосферной ошибки по моделям [{label}]")
+    ax.set_xticks(range(len(names)))
     ax.set_xticklabels(names, rotation=18, ha="right", fontsize=9)
     ax.legend(fontsize=9)
     ax.grid(axis="y", alpha=0.3)
