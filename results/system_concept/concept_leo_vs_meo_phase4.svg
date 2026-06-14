@@ -67,7 +67,7 @@
 <text x="165.0" y="492.0" text-anchor="start" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#566072" opacity="1.0">Потери в пространстве:</text>
 <text x="495" y="492" text-anchor="end" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#00b894">−159 дБ (1000 км)</text>
 <line x1="160" y1="504" x2="500" y2="504" stroke="#00b894" stroke-width="0.4" opacity="0.2"/>
-<text x="165.0" y="534.0" text-anchor="start" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#566072" opacity="1.0">Усиление vs GPS:</text>
+<text x="165.0" y="534.0" text-anchor="start" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#566072" opacity="1.0">Усиление vs ГЛОНАСС:</text>
 <text x="495" y="534" text-anchor="end" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#00b894">+23 дБ  (×200 по мощн.)</text>
 <line x1="160" y1="546" x2="500" y2="546" stroke="#00b894" stroke-width="0.4" opacity="0.2"/>
 <text x="165.0" y="576.0" text-anchor="start" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#566072" opacity="1.0">Время пролёта:</text>
@@ -93,8 +93,8 @@
 <line x1="1060" y1="150" x2="860" y2="665" stroke="#e17055" stroke-width="1" opacity="0.25" stroke-dasharray="4,3"/>
 <line x1="1060" y1="150" x2="1260" y2="665" stroke="#e17055" stroke-width="1" opacity="0.25" stroke-dasharray="4,3"/>
 <g transform="translate(1060,135) rotate(0)" ><rect x="-8.2" y="-10.5" width="16.5" height="21.0" rx="3" fill="#e17055" stroke="#5a6678" stroke-width="1.2"/><rect x="-37.2" y="-3.3" width="27.0" height="6.6" rx="2" fill="#0984e3" stroke="#5a6678" stroke-width="0.8"/><line x1="-28.2" y1="-3.3" x2="-28.2" y2="3.3" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="-19.2" y1="-3.3" x2="-19.2" y2="3.3" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><rect x="10.2" y="-3.3" width="27.0" height="6.6" rx="2" fill="#0984e3" stroke="#5a6678" stroke-width="0.8"/><line x1="19.2" y1="-3.3" x2="19.2" y2="3.3" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="28.2" y1="-3.3" x2="28.2" y2="3.3" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="0" y1="-10.5" x2="0" y2="-21.0" stroke="#5a6678" stroke-width="1.5"/><ellipse cx="0" cy="-21.9" rx="6.6" ry="3.0" fill="none" stroke="#e17055" stroke-width="1.5"/><circle cx="0" cy="0" r="3" fill="#1a2433" opacity="0.9"/></g>
-<text x="1060" y="83" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="bold" fill="#e17055" >GPS MEO</text>
-<text x="1060.0" y="101.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="normal" fill="#566072" opacity="1.0">h = 20 200 км</text>
+<text x="1060" y="83" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="bold" fill="#e17055" >ГЛОНАСС MEO</text>
+<text x="1060.0" y="101.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="normal" fill="#566072" opacity="1.0">h = 19 100 км</text>
 <line x1="1150" y1="660" x2="1150" y2="135" stroke="#e17055" stroke-width="1.2" opacity="0.5"/><circle cx="1150" cy="660" r="3" fill="#e17055" opacity="0.6"/><circle cx="1150" cy="135" r="3" fill="#e17055" opacity="0.6"/>
 <text x="1175.0" y="397.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#e17055" opacity="0.75">20 200 км</text>
 <g ><path d="M1120,666.0 L1108.0,686.0 M1120,666.0 L1132.0,686.0 M1120,666.0 L1120,687.0 M1116.0,686.0 L1124.0,686.0" stroke="#e17055" stroke-width="2.5" fill="none" stroke-linecap="round"/><rect x="1115.6" y="660.0" width="8.8" height="7.0" rx="3" fill="#e17055"/><circle cx="1120.0" cy="663.2" r="2.0" fill="#1a2433"/></g>
@@ -103,9 +103,9 @@
 <text x="1235" y="450" text-anchor="end" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#e17055">−158 дБВт</text>
 <line x1="900" y1="462" x2="1240" y2="462" stroke="#e17055" stroke-width="0.4" opacity="0.2"/>
 <text x="905.0" y="492.0" text-anchor="start" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#566072" opacity="1.0">Потери в пространстве:</text>
-<text x="1235" y="492" text-anchor="end" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#e17055">−182 дБ (20 200 км)</text>
+<text x="1235" y="492" text-anchor="end" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#e17055">−182 дБ (19 100 км)</text>
 <line x1="900" y1="504" x2="1240" y2="504" stroke="#e17055" stroke-width="0.4" opacity="0.2"/>
-<text x="905.0" y="534.0" text-anchor="start" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#566072" opacity="1.0">Усиление vs GPS:</text>
+<text x="905.0" y="534.0" text-anchor="start" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#566072" opacity="1.0">Усиление vs ГЛОНАСС:</text>
 <text x="1235" y="534" text-anchor="end" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#566072">0 дБ (референс)</text>
 <line x1="900" y1="546" x2="1240" y2="546" stroke="#e17055" stroke-width="0.4" opacity="0.2"/>
 <text x="905.0" y="576.0" text-anchor="start" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#566072" opacity="1.0">Время пролёта:</text>
@@ -129,5 +129,5 @@
 <text x="700.0" y="480.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="normal" fill="#1a2433" opacity="1.0">подавлению</text>
 <line x1="640" y1="405" x2="620" y2="405" stroke="#00b894" stroke-width="2"/><polygon points="620,402 620,408 608,405" fill="#00b894"/>
 <line x1="760" y1="405" x2="780" y2="405" stroke="#e17055" stroke-width="2"/><polygon points="780,402 780,408 792,405" fill="#e17055"/>
-<text x="700" y="36" text-anchor="middle" font-family="Arial,sans-serif" font-size="21" font-weight="bold" fill="#1a2433" >AURORA LEO vs GPS MEO — Преимущество сигнала и характеристики</text>
+<text x="700" y="36" text-anchor="middle" font-family="Arial,sans-serif" font-size="21" font-weight="bold" fill="#1a2433" >AURORA LEO vs ГЛОНАСС MEO — Преимущество сигнала и характеристики</text>
 </svg>

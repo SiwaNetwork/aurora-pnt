@@ -112,7 +112,7 @@
 <circle cx="265" cy="603" r="4" fill="#b8860b" opacity="0.8"/>
 <text x="275.0" y="607.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">Полосная точность</text>
 <circle cx="265" cy="637" r="4" fill="#b8860b" opacity="0.8"/>
-<text x="275.0" y="641.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">Устойч. +23 дБ vs GPS</text>
+<text x="275.0" y="641.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">Устойч. +23 дБ vs ГЛОНАСС</text>
 <circle cx="265" cy="671" r="4" fill="#b8860b" opacity="0.8"/>
 <text x="275.0" y="675.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">CRPA-антенна</text>
 <circle cx="265" cy="705" r="4" fill="#b8860b" opacity="0.8"/>
@@ -135,13 +135,13 @@
 <text x="1070" y="574" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#a29bfe">AURORA LPT · ISL-сетка</text>
 <line x1="940" y1="587" x2="1200" y2="587" stroke="#a29bfe" stroke-width="0.8" opacity="0.35"/>
 <circle cx="945" cy="603" r="4" fill="#a29bfe" opacity="0.8"/>
-<text x="955.0" y="607.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">Cs: 0,01 нс/6ч</text>
+<text x="955.0" y="607.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">CSAC: 2,7 нс/6ч</text>
 <circle cx="945" cy="637" r="4" fill="#a29bfe" opacity="0.8"/>
 <text x="955.0" y="641.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">6 ISL-хопов: 2,58 нс</text>
 <circle cx="945" cy="671" r="4" fill="#a29bfe" opacity="0.8"/>
 <text x="955.0" y="675.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">PTP IEEE 1588</text>
 <circle cx="945" cy="705" r="4" fill="#a29bfe" opacity="0.8"/>
-<text x="955.0" y="709.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">Замена GPS-синхрон.</text>
+<text x="955.0" y="709.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">Импортозамещение GPS-синхр.</text>
 <circle cx="945" cy="739" r="4" fill="#a29bfe" opacity="0.8"/>
 <text x="955.0" y="743.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">UTC(SU) &lt; 5 нс</text>
 </svg>
