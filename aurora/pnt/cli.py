@@ -817,6 +817,26 @@ def cmd_crypto_auth(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_reference_frame(args):
+    """Геодезическая система отсчёта ПЗ-90.11 ↔ ITRF2008 и бюджет EOP."""
+    from aurora.pnt.reference_frame import run_reference_frame_analysis
+    output_dir = args.output or "results/reference_frame"
+    label      = args.label  or "phase4"
+    print(f"\n  Running reference-frame analysis: {label}")
+    run_reference_frame_analysis(output_dir=output_dir, label=label)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_tgd_dcb(args):
+    """Межчастотная задержка TGD/DCB: вклад в UERE (одно-/двухчастотный)."""
+    from aurora.pnt.tgd_dcb import run_tgd_dcb_analysis
+    output_dir = args.output or "results/tgd_dcb"
+    label      = args.label  or "phase4"
+    print(f"\n  Running TGD/DCB analysis: {label}")
+    run_tgd_dcb_analysis(output_dir=output_dir, label=label)
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_conjunction(args):
     """Conjunction probability: Monte Carlo debris collision risk analysis."""
     from aurora.pnt.conjunction_pc import run_conjunction_analysis, print_conjunction_summary
@@ -1641,6 +1661,18 @@ def main():
     p_crypto.add_argument("-o", "--output", default="results/crypto_auth")
     p_crypto.add_argument("-l", "--label",  default="phase4")
 
+    # reference-frame
+    p_refframe = sub.add_parser("reference-frame",
+                                help="Геодезическая система отсчёта ПЗ-90.11 ↔ ITRF2008, бюджет EOP")
+    p_refframe.add_argument("-o", "--output", default="results/reference_frame")
+    p_refframe.add_argument("-l", "--label",  default="phase4")
+
+    # tgd-dcb
+    p_tgd = sub.add_parser("tgd-dcb",
+                           help="Межчастотная задержка TGD/DCB: вклад в UERE")
+    p_tgd.add_argument("-o", "--output", default="results/tgd_dcb")
+    p_tgd.add_argument("-l", "--label",  default="phase4")
+
     # coverage-maps
     p_cov = sub.add_parser("coverage-maps",
                            help="Geographic coverage maps: N_vis and PDOP heatmaps by phase")
@@ -1857,6 +1889,8 @@ def main():
         "agps":             cmd_agps_server,
         "accuracy-paths":   cmd_accuracy_paths,
         "crypto-auth":      cmd_crypto_auth,
+        "reference-frame":  cmd_reference_frame,
+        "tgd-dcb":          cmd_tgd_dcb,
         "coverage-maps":    cmd_coverage_maps,
         "radiation":        cmd_radiation,
         "relativistic":     cmd_relativistic,

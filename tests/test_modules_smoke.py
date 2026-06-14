@@ -211,3 +211,30 @@ def test_crypto_auth_runs(tmp_results):
     assert base["forge_prob_log2"] == -128
     # связка ГОСТ покрывает все пять криптофункций
     assert len(r["suite"]) == 5
+
+
+@pytest.mark.smoke
+def test_reference_frame_runs(tmp_results):
+    from aurora.pnt.reference_frame import run_reference_frame_analysis
+    r = run_reference_frame_analysis(tmp_results, "test")
+    assert r is not None
+    assert_png_exists(tmp_results, "reference_frame_test.png")
+    assert_csv_valid(tmp_results, "reference_frame_test.csv")
+    # ПЗ-90.11 совмещён с ITRF2008 на см-уровне (сдвиг < 1 см)
+    assert r["datum_shift_m"] < 0.01, f"датум-сдвиг {r['datum_shift_m']*1000:.1f} мм > 10 мм"
+    # EOP-ошибка монотонно растёт с ошибкой прогноза UT1
+    tot = [row["total_m"] for row in r["eop_rows"]]
+    assert tot == sorted(tot), f"EOP-ошибка не монотонна: {tot}"
+
+
+@pytest.mark.smoke
+def test_tgd_dcb_runs(tmp_results):
+    from aurora.pnt.tgd_dcb import run_tgd_dcb_analysis
+    r = run_tgd_dcb_analysis(tmp_results, "test")
+    assert r is not None
+    assert_png_exists(tmp_results, "tgd_dcb_test.png")
+    assert_csv_valid(tmp_results, "tgd_dcb_test.csv")
+    # двухчастотный остаток TGD/DCB укладывается в часовой член бюджета (0,20 м)
+    assert r["dual_uere_m"] < 0.20, f"двухчастотный вклад TGD {r['dual_uere_m']:.2f} м > 0,20 м"
+    # сама задержка существенно больше остатка → учёт обязателен
+    assert r["tgd_range_m"] > r["dual_uere_m"]

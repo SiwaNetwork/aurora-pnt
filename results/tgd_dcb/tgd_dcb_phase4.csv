@@ -1,0 +1,6 @@
+metric,value
+tgd_nominal_ns,5.00
+tgd_range_m,1.499
+single_uere_m,0.090
+dual_resid_ns,0.259
+dual_uere_m,0.078
