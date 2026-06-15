@@ -591,19 +591,19 @@ def _cp(doc, text, size=None, bold=False,
 
 def add_title_page(doc):
     _cp(doc, "РОССИЙСКАЯ ФЕДЕРАЦИЯ", bold=True, before=20)
-    _cp(doc, "Проект LEOPath / ShiwaNetwork", before=4)
+    _cp(doc, "ООО «ШИВА НЕТВОРК» (ShiwaNetwork)", before=4)
     _cp(doc, "")
     _cp(doc, "СОГЛАСОВАНО", bold=True, align=WD_ALIGN_PARAGRAPH.LEFT, before=24)
     _cp(doc, "Руководитель проекта", align=WD_ALIGN_PARAGRAPH.LEFT)
     _cp(doc, "________________  /________________/", align=WD_ALIGN_PARAGRAPH.LEFT)
     _cp(doc, '«____» ________________ 2026 г.', align=WD_ALIGN_PARAGRAPH.LEFT)
     _cp(doc, "")
-    _cp(doc, "AURORA PNT", size=Pt(22), bold=True, before=24)
+    _cp(doc, "АВРОРА", size=Pt(22), bold=True, before=24)
     _cp(doc, "Система низкоорбитальной спутниковой навигации", size=Pt(16), bold=True)
     _cp(doc, "и высокоточной синхронизации", size=Pt(16), bold=True)
     _cp(doc, "")
     _cp(doc, "ТЕХНИЧЕСКИЙ ПРОЕКТ", size=Pt(18), bold=True, before=12)
-    _cp(doc, "Документ: AURORA-ТП-001", bold=True, before=8)
+    _cp(doc, "Документ: АВРОРА-ТП-001", bold=True, before=8)
     _cp(doc, "")
     _cp(doc, "Составлен в соответствии с ГОСТ 7.32-2017,", size=SZ_SM, italic=True, before=40)
     _cp(doc, "ГОСТ 2.105-2019, ГОСТ Р 7.0.97-2016", size=SZ_SM, italic=True)
@@ -626,7 +626,7 @@ def add_abstract(doc, n_fig=0, n_tbl=0, n_src=0):
     fmt_run(r, bold=True)
 
     abstract = (
-        "Настоящий технический проект описывает систему AURORA PNT — "
+        "Настоящий технический проект описывает систему АВРОРА — "
         "низкоорбитальную спутниковую систему позиционирования, навигации и синхронизации "
         "(LEO PNT), функционирующую как высокоточное дополнение (усиление) к ГЛОНАСС "
         "и обеспечивающую независимую от GPS шкалу времени. Документ содержит аналитические "
@@ -642,7 +642,7 @@ def add_abstract(doc, n_fig=0, n_tbl=0, n_src=0):
         "Часовая архитектура: CSAC на всех 300 КА, space-Rb (Quantum-18) на 15 якорных КА, "
         "наземный эталон — группа активных водородных мазеров Ч1-1008 (UTC(SU)).\n\n"
         "Ключевые слова: LEO, PNT, GNSS, ГЛОНАСС, Walker, ISL, PDOP, UERE, RAIM, "
-        "девиация Аллана, CSAC, AURORA, ГОСТ 7.32, спутниковая навигация."
+        "девиация Аллана, CSAC, АВРОРА, ГОСТ 7.32, спутниковая навигация."
     )
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
