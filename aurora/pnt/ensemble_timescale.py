@@ -32,7 +32,7 @@ import matplotlib.pyplot as plt
 # ── ADEV-модели (белый FM σ0·τ^-1/2 с фликер-полом) ────────────────────────────
 CLOCKS = {
     "CSAC (чип-цезий)":   {"sigma0": 3e-10, "floor": 1e-11, "col": "#e17055"},
-    "space-Rb (якорь)":   {"sigma0": 1e-11, "floor": 1e-12, "col": "#0984e3"},
+    "space-Rb (якорь)":   {"sigma0": 5e-12, "floor": 1e-12, "col": "#0984e3"},
     "H-мазер (земля)":    {"sigma0": 1.5e-13, "floor": 8e-15, "col": "#6c5ce7"},
 }
 N_TERM = 300     # CSAC-терминалов (все КА)
@@ -63,7 +63,7 @@ def compute() -> Dict:
         rows.append({
             "tau": t,
             "csac": adev(3e-10, 1e-11, t),
-            "rb": adev(1e-11, 1e-12, t),
+            "rb": adev(5e-12, 1e-12, t),
             "ensemble": ensemble_adev(t),
         })
     # Экономика: все space-Rb vs распределённый ансамбль

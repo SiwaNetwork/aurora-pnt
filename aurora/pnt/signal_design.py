@@ -396,7 +396,7 @@ NAV_MSG_OPTIONS: Dict[str, Dict] = {
         "frame_s": 10, "subframe_s": 2,
         "ephemeris_update_s": 600,   # 10 мин (LEO быстро меняется)
         "cold_ttff_s": 5,
-        "integrity_auth": "TESLA MAC (128-bit HMAC-SHA256)",
+        "integrity_auth": "TESLA MAC (128-бит HMAC-Стрибог, ГОСТ Р 34.11-2012)",
         "color": "#00b894",
     },
 }
@@ -434,7 +434,7 @@ def tesla_key_security_bits(key_bits: int = 128, update_interval_s: float = 30.0
         "update_interval_s": update_interval_s,
         "disclosure_delay_s": disclosure_delay_s,
         "keys_per_day": keys_per_day,
-        "hash_fn": "HMAC-SHA256",
+        "hash_fn": "HMAC-Стрибог (ГОСТ Р 34.11-2012)",
         "security_level_bits": key_bits // 2,   # collision resistance
         "overhead_bps": key_bits / update_interval_s,
     }
@@ -721,48 +721,43 @@ def _plot_nav_message(nav_results, output_dir, label):
 
 def _plot_recommendation_summary(mod_metrics, code_results, output_dir, label):
     """Итоговый слайд — рекомендация для АВРОРА с обоснованием."""
-    fig = plt.figure(figsize=(14, 9))
+    fig = plt.figure(figsize=(12, 7.2))
     ax = fig.add_subplot(111)
     ax.axis("off")
 
     rec_text = (
-        "╔══════════════════════════════════════════════════════════════════════════════╗\n"
-        "║           РЕКОМЕНДАЦИЯ ПО СИГНАЛЬНОМУ ДИЗАЙНУ АВРОРА                  ║\n"
-        "╠══════════════════════════════════════════════════════════════════════════════╣\n"
-        "║  L1 КАНАЛ (1575,42 МГц):                                                   ║\n"
-        "║  • Модуляция: BOC(1,1) данные + TMBOC(6,1,4/33) пилот                     ║\n"
-        "║    ✓ Совместим с GPS L1C и Galileo E1 (CBOC) приёмниками                  ║\n"
-        "║    ✓ β_G = 1,26 МГц vs 0,64 МГц BPSK(1) → шум -6 дБ                      ║\n"
-        "║    ✓ Огибающая многолучёвости < 4 м (BPSK(1): < 10 м)                     ║\n"
-        "║  • Коды: Weil (n=10223) для пилота — 5111 кодов, F=1703 (vs Gold F=6,3)   ║\n"
-        "╠══════════════════════════════════════════════════════════════════════════════╣\n"
-        "║  L5 КАНАЛ (1176,45 МГц):                                                   ║\n"
-        "║  • Модуляция: BPSK(10) данные + BPSK(10) пилот                            ║\n"
-        "║    ✓ Совместим с GPS L5, Galileo E5a, BeiDou B2a приёмниками              ║\n"
-        "║    ✓ β_G = 6,37 МГц → шум 2,1 см @ C/N₀=40 дБ·Гц                         ║\n"
-        "║    ✓ Разрешение многолучёвости 29 м, ошибка < 1,5 м                        ║\n"
-        "║  • Коды: расширенный Memory (≥350 кодов, n=10230)                          ║\n"
-        "║    ✓ Xcorr_max = -39,4 дБ (Gold n=1023: -24 дБ) — лучше на 15,4 дБ       ║\n"
-        "╠══════════════════════════════════════════════════════════════════════════════╣\n"
-        "║  НАВИГАЦИОННОЕ СООБЩЕНИЕ (ANAV):                                            ║\n"
-        "║  • Скорость: 500 бит/с (vs GPS 50 бит/с, Galileo 250 бит/с)               ║\n"
-        "║  • FEC: LDPC(1/2) + CRC-32 → выигрыш кодирования +7 дБ vs без FEC         ║\n"
-        "║  • Период обновления эфемерид: 10 мин (LEO период ≈ 105 мин)              ║\n"
-        "║  • Холодный старт TTFF: < 5 с (vs GPS: 45–60 с)                            ║\n"
-        "║  • Аутентификация: TESLA MAC (HMAC-SHA256, 128 бит, раскрытие 35 с)       ║\n"
-        "╚══════════════════════════════════════════════════════════════════════════════╝"
+        "L1 КАНАЛ (1575,42 МГц)\n"
+        "  • Модуляция: BOC(1,1) данные + TMBOC(6,1,4/33) пилот\n"
+        "      – совместим с GPS L1C и Galileo E1 (CBOC)\n"
+        "      – β_G = 1,26 МГц против 0,64 у BPSK(1) → шум −6 дБ\n"
+        "      – огибающая многолучёвости < 4 м (BPSK(1): < 10 м)\n"
+        "  • Коды: Weil (n=10223) пилот — 5111 кодов, F=1703\n"
+        "\n"
+        "L5 КАНАЛ (1176,45 МГц)\n"
+        "  • Модуляция: BPSK(10) данные + BPSK(10) пилот\n"
+        "      – совместим с GPS L5, Galileo E5a, BeiDou B2a\n"
+        "      – β_G = 6,37 МГц → шум 2,1 см @ C/N₀=40 дБ·Гц\n"
+        "      – разрешение многолучёвости 29 м, ошибка < 1,5 м\n"
+        "  • Коды: расширенный Memory (≥350, n=10230); Xcorr −39,4 дБ\n"
+        "\n"
+        "НАВИГАЦИОННОЕ СООБЩЕНИЕ (ANAV)\n"
+        "  • Скорость 500 бит/с;  FEC: LDPC(1/2)+CRC-32 (+7 дБ)\n"
+        "  • Обновление эфемерид 10 мин;  холодный TTFF < 5 с\n"
+        "  • Аутентификация: TESLA MAC на HMAC-Стрибог (ГОСТ Р 34.11-2012),\n"
+        "    тег 128 бит, раскрытие 35 с"
     )
 
-    ax.text(0.05, 0.97, rec_text, transform=ax.transAxes,
-            fontfamily="monospace", fontsize=8.5, verticalalignment="top",
-            color="#2d3436",
-            bbox=dict(boxstyle="round,pad=0.5", facecolor="#f8fffe",
+    ax.text(0.03, 0.97, rec_text, transform=ax.transAxes,
+            fontfamily="DejaVu Sans", fontsize=12.5, verticalalignment="top",
+            linespacing=1.35, color="#2d3436",
+            bbox=dict(boxstyle="round,pad=0.8", facecolor="#f4fbf9",
                       edgecolor="#00b894", linewidth=2))
 
     ax.set_title(f"АВРОРА — Рекомендованный сигнальный дизайн [{label}]",
-                 fontsize=12, fontweight="bold", pad=15)
+                 fontsize=14, fontweight="bold", pad=12)
     plt.tight_layout()
-    fig.savefig(os.path.join(output_dir, f"sigdes_recommendation_{label}.png"), dpi=150)
+    fig.savefig(os.path.join(output_dir, f"sigdes_recommendation_{label}.png"),
+                dpi=150, bbox_inches="tight")
     plt.close(fig)
 
 

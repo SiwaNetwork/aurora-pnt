@@ -23,13 +23,13 @@ GPS L5 (CNAV),50,"Свёрт. r=1/2, K=7",45,60,Нет
 GPS L1C (CNAV-2),100,LDPC(1/2) + BCH,30,30,NMA (планируется)
 Galileo E1 (INAV),250,"Свёрт. r=1/2, K=7",30,60,OSNMA (128-bit ECDSA)
 Galileo E5a (FNAV),50,"Свёрт. r=1/2, K=7",30,60,Нет
-АВРОРА L1 (ANAV — предл.),500,LDPC(1/2) + CRC32,5,10,TESLA MAC (128-bit HMAC-SHA256)
+АВРОРА L1 (ANAV — предл.),500,LDPC(1/2) + CRC32,5,10,"TESLA MAC (128-бит HMAC-Стрибог, ГОСТ Р 34.11-2012)"
 
 === TESLA MAC ===
 key_bits,128
 update_interval_s,30.0
 disclosure_delay_s,35.0
 keys_per_day,2880.0
-hash_fn,HMAC-SHA256
+hash_fn,HMAC-Стрибог (ГОСТ Р 34.11-2012)
 security_level_bits,64
 overhead_bps,4.266666666666667

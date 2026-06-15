@@ -1,12 +1,12 @@
 """
 Timing Chain Analysis for АВРОРА.
 
-Models the complete timing chain from master Cs frequency standard
+Models the complete timing chain from the ground UTC(SU) reference
 to user 1PPS output, computing Allan deviation, ISL transfer noise,
 and end-to-end timing uncertainty at each level.
 
-Architecture:
-  Cs anchor → ISL → Rb relay → ISL → OCXO terminal → signal → user receiver
+Architecture (канон §8):
+  H-мазер Ч1-1008 (земля, UTC(SU)) → TWSTT → space-Rb якорь → ISL → CSAC терминал → сигнал → приёмник
 
 Reference: IEEE Std 1139-2008 (ADEV); Osen, "GNSS Clock Modelling" (2020);
            White, "Precise Timing Using LEO" (2022).
@@ -28,10 +28,10 @@ NS_PER_M = 1e9 / C_LIGHT   # ns / m (≈ 3.336 ns/m)
 
 # ── Clock noise models (ADEV coefficients, 3-term power law) ─────────────────
 # ADEV(τ) = √(h_{-2}/τ² + h_{-1}/τ + h_0 + h_1·τ + h_2·τ²)   (simplified)
-# Using dominant-term model for each clock type:
-#   Cs: white FM (h_0) + flicker FM (h_{-1}): ADEV ~ 5e-12 at τ=1s → 2e-13 at τ=1000s
-#   Rb: flicker FM + random walk: ADEV ~ 3e-11 at τ=1s → 1e-12 at 1000s
-#   OCXO: white PM + flicker FM: ADEV ~ 1e-10 at τ=1s → 3e-11 at 100s (aging limited)
+# Using dominant-term model for each clock type (реальные ТТХ, §8.1):
+#   H-мазер: ADEV ~1.5e-13 at τ=1s (активный, наземный эталон)
+#   space-Rb (RAFS): white FM ~5e-12·τ^-1/2 at 1s → ~1e-12 at 100s (космический)
+#   CSAC (SA.45s): white FM ~3e-10·τ^-1/2 at 1s → ~3e-11 at 100s
 
 CLOCKS = {
     "H-мазер Ч1-1008 (земля)": {
@@ -48,7 +48,7 @@ CLOCKS = {
     "space-Rb (якорь)": {
         "label":       "space-Rb",
         "color":       "#00b894",
-        "adev_1s":     1e-11,
+        "adev_1s":     5e-12,
         "exponent":    -0.5,
         "holdover_ppb_per_day": 0.001,
         "mass_kg":     1.8,
