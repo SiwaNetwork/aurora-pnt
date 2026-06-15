@@ -767,7 +767,7 @@ def _svg_signal_flow():
 
     chain = [
         (110,  "UTC(SU)", "± 5 нс"),
-        (310,  "Cs КА",   "± 0,01 нс/6ч"),
+        (310,  "CSAC КА", "ADEV 3·10⁻¹⁰"),
         (510,  "ISL ×1",  "± 0,43 нс/хоп"),
         (710,  "ISL ×6",  "± 2,58 нс"),
         (920,  "Тропосф.", "± ~6 см"),
@@ -832,7 +832,7 @@ def _svg_time_dissemination():
     sat_x, sat_y = 700, 160
     parts.append(_sat_icon(sat_x, sat_y, 36, "#00b894", 0))
     parts.append(_label(sat_x, sat_y-52, "АВРОРА КА", 14, "#00b894", bold=True))
-    parts.append(_label(sat_x, sat_y+60, "Cs/Rb · бортовая шкала (§8)", 11, "#00b894"))
+    parts.append(_label(sat_x, sat_y+60, "CSAC/space-Rb · бортовая шкала (§8)", 11, "#00b894"))
 
     # Луч LPT
     ref_x, ref_y = 700, 388
