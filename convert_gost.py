@@ -454,6 +454,25 @@ def add_numbered_item(doc, num_str, text, indent_level=0):
     return p
 
 
+# Габариты «рамки» под рисунок (ГОСТ: ширина текста A4 при полях 30/15 = 165 мм)
+FIG_MAX_W_CM = 16.0
+FIG_MAX_H_CM = 21.0   # с запасом под подпись на A4 (поля 20/20 → 257 мм)
+
+
+def _fig_width(img_path):
+    """Ширина рисунка с сохранением пропорций, вписанная в рамку (см)."""
+    try:
+        from PIL import Image
+        with Image.open(img_path) as im:
+            w_px, h_px = im.size
+        aspect = w_px / h_px if h_px else 1.4
+        # по ширине рамки; если высота превысит лимит — ограничиваем по высоте
+        w_cm = min(FIG_MAX_W_CM, FIG_MAX_H_CM * aspect)
+        return Cm(w_cm)
+    except Exception:
+        return Cm(FIG_MAX_W_CM)
+
+
 def add_figure(doc, img_path, alt, cnt):
     n = cnt.nfig()
     # Рисунок
@@ -463,7 +482,7 @@ def add_figure(doc, img_path, alt, cnt):
     set_spacing(pi, line=1.0, before=8, after=2)
     if os.path.exists(img_path):
         try:
-            pi.add_run().add_picture(img_path, width=Inches(5.7))
+            pi.add_run().add_picture(img_path, width=_fig_width(img_path))
         except Exception:
             r = pi.add_run(f"[Рисунок: {alt}]"); r.italic = True; fmt_run(r, color=GRAY)
     else:
