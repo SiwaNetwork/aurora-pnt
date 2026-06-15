@@ -847,6 +847,16 @@ def cmd_dual_service(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_ensemble_timescale(args):
+    """SHIWA TIME-Space: распределённый ансамблевый эталон на группировке."""
+    from aurora.pnt.ensemble_timescale import run_ensemble_timescale_analysis
+    output_dir = args.output or "results/ensemble_timescale"
+    label      = args.label  or "phase4"
+    print(f"\n  Running ensemble-timescale (SHIWA TIME-Space): {label}")
+    run_ensemble_timescale_analysis(output_dir=output_dir, label=label)
+    print(f"  Results saved to: {output_dir}/")
+
+
 def cmd_conjunction(args):
     """Conjunction probability: Monte Carlo debris collision risk analysis."""
     from aurora.pnt.conjunction_pc import run_conjunction_analysis, print_conjunction_summary
@@ -1689,6 +1699,12 @@ def main():
     p_dual.add_argument("-o", "--output", default="results/dual_service")
     p_dual.add_argument("-l", "--label",  default="phase4")
 
+    # ensemble-timescale
+    p_ens = sub.add_parser("ensemble-timescale",
+                           help="SHIWA TIME-Space: распределённый ансамблевый эталон")
+    p_ens.add_argument("-o", "--output", default="results/ensemble_timescale")
+    p_ens.add_argument("-l", "--label",  default="phase4")
+
     # coverage-maps
     p_cov = sub.add_parser("coverage-maps",
                            help="Geographic coverage maps: N_vis and PDOP heatmaps by phase")
@@ -1908,6 +1924,7 @@ def main():
         "reference-frame":  cmd_reference_frame,
         "tgd-dcb":          cmd_tgd_dcb,
         "dual-service":     cmd_dual_service,
+        "ensemble-timescale": cmd_ensemble_timescale,
         "coverage-maps":    cmd_coverage_maps,
         "radiation":        cmd_radiation,
         "relativistic":     cmd_relativistic,

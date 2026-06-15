@@ -241,6 +241,19 @@ def test_tgd_dcb_runs(tmp_results):
 
 
 @pytest.mark.smoke
+def test_ensemble_timescale_runs(tmp_results):
+    from aurora.pnt.ensemble_timescale import run_ensemble_timescale_analysis
+    r = run_ensemble_timescale_analysis(tmp_results, "test")
+    assert r is not None
+    assert_png_exists(tmp_results, "ensemble_timescale_test.png")
+    assert_csv_valid(tmp_results, "ensemble_timescale_test.csv")
+    # ансамбль устойчивее одиночного CSAC и достигает уровня space-Rb при 1с
+    assert r["ens_1s"] < 1e-11, f"ансамбль σ_y(1с)={r['ens_1s']:.1e} не лучше space-Rb"
+    # распределённый эталон существенно дешевле space-Rb на всех КА
+    assert r["saving"] > 0.5, f"экономия {r['saving']*100:.0f}% < 50%"
+
+
+@pytest.mark.smoke
 def test_dual_service_runs(tmp_results):
     from aurora.pnt.dual_service import run_dual_service_analysis
     r = run_dual_service_analysis(tmp_results, "test")
