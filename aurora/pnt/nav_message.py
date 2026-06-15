@@ -1,8 +1,8 @@
 """
-Navigation Message Structure and Bit Budget for AURORA PNT.
+Navigation Message Structure and Bit Budget for АВРОРА.
 
 Models the navigation data content, bit allocation, frame structure, and
-Time To First Fix (TTFF) for the AURORA L1/L5 signals.
+Time To First Fix (TTFF) for the АВРОРА L1/L5 signals.
 
 Design goals:
   - GPS/Galileo compatible message structure (LNAV/FNAV inspired)
@@ -15,7 +15,7 @@ References:
   IS-GPS-200N (ICD-GPS-LNAV / CNAV)
   Galileo OS SIS ICD 2.1 (FNAV / INAV)
   ESA OSNMA SIS ICD 1.1
-  AURORA design baseline
+  АВРОРА design baseline
 """
 
 import math
@@ -36,7 +36,7 @@ AURORA_DATA_RATE_BPS = {
 
 # ── Navigation message field definitions ─────────────────────────────────────
 # Each field: (name, bits, resolution, range, description)
-# Modelled after GPS CNAV + Galileo FNAV + AURORA extensions
+# Modelled after GPS CNAV + Galileo FNAV + АВРОРА extensions
 
 EPHEMERIS_FIELDS = [
     # Time
@@ -73,7 +73,7 @@ CLOCK_FIELDS = [
     ("af2",              8,  2**-55,   "s/s^2","Clock drift rate"),
     ("TGD_L1",           8,  2**-31,   "s",    "L1 group delay (intersignal)"),
     ("TGD_L5",           8,  2**-31,   "s",    "L5 group delay"),
-    ("ISL_correction",  16,  2**-35,   "s",    "ISL-derived clock correction (AURORA ext)"),
+    ("ISL_correction",  16,  2**-35,   "s",    "ISL-derived clock correction (АВРОРА ext)"),
     ("ISL_age",          6,  1,        "s",    "Age of ISL correction (seconds)"),
 ]
 
@@ -95,11 +95,11 @@ IONO_FIELDS = [
 ]
 
 TIMING_FIELDS = [
-    ("GGTO",            32,  2**-35,   "s",    "GPS-to-AURORA time offset"),
+    ("GGTO",            32,  2**-35,   "s",    "GPS-to-АВРОРА time offset"),
     ("GGTO_week",       13,  1,        "weeks","Reference week for GGTO"),
     ("GGTO_tow",        16,  300,      "s",    "Reference TOW for GGTO"),
     ("leap_second",      8,  1,        "s",    "Current UTC leap second count"),
-    ("aurora_timescale", 4,  1,        "",     "AURORA timescale flags"),
+    ("aurora_timescale", 4,  1,        "",     "АВРОРА timescale flags"),
 ]
 
 AUTH_FIELDS = [
@@ -333,7 +333,7 @@ def _plot_bit_allocation(capacity: Dict, output_dir: str, label: str):
     for i, (t, n) in enumerate(zip(del_times, bar_names)):
         axes[1].text(t + 0.5, i, f"{t:.1f} с", va="center", fontsize=9)
 
-    fig.suptitle(f"AURORA PNT — Структура навигационного сообщения [{label}]")
+    fig.suptitle(f"АВРОРА — Структура навигационного сообщения [{label}]")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"nav_message_bits_{label}.png"), dpi=150)
     plt.close(fig)
@@ -345,10 +345,10 @@ def _plot_ttff_vs_rate(rates, ttff_cold, ttff_warm, output_dir, label):
     ax.semilogx(rates, [t for t in ttff_warm], "s-", color="#0984e3", lw=2, label="Тёплый старт")
     ax.axhline(60.0,  ls="--", color="#e17055", lw=1.2, label="Цель 60 с (холодный)")
     ax.axhline(30.0,  ls="--", color="#0984e3", lw=1.2, label="Цель 30 с (тёплый)")
-    ax.axvline(500.0, ls=":", color="#6c5ce7",  lw=1.2, label="AURORA 500 bps")
+    ax.axvline(500.0, ls=":", color="#6c5ce7",  lw=1.2, label="АВРОРА 500 bps")
     ax.set_xlabel("Скорость данных (bps)")
     ax.set_ylabel("TTFF (секунды)")
-    ax.set_title(f"AURORA — Время первого фикса от скорости данных [{label}]")
+    ax.set_title(f"АВРОРА — Время первого фикса от скорости данных [{label}]")
     ax.legend()
     ax.grid(alpha=0.3, which="both")
     plt.tight_layout()

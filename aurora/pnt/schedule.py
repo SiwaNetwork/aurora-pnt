@@ -1,5 +1,5 @@
 """
-Программный график AURORA PNT 2026-2040.
+Программный график АВРОРА 2026-2040.
 
 Анализирует:
 - 13 фаз программы (концепт, эскиз, ТП, ОКР, производство, запуски,
@@ -172,7 +172,7 @@ def _plot_gantt(phases: List[Dict], output_dir: str, label: str) -> None:
     ax.set_xlim(-2, total + 12)
     ax.set_xlabel("Год")
     ax.set_title(
-        f"AURORA PNT — Программный график (диаграмма Ганта)  [{label}]\n"
+        f"АВРОРА — Программный график (диаграмма Ганта)  [{label}]\n"
         f"13 фаз, длительность {total - 4} мес. = {(total - 4) / 12:.1f} года")
     ax.grid(axis="x", alpha=0.3)
 
@@ -225,7 +225,7 @@ def _plot_milestones(milestones, total_months: int,
     ax.set_yticks([])
     ax.set_xlabel("Год")
     ax.set_title(
-        f"AURORA PNT — Вехи программы (M1-M7)  [{label}]\n"
+        f"АВРОРА — Вехи программы (M1-M7)  [{label}]\n"
         f"M1 = защита ТП (м. 21),  M6 = ВЭ Ф4 полное (м. 120),  "
         f"M7 = конец проектного срока (м. 204)")
     ax.grid(axis="x", alpha=0.3)
@@ -278,7 +278,7 @@ def _plot_critical_path(crit, milestones,
     ax.set_xlim(0, total + 6)
     ax.set_xlabel("Год")
     ax.set_title(
-        f"AURORA PNT — Критический путь программы  [{label}]\n"
+        f"АВРОРА — Критический путь программы  [{label}]\n"
         f"ОКР → производство Phase 0/1 → запуски → ВЭ Ф4   "
         f"(длительность {total - 6} мес. = {(total - 6) / 12:.1f} года)")
     ax.grid(axis="x", alpha=0.3)
@@ -346,7 +346,7 @@ def _plot_workforce(total_months: int, output_dir: str, label: str) -> None:
     ax.set_xlabel("Год")
     ax.set_ylabel("Численность персонала (чел.)")
     ax.set_title(
-        f"AURORA PNT — Профиль численности персонала  [{label}]\n"
+        f"АВРОРА — Профиль численности персонала  [{label}]\n"
         f"Пик = {max(work):.0f} чел.,  ср. = {work.mean():.0f} чел.,  "
         f"эксплуатация = 100 чел.")
     ax.grid(alpha=0.3)
@@ -380,7 +380,7 @@ def _save_csv(phases: List[Dict], output_dir: str, label: str) -> None:
 def print_schedule_summary(label: str, results: Dict) -> None:
     sep = "=" * 78
     print(f"\n{sep}")
-    print(f"  AURORA PNT -- Programme Schedule  --  {label}")
+    print(f"  АВРОРА -- Programme Schedule  --  {label}")
     print(sep)
     print(f"  Старт программы:    {results['start_year']}.01 (месяц 0)")
     print(f"  Конец программы:    {month_to_year_str(results['total_months'])} "

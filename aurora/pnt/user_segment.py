@@ -1,5 +1,5 @@
 """
-Пользовательский приёмник AURORA PNT: требования и характеристики.
+Пользовательский приёмник АВРОРА: требования и характеристики.
 
 Анализирует:
 - Максимальный доплер и скорость изменения доплера (LEO vs MEO)
@@ -22,7 +22,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-# ── Физические константы и параметры AURORA ──────────────────────────────────
+# ── Физические константы и параметры АВРОРА ──────────────────────────────────
 C_MS       = 299792458.0
 F_L1_HZ    = 1575.42e6
 F_L5_HZ    = 1176.45e6
@@ -35,8 +35,8 @@ SYSTEMS = {
     "GPS L1 C/A\n(MEO 20 200 км)":    {"freq": F_L1_HZ, "v_ms": 3870.0, "h_km": 20200.0, "color": "#e17055"},
     "Galileo E1\n(MEO 23 222 км)":    {"freq": F_L1_HZ, "v_ms": 3640.0, "h_km": 23222.0, "color": "#0984e3"},
     "ГЛОНАСС L1\n(MEO 19 100 км)":   {"freq": 1602e6,  "v_ms": 3950.0, "h_km": 19100.0, "color": "#6c5ce7"},
-    "AURORA L1\n(LEO 1000 км)":       {"freq": F_L1_HZ, "v_ms": V_ORB_MS, "h_km": H_KM,  "color": "#00b894"},
-    "AURORA L5\n(LEO 1000 км)":       {"freq": F_L5_HZ, "v_ms": V_ORB_MS, "h_km": H_KM,  "color": "#74b9ff"},
+    "АВРОРА L1\n(LEO 1000 км)":       {"freq": F_L1_HZ, "v_ms": V_ORB_MS, "h_km": H_KM,  "color": "#00b894"},
+    "АВРОРА L5\n(LEO 1000 км)":       {"freq": F_L5_HZ, "v_ms": V_ORB_MS, "h_km": H_KM,  "color": "#74b9ff"},
 }
 
 # ── Классы приёмников ─────────────────────────────────────────────────────────
@@ -96,7 +96,7 @@ def pll_range_noise_cm(bw_hz: float, cn0_dbhz: float) -> float:
 
 
 def channels_needed(n_sats: int, n_freq: int = 2) -> int:
-    """Число каналов для обработки видимых спутников AURORA."""
+    """Число каналов для обработки видимых спутников АВРОРА."""
     f_vis = (1 - math.cos(math.radians(52.9))) / 2   # ~0.136 полусферы
     n_vis = max(1, int(n_sats * f_vis * 2))           # × 2: запас 100%
     return n_vis * n_freq
@@ -163,7 +163,7 @@ def _plot_doppler(output_dir, label):
             ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + max(vals)*0.01,
                     f"{v:.1f}", ha="center", fontsize=9)
         ax.set_ylabel(ylabel)
-        ax.set_title(f"AURORA — {title_sfx} [{label}]")
+        ax.set_title(f"АВРОРА — {title_sfx} [{label}]")
         ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"user_doppler_{label}.png"), dpi=150)
@@ -186,7 +186,7 @@ def _plot_channels(output_dir, label):
         ax.axhline(n_chan, ls=":", color=col, lw=1.2, label=f"{cls} ({n_chan} кан.)")
     ax.set_xlabel("Число спутников в созвездии")
     ax.set_ylabel("Требуемое число каналов приёмника")
-    ax.set_title(f"AURORA — требования к числу каналов [{label}]")
+    ax.set_title(f"АВРОРА — требования к числу каналов [{label}]")
     ax.legend(fontsize=9, loc="upper left")
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -205,13 +205,13 @@ def _plot_pll_noise(bw_min, output_dir, label):
         ax.plot(bw_arr, noise, color=col, lw=2, label=f"C/N₀ = {cn0} дБ·Гц")
 
     ax.axvline(bw_min, ls="--", color="#d63031", lw=1.8,
-               label=f"BW_min AURORA LEO = {bw_min:.1f} Гц")
+               label=f"BW_min АВРОРА LEO = {bw_min:.1f} Гц")
     ax.axvline(5.0, ls=":", color="#b2bec3", lw=1.3, label="BW_min MEO = 5 Гц")
     ax.axhline(1.0, ls=":", color="#2d3436", lw=1.0, label="1 см (PPP цель)")
     ax.set_xlabel("Полоса петли PLL (Гц)")
     ax.set_ylabel("Ошибка дальности 1σ (см)")
     ax.set_ylim(0, 35)
-    ax.set_title(f"AURORA — шум PLL-слежения vs ширина полосы [{label}]")
+    ax.set_title(f"АВРОРА — шум PLL-слежения vs ширина полосы [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -238,13 +238,13 @@ def _plot_receiver_classes(output_dir, label):
         ax.set_xlabel(ylabel)
         ax.grid(axis="x", alpha=0.3)
 
-    # AURORA C/N₀ достижимый — вертикальная линия
+    # АВРОРА C/N₀ достижимый — вертикальная линия
     axes[1].axvline(55.8, ls="--", color="#00b894", lw=1.5,
-                    label="AURORA C/N₀ при ε=10°")
+                    label="АВРОРА C/N₀ при ε=10°")
     axes[1].legend(fontsize=8)
     axes[2].axvline(55.8, ls="--", color="#00b894", lw=1.5)
 
-    plt.suptitle(f"AURORA PNT — Классы пользовательских приёмников [{label}]",
+    plt.suptitle(f"АВРОРА — Классы пользовательских приёмников [{label}]",
                  fontsize=12, y=1.02)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"user_classes_{label}.png"), dpi=150)

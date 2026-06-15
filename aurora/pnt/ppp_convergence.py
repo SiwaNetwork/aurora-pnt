@@ -1,5 +1,5 @@
 """
-PPP (Precise Point Positioning) алгоритм и время сходимости AURORA PNT.
+PPP (Precise Point Positioning) алгоритм и время сходимости АВРОРА.
 
 Реализует упрощённую Kalman-фильтрацию для PPP и моделирует время
 сходимости в зависимости от числа наблюдаемых спутников.
@@ -7,7 +7,7 @@ PPP (Precise Point Positioning) алгоритм и время сходимос�
 Рассчитывает:
   - Время сходимости PPP при разном числе видимых спутников LEO/MEO
   - Kalman-диаграмму ковариации (горизонтальная/вертикальная)
-  - Сравнение LEO-PPP (AURORA) vs стандартный GPS-PPP
+  - Сравнение LEO-PPP (АВРОРА) vs стандартный GPS-PPP
   - Dual-freq vs Single-freq режимы сходимости
   - Зависимость от угла маски приёма (elevation cutoff)
 
@@ -26,7 +26,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 # ── Параметры орбит ───────────────────────────────────────────────────────────
-ALT_LEO_KM  = 1000.0   # AURORA PNT
+ALT_LEO_KM  = 1000.0   # АВРОРА
 ALT_MEO_KM  = 20200.0  # GPS
 R_E_KM      = 6371.0
 
@@ -163,18 +163,18 @@ def run_ppp_convergence_analysis(output_dir: str, label: str) -> Dict:
     dt_s = 30.0  # 30-сек эпохи
 
     # Сценарии числа видимых спутников
-    n_sats_leo_typical = int(n_visible(ALT_LEO_KM, 300))   # AURORA полное
+    n_sats_leo_typical = int(n_visible(ALT_LEO_KM, 300))   # АВРОРА полное
     n_sats_meo_typical = int(n_visible(ALT_MEO_KM, 24))    # GPS
     n_sats_leo_ioc = int(n_visible(ALT_LEO_KM, 60))        # IOC фаза (60 спутников)
 
     scenarios = {
-        f"AURORA FOC ({n_sats_leo_typical} сп., dual)":
+        f"АВРОРА FOC ({n_sats_leo_typical} сп., dual)":
             simulate_ppp_convergence(min(n_sats_leo_typical, 20), dt_s, dual_freq=True),
-        f"AURORA IOC ({n_sats_leo_ioc} сп., dual)":
+        f"АВРОРА IOC ({n_sats_leo_ioc} сп., dual)":
             simulate_ppp_convergence(min(n_sats_leo_ioc, 8), dt_s, dual_freq=True),
         f"GPS only ({n_sats_meo_typical} сп., dual)":
             simulate_ppp_convergence(min(n_sats_meo_typical, 8), dt_s, dual_freq=True),
-        f"AURORA FOC (single-freq)":
+        f"АВРОРА FOC (single-freq)":
             simulate_ppp_convergence(min(n_sats_leo_typical, 20), dt_s, dual_freq=False),
     }
     colors = ["#00b894", "#fdcb6e", "#e17055", "#74b9ff"]
@@ -207,7 +207,7 @@ def _plot_convergence_comparison(scenarios, colors, output_dir, label):
         ax.axhline(th, ls="--", color="#2d3436", lw=1.2, label=f"{th} см порог")
         ax.set_xlabel("Время (мин)")
         ax.set_ylabel("Среднеквадр. ошибка (см)")
-        ax.set_title(f"AURORA PNT — PPP {title} [{label}]")
+        ax.set_title(f"АВРОРА — PPP {title} [{label}]")
         ax.legend(fontsize=8)
         ax.grid(alpha=0.3)
         ax.set_ylim(0, min(ax.get_ylim()[1], 300))
@@ -229,7 +229,7 @@ def _plot_convergence_bar(conv_times, output_dir, label):
     ax.axvline(5.0,  ls="--", color="#00b894", lw=1.5, label="5 мин (цель LEO)")
     ax.axvline(20.0, ls=":",  color="#e17055", lw=1.5, label="20 мин (типовой GPS)")
     ax.set_xlabel("Время сходимости PPP (мин, σ_H < 10 см)")
-    ax.set_title(f"AURORA PNT — Время сходимости PPP [{label}]")
+    ax.set_title(f"АВРОРА — Время сходимости PPP [{label}]")
     ax.legend(fontsize=9)
     ax.grid(axis="x", alpha=0.3)
     plt.tight_layout()
@@ -249,7 +249,7 @@ def _plot_kalman_covariance(scenarios, colors, output_dir, label):
     ax.axhline(0.01, ls="--", color="#00b894", lw=1.2, label="0.01 м² (σ=10 см)")
     ax.set_xlabel("Время (мин)")
     ax.set_ylabel("Дисперсия позиции (м²)")
-    ax.set_title(f"AURORA PNT — Kalman PPP: эволюция ковариации [{label}]  {first_name}")
+    ax.set_title(f"АВРОРА — Kalman PPP: эволюция ковариации [{label}]  {first_name}")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3, which="both")
     plt.tight_layout()
@@ -265,9 +265,9 @@ def _plot_leo_vs_meo_geometry(output_dir, label):
     vis_dur  = [visibility_duration_s(a) / 60 for a in alts]
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
-    ax1.plot(alts / 1000, n_leo_30, color="#00b894", lw=2, label="300 спутников (AURORA)")
+    ax1.plot(alts / 1000, n_leo_30, color="#00b894", lw=2, label="300 спутников (АВРОРА)")
     ax1.plot(alts / 1000, n_meo_24, color="#e17055", lw=2, label="24 спутника (GPS)")
-    ax1.axvline(ALT_LEO_KM / 1000, ls="--", color="#0984e3", lw=1.2, label="AURORA 1000 км")
+    ax1.axvline(ALT_LEO_KM / 1000, ls="--", color="#0984e3", lw=1.2, label="АВРОРА 1000 км")
     ax1.axvline(ALT_MEO_KM / 1000, ls="--", color="#fdcb6e", lw=1.2, label="GPS 20200 км")
     ax1.set_xlabel("Высота орбиты (тыс. км)")
     ax1.set_ylabel("Ср. число видимых спутников")
@@ -276,7 +276,7 @@ def _plot_leo_vs_meo_geometry(output_dir, label):
     ax1.grid(alpha=0.3)
 
     ax2.plot(alts / 1000, vis_dur, color="#6c5ce7", lw=2)
-    ax2.axvline(ALT_LEO_KM / 1000, ls="--", color="#0984e3", lw=1.2, label="AURORA 1000 км")
+    ax2.axvline(ALT_LEO_KM / 1000, ls="--", color="#0984e3", lw=1.2, label="АВРОРА 1000 км")
     ax2.axvline(ALT_MEO_KM / 1000, ls="--", color="#fdcb6e", lw=1.2, label="GPS 20200 км")
     ax2.set_xlabel("Высота орбиты (тыс. км)")
     ax2.set_ylabel("Время видимости одного спутника (мин)")

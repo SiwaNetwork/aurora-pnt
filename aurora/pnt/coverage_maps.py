@@ -1,5 +1,5 @@
 """
-Geographic Coverage Maps for AURORA PNT.
+Geographic Coverage Maps for АВРОРА.
 
 Generates latitude-longitude heatmaps of:
   - Number of visible satellites (N_vis)
@@ -216,7 +216,7 @@ def _plot_n_vis_maps(results, phases, lat_range, lon_range, output_dir, label):
     for idx in range(len(phases), n_row * n_col):
         axes[idx // n_col][idx % n_col].set_visible(False)
 
-    fig.suptitle(f"AURORA PNT — Среднее число видимых спутников [{label}]", fontsize=12)
+    fig.suptitle(f"АВРОРА — Среднее число видимых спутников [{label}]", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"coverage_n_vis_{label}.png"), dpi=150)
     plt.close(fig)
@@ -252,7 +252,7 @@ def _plot_pdop_maps(results, phases, lat_range, lon_range, output_dir, label):
     for idx in range(len(phases), n_row * n_col):
         axes[idx // n_col][idx % n_col].set_visible(False)
 
-    fig.suptitle(f"AURORA PNT — Карта PDOP [{label}]  (белая линия = PDOP 6)", fontsize=12)
+    fig.suptitle(f"АВРОРА — Карта PDOP [{label}]  (белая линия = PDOP 6)", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"coverage_pdop_{label}.png"), dpi=150)
     plt.close(fig)
@@ -287,7 +287,7 @@ def _plot_coverage_vs_lat(results, phases, lat_range, output_dir, label):
     axes[1].legend(fontsize=8)
     axes[1].grid(alpha=0.3)
 
-    fig.suptitle(f"AURORA PNT — Покрытие от широты [{label}]")
+    fig.suptitle(f"АВРОРА — Покрытие от широты [{label}]")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"coverage_vs_lat_{label}.png"), dpi=150)
     plt.close(fig)

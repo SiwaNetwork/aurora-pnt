@@ -1,5 +1,5 @@
 """
-Криптографическая защита навигационного сообщения AURORA PNT на ГОСТ-алгоритмах.
+Криптографическая защита навигационного сообщения АВРОРА на ГОСТ-алгоритмах.
 
 Суверенная система использует российскую криптографию вместо зарубежной (NIST):
 
@@ -105,7 +105,7 @@ def run_crypto_auth_analysis(output_dir: str, label: str) -> Dict:
     ax2.set_xlim(0, 300)
     ax2.grid(axis="x", alpha=0.3)
 
-    fig.suptitle(f"AURORA PNT — криптозащита навигационного сообщения (ГОСТ) [{label}]",
+    fig.suptitle(f"АВРОРА — криптозащита навигационного сообщения (ГОСТ) [{label}]",
                  fontsize=13, fontweight="bold")
     plt.tight_layout(rect=[0, 0, 1, 0.95])
     fig.savefig(os.path.join(output_dir, f"crypto_auth_{label}.png"),

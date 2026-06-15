@@ -1,7 +1,7 @@
 {
   "autonomous_sf": {
     "mode_label": "Autonomous LPT (L1 single-freq)",
-    "pdop": 5.0,
+    "pdop": 5.036,
     "dual_frequency": false,
     "uere_rss_m": 3.688,
     "uere_components": {
@@ -14,15 +14,15 @@
       "isb_residual_m": 0.0,
       "relativistic_m": 0.02
     },
-    "cep_50_m": 7.69,
-    "sep_50_m": 9.4,
-    "sigma_3d_m": 18.44,
-    "sigma_v_m": 13.04,
+    "cep_50_m": 7.75,
+    "sep_50_m": 9.47,
+    "sigma_3d_m": 18.57,
+    "sigma_v_m": 13.13,
     "timing_1sigma_ns": 12.3
   },
   "autonomous_df": {
     "mode_label": "Autonomous LPT (L1+L5 dual-freq)",
-    "pdop": 5.0,
+    "pdop": 5.036,
     "dual_frequency": true,
     "uere_rss_m": 3.099,
     "uere_components": {
@@ -35,10 +35,10 @@
       "isb_residual_m": 0.0,
       "relativistic_m": 0.02
     },
-    "cep_50_m": 6.46,
-    "sep_50_m": 7.9,
-    "sigma_3d_m": 15.5,
-    "sigma_v_m": 10.96,
+    "cep_50_m": 6.51,
+    "sep_50_m": 7.96,
+    "sigma_3d_m": 15.61,
+    "sigma_v_m": 11.04,
     "timing_1sigma_ns": 10.34
   },
   "combined_sf": {

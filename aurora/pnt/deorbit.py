@@ -1,5 +1,5 @@
 """
-Orbital Lifetime and Deorbit Analysis for AURORA PNT.
+Orbital Lifetime and Deorbit Analysis for АВРОРА.
 
 Models atmospheric drag, orbital decay, debris lifetime, and deorbit
 requirements for 1000 km altitude constellation.
@@ -41,7 +41,7 @@ ATM_DENSITY = [
     (2000, 2.32e-17),
 ]
 
-# AURORA satellite parameters
+# АВРОРА satellite parameters
 AURORA_SAT = {
     "mass_kg":         150.0,      # estimated 150 kg satellite
     "cross_section_m2":  1.5,     # cross-sectional area
@@ -197,7 +197,7 @@ def _plot_decay_curves(alt_range, lifetimes, output_dir, label) -> None:
     ax.semilogy(alt_range, lifetimes, "o-", color="#00b894", lw=2, ms=7)
     ax.axhline(IADC_DEORBIT_YEARS, ls="--", color="#e17055", lw=1.5,
                label="Лимит IADC: 25 лет")
-    ax.axvline(1000, ls=":", color="#6c5ce7", lw=1.2, label="Высота AURORA 1000 км")
+    ax.axvline(1000, ls=":", color="#6c5ce7", lw=1.2, label="Высота АВРОРА 1000 км")
 
     # Mark where 25-year limit is crossed
     for i in range(len(lifetimes) - 1):
@@ -208,7 +208,7 @@ def _plot_decay_curves(alt_range, lifetimes, output_dir, label) -> None:
 
     ax.set_xlabel("Высота орбиты (км)")
     ax.set_ylabel("Время естественного схода (лет)")
-    ax.set_title(f"AURORA — время естественного схода орбиты [{label}]")
+    ax.set_title(f"АВРОРА — время естественного схода орбиты [{label}]")
     ax.legend()
     ax.grid(True, which="both", alpha=0.3)
     plt.tight_layout()
@@ -236,7 +236,7 @@ def _plot_deorbit_dv_vs_altitude(output_dir: str, label: str, sat: Dict) -> None
     axes[1].set_title(f"Топливо для схода (КА {sat['mass_kg']:.0f} кг, Isp = 220 с)")
     axes[1].grid(alpha=0.3)
 
-    fig.suptitle(f"AURORA — требования к сходу с орбиты [{label}]", fontsize=12)
+    fig.suptitle(f"АВРОРА — требования к сходу с орбиты [{label}]", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"deorbit_dv_{label}.png"), dpi=150)
     plt.close(fig)

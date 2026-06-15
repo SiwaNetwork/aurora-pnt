@@ -1,9 +1,9 @@
 """
-ITU/МСЭ координация частот AURORA PNT.
+ITU/МСЭ координация частот АВРОРА.
 
 Анализирует:
 - Мощностная спектральная плотность (PSD) сигналов на L1/L5
-- Коэффициент спектрального разделения (SSC) — AURORA vs GPS/Galileo/ГЛОНАСС
+- Коэффициент спектрального разделения (SSC) — АВРОРА vs GPS/Galileo/ГЛОНАСС
 - Частотный план RNSS-полос (ITU-R M.1787)
 - Маска внеполосных излучений (OOB emission mask)
 
@@ -43,7 +43,7 @@ SIGNALS = {
         "boc_f": 1.023e6, "modulation": "BOC",
         "power_dbw": -160.0, "color": "#0984e3", "ls": "-.",
     },
-    "AURORA L1\n(TMBOC-6,1,4/33)": {
+    "АВРОРА L1\n(TMBOC-6,1,4/33)": {
         "freq": F_L1, "chip_rate": 1.023e6,
         "boc_f": 6 * 1.023e6, "modulation": "BOC",
         "power_dbw": -107.0, "color": "#00b894", "ls": "-",
@@ -58,7 +58,7 @@ SIGNALS = {
         "boc_f": 0.0, "modulation": "BPSK",
         "power_dbw": -158.0, "color": "#74b9ff", "ls": "--",
     },
-    "AURORA L5\n(BPSK-10)": {
+    "АВРОРА L5\n(BPSK-10)": {
         "freq": F_L5, "chip_rate": 10.23e6,
         "boc_f": 0.0, "modulation": "BPSK",
         "power_dbw": -107.0, "color": "#00b894", "ls": "-.",
@@ -124,8 +124,8 @@ def run_itu_coordination_analysis(output_dir: str, label: str) -> Dict:
     results = {
         "signal_names": names,
         "ssc_matrix":   ssc_mat,
-        "aurora_l1_power_dbw": SIGNALS["AURORA L1\n(TMBOC-6,1,4/33)"]["power_dbw"],
-        "aurora_l5_power_dbw": SIGNALS["AURORA L5\n(BPSK-10)"]["power_dbw"],
+        "aurora_l1_power_dbw": SIGNALS["АВРОРА L1\n(TMBOC-6,1,4/33)"]["power_dbw"],
+        "aurora_l5_power_dbw": SIGNALS["АВРОРА L5\n(BPSK-10)"]["power_dbw"],
     }
 
     _plot_psd(output_dir, label)
@@ -196,13 +196,13 @@ def _plot_band_plan(output_dir, label):
         ("GPS L1C pilot (TMBOC)",      F_L1, 12.276e6, "#fab1a0", 1),
         ("Galileo E1 OS (BOC-1,1)",    F_L1, 8.184e6,  "#0984e3", 2),
         ("ГЛОНАСС L1OC (BOC-1,1)",    F_L1, 4.092e6,  "#6c5ce7", 3),
-        ("AURORA L1 (TMBOC-6,1,4/33)",F_L1, 12.276e6, "#00b894", 4),
+        ("АВРОРА L1 (TMBOC-6,1,4/33)",F_L1, 12.276e6, "#00b894", 4),
     ]
     l5_entries = [
         ("GPS L5 I+Q (BPSK-10)",       F_L5, 20.46e6,  "#e17055", 0),
         ("Galileo E5a (BPSK-10)",      F_L5, 20.46e6,  "#0984e3", 1),
         ("BeiDou B2a (BPSK-10)",       F_L5, 20.46e6,  "#fdcb6e", 2),
-        ("AURORA L5 (BPSK-10)",        F_L5, 20.46e6,  "#00b894", 3),
+        ("АВРОРА L5 (BPSK-10)",        F_L5, 20.46e6,  "#00b894", 3),
     ]
 
     for ax, entries, band_lo, band_label in [
@@ -245,7 +245,7 @@ def _plot_oob_mask(output_dir, label):
     itu_mask = np.where(np.abs(f_mhz) <= 10.23, -60.0, -80.0)
 
     fig, ax = plt.subplots(figsize=(12, 5))
-    ax.plot(f_mhz, psd_db, color="#00b894", lw=2.5, label="AURORA L1 TMBOC (PSD)")
+    ax.plot(f_mhz, psd_db, color="#00b894", lw=2.5, label="АВРОРА L1 TMBOC (PSD)")
     ax.step(f_mhz, itu_mask, color="#d63031", lw=2.0, ls="--",
             label="Предел ITU-R M.1787 (OOB)")
     ax.fill_between(f_mhz, psd_db, -100,
@@ -254,7 +254,7 @@ def _plot_oob_mask(output_dir, label):
     ax.set_xlabel("Смещение от центра L1 (МГц)")
     ax.set_ylabel("Нормированная PSD (дБс)")
     ax.set_ylim(-100, 5)
-    ax.set_title(f"AURORA PNT — маска внеполосных излучений OOB [{label}]")
+    ax.set_title(f"АВРОРА — маска внеполосных излучений OOB [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()

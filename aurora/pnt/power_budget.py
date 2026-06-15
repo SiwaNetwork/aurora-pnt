@@ -1,5 +1,5 @@
 """
-Satellite Power Budget for AURORA PNT.
+Satellite Power Budget for АВРОРА.
 
 Computes detailed orbital power balance:
   - Solar array generation (BOL/EOL, orientation, eclipse)
@@ -100,7 +100,7 @@ BATTERY = {
     "cycle_life":        50_000,       # cycles before 20% capacity loss
 }
 
-# ── AURORA satellite parameters ───────────────────────────────────────────────
+# ── АВРОРА satellite parameters ───────────────────────────────────────────────
 AURORA_ALT_M = 1_000_000.0   # 1000 km
 
 
@@ -308,7 +308,7 @@ def _plot_power_breakdown(budget: Dict, output_dir: str, label: str):
                    loc="lower left", fontsize=7, bbox_to_anchor=(-0.15, -0.15))
     axes[1].set_title(f"Распределение мощности (освещённость)\nВсего {sum(sunlit):.0f} Вт")
 
-    fig.suptitle(f"AURORA PNT — Бюджет мощности спутника [{label}]  (КСЖ, бета=0°)", fontsize=11)
+    fig.suptitle(f"АВРОРА — Бюджет мощности спутника [{label}]  (КСЖ, бета=0°)", fontsize=11)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"power_budget_breakdown_{label}.png"), dpi=150)
     plt.close(fig)
@@ -338,7 +338,7 @@ def _plot_power_vs_beta(beta_range, budgets, output_dir, label):
     axes[1].set_title("Запас мощности КСЖ от бета-угла")
     axes[1].grid(axis="y", alpha=0.3)
 
-    fig.suptitle(f"AURORA PNT — Мощность от угла Солнца [{label}]")
+    fig.suptitle(f"АВРОРА — Мощность от угла Солнца [{label}]")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"power_vs_beta_{label}.png"), dpi=150)
     plt.close(fig)

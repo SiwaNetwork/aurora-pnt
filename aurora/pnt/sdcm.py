@@ -1,8 +1,8 @@
 """
-SDCM (Sistema Differentsial'noy Korrektsii i Monitoringa) module for AURORA PNT.
+SDCM (Sistema Differentsial'noy Korrektsii i Monitoringa) module for АВРОРА.
 
 Russian SBAS/DGNSS augmentation system. Models differential correction accuracy,
-coverage zone, and UERE improvement for AURORA Mode C (Combined + SDCM).
+coverage zone, and UERE improvement for АВРОРА Mode C (Combined + SDCM).
 
 Reference: SDCM ICD v2.0, GOST R 56231-2014.
 """

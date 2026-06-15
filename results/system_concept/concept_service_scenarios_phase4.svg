@@ -43,7 +43,7 @@
   
 </defs>
 <rect width="1400" height="820" fill="url(#space_bg)"/>
-<text x="700" y="38" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="bold" fill="#1a2433" >AURORA PNT — Сценарии применения</text>
+<text x="700" y="38" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="bold" fill="#1a2433" >АВРОРА — Сценарии применения</text>
 <rect x="30" y="58" width="660" height="355" rx="12" fill="#ffffff" stroke="#0984e3" stroke-width="2" opacity="0.95"/>
 <rect x="30" y="58" width="660" height="48" rx="12" fill="#0984e3" opacity="0.22"/>
 <rect x="30" y="94" width="660" height="12" fill="#0984e3" opacity="0.22"/>
@@ -57,7 +57,7 @@
 <line x1="200" y1="186" x2="263" y2="310" stroke="#0984e3" stroke-width="2" opacity="0.7" stroke-dasharray="5,3" clip-path="url(#panel_clip_30_58)"/>
 <text x="390" y="148" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#0984e3" >&lt; 1 м вертикально</text>
 <text x="390.0" y="176.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#566072" opacity="1.0">Горячий старт: 1,5 с</text>
-<text x="390" y="200" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0984e3">AURORA PPP + СДКМ</text>
+<text x="390" y="200" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0984e3">АВРОРА PPP + СДКМ</text>
 <line x1="260" y1="213" x2="520" y2="213" stroke="#0984e3" stroke-width="0.8" opacity="0.35"/>
 <circle cx="265" cy="229" r="4" fill="#0984e3" opacity="0.8"/>
 <text x="275.0" y="233.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">TIR &lt; 1e-7 /ч</text>
@@ -82,7 +82,7 @@
 <line x1="880" y1="186" x2="943" y2="310" stroke="#00b894" stroke-width="2" opacity="0.7" stroke-dasharray="5,3" clip-path="url(#panel_clip_710_58)"/>
 <text x="1070" y="148" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#00b894" >0,5–1 см (H-68%)</text>
 <text x="1070.0" y="176.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#566072" opacity="1.0">Сходимость: 5 с</text>
-<text x="1070" y="200" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#00b894">AURORA PPP-RTK + RSN 300 км</text>
+<text x="1070" y="200" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#00b894">АВРОРА PPP-RTK + RSN 300 км</text>
 <line x1="940" y1="213" x2="1200" y2="213" stroke="#00b894" stroke-width="0.8" opacity="0.35"/>
 <circle cx="945" cy="229" r="4" fill="#00b894" opacity="0.8"/>
 <text x="955.0" y="233.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">RSN шаг 300 км</text>
@@ -107,7 +107,7 @@
 <line x1="200" y1="560" x2="263" y2="684" stroke="#fdcb6e" stroke-width="2" opacity="0.7" stroke-dasharray="5,3" clip-path="url(#panel_clip_30_432)"/>
 <text x="390" y="522" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#b8860b" >&lt; 0,5 м (H-95%)</text>
 <text x="390.0" y="550.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#566072" opacity="1.0">Тёплый старт: 5 с</text>
-<text x="390" y="574" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#b8860b">AURORA PPP / PPP-RTK</text>
+<text x="390" y="574" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#b8860b">АВРОРА PPP / PPP-RTK</text>
 <line x1="260" y1="587" x2="520" y2="587" stroke="#fdcb6e" stroke-width="0.8" opacity="0.35"/>
 <circle cx="265" cy="603" r="4" fill="#b8860b" opacity="0.8"/>
 <text x="275.0" y="607.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">Полосная точность</text>
@@ -132,7 +132,7 @@
 <line x1="880" y1="560" x2="943" y2="684" stroke="#a29bfe" stroke-width="2" opacity="0.7" stroke-dasharray="5,3" clip-path="url(#panel_clip_710_432)"/>
 <text x="1070" y="522" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#a29bfe" >&lt; 5 нс UTC(SU)</text>
 <text x="1070.0" y="550.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#566072" opacity="1.0">Удержание: 72 ч автономно</text>
-<text x="1070" y="574" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#a29bfe">AURORA LPT · ISL-сетка</text>
+<text x="1070" y="574" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#a29bfe">АВРОРА LPT · ISL-сетка</text>
 <line x1="940" y1="587" x2="1200" y2="587" stroke="#a29bfe" stroke-width="0.8" opacity="0.35"/>
 <circle cx="945" cy="603" r="4" fill="#a29bfe" opacity="0.8"/>
 <text x="955.0" y="607.0" text-anchor="start" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" opacity="1.0">CSAC: 2,7 нс/6ч</text>

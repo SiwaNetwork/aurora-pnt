@@ -1,5 +1,5 @@
 """
-Валидация моделей AURORA PNT на (embedded) реальных данных.
+Валидация моделей АВРОРА на (embedded) реальных данных.
 
 Сравнивает встроенные модели техпроекта:
   §11  — Klobuchar (8-коэфф. ионосфера) против embedded IGS GIM
@@ -417,7 +417,7 @@ def _plot_summary(iono, tropo, pod, output_dir: str, label: str):
             scell.set_text_props(color="white", weight="bold")
 
     all_pass = all(r[-1] == "PASS" for r in rows)
-    title = (f"Валидация моделей AURORA PNT — сводка [{label}]\n"
+    title = (f"Валидация моделей АВРОРА — сводка [{label}]\n"
              f"§11 Klobuchar / §34 Saastamoinen / §47 POD  |  "
              f"Общий результат: {'PASS' if all_pass else 'FAIL'}")
     ax.set_title(title, fontsize=12, pad=14,

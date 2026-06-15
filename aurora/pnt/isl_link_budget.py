@@ -1,8 +1,8 @@
 """
-ISL Link Budget for AURORA PNT.
+ISL Link Budget for АВРОРА.
 
 RF link budget for inter-satellite communication links.
-AURORA uses Ka-band (26 GHz) ISL for ranging and data exchange.
+АВРОРА uses Ka-band (26 GHz) ISL for ranging and data exchange.
 Models TX power, antenna gain, FSPL, and required margin for reliable operation.
 """
 
@@ -44,7 +44,7 @@ ISL_BANDS = {
     },
 }
 
-# AURORA ISL hardware parameters (per satellite)
+# АВРОРА ISL hardware parameters (per satellite)
 ISL_TX = {
     "tx_power_dbw":  10.0,    # 10 W = 10 dBW
     "tx_gain_dbi":   35.0,    # 30 cm aperture antenna at Ka-band
@@ -55,7 +55,7 @@ ISL_TX = {
     "req_margin_db":  3.0,    # link margin requirement
 }
 
-# AURORA Phase 3 ISL distances (from isl_ranging module)
+# АВРОРА Phase 3 ISL distances (from isl_ranging module)
 AURORA_ISL_RANGES = {
     "in_plane_km":     3068.0,
     "cross_plane_km":  3820.0,
@@ -146,7 +146,7 @@ def run_isl_link_budget_analysis(
         ptl   = band["pointing_loss_db"]
         dr    = ISL_TX["data_rate_mbps"] * 1e6
 
-        # Link budgets at key AURORA ranges
+        # Link budgets at key АВРОРА ranges
         budgets = {}
         for link_name, dist_km in AURORA_ISL_RANGES.items():
             budgets[link_name] = link_budget(
@@ -205,7 +205,7 @@ def _plot_margin_vs_range(results: Dict, output_dir: str, label: str) -> None:
                label=f"Required margin ({ISL_TX['req_margin_db']} dB)")
     ax.axhline(0, ls="-", color="black", lw=0.5)
 
-    # Mark AURORA ISL ranges
+    # Mark АВРОРА ISL ranges
     for rng_name, rng_km in AURORA_ISL_RANGES.items():
         ax.axvline(rng_km, ls=":", color="#636e72", lw=0.8, alpha=0.7)
         ax.text(rng_km, ax.get_ylim()[1] if ax.get_ylim()[1] > 0 else 10,
@@ -213,7 +213,7 @@ def _plot_margin_vs_range(results: Dict, output_dir: str, label: str) -> None:
 
     ax.set_xlabel("ISL range (km)")
     ax.set_ylabel("Link margin (dB)")
-    ax.set_title(f"AURORA ISL Link Margin vs Range [{label}]")
+    ax.set_title(f"АВРОРА ISL Link Margin vs Range [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     ax.set_xlim(min(r["range_sweep_km"]), max(r["range_sweep_km"]))
@@ -226,7 +226,7 @@ def _plot_budget_summary(results: Dict, output_dir: str, label: str) -> None:
     fig, axes = plt.subplots(1, 2, figsize=(13, 5))
     colors = {"Ka": "#00b894", "V": "#0984e3", "Optical": "#a855f7"}
 
-    # Left: margin at key AURORA ranges
+    # Left: margin at key АВРОРА ranges
     ax = axes[0]
     x     = np.arange(len(AURORA_ISL_RANGES))
     width = 0.25
@@ -242,7 +242,7 @@ def _plot_budget_summary(results: Dict, output_dir: str, label: str) -> None:
     ax.set_xticklabels([k.replace("_km", "").replace("_", " ")
                         for k in AURORA_ISL_RANGES], fontsize=9)
     ax.set_ylabel("Link margin (dB)")
-    ax.set_title("Margin at AURORA ISL ranges")
+    ax.set_title("Margin at АВРОРА ISL ranges")
     ax.legend()
     ax.grid(axis="y", alpha=0.3)
 
@@ -260,7 +260,7 @@ def _plot_budget_summary(results: Dict, output_dir: str, label: str) -> None:
     ax2.legend()
     ax2.grid(axis="y", alpha=0.3)
 
-    fig.suptitle(f"AURORA ISL Link Budget [{label}]", fontsize=12)
+    fig.suptitle(f"АВРОРА ISL Link Budget [{label}]", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"isl_budget_{label}.png"), dpi=150)
     plt.close(fig)

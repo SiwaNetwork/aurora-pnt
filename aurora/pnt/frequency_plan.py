@@ -1,5 +1,5 @@
 """
-Frequency Plan Analysis for AURORA PNT.
+Frequency Plan Analysis for АВРОРА.
 
 Models ITU frequency allocation, inter-system interference, and signal
 compatibility with GPS/GALILEO L1+L5 and GLONASS G1+G2.
@@ -29,16 +29,16 @@ C_LIGHT = 299_792_458.0   # m/s
 # ---------------------------------------------------------------------------
 
 BANDS = {
-    # AURORA proposed
+    # АВРОРА proposed
     "AURORA_L1": {
         "center_mhz": 1575.42, "bw_mhz": 24.0,
-        "service": "RNSS", "system": "AURORA",
-        "color": "#00b894", "desc": "AURORA L1 (GPS/Galileo compatible)"
+        "service": "RNSS", "system": "АВРОРА",
+        "color": "#00b894", "desc": "АВРОРА L1 (GPS/Galileo compatible)"
     },
     "AURORA_L5": {
         "center_mhz": 1176.45, "bw_mhz": 24.0,
-        "service": "RNSS", "system": "AURORA",
-        "color": "#00cec9", "desc": "AURORA L5 (GPS/Galileo compatible)"
+        "service": "RNSS", "system": "АВРОРА",
+        "color": "#00cec9", "desc": "АВРОРА L5 (GPS/Galileo compatible)"
     },
     # GPS
     "GPS_L1": {
@@ -115,7 +115,7 @@ ITU_RNSS_PROTECTED = [
 ]
 
 # ---------------------------------------------------------------------------
-# Signal modulation parameters for AURORA L1 + L5
+# Signal modulation parameters for АВРОРА L1 + L5
 # ---------------------------------------------------------------------------
 
 AURORA_SIGNALS = {
@@ -222,7 +222,7 @@ def compute_aggregate_interference(
     interferer_band: str = "AURORA_L1",
 ) -> Dict:
     """
-    Compute aggregate C/N0 degradation to a victim receiver from all AURORA LEO sats
+    Compute aggregate C/N0 degradation to a victim receiver from all АВРОРА LEO sats
     simultaneously visible at worst-case geometry.
     """
     v = BANDS[victim_signal]
@@ -331,14 +331,14 @@ def run_frequency_plan_analysis(
     # 1. Frequency allocation overview
     alloc = {name: b for name, b in BANDS.items()}
 
-    # 2. AURORA signal compatibility analysis
+    # 2. АВРОРА signal compatibility analysis
     compat = {}
     for sig_name, sig in AURORA_SIGNALS.items():
         band = BANDS[sig["band"]]
         # Check overlap with other systems at same center freq
         overlaps = {}
         for other_name, other in BANDS.items():
-            if other["system"] == "AURORA":
+            if other["system"] == "АВРОРА":
                 continue
             ov = spectral_overlap_fraction(
                 band["center_mhz"], band["bw_mhz"],
@@ -356,23 +356,23 @@ def run_frequency_plan_analysis(
 
     # 3. Interference to/from other GNSS
     interference = {}
-    # AURORA L1 -> GPS L1 (are we degrading GPS?)
+    # АВРОРА L1 -> GPS L1 (are we degrading GPS?)
     interference["AURORA_L1_to_GPS_L1"] = compute_aggregate_interference(
         n_sats, altitude_m, tx_power_dbw, tx_gain_dbi, rx_gain_dbi,
         victim_signal="GPS_L1", interferer_band="AURORA_L1",
     )
-    # AURORA L5 -> GPS L5
+    # АВРОРА L5 -> GPS L5
     interference["AURORA_L5_to_GPS_L5"] = compute_aggregate_interference(
         n_sats, altitude_m, tx_power_dbw, tx_gain_dbi, rx_gain_dbi,
         victim_signal="GPS_L5", interferer_band="AURORA_L5",
     )
-    # GPS L1 -> AURORA L1 (does GPS interfere with us?)
+    # GPS L1 -> АВРОРА L1 (does GPS interfere with us?)
     # GPS: ~31 sats, higher altitude 20200 km -> much weaker signal at user
     interference["GPS_L1_to_AURORA_L1"] = compute_aggregate_interference(
         31, 20_200_000, 14.0, 20.0, rx_gain_dbi,
         victim_signal="AURORA_L1", interferer_band="GPS_L1",
     )
-    # GLONASS G1 vs AURORA L1 (adjacent channel, ~27 MHz separation -> no overlap)
+    # GLONASS G1 vs АВРОРА L1 (adjacent channel, ~27 MHz separation -> no overlap)
     glo_overlap = spectral_overlap_fraction(1575.42, 24.0, 1602.0, 16.5)
     interference["GLO_G1_to_AURORA_L1"] = {
         "victim_signal":      "AURORA_L1",
@@ -439,7 +439,7 @@ def _plot_frequency_plan(output_dir: str, label: str) -> None:
     """Frequency allocation diagram for RNSS bands."""
     fig, ax = plt.subplots(figsize=(14, 6))
 
-    systems_order = ["GPS", "Galileo", "GLONASS", "BeiDou", "NavIC", "AURORA"]
+    systems_order = ["GPS", "Galileo", "GLONASS", "BeiDou", "NavIC", "АВРОРА"]
     y_map = {s: i for i, s in enumerate(systems_order)}
     height = 0.5
 
@@ -448,8 +448,8 @@ def _plot_frequency_plan(output_dir: str, label: str) -> None:
         y = y_map.get(system, len(systems_order))
         lo = b["center_mhz"] - b["bw_mhz"] / 2
         bw = b["bw_mhz"]
-        alpha = 0.85 if system == "AURORA" else 0.55
-        lw = 2 if system == "AURORA" else 0.8
+        alpha = 0.85 if system == "АВРОРА" else 0.55
+        lw = 2 if system == "АВРОРА" else 0.8
         rect = plt.Rectangle(
             (lo, y - height/2), bw, height,
             color=b["color"], alpha=alpha,
@@ -468,7 +468,7 @@ def _plot_frequency_plan(output_dir: str, label: str) -> None:
     ax.set_yticks(range(len(systems_order)))
     ax.set_yticklabels(systems_order)
     ax.set_xlabel("Частота (МГц)")
-    ax.set_title(f"AURORA PNT — План распределения частот [{label}]", fontsize=12)
+    ax.set_title(f"АВРОРА — План распределения частот [{label}]", fontsize=12)
     ax.set_xlim(1150, 1650)
     ax.set_ylim(-0.8, len(systems_order) + 1.2)
     ax.grid(axis="x", alpha=0.3)
@@ -491,7 +491,7 @@ def _plot_interference_summary(interference: Dict, output_dir: str, label: str) 
     ax.set_xticks(range(len(pairs)))
     ax.set_xticklabels([p.replace("_to_", " →\n") for p in pairs], fontsize=8)
     ax.set_ylabel("Деградация C/N₀ (дБ)")
-    ax.set_title(f"AURORA PNT — Межсистемная интерференция [{label}]")
+    ax.set_title(f"АВРОРА — Межсистемная интерференция [{label}]")
     ax.legend()
     ax.grid(axis="y", alpha=0.3)
     ax.set_ylim(0, max(max(degradations) * 1.3, 0.5))
@@ -531,7 +531,7 @@ def _plot_doppler(doppler: Dict, altitude_m: float, output_dir: str, label: str)
         ax.grid(alpha=0.3)
         ax.set_xlim(0, 90)
 
-    fig.suptitle(f"AURORA PNT — Доплеровский профиль [{label}]", fontsize=12)
+    fig.suptitle(f"АВРОРА — Доплеровский профиль [{label}]", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"doppler_{label}.png"), dpi=150)
     plt.close(fig)
@@ -583,7 +583,7 @@ def print_frequency_plan_summary(label: str, result: Dict) -> None:
     print(f"  Constellation: {result['n_sats']} sats @ {result['altitude_km']:.0f} km")
     print()
 
-    print(f"  AURORA Signal Plan:")
+    print(f"  АВРОРА Signal Plan:")
     print(f"  {'Signal':<12} {'Modulation':<12} {'Center MHz':>12} {'BW MHz':>8} {'Rate Mcps':>10}")
     print("  " + "-" * 58)
     for sig_name, sig in result["aurora_signals"].items():

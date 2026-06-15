@@ -1,5 +1,5 @@
 """
-Тропосферная задержка и коррекция для AURORA PNT.
+Тропосферная задержка и коррекция для АВРОРА.
 
 Тропосфера вносит задержку в распространение радиосигнала:
   - Гидростатическая часть (ZHD): ~2.3 м в зените, хорошо предсказуема
@@ -189,7 +189,7 @@ def _plot_ztd_vs_lat(lats, zhd, zwd, ztd, output_dir, label):
     ax.axvline(70,  ls=":", color="#fdcb6e", lw=1.2, label="70° (Арктика)")
     ax.set_xlabel("Широта (°)")
     ax.set_ylabel("Зенитная задержка (м)")
-    ax.set_title(f"AURORA PNT — Тропосферная зенитная задержка vs широта [{label}]")
+    ax.set_title(f"АВРОРА — Тропосферная зенитная задержка vs широта [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -219,7 +219,7 @@ def _plot_mapping_function(elev, mh, mw, std, output_dir, label):
     axes[1].legend(fontsize=9)
     axes[1].grid(True, which="both", alpha=0.3)
     axes[1].set_xlim(5, 90)
-    fig.suptitle(f"AURORA PNT — Функция отображения и наклонная задержка [{label}]")
+    fig.suptitle(f"АВРОРА — Функция отображения и наклонная задержка [{label}]")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"tropo_mapping_{label}.png"), dpi=150)
     plt.close(fig)
@@ -231,7 +231,7 @@ def _plot_seasonal(doy, ztd_seasonal, output_dir, label):
     ax.axhline(np.mean(ztd_seasonal), ls="--", color="#e17055", lw=1.2, label="Среднее")
     ax.set_xlabel("День года")
     ax.set_ylabel("ZTD (м)")
-    ax.set_title(f"AURORA PNT — Сезонная вариация ZTD (шир. 55°) [{label}]")
+    ax.set_title(f"АВРОРА — Сезонная вариация ZTD (шир. 55°) [{label}]")
     ax.set_xticks([1, 90, 180, 270, 365])
     ax.set_xticklabels(["1 янв", "1 апр", "1 июл", "1 окт", "31 дек"])
     ax.legend(fontsize=9)
@@ -252,7 +252,7 @@ def _plot_model_compare(residuals, output_dir, label):
                 f"{v*100:.1f} см", ha="center", fontsize=9)
     ax.axhline(0.01, ls="--", color="#2d3436", lw=1.2, label="1 см (цель PPP)")
     ax.set_ylabel("Остаточная ошибка в UERE (м, 1σ)")
-    ax.set_title(f"AURORA PNT — Остаток тропосферной ошибки по моделям [{label}]")
+    ax.set_title(f"АВРОРА — Остаток тропосферной ошибки по моделям [{label}]")
     ax.set_xticks(range(len(names)))
     ax.set_xticklabels(names, rotation=18, ha="right", fontsize=9)
     ax.legend(fontsize=9)
@@ -268,10 +268,10 @@ def _plot_uere(elev, no_corr, saas, gpt2, output_dir, label):
     ax.semilogy(elev, saas,    color="#fdcb6e", lw=2, label="Саастамойнен (10%)")
     ax.semilogy(elev, gpt2,    color="#00b894", lw=2, label="GPT2 / ECMWF (5%)")
     ax.axhline(0.5, ls="--", color="#0984e3", lw=1.2, label="0.5 м UERE цель")
-    ax.axvline(10, ls=":",  color="#6c5ce7", lw=1.2, label="10° (маска AURORA)")
+    ax.axvline(10, ls=":",  color="#6c5ce7", lw=1.2, label="10° (маска АВРОРА)")
     ax.set_xlabel("Угол места (°)")
     ax.set_ylabel("Вклад тропосферы в UERE (м)")
-    ax.set_title(f"AURORA PNT — Тропосферный вклад в UERE [{label}]")
+    ax.set_title(f"АВРОРА — Тропосферный вклад в UERE [{label}]")
     ax.legend(fontsize=9)
     ax.grid(True, which="both", alpha=0.3)
     plt.tight_layout()

@@ -1,5 +1,5 @@
 """
-Сравнительный анализ AURORA PNT с аналогами.
+Сравнительный анализ АВРОРА с аналогами.
 
 Категории:
   1. Традиционные MEO GNSS: ГЛОНАСС, GPS Block III, Galileo, BeiDou-3
@@ -88,7 +88,7 @@ MEO_SYSTEMS: Dict[str, Dict] = {
 }
 
 LEO_SYSTEMS: Dict[str, Dict] = {
-    "AURORA PNT\n(этот проект)": {
+    "АВРОРА\n(этот проект)": {
         "orbit_km": 1000, "inc_deg": 75.0, "n_sats": 300,
         "n_planes": 15, "signals": "L1 (1575,42), L5 (1176,45)",
         "ure_m": 0.114, "uere_l1_m": 0.290, "uere_dual_m": 0.279,
@@ -179,7 +179,7 @@ def _plot_constellation_scatter(output_dir, label):
     # Смещения подписей (pt) — разводим слипающиеся точки
     # (Xona/AURORA на ~1000 км; кластер MEO на ~20 000 км)
     _OFF = {
-        "AURORA":   (12, -17, "left"),
+        "АВРОРА":   (12, -17, "left"),
         "Xona":     (-12, 13, "right"),
         "Starlink": (12, 6,   "left"),
         "Satelles": (12, 4,   "left"),
@@ -205,8 +205,8 @@ def _plot_constellation_scatter(output_dir, label):
 
     for name, s in LEO_SYSTEMS.items():
         if s["n_sats"]:
-            marker = "^" if "AURORA" in name else "s"
-            size = 260 if "AURORA" in name else 160
+            marker = "^" if "АВРОРА" in name else "s"
+            size = 260 if "АВРОРА" in name else 160
             ax.scatter(s["orbit_km"], s["n_sats"], s=size, color=s["color"],
                        marker=marker, zorder=5, edgecolors="white", linewidths=1.5)
             n = name.replace("\n", " ")
@@ -220,7 +220,7 @@ def _plot_constellation_scatter(output_dir, label):
     ax.set_yscale("log")
     ax.set_xlabel("Высота орбиты (км)")
     ax.set_ylabel("Число спутников")
-    ax.set_title(f"AURORA PNT — Позиционирование на рынке GNSS/LEO PNT [{label}]")
+    ax.set_title(f"АВРОРА — Позиционирование на рынке GNSS/LEO PNT [{label}]")
 
     meo_patch = mpatches.Patch(color="#e17055", alpha=0.7, label="MEO GNSS")
     leo_patch = mpatches.Patch(color="#00b894", alpha=0.7, label="LEO PNT")
@@ -240,27 +240,27 @@ def _plot_spider_chart(output_dir, label):
     def score(sys_name, sys_data, is_leo=False):
         # Нормированные оценки 0–10
         uere = sys_data.get("uere_dual_m", 1.0) or 1.0
-        accuracy = min(10, 10 * (0.5 / uere))  # AURORA ~10, GPS ~5
+        accuracy = min(10, 10 * (0.5 / uere))  # АВРОРА ~10, GPS ~5
 
         conv = sys_data.get("ppp_conv_min", 30.0) or 30.0
-        convergence = min(10, 10 * (5.0 / conv))  # AURORA ~10, GPS ~1.7
+        convergence = min(10, 10 * (5.0 / conv))  # АВРОРА ~10, GPS ~1.7
 
         inc = sys_data.get("inc_deg", 55.0)
-        arctic = min(10, inc / 7.5)  # ГЛОНАСС 64.8° → 8.6; AURORA 75° → 10
+        arctic = min(10, inc / 7.5)  # ГЛОНАСС 64.8° → 8.6; АВРОРА 75° → 10
 
         sig_pow = sys_data.get("signal_power_dbw", -130)
-        anti_jam = min(10, (sig_pow + 107) * 0.5 + 5) if sig_pow else 3.0  # AURORA -107 → 10, GPS -130 → 3.5
+        anti_jam = min(10, (sig_pow + 107) * 0.5 + 5) if sig_pow else 3.0  # АВРОРА -107 → 10, GPS -130 → 3.5
 
         n_sats = sys_data.get("n_sats", 24)
         integrity = min(10, math.log(n_sats, 3))  # больше спутников → лучше RAIM
 
         t_ns = sys_data.get("time_acc_ns", 30) or 30
-        timing = min(10, 10 * (5.0 / t_ns))  # AURORA 5 нс → 10; GPS 20 нс → 2.5
+        timing = min(10, 10 * (5.0 / t_ns))  # АВРОРА 5 нс → 10; GPS 20 нс → 2.5
 
         return [accuracy, convergence, arctic, anti_jam, integrity, timing]
 
     systems_to_plot = {
-        "AURORA PNT": (LEO_SYSTEMS["AURORA PNT\n(этот проект)"], "#00b894", "-"),
+        "АВРОРА": (LEO_SYSTEMS["АВРОРА\n(этот проект)"], "#00b894", "-"),
         "Xona PULSAR": (LEO_SYSTEMS["Xona PULSAR\n(США)"], "#e17055", "--"),
         "ГЛОНАСС-K2": (MEO_SYSTEMS["ГЛОНАСС-K2"], "#6c5ce7", "-."),
         "GPS Block III": (MEO_SYSTEMS["GPS Block III"], "#e17055", ":"),
@@ -276,7 +276,7 @@ def _plot_spider_chart(output_dir, label):
     for sys_name, (sys_data, color, ls) in systems_to_plot.items():
         values = score(sys_name, sys_data)
         values += values[:1]
-        lw = 2.8 if "AURORA" in sys_name else 1.8
+        lw = 2.8 if "АВРОРА" in sys_name else 1.8
         ax.plot(angles, values, color=color, linewidth=lw, linestyle=ls,
                 marker="o", markersize=4, label=sys_name.replace("\n", " "))
         ax.fill(angles, values, color=color, alpha=0.06)
@@ -287,7 +287,7 @@ def _plot_spider_chart(output_dir, label):
     ax.set_ylim(0, 10)
     ax.set_yticks([2, 4, 6, 8, 10])
     ax.set_yticklabels(["2", "4", "6", "8", "10"], fontsize=7)
-    ax.set_title(f"AURORA PNT — Spider-диаграмма сравнения систем [{label}]",
+    ax.set_title(f"АВРОРА — Spider-диаграмма сравнения систем [{label}]",
                  pad=24, fontsize=12)
     # легенда снизу в 3 колонки — не перекрывает диаграмму и не обрезается
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.06), ncol=3,
@@ -327,7 +327,7 @@ def _plot_ure_comparison(output_dir, label):
     ax.set_xticklabels([n.split("(")[0].strip().replace(" ", "\n") for n in names],
                         fontsize=8, rotation=0)
     ax.set_ylabel("Ошибка дальности 1σ (м)")
-    ax.set_title(f"AURORA PNT — Сравнение URE и UERE: все системы [{label}]")
+    ax.set_title(f"АВРОРА — Сравнение URE и UERE: все системы [{label}]")
     ax.legend(fontsize=10)
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
@@ -347,7 +347,7 @@ def _plot_ppp_convergence_comparison(output_dir, label):
         "ESA Moonlight": (5.0,  "#74b9ff"),
         "Satelles STL":  (None, "#dfe6e9"),
         "Xona PULSAR":   (0.2,  "#e17055"),
-        "AURORA PNT":    (1.0,  "#00b894"),
+        "АВРОРА":    (1.0,  "#00b894"),
     }
     names  = [n for n, (t, c) in conv_data.items() if t is not None]
     times  = [conv_data[n][0] for n in names]
@@ -362,7 +362,7 @@ def _plot_ppp_convergence_comparison(output_dir, label):
     ax.axvline(5.0,  ls="--", color="#00b894", lw=1.5, label="5 мин (цель LEO PNT)")
     ax.axvline(20.0, ls=":",  color="#e17055", lw=1.5, label="20 мин (типов. MEO PPP)")
     ax.set_xlabel("Время сходимости PPP (мин, σ_H < 10 см)")
-    ax.set_title(f"AURORA PNT — Время сходимости PPP: все системы [{label}]")
+    ax.set_title(f"АВРОРА — Время сходимости PPP: все системы [{label}]")
     ax.legend(fontsize=9)
     ax.grid(axis="x", alpha=0.3)
     plt.tight_layout()
@@ -377,7 +377,7 @@ def _plot_timeline(output_dir, label):
         "BeiDou-3 LEO (экспер.)": (2023, 2028, "#a29bfe"),
         "Xona PULSAR":          (2027, 2030, "#e17055"),
         "ESA Moonlight":        (2030, 2035, "#74b9ff"),
-        "AURORA PNT":           (2029, 2033, "#00b894"),
+        "АВРОРА":           (2029, 2033, "#00b894"),
         "SpaceX Starlink PNT":  (None, None, "#636e72"),
     }
 
@@ -399,7 +399,7 @@ def _plot_timeline(output_dir, label):
     ax.set_yticks(y_pos)
     ax.set_yticklabels(list(timeline.keys()), fontsize=9)
     ax.set_xlabel("Год")
-    ax.set_title(f"AURORA PNT — Временна́я шкала LEO PNT систем [{label}]")
+    ax.set_title(f"АВРОРА — Временна́я шкала LEO PNT систем [{label}]")
     ax.legend(fontsize=9)
     ax.set_xlim(2014, 2040)
     ax.grid(axis="x", alpha=0.3)
@@ -409,9 +409,9 @@ def _plot_timeline(output_dir, label):
 
 
 def _plot_glonass_deep(output_dir, label):
-    """Детальное сравнение AURORA vs ГЛОНАСС по ключевым параметрам."""
+    """Детальное сравнение АВРОРА vs ГЛОНАСС по ключевым параметрам."""
     metrics = {
-        "URE (м)":                  (0.35,  0.114,  True),   # (ГЛОНАСС, AURORA, меньше=лучше)
+        "URE (м)":                  (0.35,  0.114,  True),   # (ГЛОНАСС, АВРОРА, меньше=лучше)
         "UERE dual (м)":            (0.52,  0.279,  True),
         "PDOP p95 (Россия)":        (2.0,   1.8,    True),
         "PPP конверг. (мин)":       (30.0,  1.0,    True),
@@ -428,7 +428,7 @@ def _plot_glonass_deep(output_dir, label):
     aur_vals = [v[1] for v in metrics.values()]
     less_is_better = [v[2] for v in metrics.values()]
 
-    # Нормализовать к 0–10 (больше = лучше AURORA)
+    # Нормализовать к 0–10 (больше = лучше АВРОРА)
     def normalize(g, a, lib):
         mx = max(g, a)
         if mx == 0:
@@ -454,12 +454,12 @@ def _plot_glonass_deep(output_dir, label):
     w = 0.35
     b1 = ax_bar.bar(x - w/2, glo_norm, w, label="ГЛОНАСС-K2", color="#6c5ce7",
                     alpha=0.85, edgecolor="white")
-    b2 = ax_bar.bar(x + w/2, aur_norm, w, label="AURORA PNT", color="#00b894",
+    b2 = ax_bar.bar(x + w/2, aur_norm, w, label="АВРОРА", color="#00b894",
                     alpha=0.85, edgecolor="white")
     ax_bar.set_xticks(x)
     ax_bar.set_xticklabels(names_m, rotation=28, ha="right", fontsize=8)
     ax_bar.set_ylabel("Нормированный балл (10 = лучший)")
-    ax_bar.set_title(f"AURORA vs ГЛОНАСС-K2 — нормир. баллы [{label}]")
+    ax_bar.set_title(f"АВРОРА vs ГЛОНАСС-K2 — нормир. баллы [{label}]")
     ax_bar.legend(fontsize=9)
     ax_bar.grid(axis="y", alpha=0.3)
     ax_bar.set_ylim(0, 12)
@@ -467,11 +467,11 @@ def _plot_glonass_deep(output_dir, label):
     # Правый график — абсолютные значения
     table_data = []
     for nm, gv, av, lib in zip(names_m, glo_vals, aur_vals, less_is_better):
-        better = "AURORA" if (av < gv and lib) or (av > gv and not lib) else ("Равно" if av == gv else "ГЛОНАСС")
+        better = "АВРОРА" if (av < gv and lib) or (av > gv and not lib) else ("Равно" if av == gv else "ГЛОНАСС")
         table_data.append([nm, f"{gv}", f"{av}", better])
 
     ax_raw.axis("off")
-    col_labels = ["Метрика", "ГЛОНАСС-K2", "AURORA PNT", "Победитель"]
+    col_labels = ["Метрика", "ГЛОНАСС-K2", "АВРОРА", "Победитель"]
     tbl = ax_raw.table(cellText=table_data, colLabels=col_labels,
                        cellLoc="center", loc="center",
                        colWidths=[0.38, 0.18, 0.18, 0.18])
@@ -484,11 +484,11 @@ def _plot_glonass_deep(output_dir, label):
             cell.set_text_props(color="white", fontweight="bold")
         elif col == 3:
             val = table_data[row-1][3] if row > 0 else ""
-            if val == "AURORA":
+            if val == "АВРОРА":
                 cell.set_facecolor("#d4f5e9")
             elif val == "ГЛОНАСС":
                 cell.set_facecolor("#e8e0f5")
-    ax_raw.set_title(f"Сравнение AURORA vs ГЛОНАСС-K2 [{label}]", fontsize=10, pad=15)
+    ax_raw.set_title(f"Сравнение АВРОРА vs ГЛОНАСС-K2 [{label}]", fontsize=10, pad=15)
 
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"comp_aurora_vs_glonass_{label}.png"), dpi=150)

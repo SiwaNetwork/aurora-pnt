@@ -1,8 +1,8 @@
 """
-Anti-Jamming Analysis for AURORA PNT.
+Anti-Jamming Analysis for АВРОРА.
 
 Models J/S (jammer-to-signal) ratio and effective jamming radius for
-AURORA LEO vs GPS MEO. Quantifies the +25 dB signal advantage of LEO.
+АВРОРА LEO vs GPS MEO. Quantifies the +25 dB signal advantage of LEO.
 """
 
 import math
@@ -171,7 +171,7 @@ def run_anti_jam_analysis(
             r_m = effective_jamming_radius_m(sys, jammer, elevation_deg)
             jam_radii[sys_name][jam_name] = r_m / 1000  # km
 
-    # 4. LEO advantage: AURORA vs GPS for each jammer
+    # 4. LEO advantage: АВРОРА vs GPS for each jammer
     advantage = {}
     for jam_name in JAMMERS:
         r_gps    = jam_radii.get("GPS_L1", {}).get(jam_name, 0)
@@ -262,7 +262,7 @@ def _plot_advantage(advantage: Dict, output_dir: str, label: str) -> None:
     ax.set_xticks(range(len(jammers)))
     ax.set_xticklabels(jammers, rotation=10, ha="right", fontsize=9)
     ax.set_ylabel("Снижение радиуса подавления (%)")
-    ax.set_title("AURORA и GPS: снижение радиуса подавления")
+    ax.set_title("АВРОРА и GPS: снижение радиуса подавления")
     ax.set_ylim(0, 110)
     ax.grid(axis="y", alpha=0.3)
 
@@ -273,11 +273,11 @@ def _plot_advantage(advantage: Dict, output_dir: str, label: str) -> None:
     ax2.set_xticks(range(len(jammers)))
     ax2.set_xticklabels(jammers, rotation=10, ha="right", fontsize=9)
     ax2.set_ylabel("Снижение площади подавления (%)")
-    ax2.set_title("AURORA и GPS: снижение площади подавления")
+    ax2.set_title("АВРОРА и GPS: снижение площади подавления")
     ax2.set_ylim(0, 110)
     ax2.grid(axis="y", alpha=0.3)
 
-    fig.suptitle(f"AURORA: преимущество в помехозащищённости [{label}]", fontsize=12)
+    fig.suptitle(f"АВРОРА: преимущество в помехозащищённости [{label}]", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"antijam_advantage_{label}.png"), dpi=150)
     plt.close(fig)
@@ -324,8 +324,8 @@ def print_anti_jam_summary(label: str, result: Dict) -> None:
         print(row)
 
     print()
-    print(f"  Преимущество AURORA L1 над GPS L1:")
-    print(f"  {'Джаммер':<22} {'Радиус GPS':>12} {'Радиус AURORA':>14} "
+    print(f"  Преимущество АВРОРА L1 над GPS L1:")
+    print(f"  {'Джаммер':<22} {'Радиус GPS':>12} {'Радиус АВРОРА':>14} "
           f"{'Радиус -':>10} {'Площадь -':>8}")
     print("  " + "-" * 70)
     for jam_name, adv in result["advantage"].items():

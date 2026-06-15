@@ -1,5 +1,5 @@
 """
-Signal Acquisition and TTFF (Time-To-First-Fix) Analysis for AURORA PNT.
+Signal Acquisition and TTFF (Time-To-First-Fix) Analysis for АВРОРА.
 
 LEO satellites produce large Doppler shifts (~41 kHz at L1) — 20x larger than GPS.
 This requires wider frequency search, but LEO's stronger signal compensates.
@@ -21,7 +21,7 @@ C_LIGHT  = 299_792_458.0
 MU_EARTH = 3.986004418e14
 R_EARTH  = 6_371_000.0
 
-# AURORA signal parameters
+# АВРОРА signal parameters
 AURORA_L1 = {
     "freq_mhz":       1575.42,
     "chip_rate_mcps":  1.023,
@@ -148,7 +148,7 @@ def ttff_cold_start_s(sig: Dict, rx_clock_ppm: float = 1.0,
     acq_time_s = cells_per_channel * dwell_ms * 1e-3
 
     # Add time for ephem decode and fix
-    ephem_decode_s = 18.0    # AURORA-T broadcasts every 10 s, need 1-2 frames
+    ephem_decode_s = 18.0    # АВРОРА-T broadcasts every 10 s, need 1-2 frames
     fix_s          = 1.0     # after acquisition, fix is fast
 
     ttff = acq_time_s + ephem_decode_s + fix_s
@@ -219,7 +219,7 @@ def _plot_doppler_comparison(results: Dict, output_dir: str, label: str) -> None
     ax2.set_title("Макс. скорость изменения доплеровского сдвига")
     ax2.grid(axis="y", alpha=0.3)
 
-    fig.suptitle(f"AURORA и GPS: доплеровский сдвиг [{label}]", fontsize=12)
+    fig.suptitle(f"АВРОРА и GPS: доплеровский сдвиг [{label}]", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"acquisition_doppler_{label}.png"), dpi=150)
     plt.close(fig)

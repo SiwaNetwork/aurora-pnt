@@ -1,8 +1,8 @@
 """
-User Terminal Link Budget for AURORA PNT.
+User Terminal Link Budget for АВРОРА.
 
 Computes received signal power, C/N0, and navigation accuracy at the user
-receiver for AURORA L1 (1575.42 MHz) and L5 (1176.45 MHz) signals.
+receiver for АВРОРА L1 (1575.42 MHz) and L5 (1176.45 MHz) signals.
 
 Reference: IS-GPS-200, Galileo OS SIS ICD, ITU-R P.618, GNSS textbook
 (Kaplan & Hegarty, 3rd ed.).
@@ -23,7 +23,7 @@ C_LIGHT   = 299_792_458.0   # m/s
 K_BOLTZ   = 1.380649e-23    # J/K
 R_EARTH_M = 6_371_000.0     # m
 
-# ── AURORA signal parameters ──────────────────────────────────────────────────
+# ── АВРОРА signal parameters ──────────────────────────────────────────────────
 
 AURORA_SIGNALS = {
     "L1": {
@@ -48,7 +48,7 @@ AURORA_SIGNALS = {
     },
 }
 
-# AURORA satellite TX parameters (150 kg class)
+# АВРОРА satellite TX parameters (150 kg class)
 AURORA_TX = {
     "tx_power_w":      20.0,        # 20 W RF power per signal
     "tx_losses_db":     1.5,        # feed + filter + diplexer losses
@@ -97,7 +97,7 @@ CN0_MIN_DB_HZ = {
     "rtk":         35.0,   # real-time kinematic positioning
 }
 
-# Altitude and min-elevation for AURORA LEO satellites
+# Altitude and min-elevation for АВРОРА LEO satellites
 AURORA_ALT_M  = 1_000_000.0   # 1000 km
 MIN_ELEV_DEG  = 10.0           # minimum elevation angle for service
 
@@ -295,12 +295,12 @@ def _plot_cn0_vs_elevation(results, elevations, signals, terminals, output_dir, 
                    label=f'Порог слежения ({CN0_MIN_DB_HZ["tracking"]} дБ-Гц)')
         ax.set_xlabel("Угол места (градусы)")
         ax.set_ylabel("C/N₀ (дБ-Гц)")
-        ax.set_title(f"AURORA {sig} — C/N₀ от угла места")
+        ax.set_title(f"АВРОРА {sig} — C/N₀ от угла места")
         ax.legend(fontsize=9)
         ax.grid(alpha=0.3)
         ax.set_xlim(10, 90)
 
-    fig.suptitle(f"AURORA PNT — Бюджет линии пользователя [{label}]")
+    fig.suptitle(f"АВРОРА — Бюджет линии пользователя [{label}]")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"link_budget_cn0_{label}.png"), dpi=150)
     plt.close(fig)
@@ -319,13 +319,13 @@ def _plot_sigma_pr(results, elevations, signals, terminals, output_dir, label):
 
         ax.set_xlabel("Угол места (градусы)")
         ax.set_ylabel("Тепловой шум псевдодальности σ (см)")
-        ax.set_title(f"AURORA {sig} — Шум псевдодальности σ")
+        ax.set_title(f"АВРОРА {sig} — Шум псевдодальности σ")
         ax.legend(fontsize=9)
         ax.grid(alpha=0.3)
         ax.set_xlim(10, 90)
         ax.set_ylim(bottom=0)
 
-    fig.suptitle(f"AURORA PNT — Тепловой шум псевдодальности [{label}]")
+    fig.suptitle(f"АВРОРА — Тепловой шум псевдодальности [{label}]")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"link_budget_sigma_{label}.png"), dpi=150)
     plt.close(fig)
@@ -358,7 +358,7 @@ def _plot_link_budget_waterfall(signals, terminals, altitude_m, output_dir, labe
         ax.set_xticks(list(x))
         ax.set_xticklabels(names, rotation=40, ha="right", fontsize=9)
         ax.set_ylabel("Вклад (дБ / дБВт)")
-        ax.set_title(f"AURORA {sig} — Бюджет линии связи\n(Survey, 30° места, {altitude_m/1000:.0f} км)\n"
+        ax.set_title(f"АВРОРА {sig} — Бюджет линии связи\n(Survey, 30° места, {altitude_m/1000:.0f} км)\n"
                      f"Мощн. ПРМ: {r['rx_power_dbm']:.1f} дБм  |  C/N₀: {r['cn0_db_hz']:.1f} дБ-Гц")
         ax.grid(axis="y", alpha=0.3)
 
@@ -367,7 +367,7 @@ def _plot_link_budget_waterfall(signals, terminals, altitude_m, output_dir, labe
                     bar.get_height() + (0.5 if val >= 0 else -1.5),
                     f"{val:+.1f}", ha="center", va="bottom", fontsize=8)
 
-    fig.suptitle(f"AURORA PNT — Водопад бюджета линии [{label}]", fontsize=11)
+    fig.suptitle(f"АВРОРА — Водопад бюджета линии [{label}]", fontsize=11)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"link_budget_waterfall_{label}.png"), dpi=150)
     plt.close(fig)
@@ -403,7 +403,7 @@ def print_link_budget_summary(label: str, result: Dict) -> None:
     print()
 
     for sig in result["signals"]:
-        print(f"  Signal: AURORA {sig}  ({AURORA_SIGNALS[sig]['desc']})")
+        print(f"  Signal: АВРОРА {sig}  ({AURORA_SIGNALS[sig]['desc']})")
         print(f"  {'Terminal':<12}  {'El 10°':>8}  {'El 30°':>8}  {'El 45°':>8}  {'El 90°':>8}")
         print(f"  {'':-<12}  {'C/N0 (dB-Hz)':>38}")
         for term in result["terminals"]:

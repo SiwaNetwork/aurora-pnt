@@ -1,7 +1,7 @@
 """
-AURORA-T: Satellite Timing Service Protocol for AURORA PNT.
+АВРОРА-T: Satellite Timing Service Protocol for АВРОРА.
 
-AURORA satellites broadcast a precision timing signal (AURORA-T) embedded in
+АВРОРА satellites broadcast a precision timing signal (АВРОРА-T) embedded in
 the navigation message. Ground receivers extract nanosecond-accurate UTC time
 without GPS/GLONASS, using the receiver's own position fix to remove propagation
 delay. The receiver then acts as a local PTP grandmaster or NTP stratum-1 source.
@@ -9,7 +9,7 @@ delay. The receiver then acts as a local PTP grandmaster or NTP stratum-1 source
 Architecture (borrowed from Satelles STL + extended):
   1. Master clock (Cs/Maser) at Zheleznogorsk MCS generates LPT
   2. ISL chain distributes LPT to all 300 satellites (sigma_ISL = sqrt(N)*ppb*T)
-  3. Each satellite broadcasts AURORA-T frame every 10 s on L1/L5
+  3. Each satellite broadcasts АВРОРА-T frame every 10 s on L1/L5
   4. Ground receiver solves position -> range -> removes propagation delay
   5. Remaining error: ISL clock + receiver noise + atmospheric residual
   6. Receiver outputs: 1PPS (< 5 ns), PTP sync (IEEE 1588-2019), NTP stratum-1
@@ -22,7 +22,7 @@ Key advantage vs GPS timing:
 Protocol comparison:
   - NTP  (RFC 5905): millisecond accuracy, UDP/IP, existing infrastructure
   - PTP  (IEEE 1588-2019): nanosecond accuracy, hardware timestamping, telecom
-  - AURORA-T: the satellite-layer that feeds PTP/NTP grandmasters
+  - АВРОРА-T: the satellite-layer that feeds PTP/NTP grandmasters
   - TWSTT: two-way time transfer for MCS ground stations (highest accuracy)
 """
 
@@ -49,7 +49,7 @@ PTP_CLASSES = [
     (1_000_000,  "PTP Class 37  (< 1 ms)   - Basic")
 ]
 
-# ── Clock types available for AURORA master station ───────────────────────────
+# ── Clock types available for АВРОРА master station ───────────────────────────
 CLOCK_TYPES = {
     "ocxo":  {"ppb": 1.0,    "label": "OCXO    (1 ppb)"},
     "rb":    {"ppb": 0.1,    "label": "Rb      (0.1 ppb)"},
@@ -63,7 +63,7 @@ ATM_RESIDUAL_NS   = 0.17  # L1+L5 dual-freq atmospheric residual (~0.05 m / c)
 MULTIPATH_NS      = 0.50  # Open-sky multipath on timing signal
 PROP_RESIDUAL_PCT = 0.10  # Range-correction residual: 10% of position -> time
 
-# ── AURORA-T frame specification ──────────────────────────────────────────────
+# ── АВРОРА-T frame specification ──────────────────────────────────────────────
 AURORA_T_FRAME = {
     "broadcast_interval_s": 10,        # Frame every 10 s (vs GPS LNAV 30 s)
     "frame_bits": 500,                 # Total frame size
@@ -90,7 +90,7 @@ AURORA_T_FRAME = {
     ),
 }
 
-# ── Timing protocols that AURORA receiver feeds ───────────────────────────────
+# ── Timing protocols that АВРОРА receiver feeds ───────────────────────────────
 OUTPUT_PROTOCOLS = {
     "pps_1hz": {
         "name": "1PPS output",
@@ -107,7 +107,7 @@ OUTPUT_PROTOCOLS = {
     },
     "ntp": {
         "name": "NTP Stratum-1 (RFC 5905)",
-        "refid": "AURA",              # NTP reference ID for AURORA
+        "refid": "AURA",              # NTP reference ID for АВРОРА
         "poll_interval_s": 16,
         "precision_ns": 2,            # clock_precision exponent
     },
@@ -203,7 +203,7 @@ def compute_twstt_accuracy(
         "sigma_asymmetry_ns":  sigma_asymmetry_ns,
         "sigma_mp_ns":         sigma_mp_ns,
         "sigma_total_ns":      round(sigma_total_ns, 3),
-        "note": "TWSTT used only at MCS uplink stations; user terminals use one-way AURORA-T",
+        "note": "TWSTT used only at MCS uplink stations; user terminals use one-way АВРОРА-T",
     }
 
 
@@ -310,7 +310,7 @@ def run_mixed_clock_analysis(
     ocxo_sync_interval_s: float = 10.0,
 ) -> dict:
     """
-    Mixed-clock constellation analysis for AURORA Phase 4.
+    Mixed-clock constellation analysis for АВРОРА Phase 4.
 
     Architecture:
       - cs_per_plane Cs satellites per orbital plane: timing anchors
@@ -401,7 +401,7 @@ def run_mixed_clock_analysis(
 def _plot_mixed_clock(results: dict, output_dir: str, label: str):
     fig, axes = plt.subplots(1, 3, figsize=(17, 6))
     fig.suptitle(
-        f"AURORA Mixed-Clock Constellation Analysis  "
+        f"АВРОРА Mixed-Clock Constellation Analysis  "
         f"({results['n_total']} sats: {results['n_cs']} Cs + "
         f"{results['n_rb']} Rb + {results['n_ocxo']} OCXO)",
         fontsize=13, fontweight="bold"
@@ -496,7 +496,7 @@ def _plot_mixed_clock(results: dict, output_dir: str, label: str):
 def _print_mixed_clock_summary(results: dict):
     sep = "=" * 72
     print(f"\n{sep}")
-    print("  AURORA MIXED-CLOCK CONSTELLATION ANALYSIS")
+    print("  АВРОРА MIXED-CLOCK CONSTELLATION ANALYSIS")
     print(sep)
 
     n = results
@@ -568,7 +568,7 @@ def run_timing_service_analysis(
     uere_combined_m: float = 1.69,
 ) -> dict:
     """
-    Full AURORA-T timing service analysis:
+    Full АВРОРА-T timing service analysis:
       - Timing accuracy budget for all clock types × two operating modes
       - PTP class achievable
       - TWSTT for ground stations
@@ -619,7 +619,7 @@ def _plot_timing_accuracy(budgets: dict, output_dir: str, label: str):
     Reference lines for PTP classes.
     """
     fig, axes = plt.subplots(1, 2, figsize=(15, 7), sharey=True)
-    fig.suptitle("AURORA-T Timing Service - Accuracy Budget by Clock Type",
+    fig.suptitle("АВРОРА-T Timing Service - Accuracy Budget by Clock Type",
                  fontsize=14, fontweight="bold")
 
     keys   = list(CLOCK_TYPES.keys())
@@ -676,8 +676,8 @@ def _plot_timing_accuracy(budgets: dict, output_dir: str, label: str):
 
 def _plot_protocol_stack(output_dir: str, label: str):
     """
-    Horizontal diagram showing AURORA-T protocol stack and timing chain:
-    MCS -> ISL -> Satellite -> AURORA-T broadcast -> Receiver -> PTP/NTP/1PPS
+    Horizontal diagram showing АВРОРА-T protocol stack and timing chain:
+    MCS -> ISL -> Satellite -> АВРОРА-T broadcast -> Receiver -> PTP/NTP/1PPS
     """
     fig, ax = plt.subplots(figsize=(14, 5))
     ax.set_xlim(0, 14)
@@ -685,7 +685,7 @@ def _plot_protocol_stack(output_dir: str, label: str):
     ax.axis("off")
     ax.set_facecolor("#F8F9FA")
     fig.patch.set_facecolor("#F8F9FA")
-    fig.suptitle("AURORA-T Protocol Chain - From Master Clock to PTP Grandmaster",
+    fig.suptitle("АВРОРА-T Protocol Chain - From Master Clock to PTP Grandmaster",
                  fontsize=13, fontweight="bold", y=0.98)
 
     blocks = [
@@ -733,7 +733,7 @@ def _print_timing_summary(results: dict):
     sep = "=" * 72
 
     print(f"\n{sep}")
-    print("  AURORA-T TIMING SERVICE - ACCURACY SUMMARY")
+    print("  АВРОРА-T TIMING SERVICE - ACCURACY SUMMARY")
     print(sep)
 
     for mode_key, mode_label in [
@@ -755,7 +755,7 @@ def _print_timing_summary(results: dict):
           f"Multipath: {tw['sigma_mp_ns']} ns")
 
     frame = results["aurora_t_frame"]
-    print(f"\n  AURORA-T Frame Protocol:")
+    print(f"\n  АВРОРА-T Frame Protocol:")
     print(f"    Broadcast interval : {frame['broadcast_interval_s']} s (vs GPS LNAV 30 s)")
     print(f"    Frame size         : {frame['frame_bits']} bits @ {frame['data_rate_bps']} bps")
     print(f"    Authentication     : TESLA MAC ({frame['fields']['tesla_mac']} bits, "

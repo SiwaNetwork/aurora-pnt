@@ -1,7 +1,7 @@
 """
-Программно-определяемый приёмник (SDR) AURORA PNT — захват и слежение.
+Программно-определяемый приёмник (SDR) АВРОРА — захват и слежение.
 
-Реализует полный конвейер обработки сигнала AURORA L1 BOC(1,1):
+Реализует полный конвейер обработки сигнала АВРОРА L1 BOC(1,1):
 1) Генерация принимаемого сигнала на промежуточной частоте f_IF = 4 МГц
    при частоте дискретизации 16,368 МГц с заданными C/N₀ и Доплером.
 2) Параллельный 2D-захват (Doppler × code-phase) через FFT
@@ -30,14 +30,14 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 
-# ── Сигнальные параметры AURORA L1 ─────────────────────────────────────────
+# ── Сигнальные параметры АВРОРА L1 ─────────────────────────────────────────
 F_IF       = 4.0e6           # промежуточная частота, Гц
 F_SAMPLE   = 16.368e6        # частота дискретизации, Гц (16 × чип. скор.)
 F_CHIP_L1  = 1.023e6         # чиповая скорость L1 C/A / BOC(1,1) PRN
 N_CHIPS_CA = 1023            # длина дальномерного кода 1 мс (C/A)
 T_CODE     = 1.0e-3          # период кода, с
 
-# Бюджет линии AURORA на L1 — из §10
+# Бюджет линии АВРОРА на L1 — из §10
 CN0_BUDGET_DBHZ = 52.6       # C/N₀ в зените, дБ-Гц
 
 # Слежение
@@ -449,7 +449,7 @@ def _plot_acquisition_3d(acq: Dict, output_dir: str, label: str) -> None:
     ax2.grid(alpha=0.3)
 
     fig.suptitle(
-        f"Захват AURORA L1 — C/N₀ = {CN0_BUDGET_DBHZ:.1f} дБ-Гц, PSR = {acq['psr']:.2f} [{label}]"
+        f"Захват АВРОРА L1 — C/N₀ = {CN0_BUDGET_DBHZ:.1f} дБ-Гц, PSR = {acq['psr']:.2f} [{label}]"
     )
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"sdr_acquisition_3d_{label}.png"), dpi=150)
@@ -490,7 +490,7 @@ def _plot_tracking(trk: Dict, output_dir: str, label: str) -> None:
     ax.set_title("Измерения фазы кода (DLL)")
     ax.grid(alpha=0.3)
 
-    fig.suptitle(f"Слежение AURORA L1 — PLL/DLL петли [{label}]")
+    fig.suptitle(f"Слежение АВРОРА L1 — PLL/DLL петли [{label}]")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"sdr_tracking_loops_{label}.png"), dpi=150)
     plt.close(fig)
@@ -505,7 +505,7 @@ def _plot_ttff_vs_cn0(ttff: Dict, res: Dict,
     ax.errorbar(cn0, med, yerr=std, fmt="-o", color=PALETTE["green"],
                 lw=2, capsize=4, label="Cold start медиана ± σ")
     ax.axvline(CN0_BUDGET_DBHZ, ls="--", color=PALETTE["blue"], lw=1.3,
-               label=f"Бюджет AURORA: {CN0_BUDGET_DBHZ:.1f} дБ-Гц")
+               label=f"Бюджет АВРОРА: {CN0_BUDGET_DBHZ:.1f} дБ-Гц")
     ax.axhline(res["ttff_at_budget_s"], ls=":", color=PALETTE["orange"],
                lw=1.3, label=f"TTFF при бюджете: {res['ttff_at_budget_s']:.1f} с")
     ax.set_xlabel("C/N₀ (дБ-Гц)")
@@ -567,7 +567,7 @@ def print_sdr_receiver_summary(label: str, results: Dict) -> None:
     print(f"\n{sep}")
     print(f"  SDR Receiver Analysis -- {label}")
     print(sep)
-    print(f"  Захват AURORA L1 (C/N0 = {results['cn0_budget_dbhz']:.1f} дБ-Гц):")
+    print(f"  Захват АВРОРА L1 (C/N0 = {results['cn0_budget_dbhz']:.1f} дБ-Гц):")
     print(f"    Истинный Доплер  : {results['doppler_true_hz']/1000:.2f} кГц")
     print(f"    Захвач. Доплер   : {results['doppler_acq_hz']/1000:.2f} кГц "
           f"(ошибка {results['doppler_acq_err_hz']:+.0f} Гц)")

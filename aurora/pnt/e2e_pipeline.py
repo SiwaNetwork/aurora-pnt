@@ -1,5 +1,5 @@
 """
-Сквозная end-to-end PVT-симуляция AURORA PNT.
+Сквозная end-to-end PVT-симуляция АВРОРА.
 
 Упрощённая модель «голым numpy» — без scipy / skyfield. Стек:
   1. Пропагация 300 КА: Walker 300/15 (i=75°, h=1000 км), круговые орбиты,
@@ -303,7 +303,7 @@ def _plot_position_error(user_results, output_dir, label):
 
     ax1.axhline(50, ls="--", color="#6c5ce7", lw=1.2, label="50 см (цель CEP95)")
     ax1.set_ylabel("Гор. ошибка (см)")
-    ax1.set_title(f"AURORA E2E PVT — ошибки позиционирования за 24 ч  [{label}]")
+    ax1.set_title(f"АВРОРА E2E PVT — ошибки позиционирования за 24 ч  [{label}]")
     ax1.legend(fontsize=8, ncol=3, loc="upper right")
     ax1.grid(alpha=0.3)
     ax1.set_ylim(0, 120)
@@ -330,7 +330,7 @@ def _plot_pdop(user_results, output_dir, label):
     ax.axhline(4.0, ls=":",  color="#e17055", lw=1.3, label="PDOP 4 — пороговый")
     ax.set_xlabel("Время (часы)")
     ax.set_ylabel("PDOP")
-    ax.set_title(f"AURORA E2E PVT — PDOP за 24 ч  [{label}]")
+    ax.set_title(f"АВРОРА E2E PVT — PDOP за 24 ч  [{label}]")
     ax.set_ylim(0, 6)
     ax.legend(fontsize=9, ncol=3, loc="upper right")
     ax.grid(alpha=0.3)
@@ -349,7 +349,7 @@ def _plot_nvis(user_results, output_dir, label):
     ax.axhline(8, ls=":",  color="#00b894", lw=1.3, label="N = 8 (целевой минимум)")
     ax.set_xlabel("Время (часы)")
     ax.set_ylabel("N видимых КА (elev > 10°)")
-    ax.set_title(f"AURORA E2E PVT — число видимых КА  [{label}]")
+    ax.set_title(f"АВРОРА E2E PVT — число видимых КА  [{label}]")
     ax.legend(fontsize=9, ncol=3, loc="upper right")
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -375,7 +375,7 @@ def _plot_cdf(user_results, output_dir, label):
     ax.axhline(95.0, ls=":",  color="#2d3436", lw=1.0, label="95 %")
     ax.set_xlabel("Горизонтальная ошибка (см)")
     ax.set_ylabel("CDF, %")
-    ax.set_title(f"AURORA E2E PVT — CDF гор. ошибок (4 точки)  [{label}]")
+    ax.set_title(f"АВРОРА E2E PVT — CDF гор. ошибок (4 точки)  [{label}]")
     ax.set_xlim(0, 120)
     ax.set_ylim(0, 102)
     ax.legend(fontsize=9, loc="lower right")

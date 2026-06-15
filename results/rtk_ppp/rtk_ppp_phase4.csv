@@ -2,7 +2,7 @@ service,conv_time_s,conv_time_min,base_acc_cm,latency_ms
 GPS RTK,60.0,1.00,2.00,50
 GPS PPP (классич.),1500.0,25.00,5.00,200
 Galileo PPP (HAS),300.0,5.00,2.00,120
-AURORA PPP,30.0,0.50,1.50,50
-AURORA PPP-RTK,5.0,0.08,0.50,30
+АВРОРА PPP,30.0,0.50,1.50,50
+АВРОРА PPP-RTK,5.0,0.08,0.50,30
 latency_total_ms,70.3,,,
 rsn_spacing_km,300,,,

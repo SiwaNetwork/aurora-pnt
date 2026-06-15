@@ -1,5 +1,5 @@
 """
-Timing Chain Analysis for AURORA PNT.
+Timing Chain Analysis for АВРОРА.
 
 Models the complete timing chain from master Cs frequency standard
 to user 1PPS output, computing Allan deviation, ISL transfer noise,
@@ -95,7 +95,7 @@ CHAIN = {
         "clock":       "H-мазер Ч1-1008 (земля)",
         "isl_hops":    0,
         "sync_interval_s": 0.0,
-        "desc": "Наземный эталон UTC(SU); определяет шкалу AURORA Time (AT)",
+        "desc": "Наземный эталон UTC(SU); определяет шкалу АВРОРА Time (AT)",
     },
     "space-Rb (якорь, TWSTT)": {
         "clock":       "space-Rb (якорь)",
@@ -214,7 +214,7 @@ def chain_level_budget(level_key: str) -> Dict:
     isl_ns = isl_transfer_noise_ns(n_hops, mode="code")
 
     # Relativistic corrections (Sagnac + relativistic frequency shift)
-    # AURORA: orbital velocity 7.35 km/s, altitude 1000 km
+    # АВРОРА: orbital velocity 7.35 km/s, altitude 1000 km
     # Relativistic freq shift: (gh/c² - v²/2c²) ≈ 5.4e-10 → ±0.2 ns/s if uncompensated
     relativistic_ns = 0.2 if n_hops > 0 else 0.0
 
@@ -338,7 +338,7 @@ def _plot_adev(tau_range, output_dir, label):
     ax.axhline(1e-10, ls=":", color="#ccc", lw=0.8, label="1e-10 (0.1 нс/с)")
     ax.set_xlabel("Интервал усреднения τ (с)")
     ax.set_ylabel("Отклонение Аллана ADEV(τ)")
-    ax.set_title(f"AURORA PNT — Отклонение Аллана часов созвездия [{label}]")
+    ax.set_title(f"АВРОРА — Отклонение Аллана часов созвездия [{label}]")
     ax.legend(fontsize=9)
     ax.grid(True, which="both", alpha=0.3)
     plt.tight_layout()
@@ -356,7 +356,7 @@ def _plot_isl_transfer(hops_range, isl_code, isl_phase, output_dir, label):
     ax.axhline(1.0,  ls=":",  color="#00b894", lw=1.2, label="1 нс (телеком цель)")
     ax.set_xlabel("Количество прыжков ISL")
     ax.set_ylabel("Погрешность синхронизации (нс, 1σ)")
-    ax.set_title(f"AURORA — Погрешность передачи времени через ISL [{label}]")
+    ax.set_title(f"АВРОРА — Погрешность передачи времени через ISL [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -377,7 +377,7 @@ def _plot_holdover(holdover_t, holdover_curves, output_dir, label):
     ax.axhline(100,  ls="--", color="#e17055", lw=1.2, label="100 нс (ITU-T G.8272)")
     ax.set_xlabel("Время без синхронизации (с)")
     ax.set_ylabel("Накопленная погрешность (нс)")
-    ax.set_title(f"AURORA — Деградация хранения времени (holdover) [{label}]")
+    ax.set_title(f"АВРОРА — Деградация хранения времени (holdover) [{label}]")
     ax.legend(fontsize=9)
     ax.grid(True, which="both", alpha=0.3)
     plt.tight_layout()
@@ -405,7 +405,7 @@ def _plot_chain_budget(chain_budgets, output_dir, label):
     ax.set_xticks(x)
     ax.set_xticklabels([l.split("(")[0].strip() for l in levels], rotation=25, ha="right", fontsize=8)
     ax.set_ylabel("Погрешность синхронизации (нс, 1σ)")
-    ax.set_title(f"AURORA — Бюджет погрешности по уровням цепи синхронизации [{label}]")
+    ax.set_title(f"АВРОРА — Бюджет погрешности по уровням цепи синхронизации [{label}]")
     ax.legend(fontsize=9)
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
@@ -437,7 +437,7 @@ def _plot_user_budget(user_budgets, output_dir, label):
         ax.grid(axis="y", alpha=0.3)
 
     axes[0].set_ylabel("Суммарная погрешность 1PPS (нс, 1σ)")
-    fig.suptitle(f"AURORA PNT — Сквозной бюджет погрешности синхронизации [{label}]", fontsize=11)
+    fig.suptitle(f"АВРОРА — Сквозной бюджет погрешности синхронизации [{label}]", fontsize=11)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"timing_user_budget_{label}.png"), dpi=150)
     plt.close(fig)
@@ -466,7 +466,7 @@ def print_timing_chain_summary(label: str, result: Dict) -> None:
     print(f"  Timing Chain Analysis -- {label}")
     print(sep)
 
-    print(f"\n  Часы созвездия AURORA:")
+    print(f"\n  Часы созвездия АВРОРА:")
     print(f"  {'Тип':<25} {'ADEV(1с)':>12}  {'ADEV(60с)':>12}  {'Хранение 1ч':>12}")
     print(f"  {'':─<65}")
     for ck, c in CLOCKS.items():

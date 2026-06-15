@@ -13,7 +13,7 @@ code_family,length,family_size,c_max_norm_db,merit_factor,enough_for_300
 Gold (n=8191),8191,8193,-36.1,6.3,True
 "Weil (n=10223, GPS L1C)",10223,5111,-34.1,1703.8,True
 "Memory (оптимиз., GPS L5)",10230,210,-40.4,12.5,False
-"Расшир. Memory (≥350, AURORA L5)",10230,350,-39.4,11.0,True
+"Расшир. Memory (≥350, АВРОРА L5)",10230,350,-39.4,11.0,True
 Kasami Large (n=4095),4095,16777215,-30.0,5.5,True
 
 === NAV MESSAGE ===
@@ -23,7 +23,7 @@ GPS L5 (CNAV),50,"Свёрт. r=1/2, K=7",45,60,Нет
 GPS L1C (CNAV-2),100,LDPC(1/2) + BCH,30,30,NMA (планируется)
 Galileo E1 (INAV),250,"Свёрт. r=1/2, K=7",30,60,OSNMA (128-bit ECDSA)
 Galileo E5a (FNAV),50,"Свёрт. r=1/2, K=7",30,60,Нет
-AURORA L1 (ANAV — предл.),500,LDPC(1/2) + CRC32,5,10,TESLA MAC (128-bit HMAC-SHA256)
+АВРОРА L1 (ANAV — предл.),500,LDPC(1/2) + CRC32,5,10,TESLA MAC (128-bit HMAC-SHA256)
 
 === TESLA MAC ===
 key_bits,128

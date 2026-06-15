@@ -1,5 +1,5 @@
 """
-Модель угроз и киберустойчивость AURORA PNT (STRIDE / PASTA).
+Модель угроз и киберустойчивость АВРОРА (STRIDE / PASTA).
 
 Сегменты, рассматриваемые в модели:
   1. SIS (Signal-In-Space)        — спуфинг, meaconing, replay, jamming.
@@ -126,7 +126,7 @@ COUNTERMEASURES: Dict[str, Tuple[str, str, str, float]] = {
 
 
 def run_cybersec_analysis(output_dir: str, label: str) -> Dict:
-    """Запускает анализ модели угроз AURORA PNT."""
+    """Запускает анализ модели угроз АВРОРА."""
     os.makedirs(output_dir, exist_ok=True)
 
     threats = []
@@ -176,7 +176,7 @@ def run_cybersec_analysis(output_dir: str, label: str) -> Dict:
 
 # ── 1. Дерево угроз ──────────────────────────────────────────────────────────
 def _plot_threat_tree(threats, output_dir, label):
-    """Иерархическая диаграмма угроз: ствол AURORA → 5 сегментов → угрозы."""
+    """Иерархическая диаграмма угроз: ствол АВРОРА → 5 сегментов → угрозы."""
     fig, ax = plt.subplots(figsize=(15, 9))
     ax.set_xlim(0, 100)
     ax.set_ylim(0, 100)
@@ -188,7 +188,7 @@ def _plot_threat_tree(threats, output_dir, label):
                           boxstyle="round,pad=0.3",
                           facecolor="#2d3436", edgecolor="white", linewidth=2)
     ax.add_patch(root)
-    ax.text(root_x, root_y, "AURORA PNT", color="white",
+    ax.text(root_x, root_y, "АВРОРА", color="white",
             ha="center", va="center", fontsize=12, fontweight="bold")
 
     # 5 сегментов
@@ -234,7 +234,7 @@ def _plot_threat_tree(threats, output_dir, label):
             ax.text(sx + 5.6, ty - 1.7, f"R={t['residual']:.2f}",
                     fontsize=6, color="#e17055", ha="left")
 
-    ax.set_title(f"Дерево угроз AURORA PNT  [{label}]   "
+    ax.set_title(f"Дерево угроз АВРОРА  [{label}]   "
                  f"({len(threats)} угроз, 5 сегментов)", fontsize=12, pad=10)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"cyber_threat_tree_{label}.png"), dpi=150)
@@ -281,7 +281,7 @@ def _plot_risk_matrix(threats, output_dir, label):
     ax.set_ylabel("Воздействие I")
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 10)
-    ax.set_title(f"Матрица рисков AURORA PNT (Probability × Impact)  [{label}]")
+    ax.set_title(f"Матрица рисков АВРОРА (Probability × Impact)  [{label}]")
     ax.grid(alpha=0.25)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"cyber_risk_matrix_{label}.png"), dpi=150)
@@ -310,7 +310,7 @@ def _plot_countermeasures(output_dir, label):
     ax.axvline(85, ls=":",  color="#6c5ce7", lw=1.3, label="85 % — высокая защита")
     ax.set_xlim(0, 105)
     ax.set_xlabel("Эффективность снижения риска, %")
-    ax.set_title(f"Защитные меры AURORA PNT — эффективность  [{label}]")
+    ax.set_title(f"Защитные меры АВРОРА — эффективность  [{label}]")
     ax.legend(fontsize=8, loc="lower right")
     ax.grid(axis="x", alpha=0.3)
     ax.invert_yaxis()

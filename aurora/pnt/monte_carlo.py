@@ -1,5 +1,5 @@
 """
-Monte Carlo Position Accuracy Simulation for AURORA PNT.
+Monte Carlo Position Accuracy Simulation for АВРОРА.
 
 Methodology:
   - PDOP is sampled from a lognormal distribution calibrated to real
@@ -271,7 +271,7 @@ def _plot_cdf_comparison(results: Dict, output_dir: str, label: str) -> None:
         ax.legend(fontsize=9)
         ax.grid(alpha=0.3)
 
-    fig.suptitle(f"AURORA PNT — Точность позиции Монте-Карло [{label}]", fontsize=12)
+    fig.suptitle(f"АВРОРА — Точность позиции Монте-Карло [{label}]", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"mc_cdf_{label}.png"), dpi=150)
     plt.close(fig)
@@ -301,7 +301,7 @@ def _plot_error_histograms(results: Dict, output_dir: str, label: str) -> None:
         ax.legend(fontsize=8)
         ax.grid(alpha=0.3)
 
-    fig.suptitle(f"AURORA PNT — Гистограммы ошибок [{label}]", fontsize=12)
+    fig.suptitle(f"АВРОРА — Гистограммы ошибок [{label}]", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"mc_hist_{label}.png"), dpi=150)
     plt.close(fig)

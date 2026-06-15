@@ -1,5 +1,5 @@
 """
-Реестр рисков AURORA PNT и количественная оценка.
+Реестр рисков АВРОРА и количественная оценка.
 
 Анализирует:
 - 25 идентифицированных рисков по 6 категориям (технические,
@@ -39,7 +39,7 @@ CATEGORIES = {
     "Эксплуатация":     "#74b9ff",
 }
 
-# ── Реестр рисков AURORA PNT (25 шт.) ────────────────────────────────────────
+# ── Реестр рисков АВРОРА (25 шт.) ────────────────────────────────────────
 # поля: id, категория, описание, P, S, владелец, мера митигации
 RISKS: List[Dict] = [
     # ─── Технические ────────────────────────────────────────────────────────
@@ -132,7 +132,7 @@ RISKS: List[Dict] = [
      "owner": "ИБ",
      "action": "Ротация ключей <30 с, HSM на MCS, разделение полномочий"},
     {"id": "C-02", "cat": "Кибер",
-     "desc": "Спуфинг сигнала AURORA", "P": 3, "S": 3,
+     "desc": "Спуфинг сигнала АВРОРА", "P": 3, "S": 3,
      "owner": "ИБ / приёмники",
      "action": "Аутентиф. навигационного сообщения OSNMA + TESLA, RF-watermark"},
     {"id": "C-03", "cat": "Кибер",
@@ -255,7 +255,7 @@ def _plot_matrix(risks: List[Dict], output_dir: str, label: str) -> None:
     ax.set_ylabel("Вероятность (P)")
     ax.set_xlim(0.5, 5.5)
     ax.set_ylim(0.5, 5.5)
-    ax.set_title(f"Матрица рисков AURORA PNT 5×5  [{label}]\n"
+    ax.set_title(f"Матрица рисков АВРОРА 5×5  [{label}]\n"
                  f"Всего рисков: {len(risks)},  сумма P×S = "
                  f"{sum(r['score'] for r in risks)}")
     ax.grid(alpha=0.25, color="white")
@@ -297,7 +297,7 @@ def _plot_top10(top10: List[Dict], output_dir: str, label: str) -> None:
     ax.axvline(21, ls="-.", color="#6c5ce7", lw=1.4, label="порог Critical")
 
     ax.set_xlabel("Оценка приоритета P × S")
-    ax.set_title(f"Топ-10 рисков AURORA PNT по приоритету  [{label}]")
+    ax.set_title(f"Топ-10 рисков АВРОРА по приоритету  [{label}]")
     ax.invert_yaxis()
     ax.set_xlim(0, max(scores) * 1.35)
     ax.legend(fontsize=9, loc="lower right")
@@ -345,7 +345,7 @@ def _plot_categories(by_cat: Dict[str, List[Dict]],
     # подпись по уровням
     lvl_str = "  |  ".join(f"{lv}: {by_level[lv]}"
                             for lv in ["Critical", "High", "Medium", "Low"])
-    fig.suptitle(f"AURORA PNT — Реестр рисков  [{label}]\n{lvl_str}",
+    fig.suptitle(f"АВРОРА — Реестр рисков  [{label}]\n{lvl_str}",
                  fontsize=11, y=1.02)
 
     plt.tight_layout()
@@ -386,7 +386,7 @@ def _plot_burndown(total_score: int, output_dir: str, label: str) -> None:
 
     ax.set_xlabel("Месяц от начала программы митигации")
     ax.set_ylabel("Суммарный остаточный риск (Σ P × S)")
-    ax.set_title(f"Burn-down остаточного риска AURORA PNT  [{label}]\n"
+    ax.set_title(f"Burn-down остаточного риска АВРОРА  [{label}]\n"
                  f"Стартовое значение Σ P×S = {total_score}")
     ax.legend(fontsize=9, loc="upper right")
     ax.grid(alpha=0.3)
@@ -414,7 +414,7 @@ def _save_csv(risks: List[Dict], output_dir: str, label: str) -> None:
 def print_risks_summary(label: str, results: Dict) -> None:
     sep = "=" * 78
     print(f"\n{sep}")
-    print(f"  AURORA PNT -- Risks Register  --  {label}")
+    print(f"  АВРОРА -- Risks Register  --  {label}")
     print(sep)
     print(f"  Всего рисков:      {results['n_total']}")
     print(f"  Суммарный Σ P×S:   {results['total_score']}")

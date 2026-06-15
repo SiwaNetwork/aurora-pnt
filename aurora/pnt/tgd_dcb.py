@@ -1,5 +1,5 @@
 """
-Межчастотная аппаратная задержка TGD/DCB для AURORA PNT.
+Межчастотная аппаратная задержка TGD/DCB для АВРОРА.
 
 В тракте КА сигналы L1 и L5 проходят разные цепи и приобретают разную групповую
 задержку. Разность — TGD (Timing Group Delay) / DCB (Differential Code Bias) —
@@ -75,7 +75,7 @@ def run_tgd_dcb_analysis(output_dir: str, label: str) -> Dict:
     ax.axhline(0.70, ls="--", color="#0652DD", lw=1.2)
     ax.text(2.4, 0.72, "UERE dual ≈ 0,70 м", color="#0652DD", fontsize=8, ha="right")
     ax.set_ylabel("Вклад в дальностную ошибку, м (1σ)")
-    ax.set_title(f"AURORA PNT — вклад TGD/DCB в UERE [{label}]\n"
+    ax.set_title(f"АВРОРА — вклад TGD/DCB в UERE [{label}]\n"
                  f"(TGD ≈ {b['tgd_nominal_ns']:.0f} нс; калибровка DCB "
                  f"{b['dcb_cal_ns']:.2f} нс 1σ)")
     ax.grid(axis="y", alpha=0.3)

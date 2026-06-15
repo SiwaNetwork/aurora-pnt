@@ -1,5 +1,5 @@
 """
-Conjunction Probability and Collision Avoidance for AURORA PNT.
+Conjunction Probability and Collision Avoidance for АВРОРА.
 
 Monte Carlo analysis of satellite conjunction events at 1000 km orbit.
 Models:
@@ -199,10 +199,10 @@ def _plot_debris_flux(alt_km, flux_profile, output_dir, label):
     ax.semilogy(alt_km, [f * 10 for f in flux_profile], color="#fdcb6e",
                 lw=2, ls="--", label="1–10 см (≈×10)")
     ax.axvline(AURORA_ALT_M / 1000, ls=":", color="#0984e3", lw=1.5,
-               label=f"AURORA {AURORA_ALT_M/1000:.0f} км")
+               label=f"АВРОРА {AURORA_ALT_M/1000:.0f} км")
     ax.set_xlabel("Высота орбиты (км)")
     ax.set_ylabel("Поток мусора (#/м²/год)")
-    ax.set_title(f"AURORA — Поток орбитального мусора от высоты [{label}]")
+    ax.set_title(f"АВРОРА — Поток орбитального мусора от высоты [{label}]")
     ax.legend(fontsize=9)
     ax.grid(True, which="both", alpha=0.3)
     plt.tight_layout()
@@ -235,7 +235,7 @@ def _plot_miss_distance_hist(mc, output_dir, label):
     axes[1].legend(fontsize=9)
     axes[1].grid(alpha=0.3)
 
-    fig.suptitle(f"AURORA PNT — Монте-Карло сближений [{label}]  "
+    fig.suptitle(f"АВРОРА — Монте-Карло сближений [{label}]  "
                  f"({mc['n_trials']:,} испытаний)", fontsize=11)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"conjunction_mc_{label}.png"), dpi=150)
@@ -252,7 +252,7 @@ def _plot_cam_budget(n_sats_range, total_cams, output_dir, label):
     for i, (lbl, v) in enumerate(zip(phase_names, total_cams)):
         ax.text(i, v + 1, f"{v:.0f} манёвров", ha="center", fontsize=8)
     ax.set_ylabel("Всего манёвров предотвращения за 7 лет")
-    ax.set_title(f"AURORA — Бюджет манёвров CAM по фазам [{label}]")
+    ax.set_title(f"АВРОРА — Бюджет манёвров CAM по фазам [{label}]")
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"conjunction_cam_{label}.png"), dpi=150)

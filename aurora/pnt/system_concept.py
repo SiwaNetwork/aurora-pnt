@@ -1,5 +1,5 @@
 """
-Концептуальные иллюстрации системы AURORA PNT.
+Концептуальные иллюстрации системы АВРОРА.
 
 Генерирует наглядные схемы:
   1. system_overview  — спутник, сигнал, потребители, наземный сегмент
@@ -162,7 +162,7 @@ def _plot_system_overview(output_dir, label):
 
     # ── Орбиты (дуги) ─────────────────────────────────────────────────────────
     for r_o, col, lw, alph in [
-        (earth_r + 0.19, C["aurora"], 1.8, 0.5),   # AURORA LEO 1000 км
+        (earth_r + 0.19, C["aurora"], 1.8, 0.5),   # АВРОРА LEO 1000 км
         (earth_r + 0.48, C["gps"],    1.0, 0.2),   # GPS MEO (условно)
     ]:
         ot = np.linspace(0.12, math.pi - 0.12, 400)
@@ -177,7 +177,7 @@ def _plot_system_overview(output_dir, label):
     ax.text(0.94, 0.80, "MEO 20 200 км", color=C["gps"],
             fontsize=7, alpha=0.5, rotation=-12, zorder=4)
 
-    # ── Спутники AURORA ───────────────────────────────────────────────────────
+    # ── Спутники АВРОРА ───────────────────────────────────────────────────────
     sat_pos = [
         (0.500, 0.695),   # центральный (главный)
         (0.230, 0.570),   # левый
@@ -190,7 +190,7 @@ def _plot_system_overview(output_dir, label):
                    zorder=10)
 
     # Надпись у главного спутника
-    ax.text(0.500, 0.755, "AURORA PNT", color=C["aurora"],
+    ax.text(0.500, 0.755, "АВРОРА", color=C["aurora"],
             fontsize=11, fontweight="bold", ha="center", zorder=12,
             path_effects=GLOW)
     ax.text(0.500, 0.733, "L1 1575,42 МГц · L5 1176,45 МГц",
@@ -260,7 +260,7 @@ def _plot_system_overview(output_dir, label):
             color=C["mcs"], lw=2.5, zorder=8)
     ax.plot(mcs_x - 0.015, mcs_y + 0.01,
             marker=(3, 0, -30), ms=10, color=C["mcs"], zorder=9)
-    ax.text(mcs_x, mcs_y - 0.045, "МКС AURORA\n21 станция",
+    ax.text(mcs_x, mcs_y - 0.045, "МКС АВРОРА\n21 станция",
             color=C["mcs"], fontsize=7.5, ha="center",
             fontweight="bold", zorder=12, path_effects=SHADOW)
 
@@ -295,7 +295,7 @@ def _plot_system_overview(output_dir, label):
 
     # ── Заголовок и подпись ───────────────────────────────────────────────────
     ax.text(0.5, 0.965,
-            "AURORA PNT — Системная концепция",
+            "АВРОРА — Системная концепция",
             color=C["white"], fontsize=16, fontweight="bold",
             ha="center", va="top", zorder=15,
             path_effects=[pe.withStroke(linewidth=6,
@@ -335,7 +335,7 @@ def _plot_service_scenarios(output_dir, label):
             "title":   "Авиация — захода на посадку (LPV-200)",
             "acc":     "< 1 м вертикально",
             "ttff":    "Горячий старт: 1,5 с",
-            "service": "AURORA PPP + СДКМ",
+            "service": "АВРОРА PPP + СДКМ",
             "color":   "#0984e3",
             "icon":    "plane",
             "details": [
@@ -351,7 +351,7 @@ def _plot_service_scenarios(output_dir, label):
             "title":   "Высокоточная геодезия (PPP-RTK)",
             "acc":     "0,5–1 см (H-68%)",
             "ttff":    "Сходимость: 5 с",
-            "service": "AURORA PPP-RTK + RSN",
+            "service": "АВРОРА PPP-RTK + RSN",
             "color":   C["aurora"],
             "icon":    "geo",
             "details": [
@@ -367,7 +367,7 @@ def _plot_service_scenarios(output_dir, label):
             "title":   "Автомобиль / БПЛА (Lane-level)",
             "acc":     "< 0,5 м (H-95%)",
             "ttff":    "Тёплый старт: 5 с",
-            "service": "AURORA PPP / PPP-RTK",
+            "service": "АВРОРА PPP / PPP-RTK",
             "color":   "#fdcb6e",
             "icon":    "car",
             "details": [
@@ -383,7 +383,7 @@ def _plot_service_scenarios(output_dir, label):
             "title":   "Синхронизация / LPT-сервис",
             "acc":     "< 5 нс (UTC(SU))",
             "ttff":    "Время удержания: 72 ч",
-            "service": "AURORA LPT · ISL-сетка",
+            "service": "АВРОРА LPT · ISL-сетка",
             "color":   C["mcs"],
             "icon":    "tower",
             "details": [
@@ -430,7 +430,7 @@ def _plot_service_scenarios(output_dir, label):
         aey = 0.24 + 0.235 * np.sin(tet) * 0.5
         ax.fill_between(ex, ey, aey, color=C["atm"], alpha=0.12, zorder=2)
 
-        # Орбитальная дуга AURORA
+        # Орбитальная дуга АВРОРА
         sat_y = sc["sat_h"]
         orb_r = 0.36
         ot = np.linspace(0.25, math.pi - 0.25, 200)
@@ -442,7 +442,7 @@ def _plot_service_scenarios(output_dir, label):
         # Спутник
         sat_x = scene_cx
         _satellite(ax, sat_x, sat_y, size=0.045, color=col, zorder=9)
-        ax.text(sat_x, sat_y + 0.07, "AURORA", color=col,
+        ax.text(sat_x, sat_y + 0.07, "АВРОРА", color=col,
                 fontsize=7.5, ha="center", fontweight="bold",
                 zorder=10, path_effects=SHADOW)
 
@@ -509,7 +509,7 @@ def _plot_service_scenarios(output_dir, label):
             ax.text(0.18, dy, detail, color=C["text"],
                     fontsize=8, va="center", zorder=10)
 
-    fig.text(0.5, 0.975, "AURORA PNT — Сценарии применения",
+    fig.text(0.5, 0.975, "АВРОРА — Сценарии применения",
              color=C["white"], fontsize=15, fontweight="bold",
              ha="center", va="top",
              path_effects=[pe.withStroke(linewidth=6,
@@ -559,7 +559,7 @@ def _plot_leo_vs_meo(output_dir, label):
     systems = [
         {
             "cx": 0.27, "sat_y": 0.54,
-            "label": "AURORA LEO",
+            "label": "АВРОРА LEO",
             "sublabel": "h = 1000 км",
             "color": C["aurora"],
             "sat_size": 0.05,
@@ -683,7 +683,7 @@ def _plot_leo_vs_meo(output_dir, label):
 
     # Заголовок
     ax.text(0.5, 0.972,
-            "AURORA LEO vs GPS MEO — Сравнение уровня сигнала и характеристик",
+            "АВРОРА LEO vs GPS MEO — Сравнение уровня сигнала и характеристик",
             color=C["white"], fontsize=14, fontweight="bold",
             ha="center", va="top", zorder=15,
             path_effects=[pe.withStroke(linewidth=6,
@@ -836,7 +836,7 @@ def _plot_signal_flow(output_dir, label):
                     alpha=0.6, zorder=7)
 
     ax.text(0.5, 0.955,
-            "AURORA PNT — Поток сигнала и данных: от атомных часов до навигационного решения",
+            "АВРОРА — Поток сигнала и данных: от атомных часов до навигационного решения",
             color=C["white"], fontsize=13, fontweight="bold",
             ha="center", va="top", zorder=15,
             path_effects=[pe.withStroke(linewidth=6,

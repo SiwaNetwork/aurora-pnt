@@ -1,5 +1,5 @@
 """
-Ionospheric Correction Analysis for AURORA PNT.
+Ionospheric Correction Analysis for АВРОРА.
 
 Compares residual ionospheric delay after applying:
   1. Klobuchar (GPS-compatible single-freq, 8 coefficients)
@@ -207,7 +207,7 @@ def _plot_iono_delay(tec_range, delay_l1, delay_l5, output_dir, label):
     ax.axvline(80,  ls=":", color="#fdcb6e", lw=1.2, label="Бури (80 TECU)")
     ax.set_xlabel("TEC (TECU, 1 TECU = 10¹⁶ эл/м²)")
     ax.set_ylabel("Ионосферная задержка (м)")
-    ax.set_title(f"AURORA — Ионосферная задержка от TEC [{label}]")
+    ax.set_title(f"АВРОРА — Ионосферная задержка от TEC [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -232,7 +232,7 @@ def _plot_residuals_vs_elevation(elevations, results, output_dir, label):
         ax.grid(alpha=0.3)
         ax.set_xlim(5, 90)
 
-    fig.suptitle(f"AURORA PNT — Остаточная ионосферная ошибка [{label}]", fontsize=12)
+    fig.suptitle(f"АВРОРА — Остаточная ионосферная ошибка [{label}]", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"iono_residuals_{label}.png"), dpi=150)
     plt.close(fig)
@@ -248,7 +248,7 @@ def _plot_lat_tec_profile(lat_deg, lat_profile, output_dir, label):
         ax.plot(lat_deg, tec_vals, lw=2, label=cond_key, color=color)
     ax.set_xlabel("Широта (°)")
     ax.set_ylabel("Вертикальный TEC (TECU)")
-    ax.set_title(f"AURORA — Широтный профиль TEC по условиям [{label}]")
+    ax.set_title(f"АВРОРА — Широтный профиль TEC по условиям [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -271,7 +271,7 @@ def _plot_model_comparison(results, output_dir, label):
     ax.set_xticks(x + w * (len(model_keys) - 1) / 2)
     ax.set_xticklabels(cond_keys, rotation=15, ha="right", fontsize=9)
     ax.set_ylabel("Остаточная ошибка при 30° (м, σ)")
-    ax.set_title(f"AURORA — Сравнение моделей коррекции ионосферы [{label}]")
+    ax.set_title(f"АВРОРА — Сравнение моделей коррекции ионосферы [{label}]")
     ax.legend(fontsize=9)
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()

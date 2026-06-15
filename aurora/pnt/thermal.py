@@ -1,5 +1,5 @@
 """
-Satellite Thermal Analysis for AURORA PNT.
+Satellite Thermal Analysis for АВРОРА.
 
 Models orbital temperature profile, equilibrium temperatures, and thermal
 requirements for OCXO stabilization.
@@ -228,7 +228,7 @@ def _plot_temp_profile(profiles, beta_cases, output_dir, label, altitude_m):
     ax.axhline(TEMP_LIMITS["Battery (Li-ion)"][0], ls=":", color="#fdcb6e", lw=1.0, label="Нижний предел АКБ")
     ax.set_xlabel("Время на орбите (минуты)")
     ax.set_ylabel("Температура корпуса спутника (°C)")
-    ax.set_title(f"AURORA — Профиль температуры на орбите [{label}]  ({altitude_m/1000:.0f} км)")
+    ax.set_title(f"АВРОРА — Профиль температуры на орбите [{label}]  ({altitude_m/1000:.0f} км)")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -262,7 +262,7 @@ def _plot_temp_vs_beta(beta_cases, profiles, ocxo_budgets, output_dir, label):
     axes[1].set_title("Тепловой запас OCXO от бета-угла")
     axes[1].grid(axis="y", alpha=0.3)
 
-    fig.suptitle(f"AURORA PNT — Тепловой анализ [{label}]")
+    fig.suptitle(f"АВРОРА — Тепловой анализ [{label}]")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"thermal_vs_beta_{label}.png"), dpi=150)
     plt.close(fig)

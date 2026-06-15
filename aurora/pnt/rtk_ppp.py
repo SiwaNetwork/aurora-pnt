@@ -1,9 +1,9 @@
 """
-PPP-RTK архитектура и анализ точности AURORA PNT.
+PPP-RTK архитектура и анализ точности АВРОРА.
 
 Анализирует:
 - Точность PPP-RTK vs расстояния до опорной станции
-- Время сходимости: классический PPP, PPP-RTK, AURORA PPP, AURORA PPP-RTK
+- Время сходимости: классический PPP, PPP-RTK, АВРОРА PPP, АВРОРА PPP-RTK
 - Архитектура сети опорных станций RSN (Reference Station Network)
 - Бюджет задержки конец-в-конец (latency budget)
 
@@ -47,7 +47,7 @@ SERVICES = {
         "latency_ms":       120.0,
         "color": "#0984e3", "ls": "-.", "marker": "^",
     },
-    "AURORA PPP": {
+    "АВРОРА PPP": {
         "base_acc_cm":      1.5,
         "dep_cm_per_km":    0.0,
         "max_base_km":      10000.0,
@@ -55,7 +55,7 @@ SERVICES = {
         "latency_ms":       50.0,
         "color": "#00b894", "ls": "-",  "marker": "D",
     },
-    "AURORA PPP-RTK": {
+    "АВРОРА PPP-RTK": {
         "base_acc_cm":      0.5,
         "dep_cm_per_km":    0.03,   # 0,03 см/км — почти не зависит от базы
         "max_base_km":      3000.0,
@@ -67,7 +67,7 @@ SERVICES = {
 
 # ── Бюджет задержки конец-в-конец ────────────────────────────────────────────
 LATENCY_BUDGET = {
-    "Сигнал AURORA → Земля": 3.3,
+    "Сигнал АВРОРА → Земля": 3.3,
     "Обработка RSN станции":  5.0,
     "RSN → Сервер (оптика)": 20.0,
     "Сервер: расчёт SSR":    10.0,
@@ -112,13 +112,13 @@ def _plot_accuracy_vs_baseline(output_dir, label):
         ax.plot(bases[mask], acc,
                 color=s["color"], lw=2.5, ls=s["ls"], label=name)
 
-    ax.axhline(0.5,  ls=":",  color="#6c5ce7", lw=1.3, label="0,5 см (AURORA PPP-RTK цель)")
+    ax.axhline(0.5,  ls=":",  color="#6c5ce7", lw=1.3, label="0,5 см (АВРОРА PPP-RTK цель)")
     ax.axhline(2.0,  ls=":",  color="#00b894", lw=1.0, label="2 см (геодезия)")
     ax.axhline(10.0, ls=":",  color="#fdcb6e", lw=1.0, label="10 см (авиация LPV-200)")
     ax.axhline(50.0, ls=":",  color="#dfe6e9", lw=1.0, label="50 см (авто)")
     ax.set_xlabel("Расстояние до ближайшей RSN-станции (км)")
     ax.set_ylabel("Горизонтальная точность 1σ (см)")
-    ax.set_title(f"AURORA PPP-RTK — точность vs расстояние до станции [{label}]")
+    ax.set_title(f"АВРОРА PPP-RTK — точность vs расстояние до станции [{label}]")
     ax.set_ylim(0, 55)
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
@@ -140,9 +140,9 @@ def _plot_convergence(conv_times, output_dir, label):
                 bar.get_y() + bar.get_height() / 2,
                 lbl, va="center", fontsize=10)
     ax.axvline(5 / 60, ls="--", color="#6c5ce7", lw=1.5,
-               label="5 с (AURORA PPP-RTK)")
+               label="5 с (АВРОРА PPP-RTK)")
     ax.axvline(1.0,    ls=":",  color="#00b894", lw=1.3,
-               label="1 мин (AURORA PPP)")
+               label="1 мин (АВРОРА PPP)")
     ax.set_xlabel("Время сходимости (мин)")
     ax.set_title(f"Время сходимости — сравнение сервисов [{label}]")
     ax.legend(fontsize=9)
@@ -216,12 +216,12 @@ def _plot_rsn_map(output_dir, label):
 
     ax.set_xlim(-100, 175)
     ax.set_ylim(-60, 90)
-    ax.axhline(75, ls="--", color="#6c5ce7", lw=1.3, label="Наклонение AURORA 75°")
+    ax.axhline(75, ls="--", color="#6c5ce7", lw=1.3, label="Наклонение АВРОРА 75°")
     ax.axhline(-75, ls="--", color="#6c5ce7", lw=1.3)
     ax.set_xlabel("Долгота (°)")
     ax.set_ylabel("Широта (°)")
     ax.set_title(
-        f"AURORA PPP-RTK — Сеть опорных станций RSN [{label}]\n"
+        f"АВРОРА PPP-RTK — Сеть опорных станций RSN [{label}]\n"
         f"● МКС (21 ст.) ▲ Кандидаты (8 ст.)  |  Шаг RSN = {RSN_SPACING_KM:.0f} км"
     )
     from matplotlib.patches import Patch

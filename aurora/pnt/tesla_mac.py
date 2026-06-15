@@ -1,8 +1,8 @@
 """
-TESLA MAC / Anti-Spoofing Analysis for AURORA PNT.
+TESLA MAC / Anti-Spoofing Analysis for АВРОРА.
 
 Models the TESLA (Timed Efficient Stream Loss-tolerant Authentication) protocol
-for AURORA-T signal authentication. Compatible with Galileo OSNMA architecture.
+for АВРОРА-T signal authentication. Compatible with Galileo OSNMA architecture.
 
 TESLA key chain: pre-committed hash chain disclosed with delay.
 Spoofing protection: receiver can authenticate signals retrospectively.
@@ -19,7 +19,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-# AURORA-T frame parameters (from timing_service.py)
+# АВРОРА-T frame parameters (from timing_service.py)
 AURORA_T_FRAME_BITS  = 500
 AURORA_T_FRAME_S     = 10.0    # seconds per frame
 AURORA_T_MAC_BITS    = 128     # TESLA MAC length
@@ -190,7 +190,7 @@ def _plot_auth_timeline(timeline: List[Dict], vuln: Dict,
     ax.set_ylim(-0.5, 0.5)
     ax.set_xlabel("Время от холодного старта (с)")
     ax.set_yticks([])
-    ax.set_title(f"AURORA-T TESLA MAC — Хронология аутентификации [{label}]")
+    ax.set_title(f"АВРОРА-T TESLA MAC — Хронология аутентификации [{label}]")
     ax.legend(loc="lower right", fontsize=8)
     ax.grid(axis="x", alpha=0.3)
     plt.tight_layout()
@@ -213,7 +213,7 @@ def _plot_attack_summary(detects: List[Dict], output_dir: str, label: str) -> No
         txt = "БЛОК." if b else "РИСК"
         col = "white" if b else "#e17055"
         ax.text(0.05, i, txt, va="center", fontsize=9, fontweight="bold", color=col)
-    ax.set_title(f"AURORA-T TESLA MAC — защита от атак [{label}]")
+    ax.set_title(f"АВРОРА-T TESLA MAC — защита от атак [{label}]")
     ax.grid(axis="x", alpha=0.2)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"tesla_attacks_{label}.png"), dpi=150)
@@ -243,7 +243,7 @@ def print_tesla_summary(label: str, result: Dict) -> None:
     c = result["chain_stats"]
     v = result["vulnerability"]
 
-    print(f"  AURORA-T Frame: {result['frame_s']:.0f} s, "
+    print(f"  АВРОРА-T Frame: {result['frame_s']:.0f} s, "
           f"MAC: {result['mac_bits']} bits, "
           f"overhead: {c['frame_overhead_pct']:.1f}% of frame")
     print()

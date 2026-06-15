@@ -1,5 +1,5 @@
 """
-Оптимизация сети наземных станций AURORA PNT (MCS).
+Оптимизация сети наземных станций АВРОРА (MCS).
 
 Анализирует геометрию сети наземных станций (21 станция МКС),
 качество орбитального определения (OD), и покрытие созвездия.
@@ -216,7 +216,7 @@ def _plot_station_map(cov_r_deg, output_dir, label):
     ax.legend(handles=legend_els, loc="lower left", fontsize=8)
     ax.set_xlabel("Долгота (°)")
     ax.set_ylabel("Широта (°)")
-    ax.set_title(f"AURORA PNT — Сеть наземных станций MCS [{label}]")
+    ax.set_title(f"АВРОРА — Сеть наземных станций MCS [{label}]")
     ax.grid(alpha=0.2)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"ground_network_map_{label}.png"), dpi=150)
@@ -240,7 +240,7 @@ def _plot_od_quality(output_dir, label):
     ax1.set_xlabel("Число дополнительных станций (сверх 21 МКС)")
     ax1.set_ylabel("OD геометрический фактор (%)")
     ax2.set_ylabel("Покрытие по долготе (%)")
-    ax1.set_title(f"AURORA PNT — Качество OD vs расширение сети [{label}]")
+    ax1.set_title(f"АВРОРА — Качество OD vs расширение сети [{label}]")
     lines1, lab1 = ax1.get_legend_handles_labels()
     lines2, lab2 = ax2.get_legend_handles_labels()
     ax1.legend(lines1 + lines2, lab1 + lab2, fontsize=9)
@@ -262,7 +262,7 @@ def _plot_coverage_vs_stations(output_dir, label):
     ax.axhline(1000, ls=":", color="#fdcb6e", lw=1.2, label="1000 дуг/сут (достаточно)")
     ax.set_xlabel("Число наземных станций")
     ax.set_ylabel("Дуговых наблюдений за 24 ч (оценка)")
-    ax.set_title(f"AURORA PNT — Накопление данных OD [{label}]")
+    ax.set_title(f"АВРОРА — Накопление данных OD [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()

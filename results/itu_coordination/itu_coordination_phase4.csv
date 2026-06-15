@@ -1,19 +1,19 @@
 signal_i,signal_j,ssc_db_hz
 GPS L1 C/A (BPSK-1),"GPS L1C pilot (TMBOC-6,1)",-61.71
 GPS L1 C/A (BPSK-1),"Galileo E1 OS (BOC-1,1)",-61.28
-GPS L1 C/A (BPSK-1),"AURORA L1 (TMBOC-6,1,4/33)",-61.71
+GPS L1 C/A (BPSK-1),"АВРОРА L1 (TMBOC-6,1,4/33)",-61.71
 "GPS L1C pilot (TMBOC-6,1)",GPS L1 C/A (BPSK-1),-61.71
 "GPS L1C pilot (TMBOC-6,1)","Galileo E1 OS (BOC-1,1)",-61.19
-"GPS L1C pilot (TMBOC-6,1)","AURORA L1 (TMBOC-6,1,4/33)",-61.63
+"GPS L1C pilot (TMBOC-6,1)","АВРОРА L1 (TMBOC-6,1,4/33)",-61.63
 "Galileo E1 OS (BOC-1,1)",GPS L1 C/A (BPSK-1),-61.28
 "Galileo E1 OS (BOC-1,1)","GPS L1C pilot (TMBOC-6,1)",-61.19
-"Galileo E1 OS (BOC-1,1)","AURORA L1 (TMBOC-6,1,4/33)",-61.19
-"AURORA L1 (TMBOC-6,1,4/33)",GPS L1 C/A (BPSK-1),-61.71
-"AURORA L1 (TMBOC-6,1,4/33)","GPS L1C pilot (TMBOC-6,1)",-61.63
-"AURORA L1 (TMBOC-6,1,4/33)","Galileo E1 OS (BOC-1,1)",-61.19
+"Galileo E1 OS (BOC-1,1)","АВРОРА L1 (TMBOC-6,1,4/33)",-61.19
+"АВРОРА L1 (TMBOC-6,1,4/33)",GPS L1 C/A (BPSK-1),-61.71
+"АВРОРА L1 (TMBOC-6,1,4/33)","GPS L1C pilot (TMBOC-6,1)",-61.63
+"АВРОРА L1 (TMBOC-6,1,4/33)","Galileo E1 OS (BOC-1,1)",-61.19
 GPS L5 (BPSK-10),Galileo E5a (AltBOC),-71.22
-GPS L5 (BPSK-10),AURORA L5 (BPSK-10),-71.22
+GPS L5 (BPSK-10),АВРОРА L5 (BPSK-10),-71.22
 Galileo E5a (AltBOC),GPS L5 (BPSK-10),-71.22
-Galileo E5a (AltBOC),AURORA L5 (BPSK-10),-71.22
-AURORA L5 (BPSK-10),GPS L5 (BPSK-10),-71.22
-AURORA L5 (BPSK-10),Galileo E5a (AltBOC),-71.22
+Galileo E5a (AltBOC),АВРОРА L5 (BPSK-10),-71.22
+АВРОРА L5 (BPSK-10),GPS L5 (BPSK-10),-71.22
+АВРОРА L5 (BPSK-10),Galileo E5a (AltBOC),-71.22

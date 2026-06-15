@@ -1,5 +1,5 @@
 """
-Двухсервисная архитектура сигналов AURORA PNT: открытый (А) и защищённый (Б).
+Двухсервисная архитектура сигналов АВРОРА: открытый (А) и защищённый (Б).
 
 Одна группировка (1000 км) формирует ДВА независимых сервиса с разными полосами и
 регуляторными режимами по плотности потока мощности (ПФП):
@@ -9,14 +9,14 @@
     регуляторно ограничено ≈ +10 дБ. Назначение: совместимость с GNSS-приёмниками,
     комбинированный режим с ГЛОНАСС, массовый рынок.
 
-  Сервис Б — защищённый, в ВЫДЕЛЕННОЙ полосе AURORA (национальная координация
+  Сервис Б — защищённый, в ВЫДЕЛЕННОЙ полосе АВРОРА (национальная координация
     ГКРЧ/МСЭ, первичный статус): в своей полосе допустима бо́льшая ПФП, что даёт
     +23 дБ (×200) — как у Xona (+20 дБ) и Iridium STL (+30 дБ), но БЕЗ снижения
     орбиты. Назначение: помехозащита, работа в помещениях, аутентифицированный
-    суверенный PNT для критических потребителей (приёмники AURORA).
+    суверенный PNT для критических потребителей (приёмники АВРОРА).
 
 Уникальность: конкуренты дают ЛИБО мощный сигнал в своей полосе (Xona/Iridium),
-ЛИБО GNSS-совместимость (MEO) — AURORA даёт ОБА с одной группировки.
+ЛИБО GNSS-совместимость (MEO) — АВРОРА даёт ОБА с одной группировки.
 
 References:
   Iridium STL (Satelles): +30 дБ, 780 км, MSS-полоса; Xona PULSAR: +20 дБ (×100),
@@ -49,7 +49,7 @@ SERVICES = {
     },
     "Б (защищённый, своя полоса)": {
         "p_tx_w": 30.0, "g_ant_dbi": 8.0, "feed_db": 1.5,
-        "band": "выделенная L-полоса AURORA", "regime": "первичный статус",
+        "band": "выделенная L-полоса АВРОРА", "regime": "первичный статус",
         "col": "#0652DD",
     },
 }
@@ -57,9 +57,9 @@ SERVICES = {
 # Конкуренты (опубликованные значения, см. References)
 COMPETITORS = {
     "GPS/ГЛОНАСС (MEO)": 0.0,
-    "AURORA А": None,        # вычисляется
+    "АВРОРА А": None,        # вычисляется
     "Xona PULSAR": 20.0,
-    "AURORA Б": None,        # вычисляется
+    "АВРОРА Б": None,        # вычисляется
     "Iridium STL": 30.0,
 }
 
@@ -91,18 +91,18 @@ def run_dual_service_analysis(output_dir: str, label: str) -> Dict:
     adv_b = res["Б (защищённый, своя полоса)"]["adv_db"]
 
     comp = dict(COMPETITORS)
-    comp["AURORA А"] = adv_a
-    comp["AURORA Б"] = adv_b
+    comp["АВРОРА А"] = adv_a
+    comp["АВРОРА Б"] = adv_b
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5.3))
 
-    # ── Панель 1: преимущество по сигналу vs GPS (дБ) — AURORA и конкуренты ───
+    # ── Панель 1: преимущество по сигналу vs GPS (дБ) — АВРОРА и конкуренты ───
     names = list(comp.keys())
     vals = [comp[n] for n in names]
     cols = []
     for n in names:
-        if n == "AURORA Б":   cols.append("#0652DD")
-        elif n == "AURORA А": cols.append("#0984e3")
+        if n == "АВРОРА Б":   cols.append("#0652DD")
+        elif n == "АВРОРА А": cols.append("#0984e3")
         elif "MEO" in n:      cols.append("#b2bec3")
         else:                 cols.append("#e17055")
     bars = ax1.bar(names, vals, color=cols, edgecolor="white")
@@ -110,7 +110,7 @@ def run_dual_service_analysis(output_dir: str, label: str) -> Dict:
         ax1.text(rect.get_x() + rect.get_width() / 2, v + 0.4,
                  f"+{v:.0f} дБ", ha="center", fontweight="bold", fontsize=9)
     ax1.set_ylabel("Преимущество по сигналу над GPS, дБ")
-    ax1.set_title("Сила сигнала: AURORA (2 сервиса) vs конкуренты")
+    ax1.set_title("Сила сигнала: АВРОРА (2 сервиса) vs конкуренты")
     ax1.set_xticks(range(len(names)))
     ax1.set_xticklabels(names, rotation=18, ha="right", fontsize=8)
     ax1.grid(axis="y", alpha=0.3)
@@ -133,7 +133,7 @@ def run_dual_service_analysis(output_dir: str, label: str) -> Dict:
     ax2.set_title("ПФП: А под маской RNSS · Б в выделенной полосе")
     ax2.grid(axis="y", alpha=0.3)
 
-    fig.suptitle(f"AURORA PNT — двухсервисная архитектура сигналов (А + Б) [{label}]",
+    fig.suptitle(f"АВРОРА — двухсервисная архитектура сигналов (А + Б) [{label}]",
                  fontsize=13, fontweight="bold")
     plt.tight_layout(rect=[0, 0, 1, 0.95])
     fig.savefig(os.path.join(output_dir, f"dual_service_{label}.png"),

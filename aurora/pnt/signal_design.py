@@ -1,5 +1,5 @@
 """
-Проектирование навигационного сигнала AURORA PNT.
+Проектирование навигационного сигнала АВРОРА.
 
 Полный количественный анализ и обоснование выбора:
   1. Модуляция несущей: BPSK, BOC, MBOC/TMBOC, AltBOC — сравнение по
@@ -43,7 +43,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # ─────────────────────────────────────────────────────────────────────────────
-#  Параметры AURORA и частотный план
+#  Параметры АВРОРА и частотный план
 # ─────────────────────────────────────────────────────────────────────────────
 F_L1_HZ    = 1_575_420_000.0   # GPS/Galileo L1
 F_L5_HZ    = 1_176_450_000.0   # GPS L5 / Galileo E5a
@@ -317,7 +317,7 @@ def cross_correlation_comparison(mod_name: str = "BPSK(10)") -> Dict:
     }
 
     # Extended Memory (предлагаемое расширение GPS L5 до 350+ кодов)
-    results["Расшир. Memory (≥350, AURORA L5)"] = {
+    results["Расшир. Memory (≥350, АВРОРА L5)"] = {
         "length": 10230, "family_size": 350,
         "c_max_abs": 110,   # незначительно хуже при расширении
         "c_max_norm_db": 20 * math.log10(110 / 10230),
@@ -391,7 +391,7 @@ NAV_MSG_OPTIONS: Dict[str, Dict] = {
         "integrity_auth": "Нет",
         "color": "#74b9ff",
     },
-    "AURORA L1 (ANAV — предл.)": {
+    "АВРОРА L1 (ANAV — предл.)": {
         "data_rate_bps": 500, "fec": "LDPC(1/2) + CRC32", "fec_rate": 0.5,
         "frame_s": 10, "subframe_s": 2,
         "ephemeris_update_s": 600,   # 10 мин (LEO быстро меняется)
@@ -424,7 +424,7 @@ def link_margin_for_data_rate(data_rate_bps: float,
 def tesla_key_security_bits(key_bits: int = 128, update_interval_s: float = 30.0,
                              ttff_s: float = 5.0) -> Dict:
     """
-    TESLA MAC параметры для AURORA.
+    TESLA MAC параметры для АВРОРА.
     Задержка раскрытия ≥ TTFF + 1 период обновления.
     """
     disclosure_delay_s = ttff_s + update_interval_s
@@ -543,12 +543,12 @@ def _plot_multipath_envelope(delay_chips, mod_metrics, output_dir, label):
         ax.plot(delay_chips, m["mp_envelope"], color=color, lw=lw, label=name)
     ax.set_xlabel("Задержка многолучёвого сигнала (чипы)")
     ax.set_ylabel("Максимальная ошибка дальности (м)")
-    ax.set_title(f"AURORA PNT — Огибающая ошибки многолучёвости [{label}]")
+    ax.set_title(f"АВРОРА — Огибающая ошибки многолучёвости [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     ax.set_xlim(0, 1.5)
     ax.annotate(
-        "AURORA выбирает BPSK(10) на L5 (10.23 Мчип/с)\n→ разрешение 29 м, ошибка < 1.5 м",
+        "АВРОРА выбирает BPSK(10) на L5 (10.23 Мчип/с)\n→ разрешение 29 м, ошибка < 1.5 м",
         xy=(0.7, 0.75), xycoords="axes fraction",
         fontsize=9, color="#fdcb6e",
         bbox=dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor="#fdcb6e"))
@@ -619,7 +619,7 @@ def _plot_code_comparison(code_results, output_dir, label):
     ax.legend(fontsize=9)
     ax.grid(axis="y", alpha=0.3)
 
-    plt.suptitle(f"AURORA PNT — Сравнение кодовых последовательностей [{label}]",
+    plt.suptitle(f"АВРОРА — Сравнение кодовых последовательностей [{label}]",
                  fontsize=12, fontweight="bold", y=1.01)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"sigdes_codes_{label}.png"), dpi=150,
@@ -630,7 +630,7 @@ def _plot_code_comparison(code_results, output_dir, label):
 def _plot_acf_comparison(output_dir, label):
     """Нормированная АКФ для Gold(10), Weil, Memory — сравнение главного пика и боковых."""
     fig, axes = plt.subplots(1, 3, figsize=(14, 5))
-    titles = ["Gold (n=1023)\nGPS L1 C/A", "Gold (n=8191)\nExtended", "Memory (n=10230)\nGPS L5 / AURORA L5"]
+    titles = ["Gold (n=1023)\nGPS L1 C/A", "Gold (n=8191)\nExtended", "Memory (n=10230)\nGPS L5 / АВРОРА L5"]
     n_vals = [1023, 8191, 10230]
     colors = ["#e17055", "#fdcb6e", "#0984e3"]
 
@@ -651,7 +651,7 @@ def _plot_acf_comparison(output_dir, label):
         ax.set_ylim(-0.15, 1.05)
         ax.grid(alpha=0.3)
 
-    plt.suptitle(f"AURORA PNT — Автокорреляционные функции кодов [{label}]",
+    plt.suptitle(f"АВРОРА — Автокорреляционные функции кодов [{label}]",
                  fontsize=11, fontweight="bold")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"sigdes_acf_{label}.png"), dpi=150)
@@ -706,12 +706,12 @@ def _plot_nav_message(nav_results, output_dir, label):
     ax.set_xticklabels(short, fontsize=7)
     ax.set_ylabel("Период обновления эфемерид (мин)")
     ax.set_title("Частота обновления эфемерид\n(LEO быстро меняется!)")
-    ax.axhline(10, ls="--", color="#00b894", lw=1.5, label="10 мин (AURORA)")
+    ax.axhline(10, ls="--", color="#00b894", lw=1.5, label="10 мин (АВРОРА)")
     ax.axhline(120, ls=":", color="#e17055", lw=1.5, label="2 ч (GPS LNAV)")
     ax.legend(fontsize=8)
     ax.grid(axis="y", alpha=0.3)
 
-    plt.suptitle(f"AURORA PNT — Структура навигационного сообщения [{label}]",
+    plt.suptitle(f"АВРОРА — Структура навигационного сообщения [{label}]",
                  fontsize=12, fontweight="bold")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"sigdes_navmsg_{label}.png"), dpi=150,
@@ -720,14 +720,14 @@ def _plot_nav_message(nav_results, output_dir, label):
 
 
 def _plot_recommendation_summary(mod_metrics, code_results, output_dir, label):
-    """Итоговый слайд — рекомендация для AURORA с обоснованием."""
+    """Итоговый слайд — рекомендация для АВРОРА с обоснованием."""
     fig = plt.figure(figsize=(14, 9))
     ax = fig.add_subplot(111)
     ax.axis("off")
 
     rec_text = (
         "╔══════════════════════════════════════════════════════════════════════════════╗\n"
-        "║           РЕКОМЕНДАЦИЯ ПО СИГНАЛЬНОМУ ДИЗАЙНУ AURORA PNT                  ║\n"
+        "║           РЕКОМЕНДАЦИЯ ПО СИГНАЛЬНОМУ ДИЗАЙНУ АВРОРА                  ║\n"
         "╠══════════════════════════════════════════════════════════════════════════════╣\n"
         "║  L1 КАНАЛ (1575,42 МГц):                                                   ║\n"
         "║  • Модуляция: BOC(1,1) данные + TMBOC(6,1,4/33) пилот                     ║\n"
@@ -759,7 +759,7 @@ def _plot_recommendation_summary(mod_metrics, code_results, output_dir, label):
             bbox=dict(boxstyle="round,pad=0.5", facecolor="#f8fffe",
                       edgecolor="#00b894", linewidth=2))
 
-    ax.set_title(f"AURORA PNT — Рекомендованный сигнальный дизайн [{label}]",
+    ax.set_title(f"АВРОРА — Рекомендованный сигнальный дизайн [{label}]",
                  fontsize=12, fontweight="bold", pad=15)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"sigdes_recommendation_{label}.png"), dpi=150)

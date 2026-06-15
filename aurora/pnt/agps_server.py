@@ -1,5 +1,5 @@
 """
-Assisted-GNSS (A-GPS / A-GNSS) Server Analysis for AURORA PNT.
+Assisted-GNSS (A-GPS / A-GNSS) Server Analysis for АВРОРА.
 
 Модель серверного ассистирования: какие данные сервер передаёт приёмнику по
 мобильному/интернет-каналу, чтобы сократить холодный TTFF (Time-To-First-Fix)

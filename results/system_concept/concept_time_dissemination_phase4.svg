@@ -43,7 +43,7 @@
   
 </defs>
 <rect width="1400" height="820" fill="url(#space_bg)"/>
-<text x="700" y="40" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="bold" fill="#1a2433">AURORA + SHIWA TIME — двухуровневая синхронизация времени</text>
+<text x="700" y="40" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="bold" fill="#1a2433">АВРОРА + SHIWA TIME — двухуровневая синхронизация времени</text>
 <defs><marker id="amk" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#566072"/></marker></defs>
 <line x1="40" y1="472" x2="1360" y2="472" stroke="#aeb8c4" stroke-width="1.5" stroke-dasharray="10,6"/>
 <text x="70.0" y="460.0" text-anchor="start" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#00b894" opacity="1.0">Космический сегмент · LPT (радиоканал)</text>
@@ -55,7 +55,7 @@
 <line x1="295" y1="155" x2="612" y2="135" stroke="#0984e3" stroke-width="2.2" marker-end="url(#amk)"/>
 <text x="445.0" y="110.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#566072" opacity="1.0">загрузка шкалы (ТМ/ТК)</text>
 <g transform="translate(700,160) rotate(0)" ><rect x="-9.9" y="-12.6" width="19.8" height="25.2" rx="3" fill="#00b894" stroke="#5a6678" stroke-width="1.2"/><rect x="-44.3" y="-4.0" width="32.4" height="7.9" rx="2" fill="#0984e3" stroke="#5a6678" stroke-width="0.8"/><line x1="-33.5" y1="-4.0" x2="-33.5" y2="4.0" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="-22.7" y1="-4.0" x2="-22.7" y2="4.0" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><rect x="11.9" y="-4.0" width="32.4" height="7.9" rx="2" fill="#0984e3" stroke="#5a6678" stroke-width="0.8"/><line x1="22.7" y1="-4.0" x2="22.7" y2="4.0" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="33.5" y1="-4.0" x2="33.5" y2="4.0" stroke="#5a6678" stroke-width="0.4" opacity="0.5"/><line x1="0" y1="-12.6" x2="0" y2="-25.2" stroke="#5a6678" stroke-width="1.5"/><ellipse cx="0" cy="-26.3" rx="7.9" ry="3.6" fill="none" stroke="#00b894" stroke-width="1.5"/><circle cx="0" cy="0" r="3" fill="#1a2433" opacity="0.9"/></g>
-<text x="700.0" y="108.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#00b894" opacity="1.0">AURORA КА</text>
+<text x="700.0" y="108.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#00b894" opacity="1.0">АВРОРА КА</text>
 <text x="700.0" y="220.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#00b894" opacity="1.0">Cs/Rb · бортовая шкала (§8)</text>
 <polygon points="696.0,182.0 704.0,182.0 730.0,354.0 670.0,354.0" fill="#00b894" opacity="0.15" /><line x1="700.0" y1="182.0" x2="700.0" y2="354.0" stroke="#00b894" stroke-width="1.8" opacity="0.75" stroke-dasharray="6,3"/>
 <line x1="700" y1="182" x2="700" y2="352" stroke="#00b894" stroke-width="2" stroke-dasharray="6,4" opacity="0.8"/>

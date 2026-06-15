@@ -1,5 +1,5 @@
 """
-User Dynamics and Moving Platform Accuracy for AURORA PNT.
+User Dynamics and Moving Platform Accuracy for АВРОРА.
 
 Models positioning accuracy for different vehicle types:
   - Aviation (en-route, approach)
@@ -30,7 +30,7 @@ import matplotlib.pyplot as plt
 C_LIGHT = 299_792_458.0   # m/s
 R_EARTH = 6_371_000.0     # m
 
-# ── AURORA constellation parameters ──────────────────────────────────────────
+# ── АВРОРА constellation parameters ──────────────────────────────────────────
 AURORA_ALT_M = 1_000_000.0
 AURORA_ORBITAL_V = math.sqrt(3.986004418e14 / (R_EARTH + AURORA_ALT_M))  # m/s
 
@@ -42,7 +42,7 @@ PLATFORMS = {
         "max_rate_dps": 3.0,     # max attitude rate (degrees/second)
         "sky_coverage":  0.6,    # fraction of sky visible (pitch + roll)
         "multipath_m":   0.5,    # typical multipath error (m)
-        "n_visible_leo": 10,     # typical visible AURORA sats
+        "n_visible_leo": 10,     # typical visible АВРОРА sats
         "pdop_typical":  2.5,
         "gnss_req_h_m":  220.0,  # ICAO RNP4 horizontal (m, 95%)
         "gnss_req_v_m":  50.0,   # en-route vertical (m, 95%)
@@ -268,7 +268,7 @@ def _plot_accuracy_by_platform(results, output_dir, label):
             bar.set_edgecolor(ok_c)
             bar.set_linewidth(2)
 
-    fig.suptitle(f"AURORA PNT — Точность позиционирования по типу платформы [{label}]",
+    fig.suptitle(f"АВРОРА — Точность позиционирования по типу платформы [{label}]",
                  fontsize=11)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"dynamics_accuracy_{label}.png"), dpi=150)
@@ -310,7 +310,7 @@ def _plot_uere_breakdown(results, output_dir, label):
     ax.set_xticks(x)
     ax.set_xticklabels([p[:18] for p in platforms], rotation=35, ha="right", fontsize=8)
     ax.set_ylabel("Вклад в дисперсию (м²)")
-    ax.set_title(f"AURORA — Бюджет UERE по источникам и платформам [{label}]\n(L1+L5 двухчастотный)")
+    ax.set_title(f"АВРОРА — Бюджет UERE по источникам и платформам [{label}]\n(L1+L5 двухчастотный)")
     ax.legend(loc="upper left", fontsize=8)
     ax2.legend(loc="upper right", fontsize=8)
     ax.grid(axis="y", alpha=0.3)
@@ -336,7 +336,7 @@ def _plot_doppler(output_dir, label):
 
     ax.set_xlabel("Скорость платформы (м/с)")
     ax.set_ylabel("Сдвиг Доплера L1 (Гц)")
-    ax.set_title(f"AURORA PNT — Доплеровский сдвиг L1 [{label}]")
+    ax.set_title(f"АВРОРА — Доплеровский сдвиг L1 [{label}]")
     ax.legend(fontsize=8)
     ax.grid(alpha=0.3)
     plt.tight_layout()

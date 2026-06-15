@@ -1,5 +1,5 @@
 """
-Eclipse / Earth Shadow Analysis for AURORA PNT.
+Eclipse / Earth Shadow Analysis for АВРОРА.
 
 Computes when LEO satellites enter Earth's umbra/penumbra, the fraction of
 each orbit spent in shadow, and the resulting implications for:
@@ -195,7 +195,7 @@ def run_eclipse_analysis(
 
     alt_km = altitude_m / 1000
 
-    # ── Key values at AURORA altitude ─────────────────────────────────────────
+    # ── Key values at АВРОРА altitude ─────────────────────────────────────────
     period_min    = orbital_period_s(altitude_m) / 60.0
     frac_worst    = eclipse_fraction(altitude_m)           # beta=0
     eclipse_min   = max_eclipse_duration_min(altitude_m)   # worst case
@@ -263,7 +263,7 @@ def _plot_eclipse_vs_beta(beta_range, eclipse_by_beta, rho_max_deg,
     ax.axhline(35.0, ls=":", color="#e17055", lw=1.2, label="Типовой расчёт АКБ ~35 мин")
     ax.set_xlabel("Бета-угол Солнца (градусы)")
     ax.set_ylabel("Длительность затенения за виток (мин)")
-    ax.set_title(f"AURORA — Длительность затенения от угла Солнца [{label}]\n"
+    ax.set_title(f"АВРОРА — Длительность затенения от угла Солнца [{label}]\n"
                  f"(высота = {alt_km:.0f} км)")
     ax.legend()
     ax.grid(alpha=0.3)
@@ -278,7 +278,7 @@ def _plot_eclipse_vs_altitude(alt_range_km, eclipse_by_alt, fraction_by_alt,
 
     axes[0].plot(alt_range_km, eclipse_by_alt, color="#e17055", lw=2, label="Затенение (мин)")
     axes[0].plot(alt_range_km, period_by_alt, color="#0984e3", lw=2, ls="--", label="Период орбиты (мин)")
-    axes[0].axvline(1000, ls=":", color="#6c5ce7", lw=1.2, label="AURORA 1000 км")
+    axes[0].axvline(1000, ls=":", color="#6c5ce7", lw=1.2, label="АВРОРА 1000 км")
     axes[0].set_xlabel("Высота орбиты (км)")
     axes[0].set_ylabel("Длительность (мин)")
     axes[0].set_title("Затенение и период орбиты от высоты")
@@ -294,7 +294,7 @@ def _plot_eclipse_vs_altitude(alt_range_km, eclipse_by_alt, fraction_by_alt,
     axes[1].legend()
     axes[1].grid(alpha=0.3)
 
-    fig.suptitle(f"AURORA PNT — Анализ затенения [{label}]")
+    fig.suptitle(f"АВРОРА — Анализ затенения [{label}]")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"eclipse_vs_altitude_{label}.png"), dpi=150)
     plt.close(fig)

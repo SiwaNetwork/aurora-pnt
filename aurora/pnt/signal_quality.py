@@ -1,5 +1,5 @@
 """
-Точность навигационного сигнала AURORA PNT: SISA, SISRA, URE, UERE.
+Точность навигационного сигнала АВРОРА: SISA, SISRA, URE, UERE.
 
 Метрики по аналогии с Galileo SIS ICD (OS-SIS-ICD) и GPS SPS PS:
   - SISA  (Signal In Space Accuracy) — точность эфемеридного прогноза
@@ -24,7 +24,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 # ── Бюджет ошибок сигнала (1-sigma, метры) ───────────────────────────────────
-# Сравнение: GPS, Galileo, AURORA (LEO 1000 км)
+# Сравнение: GPS, Galileo, АВРОРА (LEO 1000 км)
 
 SYSTEMS: Dict[str, Dict] = {
     "GPS Block III": {
@@ -60,7 +60,7 @@ SYSTEMS: Dict[str, Dict] = {
         "receiver_noise_m":0.15,
         "color": "#0984e3",
     },
-    "AURORA L1/L5 (LEO)": {
+    "АВРОРА L1/L5 (LEO)": {
         "eph_radial_m":    0.05,
         "eph_along_m":     0.10,
         "eph_cross_m":     0.10,
@@ -176,7 +176,7 @@ def _plot_ure_budget(results, output_dir, label):
     ax.set_xticks(x)
     ax.set_xticklabels(systems, fontsize=10)
     ax.set_ylabel("Ошибка дальности 1σ (м)")
-    ax.set_title(f"AURORA PNT — URE / SISA / UERE по системам [{label}]")
+    ax.set_title(f"АВРОРА — URE / SISA / UERE по системам [{label}]")
     ax.legend(fontsize=9)
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
@@ -185,8 +185,8 @@ def _plot_ure_budget(results, output_dir, label):
 
 
 def _plot_uere_breakdown(output_dir, label):
-    """Вклад каждого источника в UERE для AURORA."""
-    aurora = SYSTEMS["AURORA L1/L5 (LEO)"]
+    """Вклад каждого источника в UERE для АВРОРА."""
+    aurora = SYSTEMS["АВРОРА L1/L5 (LEO)"]
     sources = {
         "Эфемериды\n(радиал.)": aurora["eph_radial_m"],
         "Эфемериды\n(вдоль/попереч)": math.sqrt(aurora["eph_along_m"]**2 + aurora["eph_cross_m"]**2) / 7,
@@ -211,7 +211,7 @@ def _plot_uere_breakdown(output_dir, label):
         ax2.text(bar.get_width() + 0.002, bar.get_y() + bar.get_height()/2,
                  f"{v:.3f} м", va="center", fontsize=9)
     ax2.set_xlabel("Ошибка 1σ (м)")
-    ax2.set_title(f"Вклад источников в UERE AURORA [{label}]")
+    ax2.set_title(f"Вклад источников в UERE АВРОРА [{label}]")
     ax2.legend(fontsize=9)
     ax2.grid(axis="x", alpha=0.3)
 
@@ -222,7 +222,7 @@ def _plot_uere_breakdown(output_dir, label):
         t.set_fontsize(8)
     for at in autotexts:
         at.set_fontsize(8)
-    ax1.set_title(f"Доля дисперсии UERE AURORA [{label}]")
+    ax1.set_title(f"Доля дисперсии UERE АВРОРА [{label}]")
 
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"signal_uere_breakdown_{label}.png"), dpi=150)
@@ -242,11 +242,11 @@ def _plot_sisa_comparison(results, output_dir, label):
         ax.plot(update_intervals_min, sisa_vs_time, color=color, lw=2, label=sys_name)
 
     ax.axhline(0.50, ls="--", color="#2d3436", lw=1.2, label="0.5 м (Galileo SISA-D порог)")
-    ax.axhline(0.20, ls=":", color="#00b894",  lw=1.2, label="0.2 м (цель AURORA)")
+    ax.axhline(0.20, ls=":", color="#00b894",  lw=1.2, label="0.2 м (цель АВРОРА)")
     ax.axvline(30.0, ls="--", color="#b2bec3", lw=1.2, label="30 мин (стандарт. обновление)")
     ax.set_xlabel("Интервал обновления навигационного сообщения (мин)")
     ax.set_ylabel("SISA (м, 1σ)")
-    ax.set_title(f"AURORA PNT — SISA vs интервал обновления [{label}]")
+    ax.set_title(f"АВРОРА — SISA vs интервал обновления [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()

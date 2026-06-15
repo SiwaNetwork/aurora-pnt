@@ -1,5 +1,5 @@
 """
-Генерация SVG-иллюстраций системы AURORA PNT.
+Генерация SVG-иллюстраций системы АВРОРА.
 
 Производит чистые векторные схемы, пригодные для публикации:
   1. system_overview  — спутник, сигнал, сегменты, потребители
@@ -275,7 +275,7 @@ def _svg_system_overview():
         parts.append(f'<ellipse cx="{lx}" cy="{ly}" rx="{lw}" ry="{lh}" '
                      f'fill="#1b7a50" opacity="0.55" transform="rotate({rot},{lx},{ly})"/>')
 
-    # Орбита AURORA (LEO 1000 км) — дуга
+    # Орбита АВРОРА (LEO 1000 км) — дуга
     orb_r = ER - 180   # визуально
     op_path = _arc_path(ECX, ECY, orb_r, 25, 155)
     parts.append(f'<path d="{op_path}" fill="none" stroke="#00b894" '
@@ -296,7 +296,7 @@ def _svg_system_overview():
     # Заголовок у главного спутника
     parts.append(f'<text x="700" y="148" text-anchor="middle" '
                  f'font-family="Arial,sans-serif" font-size="18" font-weight="bold" '
-                 f'fill="#00b894" filter="url(#text_glow)">AURORA PNT</text>')
+                 f'fill="#00b894" filter="url(#text_glow)">АВРОРА</text>')
     parts.append(_label(700, 168, "L1 · 1575,42 МГц  |  L5 · 1176,45 МГц",
                         11, "#00cec9", opacity=0.85))
 
@@ -336,7 +336,7 @@ def _svg_system_overview():
 
     # ── Наземная станция МКС ──────────────────────────────────────────────────
     parts.append(_mcs_dish(875, 558, 36, "#a29bfe"))
-    parts.append(_label(875, 600, "МКС AURORA", 12, "#a29bfe", bold=True))
+    parts.append(_label(875, 600, "МКС АВРОРА", 12, "#a29bfe", bold=True))
     parts.append(_label(875, 616, "21 станция", 10, "#a29bfe", opacity=0.75))
     # Аплинк
     parts.append(f'<line x1="875" y1="522" x2="712" y2="220" '
@@ -369,7 +369,7 @@ def _svg_system_overview():
     parts.append(f'<text x="{W//2}" y="28" text-anchor="middle" '
                  f'font-family="Arial,sans-serif" font-size="22" font-weight="bold" '
                  f'fill="white" filter="url(#text_glow)">'
-                 f'AURORA PNT — Системная концепция</text>')
+                 f'АВРОРА — Системная концепция</text>')
     parts.append(_label(W // 2, 52,
                         "Walker Delta 300/15/1 · h = 1000 км · i = 75°  |  L1 + L5  |  PPP-RTK · ISL · LPT",
                         12, "#8b949e"))
@@ -388,7 +388,7 @@ def _svg_service_scenarios():
         {
             "title": "Авиация — заход на посадку (LPV-200)",
             "acc":   "< 1 м вертикально",
-            "serv":  "AURORA PPP + СДКМ",
+            "serv":  "АВРОРА PPP + СДКМ",
             "ttff":  "Горячий старт: 1,5 с",
             "color": "#0984e3",
             "icon":  "plane",
@@ -397,7 +397,7 @@ def _svg_service_scenarios():
         {
             "title": "Геодезия / точн. земледелие (PPP-RTK)",
             "acc":   "0,5–1 см (H-68%)",
-            "serv":  "AURORA PPP-RTK + RSN 300 км",
+            "serv":  "АВРОРА PPP-RTK + RSN 300 км",
             "ttff":  "Сходимость: 5 с",
             "color": "#00b894",
             "icon":  "geo",
@@ -406,7 +406,7 @@ def _svg_service_scenarios():
         {
             "title": "Автомобиль / БПЛА (lane-level)",
             "acc":   "< 0,5 м (H-95%)",
-            "serv":  "AURORA PPP / PPP-RTK",
+            "serv":  "АВРОРА PPP / PPP-RTK",
             "ttff":  "Тёплый старт: 5 с",
             "color": "#fdcb6e",
             "icon":  "car",
@@ -415,7 +415,7 @@ def _svg_service_scenarios():
         {
             "title": "Синхронизация / LPT-сервис",
             "acc":   "< 5 нс UTC(SU)",
-            "serv":  "AURORA LPT · ISL-сетка",
+            "serv":  "АВРОРА LPT · ISL-сетка",
             "ttff":  "Удержание: 72 ч автономно",
             "color": "#a29bfe",
             "icon":  "tower",
@@ -430,7 +430,7 @@ def _svg_service_scenarios():
     # Заголовок
     parts.append(f'<text x="{W//2}" y="38" text-anchor="middle" '
                  f'font-family="Arial,sans-serif" font-size="22" font-weight="bold" '
-                 f'fill="white" filter="url(#text_glow)">AURORA PNT — Сценарии применения</text>')
+                 f'fill="white" filter="url(#text_glow)">АВРОРА — Сценарии применения</text>')
 
     pw, ph = 660, 355
     positions = [(30, 58), (710, 58), (30, 432), (710, 432)]
@@ -529,7 +529,7 @@ def _svg_leo_vs_meo():
 
     systems = [
         {
-            "cx": 340, "col": "#00b894", "label": "AURORA LEO",
+            "cx": 340, "col": "#00b894", "label": "АВРОРА LEO",
             "sub": "h = 1000 км", "sat_y": 220, "sat_sz": 38,
             "earth_r": 290, "earth_cy": 950,
             "beam_w": 18, "beam_op": 0.25,
@@ -587,7 +587,7 @@ def _svg_leo_vs_meo():
                                 user_x, user_y, bw, col, sc["beam_op"]))
 
         # Ширина луча (угол покрытия)
-        half_cov = 140 if sc["label"].startswith("AURORA") else 200
+        half_cov = 140 if sc["label"].startswith("АВРОРА") else 200
         sz2 = sc["sat_sz"] // 2
         parts.append(f'<line x1="{sat_x}" y1="{sat_y + sz2}" '
                      f'x2="{cx-half_cov}" y2="{hor_y+5}" '
@@ -657,7 +657,7 @@ def _svg_leo_vs_meo():
     parts.append(f'<text x="{W//2}" y="36" text-anchor="middle" '
                  f'font-family="Arial,sans-serif" font-size="21" font-weight="bold" '
                  f'fill="white" filter="url(#text_glow)">'
-                 f'AURORA LEO vs ГЛОНАСС MEO — Преимущество сигнала и характеристики</text>')
+                 f'АВРОРА LEO vs ГЛОНАСС MEO — Преимущество сигнала и характеристики</text>')
 
     parts.append("</svg>")
     return "\n".join(parts)
@@ -686,7 +686,7 @@ def _svg_signal_flow():
             "desc": "1000 км · 3,3 мс",
         },
         {
-            "x": 790, "label": "Приёмник\nAURORA", "sub": "≥ 45 дБ·Гц",
+            "x": 790, "label": "Приёмник\nАВРОРА", "sub": "≥ 45 дБ·Гц",
             "color": "#fdcb6e", "tag": "RX",
             "desc": "238 каналов · BW 1,4 Гц",
         },
@@ -709,7 +709,7 @@ def _svg_signal_flow():
     # Заголовок
     parts.append(f'<text x="{W//2}" y="38" text-anchor="middle" '
                  f'font-family="Arial,sans-serif" font-size="19" font-weight="bold" '
-                 f'fill="white">AURORA PNT — Поток сигнала и данных</text>')
+                 f'fill="white">АВРОРА — Поток сигнала и данных</text>')
     parts.append(_label(W // 2, 60, "от атомных часов КА до навигационного решения потребителя", 12, "#8b949e"))
 
     bw, bh = 155, 120
@@ -800,7 +800,7 @@ def _svg_time_dissemination():
     parts.append(f'<rect width="{W}" height="{H}" fill="url(#space_bg)"/>')
     parts.append(f'<text x="{W//2}" y="40" text-anchor="middle" '
                  f'font-family="Arial,sans-serif" font-size="20" font-weight="bold" '
-                 f'fill="white">AURORA + SHIWA TIME — двухуровневая синхронизация времени</text>')
+                 f'fill="white">АВРОРА + SHIWA TIME — двухуровневая синхронизация времени</text>')
 
     parts.append(f'<defs><marker id="amk" markerWidth="9" markerHeight="9" refX="7" refY="3" '
                  f'orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#566072"/></marker></defs>')
@@ -828,10 +828,10 @@ def _svg_time_dissemination():
                  f'stroke="#0984e3" stroke-width="2.2" marker-end="url(#amk)"/>')
     parts.append(_label(445, 110, "загрузка шкалы (ТМ/ТК)", 10, "#8b949e"))
 
-    # Спутник AURORA
+    # Спутник АВРОРА
     sat_x, sat_y = 700, 160
     parts.append(_sat_icon(sat_x, sat_y, 36, "#00b894", 0))
-    parts.append(_label(sat_x, sat_y-52, "AURORA КА", 14, "#00b894", bold=True))
+    parts.append(_label(sat_x, sat_y-52, "АВРОРА КА", 14, "#00b894", bold=True))
     parts.append(_label(sat_x, sat_y+60, "Cs/Rb · бортовая шкала (§8)", 11, "#00b894"))
 
     # Луч LPT

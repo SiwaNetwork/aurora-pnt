@@ -1,5 +1,5 @@
 """
-Система управления ориентацией и стабилизацией (ADCS) AURORA PNT.
+Система управления ориентацией и стабилизацией (ADCS) АВРОРА.
 
 Рассчитывает требования к ADCS для навигационного спутника LEO 1000 км:
   - Бюджет точности наведения антенны (pointing budget)
@@ -221,7 +221,7 @@ def _plot_disturbance_torques(theta_range, gg_torques, srp, aero, mag, output_di
     ax.axvline(1.0, ls="--", color="#fdcb6e", lw=1.5, label="1° ошибка наведения")
     ax.set_xlabel("Угол отклонения θ (градусы)")
     ax.set_ylabel("Возмущающий момент (мкН·м)")
-    ax.set_title(f"AURORA PNT — Возмущающие моменты [{label}]")
+    ax.set_title(f"АВРОРА — Возмущающие моменты [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -280,7 +280,7 @@ def _plot_isl_pointing(output_dir, label):
     fig, ax = plt.subplots(figsize=(9, 5))
     ax.plot(ranges_km, angles_urad, color="#00b894", lw=2)
     ax.axvline(ISL_RANGE_KM, ls="--", color="#e17055", lw=1.5,
-               label=f"AURORA ISL = {ISL_RANGE_KM:.0f} км")
+               label=f"АВРОРА ISL = {ISL_RANGE_KM:.0f} км")
     pa = isl_point_ahead_angle_urad()
     ax.axhline(pa, ls=":", color="#0984e3", lw=1.5,
                label=f"Point-ahead = {pa:.1f} мкрад")
@@ -289,7 +289,7 @@ def _plot_isl_pointing(output_dir, label):
                label=f"Полуширина ДН ISL = {bw_half_urad:.0f} мкрад")
     ax.set_xlabel("Расстояние до соседнего спутника (км)")
     ax.set_ylabel("Угол опережения (мкрад)")
-    ax.set_title(f"AURORA PNT — ISL point-ahead angle [{label}]")
+    ax.set_title(f"АВРОРА — ISL point-ahead angle [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -308,7 +308,7 @@ def _plot_wheel_sizing(output_dir, label):
     ax1.plot(T_orbits, H_vals, color="#6c5ce7", lw=2)
     rw = reaction_wheel_sizing()
     ax1.axvline(rw["T_orbit_min"], ls="--", color="#e17055", lw=1.5,
-                label=f"AURORA T = {rw['T_orbit_min']:.0f} мин")
+                label=f"АВРОРА T = {rw['T_orbit_min']:.0f} мин")
     ax1.axhline(rw["H_required_Nms"] * 1e6, ls=":", color="#00b894", lw=1.5,
                 label=f"H_req = {rw['H_required_Nms']*1e6:.0f} мкН·м·с")
     ax1.set_xlabel("Период орбиты (мин)")
@@ -322,7 +322,7 @@ def _plot_wheel_sizing(output_dir, label):
         "Rockwell Collins RWA": {"H_Nms": 4.0, "T_Nm": 0.1, "mass_kg": 2.2},
         "Bradford WSAT":        {"H_Nms": 1.0, "T_Nm": 0.05, "mass_kg": 0.8},
         "Astro ARES 4":         {"H_Nms": 4.0, "T_Nm": 0.2, "mass_kg": 2.1},
-        "AURORA-RW (target)":   {"H_Nms": rw["H_required_Nms"], "T_Nm": rw["wheel_torque_Nm"],
+        "АВРОРА-RW (target)":   {"H_Nms": rw["H_required_Nms"], "T_Nm": rw["wheel_torque_Nm"],
                                   "mass_kg": 1.5},
     }
     w_names = list(wheels.keys())

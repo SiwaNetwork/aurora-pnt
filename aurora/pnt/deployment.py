@@ -1,5 +1,5 @@
 """
-Constellation Deployment Timeline for AURORA PNT.
+Constellation Deployment Timeline for АВРОРА.
 
 Models the launch sequence, orbital injection, phasing, and
 service availability ramp-up across all 4 phases.
@@ -15,7 +15,7 @@ Satellite mass: ~140 kg wet → 46 sats per rideshare
 Deployment cadence: ~4 launches/year at peak
 
 References:
-  AURORA PNT System Design Document (SDD) v1.0 (2026).
+  АВРОРА System Design Document (SDD) v1.0 (2026).
   Wertz, "Space Mission Analysis and Design", 3rd ed., Ch. 20.
 """
 
@@ -41,7 +41,7 @@ PHASES = {
         "duration_yr": 0.5,
         "color":       "#fdcb6e",
         "services": {
-            "LPT (AURORA time)":     True,
+            "LPT (АВРОРА time)":     True,
             "ISL ranging":           True,
             "Navigation (L1/L5)":    False,
             "Coverage Russia":       False,
@@ -61,7 +61,7 @@ PHASES = {
         "duration_yr": 1.0,
         "color":       "#74b9ff",
         "services": {
-            "LPT (AURORA time)":     True,
+            "LPT (АВРОРА time)":     True,
             "ISL ranging":           True,
             "Navigation (L1/L5)":    True,
             "Coverage Russia":       True,
@@ -81,7 +81,7 @@ PHASES = {
         "duration_yr": 1.5,
         "color":       "#00b894",
         "services": {
-            "LPT (AURORA time)":     True,
+            "LPT (АВРОРА time)":     True,
             "ISL ranging":           True,
             "Navigation (L1/L5)":    True,
             "Coverage Russia":       True,
@@ -101,7 +101,7 @@ PHASES = {
         "duration_yr": 2.0,
         "color":       "#6c5ce7",
         "services": {
-            "LPT (AURORA time)":     True,
+            "LPT (АВРОРА time)":     True,
             "ISL ranging":           True,
             "Navigation (L1/L5)":    True,
             "Coverage Russia":       True,
@@ -121,7 +121,7 @@ PHASES = {
         "duration_yr": 2.0,
         "color":       "#e17055",
         "services": {
-            "LPT (AURORA time)":     True,
+            "LPT (АВРОРА time)":     True,
             "ISL ranging":           True,
             "Navigation (L1/L5)":    True,
             "Coverage Russia":       True,
@@ -230,7 +230,7 @@ def _plot_deployment_timeline(timeline, output_dir, label):
     ax.set_yticks(list(PHASES.keys()))
     ax.set_yticklabels([PHASES[i]["name"] for i in PHASES], fontsize=9)
     ax.set_xlabel("Год")
-    ax.set_title(f"AURORA PNT — График развёртывания группировки [{label}]")
+    ax.set_title(f"АВРОРА — График развёртывания группировки [{label}]")
     ax.set_xlim(2025.5, 2037)
     ax.grid(axis="x", alpha=0.3)
     plt.tight_layout()
@@ -251,7 +251,7 @@ def _plot_sats_vs_time(timeline, output_dir, label):
                 f"Ф{t['phase']}: {t['n_total_sats']} сп.", fontsize=8)
     ax.set_xlabel("Год")
     ax.set_ylabel("Количество спутников на орбите")
-    ax.set_title(f"AURORA PNT — Наращивание группировки [{label}]")
+    ax.set_title(f"АВРОРА — Наращивание группировки [{label}]")
     ax.grid(alpha=0.3)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"deployment_sats_{label}.png"), dpi=150)
@@ -290,7 +290,7 @@ def _plot_coverage_ramp(timeline, output_dir, label):
     axes[1].legend()
     axes[1].grid(alpha=0.3)
 
-    fig.suptitle(f"AURORA PNT — Рост покрытия и точности [{label}]")
+    fig.suptitle(f"АВРОРА — Рост покрытия и точности [{label}]")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"deployment_coverage_{label}.png"), dpi=150)
     plt.close(fig)
@@ -309,7 +309,7 @@ def _plot_cost_breakdown(timeline, total_cost, output_dir, label):
     ax.legend(wedges, [f"Ф{t['phase']}: {t['name'].split('—')[1].strip()} "
                        f"(${c:.0f}M)" for t, c in zip(timeline, phase_costs)],
               loc="lower left", fontsize=8, bbox_to_anchor=(-0.1, -0.1))
-    ax.set_title(f"AURORA PNT — Распределение затрат по фазам [{label}]\n"
+    ax.set_title(f"АВРОРА — Распределение затрат по фазам [{label}]\n"
                  f"Итого: ${total_cost:.0f}M")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"deployment_cost_{label}.png"), dpi=150)

@@ -1,0 +1,21 @@
+parameter,value,unit
+n_samples,20000,samples
+count_Норма,20000,samples
+count_Система недоступна,0,samples
+count_MI (заблуждение),0,samples
+count_HMI (опасная),0,samples
+availability_lpv200,1.00000,fraction
+availability_cati,1.00000,fraction
+vpl_lt_val_fraction,1.00000,fraction
+VAL_LPV200,35.0,m
+HAL_LPV200,40.0,m
+VAL_CATI,15.0,m
+HAL_CATI,40.0,m
+geo_avail_mean,99.6271,%
+geo_avail_min,99.0000,%
+geo_avail_max,99.9900,%
+ISM_b_nom (м),0.75,
+ISM_σ_URA (м),0.5,
+ISM_P_sat,1e-05,
+ISM_P_const,0.0001,
+ISM_R_irr (1/ч),1e-08,

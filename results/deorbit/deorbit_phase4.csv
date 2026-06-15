@@ -1,0 +1,16 @@
+altitude_km,lifetime_years,iadc_compliant
+300,0.1,True
+400,0.7,True
+500,3.6,True
+600,13.1,True
+700,38.7,False
+800,97.9,False
+900,222.4,False
+1000,471.2,False
+1100,499.7,False
+1200,499.7,False
+,,
+debris_type,lifetime_years
+"1 cm fragment (1g, Cd=2.5, A=0.0001m2)",41.6
+"10 cm fragment (100g, Cd=2.2, A=0.01m2)",47.2
+"Spent satellite (150 kg, no deorbit)",471.2

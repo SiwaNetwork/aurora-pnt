@@ -1,5 +1,5 @@
 """
-Радиационная среда и радиационная стойкость AURORA PNT.
+Радиационная среда и радиационная стойкость АВРОРА.
 
 Орбита 1000 км / 75 deg — зона внутреннего пояса протонов Ван Аллена.
 Модели: AP8/AE8 (NASA), CREME96 (NRL), экспоненциальное затухание в Al-экране.
@@ -148,10 +148,10 @@ def _plot_tid_vs_shield(shield_range, tid_curves, output_dir, label):
     ax.axhline(100, ls="--", color="#e17055", lw=1.2, label="100 кРад (Бортовой компьютер)")
     ax.axhline(30,  ls=":",  color="#fdcb6e", lw=1.2, label="30 кРад (OCXO, ресивер)")
     ax.axhline(5,   ls="-.", color="#6c5ce7", lw=1.0, label="5 кРад (Солнечная батарея)")
-    ax.axvline(4.0, ls="--", color="#00b894", lw=1.2, label="4 мм Al (стандарт AURORA)")
+    ax.axvline(4.0, ls="--", color="#00b894", lw=1.2, label="4 мм Al (стандарт АВРОРА)")
     ax.set_xlabel("Толщина алюминиевого экрана (мм)")
     ax.set_ylabel("TID (кРад, Si)")
-    ax.set_title(f"AURORA PNT — Полная ионизирующая доза (TID) vs экран [{label}]")
+    ax.set_title(f"АВРОРА — Полная ионизирующая доза (TID) vs экран [{label}]")
     ax.legend(fontsize=9)
     ax.grid(True, which="both", alpha=0.3)
     ax.set_xlim(shield_range[0], shield_range[-1])
@@ -170,7 +170,7 @@ def _plot_seu_rates(shield_range, seu_curves, output_dir, label):
     ax.axvline(4.0, ls="--", color="#00b894", lw=1.2, label="4 мм Al")
     ax.set_xlabel("Толщина алюминиевого экрана (мм)")
     ax.set_ylabel("SEU rate (событий/устройство/день)")
-    ax.set_title(f"AURORA PNT — SEU rate по типам памяти vs экран [{label}]")
+    ax.set_title(f"АВРОРА — SEU rate по типам памяти vs экран [{label}]")
     ax.legend(fontsize=9)
     ax.grid(True, which="both", alpha=0.3)
     plt.tight_layout()
@@ -197,7 +197,7 @@ def _plot_subsystem_doses(subsys_results, output_dir, label):
     ax.set_xticks(x)
     ax.set_xticklabels(names, rotation=25, ha="right", fontsize=9)
     ax.set_ylabel("Доза (кРад, Si)")
-    ax.set_title(f"AURORA PNT — Радиационная нагрузка подсистем за 7 лет [{label}]")
+    ax.set_title(f"АВРОРА — Радиационная нагрузка подсистем за 7 лет [{label}]")
     ax.legend(fontsize=9)
     ax.grid(axis="y", alpha=0.3)
     from matplotlib.patches import Patch
@@ -215,10 +215,10 @@ def _plot_ocxo_drift(shield_range, ocxo_drift, output_dir, label):
     ax.plot(shield_range, ocxo_drift, color="#6c5ce7", lw=2)
     ax.axhline(1.0,  ls="--", color="#e17055", lw=1.2, label="1 ppb (допустимый уход)")
     ax.axhline(0.1,  ls=":",  color="#00b894", lw=1.2, label="0.1 ppb (цель проекта)")
-    ax.axvline(4.0,  ls="--", color="#0984e3", lw=1.2, label="4 мм Al (AURORA)")
+    ax.axvline(4.0,  ls="--", color="#0984e3", lw=1.2, label="4 мм Al (АВРОРА)")
     ax.set_xlabel("Толщина экрана (мм Al)")
     ax.set_ylabel("Уход частоты OCXO от радиации (ppb, за 7 лет)")
-    ax.set_title(f"AURORA PNT — Радиационный уход OCXO [{label}]")
+    ax.set_title(f"АВРОРА — Радиационный уход OCXO [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()

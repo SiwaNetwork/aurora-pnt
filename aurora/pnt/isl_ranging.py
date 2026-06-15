@@ -1,5 +1,5 @@
 """
-ISL Ranging Module for AURORA PNT.
+ISL Ranging Module for АВРОРА.
 
 Autonomous orbit determination via inter-satellite link distance measurements.
 Models ephemeris holdover quality, ISL ranging geometry, and positioning impact.
@@ -358,13 +358,13 @@ def _plot_ephemeris_holdover(
 ) -> None:
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.semilogy(hours, eph_no,  color="#e74c3c", lw=2,  label="Без ISL-OD")
-    ax.semilogy(hours, eph_isl, color="#00b894", lw=2,  label="С ISL-OD (AURORA)")
+    ax.semilogy(hours, eph_isl, color="#00b894", lw=2,  label="С ISL-OD (АВРОРА)")
     ax.axhline(0.5,  ls="--", color="#7f8c8d", lw=0.8, alpha=0.8, label="0,5 м")
     ax.axhline(5.0,  ls="--", color="#e67e22", lw=0.8, alpha=0.8, label="5 м")
     ax.axvline(OD_CONVERGENCE_MIN / 60.0, ls=":", color="#6c5ce7", lw=1.2, label="Сходимость OD")
     ax.set_xlabel("Время удержания (ч с последнего сеанса MCS)")
     ax.set_ylabel("Ошибка эфемерид 1σ (м)")
-    ax.set_title(f"AURORA PNT — Качество удержания эфемерид [{label}]")
+    ax.set_title(f"АВРОРА — Качество удержания эфемерид [{label}]")
     ax.legend(fontsize=9)
     ax.grid(True, which="both", alpha=0.3)
     ax.set_xlim(0, max(hours))
@@ -383,12 +383,12 @@ def _plot_cep_degradation(
 ) -> None:
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.plot(hours, cep_no,  color="#e74c3c", lw=2, label="Без ISL-OD")
-    ax.plot(hours, cep_isl, color="#00b894", lw=2, label="С ISL-OD (AURORA)")
+    ax.plot(hours, cep_isl, color="#00b894", lw=2, label="С ISL-OD (АВРОРА)")
     ax.axhline(10.0, ls="--", color="#7f8c8d", lw=0.8, alpha=0.8, label="CEP 10 м")
     ax.axhline(50.0, ls="--", color="#e67e22", lw=0.8, alpha=0.8, label="CEP 50 м")
     ax.set_xlabel("Время удержания (ч с последнего сеанса MCS)")
     ax.set_ylabel("CEP 50% (м)")
-    ax.set_title(f"AURORA PNT — Деградация CEP при удержании без MCS [{label}]")
+    ax.set_title(f"АВРОРА — Деградация CEP при удержании без MCS [{label}]")
     ax.legend(fontsize=9)
     ax.grid(True, alpha=0.3)
     ax.set_xlim(0, max(hours))
@@ -433,7 +433,7 @@ def _plot_isl_geometry(geom: Dict, output_dir: str, label: str) -> None:
     ax2.set_title("Геометрия ISL-OD")
     ax2.grid(axis="y", alpha=0.3)
 
-    fig.suptitle(f"AURORA — Геометрия ISL-измерений — {label}", fontsize=12, y=1.01)
+    fig.suptitle(f"АВРОРА — Геометрия ISL-измерений — {label}", fontsize=12, y=1.01)
     plt.tight_layout()
     path = os.path.join(output_dir, f"isl_geometry_{label}.png")
     fig.savefig(path, dpi=150, bbox_inches="tight")

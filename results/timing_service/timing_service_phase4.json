@@ -156,6 +156,6 @@
     "sigma_asymmetry_ns": 0.1,
     "sigma_mp_ns": 0.3,
     "sigma_total_ns": 0.374,
-    "note": "TWSTT used only at MCS uplink stations; user terminals use one-way AURORA-T"
+    "note": "TWSTT used only at MCS uplink stations; user terminals use one-way АВРОРА-T"
   }
 }

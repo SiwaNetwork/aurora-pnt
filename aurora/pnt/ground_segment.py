@@ -1,5 +1,5 @@
 """
-Архитектура наземного сегмента (MCS / TT&C) системы AURORA PNT.
+Архитектура наземного сегмента (MCS / TT&C) системы АВРОРА.
 
 Рассчитывает:
 - Элементы: MCS (центр управления, резервированный), станции TT&C (5),
@@ -138,7 +138,7 @@ def _plot_architecture(output_dir, label):
     ax.text(5.95, 3.25, "оптика", fontsize=8, color=PALETTE[7])
     ax.text(8.95, 3.25, "SSR", fontsize=8, color=PALETTE[7])
 
-    ax.set_title(f"Архитектура наземного сегмента AURORA PNT "
+    ax.set_title(f"Архитектура наземного сегмента АВРОРА "
                  f"(КА → TT&C → MCS → Пользователи) [{label}]",
                  fontsize=12)
     plt.tight_layout()

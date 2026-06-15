@@ -1,5 +1,5 @@
 """
-Релятивистские поправки для AURORA PNT.
+Релятивистские поправки для АВРОРА.
 
 На орбите LEO 1000 км действуют три основных релятивистских эффекта,
 необходимых для наносекундной синхронизации:
@@ -30,7 +30,7 @@ OMEGA_E = 7.292115e-5          # угловая скорость вращени�
 J2      = 1.0826257e-3         # вторая зональная гармоника
 C20     = -J2
 
-# ── Параметры орбиты AURORA ───────────────────────────────────────────────────
+# ── Параметры орбиты АВРОРА ───────────────────────────────────────────────────
 AURORA_ALT_M  = 1_000_000.0
 AURORA_INC_D  = 75.0
 
@@ -99,7 +99,7 @@ def eccentricity_correction_ns(e: float, sqrt_a_m05: float,
     """
     Эксцентрическая поправка часов КА (IS-GPS-200):
     Δt_rel = -2 × sqrt(GM) / c² × e × sqrt(a) × sin(E)
-    Для AURORA: e ≈ 0 → поправка пренебрежимо мала.
+    Для АВРОРА: e ≈ 0 → поправка пренебрежимо мала.
     Возвращает нс.
     """
     return -(2 * math.sqrt(GM) / C**2) * e * sqrt_a_m05 * math.sin(eccentric_anomaly_rad) * 1e9
@@ -122,7 +122,7 @@ def run_relativistic_analysis(output_dir: str, label: str) -> Dict:
 
     # Таблица ключевых орбит
     key_orbits = {
-        "AURORA LEO (1000 км)": AURORA_ALT_M,
+        "АВРОРА LEO (1000 км)": AURORA_ALT_M,
         "ISS (400 км)":          400_000.0,
         "GPS MEO (20 200 км)":   GPS_ALT_M,
         "Galileo (23 222 км)":   23_222_000.0,
@@ -165,12 +165,12 @@ def _plot_clock_correction(alt_km, grav, dop, total, output_dir, label):
     ax.plot(alt_km, dop,   color="#e17055", lw=2, label="Доплер 2-го порядка (−)")
     ax.plot(alt_km, total, color="#0984e3", lw=2.5, label="Суммарная поправка")
     ax.axhline(0, color="black", lw=0.8, ls="--")
-    ax.axvline(AURORA_ALT_M/1000, color="#6c5ce7", lw=1.5, ls=":", label="AURORA 1000 км")
+    ax.axvline(AURORA_ALT_M/1000, color="#6c5ce7", lw=1.5, ls=":", label="АВРОРА 1000 км")
     ax.axvline(GPS_ALT_M/1000,    color="#fdcb6e", lw=1.5, ls=":", label="GPS 20 200 км")
     # Аннотации
     aurora_total = total_clock_correction_ppb(AURORA_ALT_M)
     gps_total    = total_clock_correction_ppb(GPS_ALT_M)
-    ax.annotate(f"AURORA: {aurora_total:+.2f} ppb",
+    ax.annotate(f"АВРОРА: {aurora_total:+.2f} ppb",
                 xy=(1000, aurora_total), xytext=(3000, aurora_total+0.02),
                 arrowprops=dict(arrowstyle="->", color="#6c5ce7"),
                 fontsize=9, color="#6c5ce7")
@@ -180,7 +180,7 @@ def _plot_clock_correction(alt_km, grav, dop, total, output_dir, label):
                 fontsize=9, color="#fdcb6e")
     ax.set_xlabel("Высота орбиты (км)")
     ax.set_ylabel("Относительный сдвиг частоты (ppb = 10⁻⁹)")
-    ax.set_title(f"AURORA PNT — Релятивистская поправка часов КА [{label}]")
+    ax.set_title(f"АВРОРА — Релятивистская поправка часов КА [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -192,7 +192,7 @@ def _plot_ns_per_day(alt_km, ns_day, output_dir, label):
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.plot(alt_km, ns_day, color="#0984e3", lw=2)
     ax.axhline(0, color="black", lw=0.8)
-    ax.axvline(AURORA_ALT_M/1000, color="#6c5ce7", lw=1.5, ls=":", label="AURORA 1000 км")
+    ax.axvline(AURORA_ALT_M/1000, color="#6c5ce7", lw=1.5, ls=":", label="АВРОРА 1000 км")
     ax.axvline(GPS_ALT_M/1000,    color="#fdcb6e", lw=1.5, ls=":", label="GPS 20 200 км")
     aurora_ns = clock_correction_ns_per_day(AURORA_ALT_M)
     gps_ns    = clock_correction_ns_per_day(GPS_ALT_M)
@@ -204,7 +204,7 @@ def _plot_ns_per_day(alt_km, ns_day, output_dir, label):
                 arrowprops=dict(arrowstyle="->", color="#fdcb6e"))
     ax.set_xlabel("Высота орбиты (км)")
     ax.set_ylabel("Поправка часов (нс/сутки)")
-    ax.set_title(f"AURORA PNT — Суммарная релятивистская поправка [{label}]")
+    ax.set_title(f"АВРОРА — Суммарная релятивистская поправка [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -215,12 +215,12 @@ def _plot_ns_per_day(alt_km, ns_day, output_dir, label):
 def _plot_sagnac(range_km, sagnac_ns, output_dir, label):
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.plot(range_km, sagnac_ns, color="#e17055", lw=2)
-    # Характерные дальности AURORA
+    # Характерные дальности АВРОРА
     ax.axvline(1000, ls=":", color="#0984e3", lw=1.2, label="1000 км (зенит)")
     ax.axvline(2825, ls=":", color="#6c5ce7", lw=1.2, label="2825 км (угол 10°)")
     ax.set_xlabel("Дальность до спутника (км)")
     ax.set_ylabel("Поправка Саньяка (нс)")
-    ax.set_title(f"AURORA PNT — Эффект Саньяка vs дальность [{label}]  (аз. 90°, ув. 30°)")
+    ax.set_title(f"АВРОРА — Эффект Саньяка vs дальность [{label}]  (аз. 90°, ув. 30°)")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -243,7 +243,7 @@ def _plot_orbit_comparison(orbit_table, output_dir, label):
     ax.set_xticks(x)
     ax.set_xticklabels(names, rotation=18, ha="right", fontsize=9)
     ax.set_ylabel("Поправка часов (нс/сутки)")
-    ax.set_title(f"AURORA PNT — Релятивистские поправки для разных орбит [{label}]")
+    ax.set_title(f"АВРОРА — Релятивистские поправки для разных орбит [{label}]")
     ax.legend(fontsize=9)
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()

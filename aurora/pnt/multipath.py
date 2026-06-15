@@ -1,5 +1,5 @@
 """
-Multipath Environment Model for AURORA PNT.
+Multipath Environment Model for АВРОРА.
 
 Models multipath-induced ranging error by environment type.
 LEO satellites provide significantly better multipath geometry than GPS
@@ -77,7 +77,7 @@ def leo_mp_advantage_db(leo_el: float, gps_el: float) -> float:
 def compute_environment_uere(
     env_name: str,
     freq: str = "L1+L5",
-    system: str = "AURORA",
+    system: str = "АВРОРА",
 ) -> Dict:
     env = ENVIRONMENTS[env_name]
     base = dict(UERE_NO_MP)
@@ -88,7 +88,7 @@ def compute_environment_uere(
         mp_open = env["mp_l1_m"]
 
     # Apply LEO factor (elevated angles reduce multipath)
-    if system == "AURORA":
+    if system == "АВРОРА":
         mp = mp_open * env["leo_factor"]
         system_mp_factor = env["leo_factor"]
     else:  # GPS
@@ -117,7 +117,7 @@ def run_multipath_analysis(
 
     results = []
     for env_name in ENVIRONMENTS:
-        for system, pdop in [("AURORA", pdop_leo), ("GPS", pdop_gps)]:
+        for system, pdop in [("АВРОРА", pdop_leo), ("GPS", pdop_gps)]:
             for freq in ["L1+L5", "L1"]:
                 r = compute_environment_uere(env_name, freq, system)
                 r["pdop"]  = pdop
@@ -127,11 +127,11 @@ def run_multipath_analysis(
     # LEO elevation advantage
     el_advantage = leo_mp_advantage_db(LEO_AVG_ELEVATION_DEG, GPS_AVG_ELEVATION_DEG)
 
-    # Summary: AURORA L1+L5 vs GPS L1 CEP per environment
+    # Summary: АВРОРА L1+L5 vs GPS L1 CEP per environment
     summary = []
     for env_name in ENVIRONMENTS:
         aurora = next(r for r in results if r["env"] == env_name
-                      and r["system"] == "AURORA" and r["freq"] == "L1+L5")
+                      and r["system"] == "АВРОРА" and r["freq"] == "L1+L5")
         gps    = next(r for r in results if r["env"] == env_name
                       and r["system"] == "GPS" and r["freq"] == "L1")
         summary.append({
@@ -168,7 +168,7 @@ def _plot_mp_by_environment(summary: List[Dict], output_dir: str, label: str) ->
     w = 0.35
     mp_aurora = [s["mp_aurora_m"] for s in summary]
     mp_gps    = [s["mp_gps_m"]    for s in summary]
-    b1 = ax.bar(x - w/2, mp_aurora, w, label="AURORA L1+L5", color="#00b894", edgecolor="white")
+    b1 = ax.bar(x - w/2, mp_aurora, w, label="АВРОРА L1+L5", color="#00b894", edgecolor="white")
     b2 = ax.bar(x + w/2, mp_gps,    w, label="GPS L1",       color="#0984e3", edgecolor="white")
     ax.bar_label(b1, fmt="%.2f м", padding=2, fontsize=7)
     ax.bar_label(b2, fmt="%.2f м", padding=2, fontsize=7)
@@ -184,25 +184,25 @@ def _plot_mp_by_environment(summary: List[Dict], output_dir: str, label: str) ->
     cep_aurora = [s["cep_aurora_m"] for s in summary]
     cep_gps    = [s["cep_gps_m"]    if s["cep_gps_m"] else s["cep_aurora_m"] * 3
                   for s in summary]
-    b3 = ax2.bar(x - w/2, cep_aurora, w, label="AURORA L1+L5", color="#00b894", edgecolor="white")
+    b3 = ax2.bar(x - w/2, cep_aurora, w, label="АВРОРА L1+L5", color="#00b894", edgecolor="white")
     b4 = ax2.bar(x + w/2, cep_gps,    w, label="GPS L1",       color="#0984e3", edgecolor="white")
     ax2.bar_label(b3, fmt="%.1f м", padding=2, fontsize=7)
     ax2.bar_label(b4, fmt="%.1f м", padding=2, fontsize=7)
     ax2.set_xticks(x)
     ax2.set_xticklabels(envs, rotation=20, ha="right", fontsize=9)
     ax2.set_ylabel("CEP 50% (м)")
-    ax2.set_title("CEP по среде (AURORA L1+L5 vs GPS L1)")
+    ax2.set_title("CEP по среде (АВРОРА L1+L5 vs GPS L1)")
     ax2.legend()
     ax2.grid(axis="y", alpha=0.3)
 
-    fig.suptitle(f"AURORA PNT — Анализ многолучёвости [{label}]", fontsize=12)
+    fig.suptitle(f"АВРОРА — Анализ многолучёвости [{label}]", fontsize=12)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"multipath_{label}.png"), dpi=150)
     plt.close(fig)
 
 
 def _plot_uere_breakdown_env(results: List[Dict], output_dir: str, label: str) -> None:
-    aurora_l1l5 = [r for r in results if r["system"] == "AURORA" and r["freq"] == "L1+L5"]
+    aurora_l1l5 = [r for r in results if r["system"] == "АВРОРА" and r["freq"] == "L1+L5"]
     envs   = [r["env"] for r in aurora_l1l5]
     ueres  = [r["uere_total_m"] for r in aurora_l1l5]
     mps    = [r["mp_error_m"] for r in aurora_l1l5]
@@ -217,7 +217,7 @@ def _plot_uere_breakdown_env(results: List[Dict], output_dir: str, label: str) -
     ax.set_xticks(x)
     ax.set_xticklabels(envs, rotation=20, ha="right", fontsize=9)
     ax.set_ylabel("UERE 1σ (м)")
-    ax.set_title(f"Состав UERE AURORA L1+L5 по среде [{label}]")
+    ax.set_title(f"Состав UERE АВРОРА L1+L5 по среде [{label}]")
     ax.legend()
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
@@ -247,9 +247,9 @@ def print_multipath_summary(label: str, result: Dict) -> None:
     print(f"  LEO elevation advantage over GPS: "
           f"{result['elevation_advantage_db']:.1f} dB")
     print()
-    print(f"  CEP comparison (AURORA L1+L5 vs GPS L1):")
-    print(f"  {'Environment':<14} {'MP AURORA':>10} {'MP GPS':>8} "
-          f"{'CEP AURORA':>12} {'CEP GPS':>10} {'Improv.':>9}")
+    print(f"  CEP comparison (АВРОРА L1+L5 vs GPS L1):")
+    print(f"  {'Environment':<14} {'MP АВРОРА':>10} {'MP GPS':>8} "
+          f"{'CEP АВРОРА':>12} {'CEP GPS':>10} {'Improv.':>9}")
     print("  " + "-" * 67)
     for s in result["summary"]:
         gps_cep = f"{s['cep_gps_m']:.1f}m" if s["cep_gps_m"] else "N/A"

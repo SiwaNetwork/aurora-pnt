@@ -1,5 +1,5 @@
 """
-Satellite Mass and Volume Budget for AURORA PNT.
+Satellite Mass and Volume Budget for АВРОРА.
 
 Detailed subsystem mass breakdown for a ~150 kg LEO navigation satellite.
 Includes dry mass, propellant budget (station-keeping + deorbit), and
@@ -188,7 +188,7 @@ def _plot_mass_breakdown(cat_mass, dry_mass, wet_mass, prop, output_dir, label):
                 f"{v:.1f} кг", va="center", fontsize=8)
 
     ax.set_xlabel("Масса (кг)")
-    ax.set_title(f"AURORA — Бюджет массы спутника [{label}]\n"
+    ax.set_title(f"АВРОРА — Бюджет массы спутника [{label}]\n"
                  f"Сухая: {dry_mass:.1f} кг  |  "
                  f"Топливо: {prop['mp_total_kg']:.1f} кг  |  "
                  f"Заправл.: {wet_mass:.1f} кг  (цель {AURORA_MASS_TARGET_KG:.0f} кг)")
@@ -204,7 +204,7 @@ def _plot_mass_pie(cat_mass, output_dir, label):
     colors = plt.cm.Set3(np.linspace(0, 1, len(cat_mass)))
     ax.pie(list(cat_mass.values()), labels=labels, colors=colors,
            autopct="%1.0f%%", startangle=90, pctdistance=0.75, textprops={"fontsize": 8})
-    ax.set_title(f"AURORA — Распределение сухой массы [{label}]")
+    ax.set_title(f"АВРОРА — Распределение сухой массы [{label}]")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"mass_pie_{label}.png"), dpi=150)
     plt.close(fig)

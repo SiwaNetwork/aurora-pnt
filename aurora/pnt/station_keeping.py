@@ -1,5 +1,5 @@
 """
-Поддержание орбиты (Station Keeping) AURORA PNT.
+Поддержание орбиты (Station Keeping) АВРОРА.
 
 Рассчитывает возмущения орбиты и необходимый ΔV для Walker Delta 300/15/1
 на 1000 км / 75°:
@@ -30,7 +30,7 @@ J4        = -1.6199e-6
 C_LIGHT   = 299_792_458.0
 P_SOLAR   = 4.56e-6          # Па (солнечное давление на 1 а.е.)
 
-# ── Параметры орбиты AURORA ───────────────────────────────────────────────────
+# ── Параметры орбиты АВРОРА ───────────────────────────────────────────────────
 ALT_M     = 1_000_000.0      # 1000 км
 INC_DEG   = 75.0
 ECC       = 0.001            # почти круговая
@@ -206,7 +206,7 @@ def _plot_altitude_decay(years_range, alt_min, alt_mean, alt_max, output_dir, la
                label="Порог коррекции высоты (-20 км)")
     ax.set_xlabel("Время (лет)")
     ax.set_ylabel("Высота орбиты (км)")
-    ax.set_title(f"AURORA PNT — Высотный дрейф без коррекции [{label}]")
+    ax.set_title(f"АВРОРА — Высотный дрейф без коррекции [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -235,7 +235,7 @@ def _plot_raan_drift(years_range, raan_drift, output_dir, label):
 
     ax.set_xlabel("Время (лет)")
     ax.set_ylabel("Дрейф RAAN (градусы)")
-    ax.set_title(f"AURORA PNT — Прецессия RAAN из-за J2 [{label}]")
+    ax.set_title(f"АВРОРА — Прецессия RAAN из-за J2 [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -260,7 +260,7 @@ def _plot_dv_budget(dv_budget, output_dir, label):
         ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.2,
                 f"{v:.1f}", ha="center", fontsize=9, fontweight="bold")
     ax.set_ylabel("ΔV (м/с) за 7 лет")
-    ax.set_title(f"AURORA PNT — Бюджет ΔV поддержания орбиты [{label}]")
+    ax.set_title(f"АВРОРА — Бюджет ΔV поддержания орбиты [{label}]")
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"sk_dv_budget_{label}.png"), dpi=150)
@@ -291,7 +291,7 @@ def _plot_manoeuvre_schedule(output_dir, label):
     ax1.plot(days / 365, alt_adjusted, color="#0984e3", lw=1.5)
     ax1.axhline(ALT_M / 1e3, ls="--", color="#b2bec3", lw=1, label="Номинальная высота")
     ax1.set_ylabel("Высота (км)")
-    ax1.set_title(f"AURORA PNT — Расписание манёвров поддержания орбиты [{label}]")
+    ax1.set_title(f"АВРОРА — Расписание манёвров поддержания орбиты [{label}]")
     ax1.legend(fontsize=9)
     ax1.grid(alpha=0.3)
 

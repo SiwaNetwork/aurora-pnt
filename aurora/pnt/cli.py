@@ -505,13 +505,13 @@ def cmd_clock_arch(args):
 
 
 def cmd_timing_service(args):
-    """AURORA-T timing service: PTP/NTP grandmaster accuracy by clock type."""
+    """АВРОРА-T timing service: PTP/NTP grandmaster accuracy by clock type."""
     from aurora.pnt.timing_service import run_timing_service_analysis
 
     label = args.label or "phase4"
     output_dir = args.output or "results/timing_service"
 
-    print(f"\n  Running AURORA-T timing service analysis: {label}")
+    print(f"\n  Running АВРОРА-T timing service analysis: {label}")
     print(f"  ISL chain: {args.isl_hops} hops, sync interval {args.sync_interval} s")
     print(f"  UERE: autonomous={args.uere_autonomous} m, combined={args.uere_combined} m")
 
@@ -1028,7 +1028,7 @@ def cmd_signal_design(args):
 
 
 def cmd_competitor_analysis(args):
-    """Competitor analysis: AURORA vs GLONASS, GPS, Galileo, LEO PNT systems."""
+    """Competitor analysis: АВРОРА vs GLONASS, GPS, Galileo, LEO PNT systems."""
     from aurora.pnt.competitor_analysis import run_competitor_analysis, print_competitor_summary
     label      = args.label  or "phase4"
     output_dir = args.output or "results/competitor_analysis"
@@ -1112,7 +1112,7 @@ def cmd_sdr_receiver(args):
 
 
 def cmd_risks(args):
-    """Реестр рисков AURORA PNT (P×S матрица)."""
+    """Реестр рисков АВРОРА (P×S матрица)."""
     from aurora.pnt.risks import run_risks_analysis, print_risks_summary
     label = args.label or "phase5"
     output_dir = args.output or "results/risks"
@@ -1122,7 +1122,7 @@ def cmd_risks(args):
 
 
 def cmd_schedule(args):
-    """График работ AURORA PNT (Gantt + критический путь)."""
+    """График работ АВРОРА (Gantt + критический путь)."""
     from aurora.pnt.schedule import run_schedule_analysis, print_schedule_summary
     label = args.label or "phase5"
     output_dir = args.output or "results/schedule"
@@ -1320,7 +1320,7 @@ def cmd_resilience(args):
 def main():
     parser = argparse.ArgumentParser(
         prog="aurora-pnt",
-        description="AURORA PNT Simulation Framework — Shiwa Network",
+        description="АВРОРА Simulation Framework — Shiwa Network",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -1479,7 +1479,7 @@ def main():
 
     # timing-service
     p_tms = sub.add_parser("timing-service",
-                           help="AURORA-T: PTP/NTP grandmaster accuracy, timing protocol stack")
+                           help="АВРОРА-T: PTP/NTP grandmaster accuracy, timing protocol stack")
     p_tms.add_argument("-o", "--output", default="results/timing_service", help="Output directory")
     p_tms.add_argument("-l", "--label",  default="phase4", help="Run label")
     p_tms.add_argument("--isl-hops",       type=int,   default=8,
@@ -1778,7 +1778,7 @@ def main():
 
     # competitor-analysis
     p_comp = sub.add_parser("competitor-analysis",
-                            help="Competitor analysis: AURORA vs GLONASS, GPS, Galileo, LEO PNT systems")
+                            help="Competitor analysis: АВРОРА vs GLONASS, GPS, Galileo, LEO PNT systems")
     p_comp.add_argument("-o", "--output", default="results/competitor_analysis")
     p_comp.add_argument("-l", "--label",  default="phase4")
 

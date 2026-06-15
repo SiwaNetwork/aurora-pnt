@@ -1,5 +1,5 @@
 """
-Интеграция AURORA PNT с реальными источниками данных.
+Интеграция АВРОРА с реальными источниками данных.
 
 Демонстрирует получение и парсинг реальных продуктов GNSS для валидации
 встроенных моделей: ионосферы (§11), тропосферы (§34), эфемерид (§47).
@@ -437,7 +437,7 @@ def _plot_sources_table(output_dir: str, label: str):
         for j in range(len(headers)):
             cell = table[(i, j)]
             cell.set_facecolor("#dfe6e9" if i % 2 == 0 else "#f5f6fa")
-    ax.set_title(f"Источники реальных данных AURORA PNT [{label}]\n"
+    ax.set_title(f"Источники реальных данных АВРОРА [{label}]\n"
                  f"Всего {len(DATA_SOURCES)} источников | "
                  f"{sum(1 for s in DATA_SOURCES if s['embedded'])} embedded в офлайн-режиме",
                  fontsize=12, pad=14)

@@ -1,5 +1,5 @@
 """
-Надёжность и MTBF подсистем AURORA PNT.
+Надёжность и MTBF подсистем АВРОРА.
 
 Модели: MIL-HDBK-217F / ECSS-Q-ST-30-C (класс S, геостационарная → LEO).
 Рассчитывает:
@@ -175,7 +175,7 @@ def _plot_subsystem_mtbf(mtbf_dict, r7_dict, output_dir, label):
     ax1.set_ylabel("MTBF (тыс. часов)")
     ax2.set_ylabel("Надёжность R(7 лет), %")
     ax2.set_ylim(0, 110)
-    ax1.set_title(f"AURORA PNT — MTBF и надёжность подсистем за 7 лет [{label}]")
+    ax1.set_title(f"АВРОРА — MTBF и надёжность подсистем за 7 лет [{label}]")
     lines2, labels2 = ax2.get_legend_handles_labels()
     ax1.legend(loc="upper left", fontsize=9)
     ax2.legend(loc="upper right", fontsize=9)
@@ -199,7 +199,7 @@ def _plot_satellite_r_vs_time(years_range, r_curve, output_dir, label):
                 arrowprops=dict(arrowstyle="->", color="#2d3436"))
     ax.set_xlabel("Время (лет)")
     ax.set_ylabel("Надёжность спутника R(t), %")
-    ax.set_title(f"AURORA PNT — Надёжность одного спутника vs время [{label}]")
+    ax.set_title(f"АВРОРА — Надёжность одного спутника vs время [{label}]")
     ax.legend(fontsize=10)
     ax.grid(alpha=0.3)
     ax.set_ylim(0, 105)
@@ -224,7 +224,7 @@ def _plot_fleet_degradation(years_range, fleet_curve, output_dir, label):
                     alpha=0.25, color="#e17055", label="Зона деградации")
     ax.set_xlabel("Время (лет)")
     ax.set_ylabel("Ожидаемое число работающих спутников")
-    ax.set_title(f"AURORA PNT — Деградация созвездия [{label}]")
+    ax.set_title(f"АВРОРА — Деградация созвездия [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()
@@ -246,7 +246,7 @@ def _plot_spares_analysis(output_dir, label):
                 str(val), ha="center", fontsize=11, fontweight="bold")
     ax.set_xlabel("Уровень достоверности")
     ax.set_ylabel("Число запасных спутников")
-    ax.set_title(f"AURORA PNT — Необходимые запасы по уровню надёжности [{label}]")
+    ax.set_title(f"АВРОРА — Необходимые запасы по уровню надёжности [{label}]")
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"reliability_spares_{label}.png"), dpi=150)
@@ -265,7 +265,7 @@ def _plot_plane_reliability(output_dir, label):
     ax.axhline(95, ls=":", color="#00b894", lw=1.2, label="95% требование")
     ax.set_xlabel(f"Минимальное число рабочих спутников в плоскости (из {SATS_PER_PLANE})")
     ax.set_ylabel("Надёжность плоскости, %")
-    ax.set_title(f"AURORA PNT — Надёжность орбитальной плоскости через 7 лет [{label}]")
+    ax.set_title(f"АВРОРА — Надёжность орбитальной плоскости через 7 лет [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     ax.set_ylim(0, 105)

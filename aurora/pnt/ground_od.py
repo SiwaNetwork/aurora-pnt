@@ -1,9 +1,9 @@
 """
-Ground-Only Orbit Determination (OD) for AURORA PNT.
+Ground-Only Orbit Determination (OD) for АВРОРА.
 
 Models orbit determination accuracy using only ground station
 network observations, without ISL measurements. Compares:
-  - Ground-only OD (AURORA 21 MCS stations)
+  - Ground-only OD (АВРОРА 21 MCS stations)
   - ISL-augmented OD
   - GPS-like ground network (reference)
 
@@ -39,7 +39,7 @@ AURORA_INC   = 75.0           # inclination (°)
 
 # ── Ground station networks ───────────────────────────────────────────────────
 NETWORKS = {
-    "AURORA МКС (21 ст.)": {
+    "АВРОРА МКС (21 ст.)": {
         "n_stations":   21,
         "lat_coverage": "Россия + партнёры (15°–70° с.ш.)",
         "arc_h":        2.0,    # tracking arc (hours) before contact gap
@@ -57,7 +57,7 @@ NETWORKS = {
         "phase_mm":     2.0,
         "color": "#e17055",
     },
-    "AURORA МКС + ИСЛ": {
+    "АВРОРА МКС + ИСЛ": {
         "n_stations":   21,
         "lat_coverage": "МКС + ISL дополнение",
         "arc_h":        24.0,   # ISL provides continuous coverage
@@ -183,7 +183,7 @@ def _plot_rac_accuracy(results, output_dir, label):
     ax.set_xticks(x + w * 1.5)
     ax.set_xticklabels(networks, rotation=15, ha="right", fontsize=9)
     ax.set_ylabel("Погрешность (м, 1σ)")
-    ax.set_title(f"AURORA — Точность орбитального определения: RAC сравнение [{label}]")
+    ax.set_title(f"АВРОРА — Точность орбитального определения: RAC сравнение [{label}]")
     ax.legend(fontsize=9)
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
@@ -215,7 +215,7 @@ def _plot_prediction_degradation(t_range, results, output_dir, label):
     axes[1].legend(fontsize=8)
     axes[1].grid(alpha=0.3)
 
-    fig.suptitle(f"AURORA — Деградация прогноза эфемерид [{label}]")
+    fig.suptitle(f"АВРОРА — Деградация прогноза эфемерид [{label}]")
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"od_prediction_{label}.png"), dpi=150)
     plt.close(fig)
@@ -235,7 +235,7 @@ def _plot_network_comparison(results, output_dir, label):
     ax.set_xticks(x)
     ax.set_xticklabels(networks, rotation=10, ha="right", fontsize=9)
     ax.set_ylabel("Погрешность (м, 1σ)")
-    ax.set_title(f"AURORA — Сравнение сетей НС для орбитального определения [{label}]")
+    ax.set_title(f"АВРОРА — Сравнение сетей НС для орбитального определения [{label}]")
     ax.legend(fontsize=9)
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
@@ -272,7 +272,7 @@ def print_ground_od_summary(label: str, result: Dict) -> None:
               f"{b['sigma_c_m']:>6.2f}  {b['sigma_3d_m']:>7.2f}  {b['uere_orbit_m']:>8.2f}")
     print()
     print(f"  Наихудший случай: 12 ч без контакта (только МКС):")
-    n = NETWORKS["AURORA МКС (21 ст.)"]
+    n = NETWORKS["АВРОРА МКС (21 ст.)"]
     b12 = orbit_accuracy_m(n["arc_h"], n["gap_h"], n["ranging_m"], n["n_stations"], 12.0)
     print(f"    Вдоль трека: {b12['sigma_a_m']:.1f} м  |  3D: {b12['sigma_3d_m']:.1f} м")
     print(sep)
