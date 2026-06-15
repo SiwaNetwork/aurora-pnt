@@ -1,7 +1,7 @@
 """
 Satellite Mass and Volume Budget for АВРОРА.
 
-Detailed subsystem mass breakdown for a ~150 kg LEO navigation satellite.
+Detailed subsystem mass breakdown for a ~140 кг (малый спутник) LEO-навигации.
 Includes dry mass, propellant budget (station-keeping + deorbit), and
 structural volume allocations.
 
@@ -24,51 +24,51 @@ G0 = 9.80665   # m/s²
 # ── Subsystem mass allocations ────────────────────────────────────────────────
 # Each entry: (mass_kg, volume_l, power_w, desc)
 SUBSYSTEMS = {
-    # Structure & Mechanisms
-    "Structure & panels":          (18.0,  40.0,   0.0, "Primary structure, panels, brackets"),
-    "Separation system":           ( 2.5,   3.0,   0.0, "Clamp band + ADCS springs"),
-    "Solar array mechanism":       ( 2.0,   2.0,   0.0, "Deployment hinges + drives"),
-    # Power
-    "Solar array (GaAs, 3 m²)":   ( 6.0,   2.0,   0.0, "3J GaAs, BOL 28%, 3.0 m² deployed"),
-    "Battery (Li-ion)":            ( 3.5,   5.5,   0.0, "54.5 Wh/0.27 kg — sized to eclipse"),
-    "EPS (power conditioning)":    ( 4.0,   4.0,  10.0, "PCDU, regulators, protection"),
-    "Solar array harness":         ( 1.5,   0.5,   0.0, "Array-to-PCDU wiring"),
-    # AOCS
-    "Star trackers (x2)":          ( 2.0,   1.5,   8.0, "0.4 kg each, 5 arcsec accuracy"),
-    "IMU (gyroscope)":             ( 0.8,   0.5,   4.0, "MEMS/FOG, 3-axis"),
-    "Magnetometer":                ( 0.3,   0.2,   0.5, "3-axis fluxgate"),
-    "Reaction wheels (x4)":        ( 4.0,   3.0,   8.0, "4 Nms, 4 wheels for redundancy"),
-    "AOCS computer":               ( 1.0,   0.8,   5.0, "Embedded AOCS processor"),
-    # Navigation payload
-    "PNT signal generator":        ( 5.0,   4.0,  40.0, "L1+L5 BPSK signal generator"),
-    "Navigation antennas (x2)":    ( 3.0,   2.0,   0.0, "L1/L5 nadir patch array"),
-    "RF amplifiers + diplexer":    ( 2.0,   1.5,  40.0, "20 W PA x2 per signal"),
-    "On-board GNSS receiver":      ( 0.5,   0.3,   5.0, "GPS/GLONASS orbit determination"),
-    # Atomic clock
-    "Cs frequency standard":       ( 0.7,   0.5,   4.0, "1 per plane anchor (15 total)"),
-    "Rb frequency standard":       ( 0.4,   0.3,   3.0, "3 per plane relay (45 total)"),
-    "OCXO oscillator":             ( 0.2,   0.1,   2.5, "16 per plane terminal (240 total)"),
+    # Структура и механизмы
+    "Структура и панели":          (21.0,  40.0,   0.0, "Несущий корпус, панели, кронштейны (радстойкость 7 лет)"),
+    "Система отделения":           ( 2.5,   3.0,   0.0, "Захватный бандаж + пружины"),
+    "Механизм раскрытия СБ":       ( 2.0,   2.0,   0.0, "Шарниры и приводы раскрытия"),
+    # Энергетика
+    "Солнечная батарея (GaAs, 3 м²)": ( 6.0, 2.0,  0.0, "3J GaAs, BOL 30%, 3,0 м²"),
+    "АКБ (Li-ion, 160 Вт·ч)":      ( 2.5,   5.5,   0.0, "160 Вт·ч под двухсервисную нагрузку"),
+    "ЭПС (кондиционирование)":     ( 4.0,   4.0,  10.0, "PCDU, регуляторы, защита"),
+    "Кабельная сеть СБ":           ( 1.5,   0.5,   0.0, "СБ → PCDU"),
+    # СУОС
+    "Звёздные датчики (x2)":       ( 2.0,   1.5,   8.0, "0,4 кг каждый, 5 угл.с"),
+    "ИНС (гироскоп)":              ( 0.8,   0.5,   4.0, "МЭМС/ВОГ, 3 оси"),
+    "Магнитометр":                 ( 0.3,   0.2,   0.5, "3-осевой феррозонд"),
+    "Маховики (x4)":               ( 4.0,   3.0,   8.0, "4 Н·м·с, резерв"),
+    "Вычислитель СУОС":            ( 1.0,   0.8,   5.0, "Встроенный процессор СУОС"),
+    # Навигационная ПН (двухсервисная, §65)
+    "Генератор сигналов ПНВ (А+Б)": ( 5.0,  4.0,  45.0, "Сервис А L1/L5 + Сервис Б выдел. L"),
+    "Антенны навигационные":       ( 4.0,   2.5,   0.0, "RHCP L1/L5 + изо-flux выдел. L (Сервис Б)"),
+    "УМ РЧ + диплексер":           ( 4.0,   2.0,  80.0, "Сервис А 5/3 Вт + Сервис Б 30 Вт"),
+    "Бортовой GNSS-приёмник":      ( 0.5,   0.3,   5.0, "Определение орбиты"),
+    # Часовая архитектура (канон)
+    "CSAC (чип-цезий, все КА)":    ( 0.1,   0.1,   0.5, "Microsemi SA.45s, терминал на всех 300 КА"),
+    "space-Rb (якорные КА)":       ( 0.5,   0.3,   3.0, "Quantum-18, ~15 якорей (1,8 кг на якоре)"),
     # ISL
-    "ISL Ka-band transceiver":     ( 3.5,   2.5,  30.0, "Ka 26 GHz, 10 W TX, 4 links"),
-    "ISL antennas (x4)":           ( 2.0,   1.0,   0.0, "Steerable Ka phased arrays"),
-    # TT&C
-    "S-band TT&C radio":           ( 1.5,   1.0,  12.0, "2 W TX, 2 kbps uplink"),
-    "TT&C antenna":                ( 0.3,   0.2,   0.0, "Omnidirectional S-band"),
-    # OBC
-    "On-board computer":           ( 1.2,   0.8,  12.0, "Main CPU + 64 GB storage"),
-    "Software & FPGA":             ( 0.5,   0.3,   3.0, "Navigation signal processing FPGA"),
-    # Thermal
-    "Radiators":                   ( 2.0,   0.5,   0.0, "Passive radiator panels"),
-    "MLI blankets":                ( 1.5,   1.0,   0.0, "Multi-layer insulation"),
-    "Thermal heaters":             ( 0.5,   0.2,  25.0, "OCXO + cold-face heaters"),
-    "Heat pipes":                  ( 0.8,   0.3,   0.0, "Isothermal panel coupling"),
-    # Propulsion
-    "Propellant tank":             ( 2.5,   8.0,   0.0, "CFRP overwrap, 15 L"),
-    "Thruster (x4 cold-gas/ion)":  ( 1.5,   1.0,   0.0, "4 x 50 mN thrusters"),
-    "Feed system + valves":        ( 1.0,   0.5,   0.0, "Latch valves, regulators, lines"),
-    # Harness & misc
-    "Satellite harness":           ( 4.0,   2.0,   0.0, "All internal cabling"),
-    "Fasteners & adhesives":       ( 1.0,   0.5,   0.0, "Screws, brackets, epoxy"),
+    "ISL Ka приёмопередатчик":     ( 3.5,   2.5,  20.0, "Ka 26 ГГц, 2 канала"),
+    "Антенны ISL (x2)":            ( 2.0,   1.0,   0.0, "Управляемые Ka-решётки"),
+    # ТКС/связь
+    "ТКС S-диапазон (радио)":      ( 1.5,   1.0,   8.0, "S-band, приём команд/телеметрия"),
+    "Антенна ТКС":                 ( 0.3,   0.2,   0.0, "Всенаправленная S-band"),
+    # БК
+    "Бортовой компьютер":          ( 1.2,   0.8,  12.0, "Рад-стойкий ЦП + хранилище"),
+    "ПО и ПЛИС":                   ( 0.5,   0.3,   3.0, "ПЛИС обработки сигнала"),
+    # Терморегулирование
+    "Радиаторы":                   ( 2.0,   0.5,   0.0, "Пассивные радиаторы"),
+    "ЭВТИ (MLI)":                  ( 1.5,   1.0,   0.0, "Многослойная изоляция"),
+    "Нагреватели":                 ( 0.5,   0.2,  15.0, "CSAC + холодные грани"),
+    "Тепловые трубы":              ( 0.8,   0.3,   0.0, "Изотермализация панелей"),
+    # Двигательная установка
+    "Бак рабочего тела":           ( 2.5,   8.0,   0.0, "CFRP, 15 л"),
+    "Двигатели (x4)":              ( 1.5,   1.0,   0.0, "4 × 50 мН (ион/холодн. газ)"),
+    "Система подачи":              ( 1.0,   0.5,   0.0, "Клапаны, регуляторы, магистрали"),
+    # Кабели и прочее
+    "Кабельная сеть КА":           ( 4.0,   2.0,   0.0, "Внутренняя проводка"),
+    "Крепёж и клеи":               ( 1.0,   0.5,   0.0, "Винты, кронштейны, эпоксид"),
+    "Резерв массы (ECSS)":         (10.0,   0.0,   0.0, "Высвобожден малым CSAC; запас на дозревание"),
 }
 
 # Propellant budget
@@ -86,7 +86,7 @@ MASS_MARGINS = {
 }
 
 # Mission design target
-AURORA_MASS_TARGET_KG = 150.0
+AURORA_MASS_TARGET_KG = 140.0
 AURORA_VOLUME_LIMIT_L = 120.0   # stacked dispenser envelope
 
 
@@ -112,7 +112,7 @@ def propellant_mass_kg(
 def run_mass_budget_analysis(
     output_dir: str,
     label: str,
-    n_sats: int = 180,
+    n_sats: int = 300,
     mission_years: float = 7.0,
 ) -> Dict:
     os.makedirs(output_dir, exist_ok=True)
@@ -138,16 +138,16 @@ def run_mass_budget_analysis(
 
     # Group by category for pie chart (русские названия для графиков)
     categories = {
-        "Конструкция и механизмы": ["Structure & panels", "Separation system", "Solar array mechanism"],
-        "СЭП (солн. бат. + АКБ)": ["Solar array (GaAs, 3 m²)", "Battery (Li-ion)", "EPS (power conditioning)", "Solar array harness"],
-        "СОС (ADCS)": ["Star trackers (x2)", "IMU (gyroscope)", "Magnetometer", "Reaction wheels (x4)", "AOCS computer"],
-        "Навигационная ПН": ["PNT signal generator", "Navigation antennas (x2)", "RF amplifiers + diplexer", "On-board GNSS receiver"],
-        "Атомные часы": ["Cs frequency standard", "Rb frequency standard", "OCXO oscillator"],
-        "ISL (Ka)": ["ISL Ka-band transceiver", "ISL antennas (x4)"],
-        "ТМ/КУ + БЦВМ": ["S-band TT&C radio", "TT&C antenna", "On-board computer", "Software & FPGA"],
-        "Терморегулирование": ["Radiators", "MLI blankets", "Thermal heaters", "Heat pipes"],
-        "Двиг. установка (сухая)": ["Propellant tank", "Thruster (x4 cold-gas/ion)", "Feed system + valves"],
-        "Кабельная сеть и крепёж": ["Satellite harness", "Fasteners & adhesives"],
+        "Конструкция и механизмы": ["Структура и панели", "Система отделения", "Механизм раскрытия СБ"],
+        "СЭП (солн. бат. + АКБ)": ["Солнечная батарея (GaAs, 3 м²)", "АКБ (Li-ion, 160 Вт·ч)", "ЭПС (кондиционирование)", "Кабельная сеть СБ"],
+        "СУОС (ADCS)": ["Звёздные датчики (x2)", "ИНС (гироскоп)", "Магнитометр", "Маховики (x4)", "Вычислитель СУОС"],
+        "Навигационная ПН (А+Б)": ["Генератор сигналов ПНВ (А+Б)", "Антенны навигационные", "УМ РЧ + диплексер", "Бортовой GNSS-приёмник"],
+        "Часы (CSAC + space-Rb)": ["CSAC (чип-цезий, все КА)", "space-Rb (якорные КА)"],
+        "ISL (Ka)": ["ISL Ka приёмопередатчик", "Антенны ISL (x2)"],
+        "ТМ/КУ + БЦВМ": ["ТКС S-диапазон (радио)", "Антенна ТКС", "Бортовой компьютер", "ПО и ПЛИС"],
+        "Терморегулирование": ["Радиаторы", "ЭВТИ (MLI)", "Нагреватели", "Тепловые трубы"],
+        "Двиг. установка (сухая)": ["Бак рабочего тела", "Двигатели (x4)", "Система подачи"],
+        "Кабели, крепёж, резерв": ["Кабельная сеть КА", "Крепёж и клеи", "Резерв массы (ECSS)"],
     }
     cat_mass = {}
     for cat, subs in categories.items():

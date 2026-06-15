@@ -1,39 +1,39 @@
 subsystem,mass_kg,volume_l,desc
-Structure & panels,18.0,40.0,"Primary structure, panels, brackets"
-Separation system,2.5,3.0,Clamp band + ADCS springs
-Solar array mechanism,2.0,2.0,Deployment hinges + drives
-"Solar array (GaAs, 3 m²)",6.0,2.0,"3J GaAs, BOL 28%, 3.0 m² deployed"
-Battery (Li-ion),3.5,5.5,54.5 Wh/0.27 kg — sized to eclipse
-EPS (power conditioning),4.0,4.0,"PCDU, regulators, protection"
-Solar array harness,1.5,0.5,Array-to-PCDU wiring
-Star trackers (x2),2.0,1.5,"0.4 kg each, 5 arcsec accuracy"
-IMU (gyroscope),0.8,0.5,"MEMS/FOG, 3-axis"
-Magnetometer,0.3,0.2,3-axis fluxgate
-Reaction wheels (x4),4.0,3.0,"4 Nms, 4 wheels for redundancy"
-AOCS computer,1.0,0.8,Embedded AOCS processor
-PNT signal generator,5.0,4.0,L1+L5 BPSK signal generator
-Navigation antennas (x2),3.0,2.0,L1/L5 nadir patch array
-RF amplifiers + diplexer,2.0,1.5,20 W PA x2 per signal
-On-board GNSS receiver,0.5,0.3,GPS/GLONASS orbit determination
-Cs frequency standard,0.7,0.5,1 per plane anchor (15 total)
-Rb frequency standard,0.4,0.3,3 per plane relay (45 total)
-OCXO oscillator,0.2,0.1,16 per plane terminal (240 total)
-ISL Ka-band transceiver,3.5,2.5,"Ka 26 GHz, 10 W TX, 4 links"
-ISL antennas (x4),2.0,1.0,Steerable Ka phased arrays
-S-band TT&C radio,1.5,1.0,"2 W TX, 2 kbps uplink"
-TT&C antenna,0.3,0.2,Omnidirectional S-band
-On-board computer,1.2,0.8,Main CPU + 64 GB storage
-Software & FPGA,0.5,0.3,Navigation signal processing FPGA
-Radiators,2.0,0.5,Passive radiator panels
-MLI blankets,1.5,1.0,Multi-layer insulation
-Thermal heaters,0.5,0.2,OCXO + cold-face heaters
-Heat pipes,0.8,0.3,Isothermal panel coupling
-Propellant tank,2.5,8.0,"CFRP overwrap, 15 L"
-Thruster (x4 cold-gas/ion),1.5,1.0,4 x 50 mN thrusters
-Feed system + valves,1.0,0.5,"Latch valves, regulators, lines"
-Satellite harness,4.0,2.0,All internal cabling
-Fasteners & adhesives,1.0,0.5,"Screws, brackets, epoxy"
+Структура и панели,21.0,40.0,"Несущий корпус, панели, кронштейны (радстойкость 7 лет)"
+Система отделения,2.5,3.0,Захватный бандаж + пружины
+Механизм раскрытия СБ,2.0,2.0,Шарниры и приводы раскрытия
+"Солнечная батарея (GaAs, 3 м²)",6.0,2.0,"3J GaAs, BOL 30%, 3,0 м²"
+"АКБ (Li-ion, 160 Вт·ч)",2.5,5.5,160 Вт·ч под двухсервисную нагрузку
+ЭПС (кондиционирование),4.0,4.0,"PCDU, регуляторы, защита"
+Кабельная сеть СБ,1.5,0.5,СБ → PCDU
+Звёздные датчики (x2),2.0,1.5,"0,4 кг каждый, 5 угл.с"
+ИНС (гироскоп),0.8,0.5,"МЭМС/ВОГ, 3 оси"
+Магнитометр,0.3,0.2,3-осевой феррозонд
+Маховики (x4),4.0,3.0,"4 Н·м·с, резерв"
+Вычислитель СУОС,1.0,0.8,Встроенный процессор СУОС
+Генератор сигналов ПНВ (А+Б),5.0,4.0,Сервис А L1/L5 + Сервис Б выдел. L
+Антенны навигационные,4.0,2.5,RHCP L1/L5 + изо-flux выдел. L (Сервис Б)
+УМ РЧ + диплексер,4.0,2.0,Сервис А 5/3 Вт + Сервис Б 30 Вт
+Бортовой GNSS-приёмник,0.5,0.3,Определение орбиты
+"CSAC (чип-цезий, все КА)",0.1,0.1,"Microsemi SA.45s, терминал на всех 300 КА"
+space-Rb (якорные КА),0.5,0.3,"Quantum-18, ~15 якорей (1,8 кг на якоре)"
+ISL Ka приёмопередатчик,3.5,2.5,"Ka 26 ГГц, 2 канала"
+Антенны ISL (x2),2.0,1.0,Управляемые Ka-решётки
+ТКС S-диапазон (радио),1.5,1.0,"S-band, приём команд/телеметрия"
+Антенна ТКС,0.3,0.2,Всенаправленная S-band
+Бортовой компьютер,1.2,0.8,Рад-стойкий ЦП + хранилище
+ПО и ПЛИС,0.5,0.3,ПЛИС обработки сигнала
+Радиаторы,2.0,0.5,Пассивные радиаторы
+ЭВТИ (MLI),1.5,1.0,Многослойная изоляция
+Нагреватели,0.5,0.2,CSAC + холодные грани
+Тепловые трубы,0.8,0.3,Изотермализация панелей
+Бак рабочего тела,2.5,8.0,"CFRP, 15 л"
+Двигатели (x4),1.5,1.0,4 × 50 мН (ион/холодн. газ)
+Система подачи,1.0,0.5,"Клапаны, регуляторы, магистрали"
+Кабельная сеть КА,4.0,2.0,Внутренняя проводка
+Крепёж и клеи,1.0,0.5,"Винты, кронштейны, эпоксид"
+Резерв массы (ECSS),10.0,0.0,Высвобожден малым CSAC; запас на дозревание
 ,,,
-DRY MASS (with margins),87.82,,
-Propellant (nominal+cont),17.60,,
-WET MASS,105.42,,
+DRY MASS (with margins),103.28,,
+Propellant (nominal+cont),20.70,,
+WET MASS,123.98,,
