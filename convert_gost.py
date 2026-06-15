@@ -9,7 +9,7 @@ AURORA PNT — Конвертер Markdown → DOCX по ГОСТ 2.105-2019 / �
   - Times New Roman 14, поля 30/15/20/20, красная строка 1.25, межстрочный 1.5
 """
 
-import re, os
+import re, os, sys
 from docx import Document
 from docx.shared import Pt, Cm, RGBColor, Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
@@ -20,6 +20,7 @@ from docx.oxml import OxmlElement
 BASE_DIR = r"c:\Users\SHIWA\Documents\LEOPath"
 MD_IN    = os.path.join(BASE_DIR, "AURORA_PNT_Technical_Project.md")
 DOCX_OUT = os.path.join(BASE_DIR, "AURORA_PNT_GOST.docx")
+PDF_OUT  = os.path.join(BASE_DIR, "AURORA_PNT_GOST.pdf")
 
 # ── ГОСТ-параметры ────────────────────────────────────────────────────────────
 FONT_MAIN  = "Times New Roman"
@@ -835,6 +836,54 @@ def setup_doc():
 # Точка входа
 # ═══════════════════════════════════════════════════════════════════════════════
 
+def export_pdf(docx_path=DOCX_OUT, pdf_path=PDF_OUT):
+    """Экспорт DOCX → PDF.
+
+    Предпочтительно через Word COM (win32com): помимо PDF это обновляет все поля
+    и оглавление — эквивалент Ctrl+A→F9, т.е. один из ручных шагов выпадает.
+    Fallback — docx2pdf. На Linux/без Word/без pywin32 — мягкий пропуск
+    (сборка docx не падает; важно для CI).
+    """
+    # 1) Word COM — обновляет оглавление и поля перед экспортом
+    try:
+        import pythoncom
+        import win32com.client as win32
+        pythoncom.CoInitialize()
+        word = win32.DispatchEx("Word.Application")
+        word.Visible = False
+        word.DisplayAlerts = False
+        try:
+            doc = word.Documents.Open(docx_path)
+            try:                                  # Ctrl+A → F9 (поля + оглавление)
+                doc.Fields.Update()
+                for toc in doc.TablesOfContents:
+                    toc.Update()
+            except Exception:
+                pass
+            doc.ExportAsFixedFormat(pdf_path, 17)  # 17 = wdExportFormatPDF
+            doc.Close(False)
+            kb = os.path.getsize(pdf_path) // 1024
+            print(f"  PDF: {pdf_path} — {kb} КБ (Word COM; оглавление обновлено)")
+            return True
+        finally:
+            word.Quit()
+            pythoncom.CoUninitialize()
+    except Exception as e:
+        print(f"  Word COM недоступен ({type(e).__name__}); пробую docx2pdf…")
+
+    # 2) docx2pdf (тоже использует Word на Windows)
+    try:
+        from docx2pdf import convert
+        convert(docx_path, pdf_path)
+        kb = os.path.getsize(pdf_path) // 1024
+        print(f"  PDF: {pdf_path} — {kb} КБ (docx2pdf)")
+        return True
+    except Exception as e:
+        print(f"  PDF-экспорт пропущен ({type(e).__name__}): нет Word/pywin32/docx2pdf. "
+              f"DOCX собран; PDF — вручную из Word (Сохранить как PDF).")
+        return False
+
+
 def main():
     print("AURORA PNT — ГОСТ 2.105-2019 / 7.32-2017")
     print("Инициализация...")
@@ -867,6 +916,10 @@ def main():
     doc.save(DOCX_OUT)
     kb = os.path.getsize(DOCX_OUT) // 1024
     print(f"  Готово! {kb} КБ")
+
+    if "--no-pdf" not in sys.argv:
+        print("  Экспорт PDF…")
+        export_pdf()
 
 if __name__ == "__main__":
     main()
