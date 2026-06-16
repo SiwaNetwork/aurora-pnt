@@ -112,6 +112,9 @@ def run_cost_analysis(output_dir: str, label: str) -> Dict:
         "lcc_7y_Mrub":          lcc7["_total"],
         "lcc_15y_Mrub":         lcc15["_total"],
         "recurring_total_Mrub": recur,
+        # цена ИЗГОТОВЛЕНИЯ 1 КА (серия, с обучением: платформа+ПН+ISL + часы)
+        "build_cost_per_sat_Mrub": (recur + a["atomic_clock_block_Mrub"] * N_SATS) / N_SATS,
+        # удельная LCC на 1 КА (вся программа ÷ N) — НЕ цена постройки
         "cost_per_sat_Mrub":    lcc7["_total"] / N_SATS,
         "cost_per_year_7y_Mrub": lcc7["_total"] / DESIGN_LIFE_Y,
         "lcc_7y_Brub":          lcc7["_total"] / 1000.0,
