@@ -665,7 +665,7 @@ $$\sigma_{eph}(t) \approx \sigma_0 \cdot \left(1 + \frac{t}{\tau_{corr}}\right)^
 - LDPC(1/2): применяется в BeiDou-3 B1C и GPS CNAV2; обеспечивает BER < 10⁻⁶ при C/N₀ > 28 дБ·Гц
 - TESLA MAC: применяется в Galileo OSNMA (EUSPA, 2023); задержка < 1 эфемеридный интервал
 
-![Итоговое сравнение — рекомендованный сигнальный дизайн](results/signal_design/sigdes_recommendation_phase4.png)
+![Спектр рекомендованного сигнала АВРОРА: ПСД каналов L1 (BOC/TMBOC) и L5 (BPSK(10))](results/signal_design/sigdes_recommendation_phase4.png)
 
 ### 6.9 Программный прототип генератора кодов
 

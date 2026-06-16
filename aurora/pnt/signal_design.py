@@ -720,42 +720,49 @@ def _plot_nav_message(nav_results, output_dir, label):
 
 
 def _plot_recommendation_summary(mod_metrics, code_results, output_dir, label):
-    """Итоговый слайд — рекомендация для АВРОРА с обоснованием."""
-    fig = plt.figure(figsize=(12, 7.2))
-    ax = fig.add_subplot(111)
-    ax.axis("off")
+    """Спектр рекомендованного сигнала АВРОРА — наглядная ПСД каналов L1 и L5."""
+    fc = F_CHIP_HZ  # 1,023 МГц
 
-    rec_text = (
-        "L1 КАНАЛ (1575,42 МГц)\n"
-        "  • Модуляция: BOC(1,1) данные + TMBOC(6,1,4/33) пилот\n"
-        "      – совместим с GPS L1C и Galileo E1 (CBOC)\n"
-        "      – β_G = 1,26 МГц против 0,64 у BPSK(1) → шум −6 дБ\n"
-        "      – огибающая многолучёвости < 4 м (BPSK(1): < 10 м)\n"
-        "  • Коды: Weil (n=10223) пилот — 5111 кодов, F=1703\n"
-        "\n"
-        "L5 КАНАЛ (1176,45 МГц)\n"
-        "  • Модуляция: BPSK(10) данные + BPSK(10) пилот\n"
-        "      – совместим с GPS L5, Galileo E5a, BeiDou B2a\n"
-        "      – β_G = 6,37 МГц → шум 2,1 см @ C/N₀=40 дБ·Гц\n"
-        "      – разрешение многолучёвости 29 м, ошибка < 1,5 м\n"
-        "  • Коды: расширенный Memory (≥350, n=10230); Xcorr −39,4 дБ\n"
-        "\n"
-        "НАВИГАЦИОННОЕ СООБЩЕНИЕ (ANAV)\n"
-        "  • Скорость 500 бит/с;  FEC: LDPC(1/2)+CRC-32 (+7 дБ)\n"
-        "  • Обновление эфемерид 10 мин;  холодный TTFF < 5 с\n"
-        "  • Аутентификация: TESLA MAC на HMAC-Стрибог (ГОСТ Р 34.11-2012),\n"
-        "    тег 128 бит, раскрытие 35 с"
-    )
+    def sinc2(x):
+        return np.sinc(x) ** 2   # np.sinc(x) = sin(πx)/(πx)
 
-    ax.text(0.03, 0.97, rec_text, transform=ax.transAxes,
-            fontfamily="DejaVu Sans", fontsize=12.5, verticalalignment="top",
-            linespacing=1.35, color="#2d3436",
-            bbox=dict(boxstyle="round,pad=0.8", facecolor="#f4fbf9",
-                      edgecolor="#00b894", linewidth=2))
+    def boc_psd(f, fs_hz, fchip_hz):
+        # sine-BOC ≈ BPSK(fchip), смещённый к ±fs → характерный расщеплённый спектр
+        return 0.5 * (sinc2((f - fs_hz) / fchip_hz) + sinc2((f + fs_hz) / fchip_hz))
 
-    ax.set_title(f"АВРОРА — Рекомендованный сигнальный дизайн [{label}]",
-                 fontsize=14, fontweight="bold", pad=12)
-    plt.tight_layout()
+    def to_db(g):
+        g = g / g.max()
+        return 10 * np.log10(np.maximum(g, 1e-5))
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5.2))
+
+    # ── Канал L1: BOC(1,1) данные + TMBOC(6,1,4/33) пилот ────────────────────
+    f1 = np.linspace(-10e6, 10e6, 4000)
+    g_boc11 = boc_psd(f1, 1 * fc, 1 * fc)
+    g_tmboc = (29 / 33) * g_boc11 + (4 / 33) * boc_psd(f1, 6 * fc, 1 * fc)
+    ax1.plot(f1 / 1e6, to_db(g_boc11), color="#0984e3", lw=1.9, label="BOC(1,1) — данные")
+    ax1.plot(f1 / 1e6, to_db(g_tmboc), color="#6c5ce7", lw=1.9, label="TMBOC(6,1,4/33) — пилот")
+    ax1.fill_between(f1 / 1e6, to_db(g_tmboc), -40, color="#6c5ce7", alpha=0.08)
+    ax1.set_xlim(-10, 10); ax1.set_ylim(-40, 3)
+    ax1.set_xlabel("Отстройка от центра L1 (1575,42 МГц), МГц")
+    ax1.set_ylabel("Нормированная ПСД, дБ")
+    ax1.set_title("Канал L1: расщеплённый спектр BOC/TMBOC\nβ_G = 1,26 / 6,17 МГц")
+    ax1.legend(fontsize=9, loc="upper right"); ax1.grid(alpha=0.3)
+
+    # ── Канал L5: BPSK(10) данные+пилот ──────────────────────────────────────
+    f5 = np.linspace(-15e6, 15e6, 4000)
+    g_bpsk10 = sinc2(f5 / (10 * fc))
+    ax2.plot(f5 / 1e6, to_db(g_bpsk10), color="#00b894", lw=1.9, label="BPSK(10) — данные+пилот")
+    ax2.fill_between(f5 / 1e6, to_db(g_bpsk10), -40, color="#00b894", alpha=0.08)
+    ax2.set_xlim(-15, 15); ax2.set_ylim(-40, 3)
+    ax2.set_xlabel("Отстройка от центра L5 (1176,45 МГц), МГц")
+    ax2.set_ylabel("Нормированная ПСД, дБ")
+    ax2.set_title("Канал L5: главный лепесток BPSK(10)\nβ_G = 5,91 МГц")
+    ax2.legend(fontsize=9, loc="upper right"); ax2.grid(alpha=0.3)
+
+    fig.suptitle(f"АВРОРА — спектр рекомендованного сигнала (L1 + L5) [{label}]",
+                 fontsize=13, fontweight="bold")
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
     fig.savefig(os.path.join(output_dir, f"sigdes_recommendation_{label}.png"),
                 dpi=150, bbox_inches="tight")
     plt.close(fig)
