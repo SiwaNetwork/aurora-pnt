@@ -609,22 +609,25 @@ def _cp(doc, text, size=None, bold=False,
     return p
 
 def add_title_page(doc):
-    _cp(doc, "РОССИЙСКАЯ ФЕДЕРАЦИЯ", bold=True, before=20)
+    _cp(doc, "РОССИЙСКАЯ ФЕДЕРАЦИЯ", bold=True, before=18)
     _cp(doc, "ООО «ШИВА НЕТВОРК» (ShiwaNetwork)", before=4)
+    _cp(doc, "Основание: приказ ООО «ШИВА НЕТВОРК» № 11/2026", size=SZ_SM, before=4)
     _cp(doc, "")
-    _cp(doc, "СОГЛАСОВАНО", bold=True, align=WD_ALIGN_PARAGRAPH.LEFT, before=24)
+    _cp(doc, "СОГЛАСОВАНО", bold=True, align=WD_ALIGN_PARAGRAPH.LEFT, before=18)
     _cp(doc, "Руководитель проекта", align=WD_ALIGN_PARAGRAPH.LEFT)
     _cp(doc, "________________  /________________/", align=WD_ALIGN_PARAGRAPH.LEFT)
     _cp(doc, '«____» ________________ 2026 г.', align=WD_ALIGN_PARAGRAPH.LEFT)
     _cp(doc, "")
-    _cp(doc, "АВРОРА", size=Pt(22), bold=True, before=24)
+    _cp(doc, "НАУЧНО-ИССЛЕДОВАТЕЛЬСКАЯ РАБОТА «СИЯНИЕ»", size=Pt(15), bold=True, before=22)
+    _cp(doc, "")
+    _cp(doc, "АВРОРА", size=Pt(22), bold=True, before=8)
     _cp(doc, "Система низкоорбитальной спутниковой навигации", size=Pt(16), bold=True)
     _cp(doc, "и высокоточной синхронизации", size=Pt(16), bold=True)
     _cp(doc, "")
     _cp(doc, "ТЕХНИЧЕСКИЙ ПРОЕКТ", size=Pt(18), bold=True, before=12)
-    _cp(doc, "Документ: АВРОРА-ТП-001", bold=True, before=8)
+    _cp(doc, "Шифр НИР: «Сияние».  Документ: СИЯНИЕ-ТП-001", bold=True, before=8)
     _cp(doc, "")
-    _cp(doc, "Составлен в соответствии с ГОСТ 7.32-2017,", size=SZ_SM, italic=True, before=40)
+    _cp(doc, "Составлен в соответствии с ГОСТ 7.32-2017,", size=SZ_SM, italic=True, before=34)
     _cp(doc, "ГОСТ 2.105-2019, ГОСТ Р 7.0.97-2016", size=SZ_SM, italic=True)
     _cp(doc, "")
     _cp(doc, "Москва — 2026", bold=True, before=12)
@@ -645,7 +648,8 @@ def add_abstract(doc, n_fig=0, n_tbl=0, n_src=0):
     fmt_run(r, bold=True)
 
     abstract = (
-        "Настоящий технический проект описывает систему АВРОРА — "
+        "Настоящий технический проект научно-исследовательской работы «Сияние» "
+        "(основание — приказ ООО «ШИВА НЕТВОРК» № 11/2026) описывает систему АВРОРА — "
         "низкоорбитальную спутниковую систему позиционирования, навигации и синхронизации "
         "(LEO PNT), функционирующую как высокоточное дополнение (усиление) к ГЛОНАСС "
         "и обеспечивающую независимую от GPS шкалу времени. Документ содержит аналитические "
