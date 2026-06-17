@@ -58,7 +58,21 @@ COST_ASSUMPTIONS = {
     "launch_cost_per_Mrub":     1_080.0,   # 12 $M (rideshare-цены)
     "ground_capex_Mrub":        7_200.0,   # 80 $M
     "opex_per_year_Mrub":       3_600.0,   # 40 $M/год
+    # Демонстраторы Фаз 0–1 на дешёвой 16U CubeSat-платформе (СПУТНИКС/Геоскан, §66):
+    # урезанная ПН + 1 CSAC + rideshare — для лётной проверки концепции до серии 300.
+    "demo_phase_sats":          12,        # Ф0(3)+Ф1(9) → 12 демонстраторов
+    "demo_unit_Mrub":           35.0,      # 16U-платформа + урезанная ПН + CSAC
+    "demo_launches":            2,         # rideshare (≈6×16U на пуск)
+    "demo_launch_per_Mrub":     200.0,     # попутный запуск, существенно дешевле
+    # Восполнение группировки: ожидаемые отказы → замена КА (§35.3). Эффективный
+    # MTBF КА с горячим резервированием часов/вычислителя — R(7 лет) ≈ 50 %
+    # (MTBF ≈ −7/ln0,5 ≈ 10,1 года). Доминирующая неопределённость LCC на 15 лет.
+    "sat_mtbf_years":           10.1,
 }
+
+# График ввода группировки (t — лет от старта программы 2026,5; накопл. число КА).
+# Согласован с §4.3 / §30.2 (3 / 12 / 90 / 180 / 300).
+DEPLOY_SCHEDULE = [(0.0, 3), (1.0, 12), (2.5, 90), (4.5, 180), (7.0, 300)]
 
 
 def unit_cost(n: int, t1: float, b: float) -> float:
@@ -72,19 +86,54 @@ def cumulative_recurring(n_sats: int, t1: float, b: float) -> float:
     return float(sum(unit_cost(i, t1, b) for i in range(1, n_sats + 1)))
 
 
+def operational_sat_years(years: float) -> float:
+    """Интеграл числа действующих КА по времени за `years` лет (КА·лет)."""
+    total = 0.0
+    # Последний элемент графика расширяется до `years` (полная группировка держится).
+    for i, (t0, n) in enumerate(DEPLOY_SCHEDULE):
+        t1 = DEPLOY_SCHEDULE[i + 1][0] if i + 1 < len(DEPLOY_SCHEDULE) else years
+        t1 = min(t1, years)
+        if t1 > t0:
+            total += n * (t1 - t0)
+    return total
+
+
+def replenishment(years: int, a: Dict) -> Dict:
+    """Восполнение отказов: ожидаемое число КА на замену и его стоимость (млн ₽).
+
+    E[отказов] = (КА·лет эксплуатации) / MTBF_КА. Замещающие КА — на «полке»
+    кривой обучения (серийный минимум + часы); запуск — по средней пусковой
+    экономике серии. OPEX наземного сегмента восполнение НЕ покрывает (это
+    производство + выведение), поэтому оно вынесено отдельной статьёй.
+    """
+    sat_years  = operational_sat_years(years)
+    n_replace  = sat_years / a["sat_mtbf_years"]
+    unit_floor = (unit_cost(N_SATS, a["recurring_T1_Mrub"], a["learning_b"])
+                  + a["atomic_clock_block_Mrub"])
+    launch_ps  = a["n_launches"] * a["launch_cost_per_Mrub"] / N_SATS
+    cost       = n_replace * (unit_floor + launch_ps)
+    return {"n_replace": n_replace, "sat_years": sat_years,
+            "unit_floor": unit_floor, "launch_per_sat": launch_ps, "cost": cost}
+
+
 def lcc(years: int, a: Dict) -> Dict:
     nre      = a["NRE_design_qual_Mrub"]
+    demo     = (a["demo_phase_sats"] * a["demo_unit_Mrub"]
+                + a["demo_launches"] * a["demo_launch_per_Mrub"])
     recur    = cumulative_recurring(N_SATS, a["recurring_T1_Mrub"], a["learning_b"])
     clocks   = a["atomic_clock_block_Mrub"] * N_SATS  # COTS, без learning curve
     launch   = a["n_launches"] * a["launch_cost_per_Mrub"]
     ground   = a["ground_capex_Mrub"]
     opex     = a["opex_per_year_Mrub"] * years
-    total    = nre + recur + clocks + launch + ground + opex
+    repl     = replenishment(years, a)["cost"]
+    total    = nre + demo + recur + clocks + launch + ground + opex + repl
     return {
         "NRE": nre,
+        "Демонстраторы Ф0–1 (16U)": demo,
         "Серия 300 КА (бус+ПН+ISL)": recur,
         "Атомные часы (РФ)": clocks,
         "Запуски": launch,
+        "Восполнение (отказы КА)": repl,
         "Наземный сегмент": ground,
         f"OPEX × {years} лет": opex,
         "_total": total, "_years": years,
@@ -105,6 +154,8 @@ def run_cost_analysis(output_dir: str, label: str) -> Dict:
     lcc7  = lcc(DESIGN_LIFE_Y, a)
     lcc15 = lcc(15, a)
     recur = cumulative_recurring(N_SATS, a["recurring_T1_Mrub"], a["learning_b"])
+    repl7  = replenishment(DESIGN_LIFE_Y, a)
+    repl15 = replenishment(15, a)
 
     results = {
         "assumptions":          dict(a),
@@ -112,6 +163,10 @@ def run_cost_analysis(output_dir: str, label: str) -> Dict:
         "lcc_7y_Mrub":          lcc7["_total"],
         "lcc_15y_Mrub":         lcc15["_total"],
         "recurring_total_Mrub": recur,
+        "replace_n_7y":         repl7["n_replace"],
+        "replace_n_15y":        repl15["n_replace"],
+        "replace_cost_7y_Mrub": repl7["cost"],
+        "replace_cost_15y_Mrub": repl15["cost"],
         # цена ИЗГОТОВЛЕНИЯ 1 КА (серия, с обучением: платформа+ПН+ISL + часы)
         "build_cost_per_sat_Mrub": (recur + a["atomic_clock_block_Mrub"] * N_SATS) / N_SATS,
         # удельная LCC на 1 КА (вся программа ÷ N) — НЕ цена постройки
@@ -220,6 +275,7 @@ def _plot_cost_sensitivity(a, output_dir, label):
         "Атомные часы (за 1 КА)":          "atomic_clock_block_Mrub",
         "Стоимость пуска":                 "launch_cost_per_Mrub",
         "OPEX в год":                      "opex_per_year_Mrub",
+        "MTBF КА (восполнение)":           "sat_mtbf_years",
         "NRE":                             "NRE_design_qual_Mrub",
     }
     names, los, his = [], [], []

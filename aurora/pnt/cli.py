@@ -1161,6 +1161,80 @@ def cmd_e2e_pipeline(args):
     print(f"  Results saved to: {output_dir}/")
 
 
+def cmd_leo_pnt_validation(args):
+    """Кросс-валидация точностных характеристик АВРОРА с натурными LEO-PNT данными (CENTISPACE)."""
+    from aurora.pnt.leo_pnt_validation import run_leo_pnt_validation, print_leo_pnt_validation_summary
+    label = args.label or "phase4"
+    output_dir = args.output or "results/leo_pnt_validation"
+    print(f"\n  Running LEO-PNT cross-validation: {label}")
+    r = run_leo_pnt_validation(output_dir, label); print_leo_pnt_validation_summary(label, r)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_orbit_render(args):
+    """3D-рендер: Земля + группировка Walker + детальная 3D-модель КА АВРОРА."""
+    from aurora.pnt.orbit_render import run_orbit_render, print_orbit_render_summary
+    label = args.label or "phase4"
+    output_dir = args.output or "results/orbit_render"
+    print(f"\n  Rendering orbit/constellation hero scene: {label}")
+    r = run_orbit_render(output_dir, label); print_orbit_render_summary(label, r)
+    print(f"  Results saved to: {output_dir}/")
+
+
+def cmd_constellation_anim(args):
+    """Анимация облёта: движение группировки, зоны видимости, N_vis(t) → GIF."""
+    from aurora.pnt.constellation_anim import run_constellation_anim, print_constellation_anim_summary
+    label = args.label or "phase4"; out = args.output or "results/constellation_anim"
+    print(f"\n  Rendering constellation flyby animation: {label}")
+    r = run_constellation_anim(out, label); print_constellation_anim_summary(label, r)
+    print(f"  Results saved to: {out}/")
+
+
+def cmd_pdop_globe(args):
+    """3D-карта PDOP / N_vis на глобусе."""
+    from aurora.pnt.pdop_globe import run_pdop_globe, print_pdop_globe_summary
+    label = args.label or "phase4"; out = args.output or "results/pdop_globe"
+    print(f"\n  Rendering PDOP/coverage globe: {label}")
+    r = run_pdop_globe(out, label); print_pdop_globe_summary(label, r)
+    print(f"  Results saved to: {out}/")
+
+
+def cmd_isl_mesh(args):
+    """Граф ISL-mesh и иерархия gossip §28.6."""
+    from aurora.pnt.isl_mesh import run_isl_mesh, print_isl_mesh_summary
+    label = args.label or "phase4"; out = args.output or "results/isl_mesh"
+    print(f"\n  Rendering ISL mesh graph: {label}")
+    r = run_isl_mesh(out, label); print_isl_mesh_summary(label, r)
+    print(f"  Results saved to: {out}/")
+
+
+def cmd_sankey_budget(args):
+    """Sankey-диаграммы бюджета UERE и временно́й цепочки."""
+    from aurora.pnt.sankey_budget import run_sankey_budget, print_sankey_budget_summary
+    label = args.label or "phase4"; out = args.output or "results/sankey_budget"
+    print(f"\n  Rendering Sankey budget diagrams: {label}")
+    r = run_sankey_budget(out, label); print_sankey_budget_summary(label, r)
+    print(f"  Results saved to: {out}/")
+
+
+def cmd_antenna_signal(args):
+    """Антенны Сервис А/Б (3D), созвездие сигнала, waterfall-спектрограмма."""
+    from aurora.pnt.antenna_signal import run_antenna_signal, print_antenna_signal_summary
+    label = args.label or "phase4"; out = args.output or "results/antenna_signal"
+    print(f"\n  Rendering antenna/signal figure: {label}")
+    r = run_antenna_signal(out, label); print_antenna_signal_summary(label, r)
+    print(f"  Results saved to: {out}/")
+
+
+def cmd_cesium_gltf(args):
+    """Cesium-сцена с реальными орбитами + glTF-модель КА (3D в браузере)."""
+    from aurora.pnt.cesium_gltf import run_cesium_gltf, print_cesium_gltf_summary
+    label = args.label or "phase4"; out = args.output or "results/cesium"
+    print(f"\n  Generating Cesium + glTF scene: {label}")
+    r = run_cesium_gltf(out, label); print_cesium_gltf_summary(label, r)
+    print(f"  Results saved to: {out}/")
+
+
 def cmd_pvt_montecarlo(args):
     """End-to-end Monte-Carlo PVT error budget."""
     from aurora.pnt.pvt_montecarlo import run_pvt_montecarlo_analysis, print_pvt_montecarlo_summary
@@ -1845,6 +1919,14 @@ def main():
         ("schedule",   "График работ (Gantt) и критический путь",  "results/schedule"),
         ("cybersec",   "Модель угроз и меры (STRIDE/PASTA)",       "results/cybersec"),
         ("e2e",        "Сквозная PVT-симуляция 24 ч",              "results/e2e"),
+        ("leo-pnt-validation", "Кросс-валидация с натурными LEO-PNT данными (CENTISPACE)", "results/leo_pnt_validation"),
+        ("orbit-render", "3D-рендер: Земля + группировка + модель КА", "results/orbit_render"),
+        ("constellation-anim", "Анимация облёта (GIF): группировка, зоны видимости, N_vis(t)", "results/constellation_anim"),
+        ("pdop-globe", "3D-карта PDOP/N_vis на глобусе", "results/pdop_globe"),
+        ("isl-mesh", "Граф ISL-mesh и иерархия gossip §28.6", "results/isl_mesh"),
+        ("sankey-budget", "Sankey бюджета UERE и временно́й цепочки", "results/sankey_budget"),
+        ("antenna-signal", "Антенны А/Б (3D), созвездие, waterfall", "results/antenna_signal"),
+        ("cesium-gltf", "Cesium-сцена + glTF-модель КА (3D в браузере)", "results/cesium"),
     ]:
         _p = sub.add_parser(_name, help=_help)
         _p.add_argument("-o", "--output", default=_odir)
@@ -1957,6 +2039,14 @@ def main():
         "schedule":           cmd_schedule,
         "cybersec":           cmd_cybersec,
         "e2e":                cmd_e2e_pipeline,
+        "leo-pnt-validation": cmd_leo_pnt_validation,
+        "orbit-render":       cmd_orbit_render,
+        "constellation-anim": cmd_constellation_anim,
+        "pdop-globe":         cmd_pdop_globe,
+        "isl-mesh":           cmd_isl_mesh,
+        "sankey-budget":      cmd_sankey_budget,
+        "antenna-signal":     cmd_antenna_signal,
+        "cesium-gltf":        cmd_cesium_gltf,
         "signal-design":       cmd_signal_design,
         "competitor-analysis": cmd_competitor_analysis,
         "combined":         cmd_combined,

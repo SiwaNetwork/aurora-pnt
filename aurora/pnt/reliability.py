@@ -32,9 +32,8 @@ SATS_PER_PLANE = N_SATS_TOTAL // N_PLANES   # 20 спутников/плоско
 
 # ── MTBF подсистем (часы) — ECSS-Q-ST-30, класс S ────────────────────────────
 SUBSYSTEMS: Dict[str, Dict] = {
-    "Cs-стандарт":       {"mtbf_h": 50_000,  "weight": 1, "critical": True,  "color": "#e17055"},
-    "Rb-стандарт":       {"mtbf_h": 100_000, "weight": 1, "critical": True,  "color": "#fdcb6e"},
-    "OCXO":              {"mtbf_h": 200_000, "weight": 1, "critical": True,  "color": "#74b9ff"},
+    "CSAC (SA.45s)":     {"mtbf_h": 100_000, "weight": 1, "critical": True,  "color": "#e17055"},
+    "space-Rb (Quantum-18)": {"mtbf_h": 100_000, "weight": 1, "critical": True,  "color": "#fdcb6e"},
     "Бортовой компьютер":{"mtbf_h": 300_000, "weight": 1, "critical": True,  "color": "#0984e3"},
     "ADCS":              {"mtbf_h": 100_000, "weight": 1, "critical": True,  "color": "#6c5ce7"},
     "Ресивер L1/L5":     {"mtbf_h": 150_000, "weight": 1, "critical": True,  "color": "#00cec9"},

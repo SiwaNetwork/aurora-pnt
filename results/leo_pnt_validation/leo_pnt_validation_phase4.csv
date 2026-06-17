@@ -1,0 +1,7 @@
+metric,aurora,aurora_src,real_lo,real_hi,real_system,verdict,ratio_aurora_real
+Высота орбиты (км),1000.000,§4.2,950.0,1000.0,CENTISPACE ~975 км [C1],confirmed,1.03
+Время сходимости PPP (мин),2.000,§36 (1–3 мин FOC),1.0,3.0,CENTISPACE ~1 мин [C2]; LeGNSS 1–3 мин [L1],confirmed,1.33
+"N видимых КА (LEO, ~300 КА)",14.000,"§5/§46 (7–22, ср. 14)",8.0,20.0,LEO-PNT обзор [P1]; геометрия 200–300 КА,confirmed,1.00
+"Гор. точность после сходимости, CEP95 (см)",27.278,e2e (PPP-режим),5.0,30.0,CENTISPACE <10 см цель; PPP реал. см–дм [C2],plausible,2.73
+Радиальная ошибка POD (см),5.000,§47 (5–19 см),10.0,40.0,CENTISPACE реал. дм-уровень [C1/C3],optimistic,0.25
+"UERE одной псевдодальности, dual (м)",0.700,§37.2,0.3,0.8,LEO augmentation SISRE дм–м [C3],plausible,1.40

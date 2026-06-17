@@ -17,6 +17,8 @@ geographiclib==2.0
 geopy==2.4.1
 iniconfig==2.1.0
 isort==6.0.1
+imageio==2.37.3
+imageio-ffmpeg==0.6.0
 jplephem==2.22
 kiwisolver==1.4.8
 matplotlib==3.10.1

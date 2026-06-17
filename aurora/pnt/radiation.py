@@ -50,15 +50,14 @@ MEMORY_TYPES = {
 
 # ── Подсистемы спутника ───────────────────────────────────────────────────────
 SUBSYSTEMS = {
-    "Cs-стандарт":       {"shield_mm": 6.0, "tid_limit_krad": 50,  "critical": True},
-    "Rb-стандарт":       {"shield_mm": 4.0, "tid_limit_krad": 100, "critical": True},
-    "OCXO":              {"shield_mm": 3.0, "tid_limit_krad": 30,  "critical": True},
-    "Бортовой компьютер":{"shield_mm": 4.0, "tid_limit_krad": 100, "critical": True},
-    "ADCS":              {"shield_mm": 3.0, "tid_limit_krad": 50,  "critical": False},
-    "Ресивер L1/L5":     {"shield_mm": 3.0, "tid_limit_krad": 50,  "critical": True},
-    "ISL трансивер":     {"shield_mm": 2.0, "tid_limit_krad": 30,  "critical": False},
-    "АКБ (Li-Ion)":      {"shield_mm": 1.0, "tid_limit_krad": 10,  "critical": False},
-    "Солнечная батарея": {"shield_mm": 0.5, "tid_limit_krad": 5,   "critical": False},
+    "CSAC (SA.45s)":         {"shield_mm": 7.0, "tid_limit_krad": 20,  "critical": True},
+    "space-Rb (Quantum-18)": {"shield_mm": 4.0, "tid_limit_krad": 100, "critical": True},
+    "Бортовой компьютер":    {"shield_mm": 4.0, "tid_limit_krad": 100, "critical": True},
+    "ADCS":                  {"shield_mm": 3.0, "tid_limit_krad": 50,  "critical": False},
+    "Ресивер L1/L5":         {"shield_mm": 3.0, "tid_limit_krad": 50,  "critical": True},
+    "ISL трансивер":         {"shield_mm": 2.0, "tid_limit_krad": 30,  "critical": False},
+    "АКБ (Li-Ion)":          {"shield_mm": 1.0, "tid_limit_krad": 10,  "critical": False},
+    "Солнечная батарея":     {"shield_mm": 0.5, "tid_limit_krad": 5,   "critical": False},
 }
 
 # ── OCXO радиационный уход частоты ───────────────────────────────────────────
@@ -146,7 +145,7 @@ def _plot_tid_vs_shield(shield_range, tid_curves, output_dir, label):
 
     # Уровни допустимой дозы типовых компонентов
     ax.axhline(100, ls="--", color="#e17055", lw=1.2, label="100 кРад (Бортовой компьютер)")
-    ax.axhline(30,  ls=":",  color="#fdcb6e", lw=1.2, label="30 кРад (OCXO, ресивер)")
+    ax.axhline(20,  ls=":",  color="#fdcb6e", lw=1.2, label="20 кРад (CSAC)")
     ax.axhline(5,   ls="-.", color="#6c5ce7", lw=1.0, label="5 кРад (Солнечная батарея)")
     ax.axvline(4.0, ls="--", color="#00b894", lw=1.2, label="4 мм Al (стандарт АВРОРА)")
     ax.set_xlabel("Толщина алюминиевого экрана (мм)")
@@ -217,8 +216,8 @@ def _plot_ocxo_drift(shield_range, ocxo_drift, output_dir, label):
     ax.axhline(0.1,  ls=":",  color="#00b894", lw=1.2, label="0.1 ppb (цель проекта)")
     ax.axvline(4.0,  ls="--", color="#0984e3", lw=1.2, label="4 мм Al (АВРОРА)")
     ax.set_xlabel("Толщина экрана (мм Al)")
-    ax.set_ylabel("Уход частоты OCXO от радиации (ppb, за 7 лет)")
-    ax.set_title(f"АВРОРА — Радиационный уход OCXO [{label}]")
+    ax.set_ylabel("Уход частоты недисципл. кварца (ppb, за 7 лет)")
+    ax.set_title(f"АВРОРА — Радиационный уход недисциплинированного кварца [{label}]")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     plt.tight_layout()

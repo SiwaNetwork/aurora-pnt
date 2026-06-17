@@ -45,6 +45,7 @@ MEO_SYSTEMS: Dict[str, Dict] = {
         "orbit_km": 20200, "inc_deg": 55.0, "n_sats": 31,
         "n_planes": 6, "signals": "L1 C/A, L1C, L2C, L5",
         "ure_m": 0.218, "uere_l1_m": 4.023, "uere_dual_m": 0.461,
+        "cep_combined_m": 1.8,   # типовая гор. CEP50 (одиночная система, dual)
         "pdop_p95_global": 2.5, "pdop_p95_russia": 2.8,
         "ppp_conv_min": 25.0, "time_acc_ns": 20,
         "anti_spoof": "P(Y)-code, MNAV", "auth": "Нет (публичный)",
@@ -56,6 +57,7 @@ MEO_SYSTEMS: Dict[str, Dict] = {
         "orbit_km": 19100, "inc_deg": 64.8, "n_sats": 24,
         "n_planes": 3, "signals": "L1OF/L2OF (FDMA), L1OC/L2OC/L3OC (CDMA)",
         "ure_m": 0.35, "uere_l1_m": 3.5, "uere_dual_m": 0.52,
+        "cep_combined_m": 2.5,   # типовая гор. CEP50
         "pdop_p95_global": 3.0, "pdop_p95_russia": 2.0,
         "ppp_conv_min": 30.0, "time_acc_ns": 10,
         "anti_spoof": "GOVSS (засекр.)", "auth": "Нет (публичный)",
@@ -67,6 +69,7 @@ MEO_SYSTEMS: Dict[str, Dict] = {
         "orbit_km": 23222, "inc_deg": 56.0, "n_sats": 28,
         "n_planes": 3, "signals": "E1, E5a, E5b, E6",
         "ure_m": 0.163, "uere_l1_m": 2.524, "uere_dual_m": 0.363,
+        "cep_combined_m": 1.5,   # типовая гор. CEP50
         "pdop_p95_global": 2.3, "pdop_p95_russia": 2.5,
         "ppp_conv_min": 22.0, "time_acc_ns": 15,
         "anti_spoof": "OSNMA (открытый, 2023)", "auth": "OSNMA",
@@ -90,19 +93,24 @@ MEO_SYSTEMS: Dict[str, Dict] = {
 LEO_SYSTEMS: Dict[str, Dict] = {
     "АВРОРА\n(этот проект)": {
         "orbit_km": 1000, "inc_deg": 75.0, "n_sats": 300,
-        "n_planes": 15, "signals": "L1 (1575,42), L5 (1176,45)",
-        "ure_m": 0.114, "uere_l1_m": 0.290, "uere_dual_m": 0.279,
-        "pdop_p95_global": 1.9, "pdop_p95_russia": 1.8,
+        "n_planes": 15, "signals": "Сервис А: L1/L5 (GPS-совм.); Сервис Б: L-полоса AURORA",
+        # Канон §8/§65 (только проверенные числа): URE 0,45 м; UERE одночаст. иона-огранич.;
+        # UERE dual 0,7 м (до 1,0 м у терминального КА). По одной псевдодальности —
+        # сопоставимо с ГЛОНАСС, уступает GPS/Galileo; преимущество в геометрии комбинир. режима.
+        "ure_m": 0.45, "uere_l1_m": 2.5, "uere_dual_m": 0.7,
+        "cep_combined_m": 1.0,   # комбинир. LEO+ГЛОНАСС, CEP ≈1 м (§8.6) — геометрия
+        "pdop_p95_global": 5.04, "pdop_p95_russia": 1.67,  # автоном. / комбинир. с ГЛОНАСС
         "ppp_conv_min": 1.0, "time_acc_ns": 5,
-        "anti_spoof": "TESLA MAC", "auth": "TESLA MAC (открытый)",
-        "signal_power_dbw": -107, "ioc_year": 2029, "foc_year": 2033,
-        "operator": "ShiwaNetwork / LEOPath", "cost_b_usd": 2.8,
+        "anti_spoof": "TESLA MAC (Стрибог)", "auth": "TESLA MAC (открытый)",
+        "signal_power_dbw": -107, "ioc_year": 2029, "foc_year": 2033,  # Rx Сервис Б, §65
+        "operator": "ШИВА НЕТВОРК (РФ)", "cost_b_usd": 2.8,
         "status": "Проект", "color": "#00b894",
     },
     "Xona PULSAR\n(США)": {
         "orbit_km": 700, "inc_deg": 60.0, "n_sats": 300,
         "n_planes": 12, "signals": "L1, L5 (совместим с GPS/Galileo)",
         "ure_m": 0.10, "uere_l1_m": 0.25, "uere_dual_m": 0.22,
+        "cep_combined_m": 0.3,   # суб-метровая (быстрый PPP)
         "pdop_p95_global": 1.8, "pdop_p95_russia": 2.5,
         "ppp_conv_min": 0.2, "time_acc_ns": 3,
         "anti_spoof": "Navigation Message Authentication", "auth": "NMA",
@@ -114,6 +122,7 @@ LEO_SYSTEMS: Dict[str, Dict] = {
         "orbit_km": 780, "inc_deg": 86.4, "n_sats": 66,
         "n_planes": 6, "signals": "L-band (~1626 МГц, Iridium)",
         "ure_m": 50.0, "uere_l1_m": 100.0, "uere_dual_m": 100.0,
+        "cep_combined_m": 50.0,   # служба времени/грубое позиц.
         "pdop_p95_global": None, "pdop_p95_russia": None,
         "ppp_conv_min": None, "time_acc_ns": 100,
         "anti_spoof": "Засекречен (закрытый)", "auth": "Засекречен",
@@ -155,6 +164,52 @@ LEO_SYSTEMS: Dict[str, Dict] = {
 }
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+#  Китайские LEO-инициативы (по открытым публикациям, статус на 2026)
+#  Источники: PMC10301026 (CentiSpace); geely.com / SpaceNews (Geespace);
+#  en.wikipedia.org/Qianfan, spacenews.com (Qianfan/Guowang); ITU filings 2020.
+#  ВНИМАНИЕ: ТТХ ориентировочные; точные значения у операторов закрыты.
+# ─────────────────────────────────────────────────────────────────────────────
+CHINA_LEO: List[Dict] = [
+    {
+        "name": "CentiSpace\n(未来导航)",
+        "operator": "Beijing Future Navigation + CETC-29",
+        "orbit_km": "≈975",  "inc": "55°/30° (накл.+поляр.)",
+        "in_orbit": "неск. эксп. КА (с 2018)", "plan": "≈160",
+        "role": "Целевое навиг.-усиление (прямой аналог АВРОРА)",
+        "note": "цель <10 см, PPP ≈1 мин; CCST-подавление самопомех (приём GNSS + передача в той же полосе)",
+        "color": "#d63031",
+    },
+    {
+        "name": "Geespace\n(GEESATCOM)",
+        "operator": "Geely / Geespace",
+        "orbit_km": "600",   "inc": "50°",
+        "in_orbit": "64 (Фаза I)", "plan": "72 → ~240",
+        "role": "Связь/IoT + высокоточное позиц. (доп.)",
+        "note": "см-уровень через наземное усиление; для автономного транспорта",
+        "color": "#e17055",
+    },
+    {
+        "name": "Qianfan / 千帆\n(G60)",
+        "operator": "SSST / Spacesail",
+        "orbit_km": "≈1160", "inc": "—",
+        "in_orbit": "≈180 (05.2026)", "plan": "≈14 000–15 000 (2030)",
+        "role": "Широкополосный интернет; PNT-потенциал",
+        "note": "аналог Starlink PNT — навигация не основная функция",
+        "color": "#fdcb6e",
+    },
+    {
+        "name": "Guowang / 国网",
+        "operator": "China SatNet (гос.)",
+        "orbit_km": "<500 / 600–1145", "inc": "—",
+        "in_orbit": "неск. десятков", "plan": "ITU 12 992; 400 к 2027",
+        "role": "Широкополосный интернет (гос.); PNT-потенциал",
+        "note": "мегагруппировка; навигация не основная функция",
+        "color": "#a29bfe",
+    },
+]
+
+
 def run_competitor_analysis(output_dir: str, label: str) -> Dict:
     os.makedirs(output_dir, exist_ok=True)
 
@@ -164,11 +219,13 @@ def run_competitor_analysis(output_dir: str, label: str) -> Dict:
     _plot_ppp_convergence_comparison(output_dir, label)
     _plot_timeline(output_dir, label)
     _plot_glonass_deep(output_dir, label)
+    _plot_china_leo(output_dir, label)
     _save_csv(output_dir, label)
 
     return {
         "meo_systems": list(MEO_SYSTEMS.keys()),
         "leo_systems": list(LEO_SYSTEMS.keys()),
+        "china_leo": [c["name"].replace("\n", " ") for c in CHINA_LEO],
     }
 
 
@@ -233,14 +290,17 @@ def _plot_constellation_scatter(output_dir, label):
 
 def _plot_spider_chart(output_dir, label):
     """Лепестковая диаграмма (spider/radar) — сравнение по 6 метрикам."""
-    categories = ["Точность\n(1/UERE)", "PPP\nсходимость", "Покрытие\nАрктика",
+    categories = ["Точность дальности\n(1/UERE)", "Точность позиц.\n(CEP, комбин.)",
+                  "PPP\nсходимость", "Покрытие\nАрктика",
                   "Стойкость к\nпомехам", "Целостность\n(RAIM)", "Временна́я\nточность"]
     N = len(categories)
 
     def score(sys_name, sys_data, is_leo=False):
         # Нормированные оценки 0–10
         uere = sys_data.get("uere_dual_m", 1.0) or 1.0
-        accuracy = min(10, 10 * (0.5 / uere))  # АВРОРА ~10, GPS ~5
+        accuracy = min(10, 10 * (0.5 / uere))   # точность ОДНОЙ псевдодальности (АВРОРА ~7,1)
+        cep = sys_data.get("cep_combined_m", 5.0) or 5.0
+        positioning = min(10, 9.0 / cep)        # ИТОГОВАЯ гор. точность, рабочий режим (АВРОРА комбин. ~1 м → 9)
 
         conv = sys_data.get("ppp_conv_min", 30.0) or 30.0
         convergence = min(10, 10 * (5.0 / conv))  # АВРОРА ~10, GPS ~1.7
@@ -257,7 +317,7 @@ def _plot_spider_chart(output_dir, label):
         t_ns = sys_data.get("time_acc_ns", 30) or 30
         timing = min(10, 10 * (5.0 / t_ns))  # АВРОРА 5 нс → 10; GPS 20 нс → 2.5
 
-        return [accuracy, convergence, arctic, anti_jam, integrity, timing]
+        return [accuracy, positioning, convergence, arctic, anti_jam, integrity, timing]
 
     systems_to_plot = {
         "АВРОРА": (LEO_SYSTEMS["АВРОРА\n(этот проект)"], "#00b894", "-"),
@@ -411,12 +471,12 @@ def _plot_timeline(output_dir, label):
 def _plot_glonass_deep(output_dir, label):
     """Детальное сравнение АВРОРА vs ГЛОНАСС по ключевым параметрам."""
     metrics = {
-        "URE (м)":                  (0.35,  0.114,  True),   # (ГЛОНАСС, АВРОРА, меньше=лучше)
-        "UERE dual (м)":            (0.52,  0.279,  True),
-        "PDOP p95 (Россия)":        (2.0,   1.8,    True),
+        "URE (м)":                  (0.35,  0.45,   True),   # (ГЛОНАСС, АВРОРА, меньше=лучше)
+        "UERE dual (м)":            (0.52,  0.70,   True),   # по псевдодальн. сопоставимо/уступает
+        "PDOP p95 (Россия)":        (2.0,   1.67,   True),   # комбинир. LEO+ГЛОНАСС
         "PPP конверг. (мин)":       (30.0,  1.0,    True),
-        "N_vis (среднее)":          (6.0,   42.0,   False),
-        "Сигнал +дБ vs GPS":        (0.0,   23.0,   False),
+        "N_vis (среднее)":          (6.0,   14.0,   False),
+        "Сигнал Б +дБ (vs MEO)":    (0.0,   23.0,   False),  # Сервис Б, выделенная полоса §65
         "Вр. точность (нс)":        (10.0,  5.0,    True),
         "Срок орб. жизни (лет)":    (7.0,   7.0,    False),
         "Покрытие Арктики":         (9.0,   10.0,   False),
@@ -492,6 +552,54 @@ def _plot_glonass_deep(output_dir, label):
 
     plt.tight_layout()
     fig.savefig(os.path.join(output_dir, f"comp_aurora_vs_glonass_{label}.png"), dpi=150)
+    plt.close(fig)
+
+
+def _plot_china_leo(output_dir, label):
+    """Обзор китайских LEO-инициатив (таблица-рисунок, по открытым источникам)."""
+    fig, ax = plt.subplots(figsize=(15, 6.0))
+    ax.axis("off")
+
+    col_labels = ["Система", "Оператор", "Орбита, км",
+                  "КА на орбите / план", "Назначение и PNT-роль"]
+    rows, row_colors = [], []
+    for c in CHINA_LEO:
+        rows.append([
+            c["name"].replace("\n", " "),
+            c["operator"],
+            f"{c['orbit_km']}\n({c['inc']})",
+            f"{c['in_orbit']}\n/ {c['plan']}",
+            f"{c['role']}.\n{c['note']}",
+        ])
+        row_colors.append(c["color"])
+
+    tbl = ax.table(cellText=rows, colLabels=col_labels, cellLoc="left",
+                   loc="center", colWidths=[0.13, 0.18, 0.14, 0.17, 0.38])
+    tbl.auto_set_font_size(False)
+    tbl.set_fontsize(8.5)
+    tbl.scale(1, 2.6)
+    for (row, col), cell in tbl.get_celld().items():
+        cell.set_text_props(va="center")
+        if row == 0:
+            cell.set_facecolor("#2d3436")
+            cell.set_text_props(color="white", fontweight="bold")
+        else:
+            if col == 0:
+                cell.set_facecolor(row_colors[row - 1])
+                cell.set_text_props(color="white", fontweight="bold")
+            elif row % 2 == 0:
+                cell.set_facecolor("#f5f6fa")
+
+    ax.set_title(
+        f"Китайские LEO-инициативы с PNT-функцией — обзор по открытым источникам "
+        f"(статус на 2026) [{label}]", fontsize=11, pad=16)
+    fig.text(0.5, 0.02,
+             "Прямой аналог концепции АВРОРА — только CentiSpace (целевое навиг.-усиление). "
+             "Geespace — связь+позиционирование; Qianfan/Guowang — широкополосные мегагруппировки "
+             "с PNT-потенциалом. ТТХ ориентировочные (данные операторов закрыты).",
+             ha="center", fontsize=7.5, style="italic", color="#636e72", wrap=True)
+    fig.subplots_adjust(left=0.02, right=0.98, top=0.88, bottom=0.10)
+    fig.savefig(os.path.join(output_dir, f"comp_china_leo_{label}.png"), dpi=150)
     plt.close(fig)
 
 
