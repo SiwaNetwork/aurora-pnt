@@ -1235,6 +1235,24 @@ def cmd_cesium_gltf(args):
     print(f"  Results saved to: {out}/")
 
 
+def cmd_trl_roadmap(args):
+    """Маршрут зрелости: фазы → TRL → закрытие рисков К-1…К-5."""
+    from aurora.pnt.trl_roadmap import run_trl_roadmap, print_trl_roadmap_summary
+    label = args.label or "phase4"; out = args.output or "results/roadmap"
+    print(f"\n  Rendering TRL roadmap: {label}")
+    r = run_trl_roadmap(out, label); print_trl_roadmap_summary(label, r)
+    print(f"  Results saved to: {out}/")
+
+
+def cmd_segment_diagram(args):
+    """Структурная блок-схема сегментов системы (§3.1)."""
+    from aurora.pnt.segment_diagram import run_segment_diagram, print_segment_diagram_summary
+    label = args.label or "phase4"; out = args.output or "results/system_concept"
+    print(f"\n  Rendering segment block diagram: {label}")
+    r = run_segment_diagram(out, label); print_segment_diagram_summary(label, r)
+    print(f"  Results saved to: {out}/")
+
+
 def cmd_pvt_montecarlo(args):
     """End-to-end Monte-Carlo PVT error budget."""
     from aurora.pnt.pvt_montecarlo import run_pvt_montecarlo_analysis, print_pvt_montecarlo_summary
@@ -1927,6 +1945,8 @@ def main():
         ("sankey-budget", "Sankey бюджета UERE и временно́й цепочки", "results/sankey_budget"),
         ("antenna-signal", "Антенны А/Б (3D), созвездие, waterfall", "results/antenna_signal"),
         ("cesium-gltf", "Cesium-сцена + glTF-модель КА (3D в браузере)", "results/cesium"),
+        ("segment-diagram", "Структурная блок-схема сегментов (§3.1)", "results/system_concept"),
+        ("trl-roadmap", "Маршрут зрелости: фазы → TRL → закрытие рисков", "results/roadmap"),
     ]:
         _p = sub.add_parser(_name, help=_help)
         _p.add_argument("-o", "--output", default=_odir)
@@ -2047,6 +2067,8 @@ def main():
         "sankey-budget":      cmd_sankey_budget,
         "antenna-signal":     cmd_antenna_signal,
         "cesium-gltf":        cmd_cesium_gltf,
+        "segment-diagram":    cmd_segment_diagram,
+        "trl-roadmap":        cmd_trl_roadmap,
         "signal-design":       cmd_signal_design,
         "competitor-analysis": cmd_competitor_analysis,
         "combined":         cmd_combined,

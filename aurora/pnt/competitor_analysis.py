@@ -103,7 +103,7 @@ LEO_SYSTEMS: Dict[str, Dict] = {
         "ppp_conv_min": 1.0, "time_acc_ns": 5,
         "anti_spoof": "TESLA MAC (Стрибог)", "auth": "TESLA MAC (открытый)",
         "signal_power_dbw": -107, "ioc_year": 2029, "foc_year": 2033,  # Rx Сервис Б, §65
-        "operator": "ШИВА НЕТВОРК (РФ)", "cost_b_usd": 2.8,
+        "operator": "ШИВА НЕТВОРК (РФ)", "cost_b_usd": 2.0,  # LCC 15 лет ≈ $2,0B (§51)
         "status": "Проект", "color": "#00b894",
     },
     "Xona PULSAR\n(США)": {
