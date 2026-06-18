@@ -36,7 +36,12 @@ __pycache__/
 *$py.class
 # IDE / tool artifacts
 Untitled
-.claude/
+# Claude Code: проектные настройки и скиллы — в репо; локальное и сторонние плагины — нет
+.claude/*
+!.claude/settings.json
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/build-gost/
 
 # MS Office lock/temp files
 ~$*

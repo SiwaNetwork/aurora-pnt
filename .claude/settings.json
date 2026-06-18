@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python check_tp.py --hook",
+            "timeout": 30,
+            "statusMessage": "Проверка связности ТП (check_tp)"
+          }
+        ]
+      }
+    ]
+  }
+}
