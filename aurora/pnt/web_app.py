@@ -10,7 +10,7 @@ CZML и модель встроены, Cesium берётся локально (a
 Открыть: web/index.html в браузере.
 """
 
-import sys, os, json
+import sys, os, json, math
 from typing import Dict, List
 import numpy as np
 
@@ -20,9 +20,54 @@ if hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-from aurora.pnt.constellation_anim import _build, _eci, _ecef, T_ORB, N_PLANE, N_PER, N_SAT
+from aurora.pnt.constellation_anim import (
+    _build, T_ORB, N_PLANE, N_PER, N_SAT,
+    GM, R_E, A, INCL, OMEGA_E, N_MEAN)
 from aurora.pnt.cesium_gltf import gltf_data_uri
 from aurora.pnt import cesium_pnt
+
+# Вековая прецессия восходящего узла от J2 (для круговой орбиты):
+#   dΩ/dt = -1.5 · n · J2 · (R_E/a)² · cos i   — реальный дрейф плоскостей
+_J2 = 1.08263e-3
+RAAN_DOT = -1.5 * N_MEAN * _J2 * (R_E / A) ** 2 * math.cos(INCL)   # рад/с
+
+
+def _prop_ecef(raan0, u0, t):
+    """ECEF-позиции всех КА в момент t (круговая орбита + J2-прецессия RAAN + вращение Земли)."""
+    u = u0 + N_MEAN * t
+    raan = raan0 + RAAN_DOT * t          # ← J2: плоскости дрейфуют
+    x0, y0 = A * np.cos(u), A * np.sin(u)
+    x1 = x0; y1 = y0 * math.cos(INCL); z1 = y0 * math.sin(INCL)   # наклон вокруг X
+    xe = x1 * np.cos(raan) - y1 * np.sin(raan)                    # поворот RAAN вокруг Z
+    ye = x1 * np.sin(raan) + y1 * np.cos(raan)
+    th = OMEGA_E * t                                             # ECEF: вращение Земли
+    c, s = math.cos(-th), math.sin(-th)
+    return np.stack([xe * c - ye * s, xe * s + ye * c, z1], axis=1)
+
+
+def _nadir_quat(r, v, prev=None):
+    """Кватернион [x,y,z,w] надирной ориентации: +X→надир, +Y→нормаль орбиты."""
+    xb = -r / np.linalg.norm(r)                 # +X модели = надир (антенна на Землю)
+    h = np.cross(r, v); yb = h / np.linalg.norm(h)   # +Y = нормаль орбиты (ось панелей)
+    zb = np.cross(xb, yb)
+    m00, m10, m20 = xb; m01, m11, m21 = yb; m02, m12, m22 = zb
+    tr = m00 + m11 + m22
+    if tr > 0:
+        S = math.sqrt(tr + 1.0) * 2; w = 0.25 * S
+        x = (m21 - m12) / S; y = (m02 - m20) / S; z = (m10 - m01) / S
+    elif m00 > m11 and m00 > m22:
+        S = math.sqrt(1 + m00 - m11 - m22) * 2; w = (m21 - m12) / S
+        x = 0.25 * S; y = (m01 + m10) / S; z = (m02 + m20) / S
+    elif m11 > m22:
+        S = math.sqrt(1 + m11 - m00 - m22) * 2; w = (m02 - m20) / S
+        x = (m01 + m10) / S; y = 0.25 * S; z = (m12 + m21) / S
+    else:
+        S = math.sqrt(1 + m22 - m00 - m11) * 2; w = (m10 - m01) / S
+        x = (m02 + m20) / S; y = (m12 + m21) / S; z = 0.25 * S
+    q = [x, y, z, w]
+    if prev is not None and (q[0]*prev[0]+q[1]*prev[1]+q[2]*prev[2]+q[3]*prev[3]) < 0:
+        q = [-c for c in q]                     # непрерывность знака для SLERP
+    return q
 
 # Канонические фазы (накопл. число КА) — §4.3
 PHASES = [("Ф0", 3), ("Ф1", 12), ("Ф2", 90), ("Ф3", 180), ("Ф4", 300)]
@@ -43,16 +88,24 @@ def _roundrobin_order():
 def _build_czml(model_uri: str, n_orbits=2.0, step_s=60.0, speed=60, model_every=6):
     import datetime
     order, raan, u0 = _roundrobin_order()
+    modeled = {rank for rank in range(N_SAT) if rank % model_every == 0}
     times = np.arange(0, n_orbits * T_ORB + step_s, step_s)
     epoch = datetime.datetime(2000, 1, 1, tzinfo=datetime.timezone.utc)
     end = (epoch + datetime.timedelta(seconds=float(times[-1]))).strftime("%Y-%m-%dT%H:%M:%SZ")
     avail = f"2000-01-01T00:00:00Z/{end}"
 
     pos = {si: [] for si in range(N_SAT)}
+    ori = {rank: [] for rank in modeled}        # надирная ориентация только для КА с моделью
+    prev = {rank: None for rank in modeled}
     for t in times:
-        ecef = _ecef(_eci(raan, u0, t), t)
+        P = _prop_ecef(raan, u0, t)             # позиции (J2 + вращение Земли)
+        V = _prop_ecef(raan, u0, t + 1.0) - P   # направление скорости (для ориентации)
         for si in range(N_SAT):
-            pos[si].extend([round(float(t), 1), float(ecef[si, 0]), float(ecef[si, 1]), float(ecef[si, 2])])
+            pos[si].extend([round(float(t), 1), float(P[si, 0]), float(P[si, 1]), float(P[si, 2])])
+        for rank in modeled:
+            si = order[rank]
+            q = _nadir_quat(P[si], V[si], prev[rank]); prev[rank] = q
+            ori[rank].extend([round(float(t), 1)] + [float(c) for c in q])
 
     packets = [{"id": "document", "name": "AURORA", "version": "1.0",
                 "clock": {"interval": avail, "currentTime": "2000-01-01T00:00:00Z",
@@ -66,12 +119,13 @@ def _build_czml(model_uri: str, n_orbits=2.0, step_s=60.0, speed=60, model_every
                "position": {"interpolationAlgorithm": "LAGRANGE", "interpolationDegree": 5,
                             "referenceFrame": "FIXED", "epoch": "2000-01-01T00:00:00Z",
                             "cartesian": pos[si]},
-               "orientation": {"velocityReference": "#position"},
                "point": {"color": {"rgba": col}, "pixelSize": 7,
                          "outlineColor": {"rgba": [255, 255, 255, 170]}, "outlineWidth": 1}}
-        if rank % model_every == 0:
+        if rank in modeled:
             pkt["model"] = {"gltf": model_uri, "scale": 1.0, "minimumPixelSize": 46,
                             "maximumScale": 250000, "runAnimations": False}
+            pkt["orientation"] = {"interpolationAlgorithm": "LINEAR",
+                                  "epoch": "2000-01-01T00:00:00Z", "unitQuaternion": ori[rank]}
         packets.append(pkt)
     return packets
 
