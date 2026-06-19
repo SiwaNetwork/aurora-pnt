@@ -1235,6 +1235,15 @@ def cmd_cesium_gltf(args):
     print(f"  Results saved to: {out}/")
 
 
+def cmd_web_app(args):
+    """Веб-симулятор группировки АВРОРА (web/index.html, Cesium 3D)."""
+    from aurora.pnt.web_app import run_web_app, print_web_app_summary
+    label = args.label or "phase4"; out = args.output or "web"
+    print(f"\n  Generating AURORA web simulator: {label}")
+    r = run_web_app(out, label); print_web_app_summary(label, r)
+    print(f"  Results saved to: {out}/")
+
+
 def cmd_nav_payload_diagram(args):
     """Блок-схема навигационной ПН и ЧВО (§3.5)."""
     from aurora.pnt.nav_payload_diagram import run_nav_payload_diagram, print_nav_payload_diagram_summary
@@ -1957,6 +1966,7 @@ def main():
         ("segment-diagram", "Структурная блок-схема сегментов (§3.1)", "results/system_concept"),
         ("trl-roadmap", "Маршрут зрелости: фазы → TRL → закрытие рисков", "results/roadmap"),
         ("nav-payload-diagram", "Блок-схема навигационной ПН и ЧВО (§3.5)", "results/system_concept"),
+        ("web-app", "Веб-симулятор группировки АВРОРА (web/, Cesium 3D)", "web"),
     ]:
         _p = sub.add_parser(_name, help=_help)
         _p.add_argument("-o", "--output", default=_odir)
@@ -2080,6 +2090,7 @@ def main():
         "segment-diagram":    cmd_segment_diagram,
         "trl-roadmap":        cmd_trl_roadmap,
         "nav-payload-diagram": cmd_nav_payload_diagram,
+        "web-app":            cmd_web_app,
         "signal-design":       cmd_signal_design,
         "competitor-analysis": cmd_competitor_analysis,
         "combined":         cmd_combined,

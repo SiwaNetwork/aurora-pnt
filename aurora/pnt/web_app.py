@@ -1,0 +1,227 @@
+"""
+Генератор автономного веб-симулятора группировки АВРОРА (папка web/).
+
+Полноценный одностраничный сайт на CesiumJS: 3D-глобус Земли, реальные
+время-динамические орбиты Walker 300/15, glTF-модель КА, фирменный интерфейс
+(панель миссии, переключение фаз развёртывания, легенда). Самодостаточен:
+CZML и модель встроены, Cesium берётся локально (assets/cesium) или с CDN.
+
+Сборка:  python -m aurora.pnt.cli web-app
+Открыть: web/index.html в браузере.
+"""
+
+import sys, os, json
+from typing import Dict, List
+import numpy as np
+
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+from aurora.pnt.constellation_anim import _build, _eci, _ecef, T_ORB, N_PLANE, N_PER, N_SAT
+from aurora.pnt.cesium_gltf import gltf_data_uri
+from aurora.pnt import cesium_pnt
+
+# Канонические фазы (накопл. число КА) — §4.3
+PHASES = [("Ф0", 3), ("Ф1", 12), ("Ф2", 90), ("Ф3", 180), ("Ф4", 300)]
+PLANE_COLORS = [[0, 230, 180, 255], [9, 132, 227, 255], [225, 112, 85, 255],
+                [253, 203, 110, 255], [108, 92, 231, 255]]
+
+
+def _roundrobin_order():
+    """Порядок КА «по кругу» плоскостям — чтобы первые N были распределены."""
+    raan, u0 = _build()
+    order = []
+    for slot in range(N_PER):
+        for p in range(N_PLANE):
+            order.append(p * N_PER + slot)
+    return order, raan, u0
+
+
+def _build_czml(model_uri: str, n_orbits=2.0, step_s=60.0, speed=60, model_every=6):
+    import datetime
+    order, raan, u0 = _roundrobin_order()
+    times = np.arange(0, n_orbits * T_ORB + step_s, step_s)
+    epoch = datetime.datetime(2000, 1, 1, tzinfo=datetime.timezone.utc)
+    end = (epoch + datetime.timedelta(seconds=float(times[-1]))).strftime("%Y-%m-%dT%H:%M:%SZ")
+    avail = f"2000-01-01T00:00:00Z/{end}"
+
+    pos = {si: [] for si in range(N_SAT)}
+    for t in times:
+        ecef = _ecef(_eci(raan, u0, t), t)
+        for si in range(N_SAT):
+            pos[si].extend([round(float(t), 1), float(ecef[si, 0]), float(ecef[si, 1]), float(ecef[si, 2])])
+
+    packets = [{"id": "document", "name": "AURORA", "version": "1.0",
+                "clock": {"interval": avail, "currentTime": "2000-01-01T00:00:00Z",
+                          "multiplier": speed, "range": "LOOP_STOP",
+                          "step": "SYSTEM_CLOCK_MULTIPLIER"}}]
+    for rank, si in enumerate(order):
+        plane = si // N_PER
+        col = PLANE_COLORS[plane % len(PLANE_COLORS)]
+        pkt = {"id": f"sat_{rank}", "name": f"АВРОРА КА-{rank+1:03d} | плоскость {plane+1}",
+               "availability": avail,
+               "position": {"interpolationAlgorithm": "LAGRANGE", "interpolationDegree": 5,
+                            "referenceFrame": "FIXED", "epoch": "2000-01-01T00:00:00Z",
+                            "cartesian": pos[si]},
+               "orientation": {"velocityReference": "#position"},
+               "point": {"color": {"rgba": col}, "pixelSize": 7,
+                         "outlineColor": {"rgba": [255, 255, 255, 170]}, "outlineWidth": 1}}
+        if rank % model_every == 0:
+            pkt["model"] = {"gltf": model_uri, "scale": 1.0, "minimumPixelSize": 46,
+                            "maximumScale": 250000, "runAnimations": False}
+        packets.append(pkt)
+    return packets
+
+
+_HTML = r"""<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>АВРОРА — симулятор группировки</title>
+<script src="__CESIUM_JS__"></script>
+<link href="__CESIUM_CSS__" rel="stylesheet">
+<style>
+  html,body,#globe{width:100%;height:100%;margin:0;padding:0;overflow:hidden;
+    font-family:'Segoe UI',Roboto,sans-serif;background:#05080f;}
+  .glass{position:absolute;background:rgba(10,18,32,0.72);backdrop-filter:blur(8px);
+    border:1px solid rgba(95,168,255,0.25);border-radius:14px;color:#e8eef5;
+    box-shadow:0 6px 24px rgba(0,0,0,0.45);z-index:50;}
+  #hud{top:16px;left:16px;padding:16px 20px;max-width:300px;}
+  #hud h1{margin:0 0 2px;font-size:24px;letter-spacing:2px;color:#00d6a4;}
+  #hud .sub{font-size:12px;color:#9fb3c8;margin-bottom:12px;}
+  #hud .row{display:flex;justify-content:space-between;font-size:13px;padding:3px 0;
+    border-bottom:1px solid rgba(255,255,255,0.06);}
+  #hud .row b{color:#5fd0b4;}
+  #hud .big{font-size:30px;color:#00ffc8;font-weight:700;margin-top:8px;}
+  #phases{bottom:22px;left:50%;transform:translateX(-50%);padding:10px 14px;display:flex;gap:8px;align-items:center;}
+  #phases span{font-size:12px;color:#9fb3c8;margin-right:4px;}
+  .pbtn{background:rgba(95,168,255,0.12);border:1px solid rgba(95,168,255,0.35);
+    color:#cfe3fb;border-radius:9px;padding:7px 13px;font-size:13px;cursor:pointer;transition:.15s;}
+  .pbtn:hover{background:rgba(95,168,255,0.3);}
+  .pbtn.active{background:#00d6a4;color:#05080f;border-color:#00d6a4;font-weight:700;}
+  #legend{bottom:22px;right:16px;padding:12px 16px;font-size:12px;}
+  #legend .li{display:flex;align-items:center;gap:8px;padding:2px 0;}
+  #legend .dot{width:11px;height:11px;border-radius:50%;}
+  #brand{position:absolute;top:18px;right:18px;font-size:12px;color:#6c8198;z-index:50;text-align:right;}
+  .cesium-viewer-bottom{display:none;}
+</style>
+</head>
+<body>
+<div id="globe"></div>
+<div id="hud" class="glass">
+  <h1>АВРОРА</h1>
+  <div class="sub">Низкоорбитальная PNT · ШИВА НЕТВОРК</div>
+  <div class="row"><span>Орбита</span><b>1000 км</b></div>
+  <div class="row"><span>Наклонение</span><b>75°</b></div>
+  <div class="row"><span>Конфигурация</span><b>Walker 300/15</b></div>
+  <div class="row"><span>Фаза</span><b id="phName">Ф4 — FOC</b></div>
+  <div class="row"><span>КА на орбите</span><b id="satN">300</b></div>
+  <div class="big" id="bigN">300 КА</div>
+</div>
+<div id="brand">Симулятор группировки<br>НИР «Сияние» · СИЯНИЕ-ТП-001</div>
+<div id="phases" class="glass">
+  <span>Фаза:</span>
+  <button class="pbtn" data-n="3"   data-l="Ф0 — демо">Ф0 · 3</button>
+  <button class="pbtn" data-n="12"  data-l="Ф1 — демо">Ф1 · 12</button>
+  <button class="pbtn" data-n="90"  data-l="Ф2 — РФ 82%">Ф2 · 90</button>
+  <button class="pbtn" data-n="180" data-l="Ф3 — РФ 100%">Ф3 · 180</button>
+  <button class="pbtn active" data-n="300" data-l="Ф4 — FOC">Ф4 · 300</button>
+</div>
+<div id="legend" class="glass">
+  <div style="color:#9fb3c8;margin-bottom:5px;">Орбитальные плоскости</div>
+  <div class="li"><span class="dot" style="background:#00e6b4"></span>группа 1</div>
+  <div class="li"><span class="dot" style="background:#0984e3"></span>группа 2</div>
+  <div class="li"><span class="dot" style="background:#e17055"></span>группа 3</div>
+</div>
+<script>
+var viewer = new Cesium.Viewer('globe', {
+  animation:true, timeline:true, geocoder:false, homeButton:true,
+  sceneModePicker:false, baseLayerPicker:false, navigationHelpButton:false,
+  infoBox:true, selectionIndicator:true, fullscreenButton:true,
+  imageryProvider:false, creditContainer:document.createElement('div')
+});
+viewer.scene.backgroundColor = Cesium.Color.fromCssColorString('#05080f');
+viewer.scene.globe.enableLighting = true;
+viewer.scene.globe.baseColor = Cesium.Color.fromCssColorString('#0d2040');
+__EARTH_JS__
+
+var ds = new Cesium.CzmlDataSource();
+ds.load(__CZML__).then(function(){
+  viewer.dataSources.add(ds);
+  viewer.camera.setView({destination: Cesium.Cartesian3.fromDegrees(70.0, 50.0, 22000000)});
+  setPhase(300, 'Ф4 — FOC');
+});
+viewer.clock.multiplier = 60; viewer.clock.shouldAnimate = true;
+
+function setPhase(n, label){
+  var ents = ds.entities.values;
+  for (var i=0;i<ents.length;i++){
+    var m = /sat_(\d+)/.exec(ents[i].id);
+    if(m){ ents[i].show = (parseInt(m[1]) < n); }
+  }
+  document.getElementById('satN').textContent = n;
+  document.getElementById('bigN').textContent = n + ' КА';
+  if(label) document.getElementById('phName').textContent = label;
+}
+document.querySelectorAll('.pbtn').forEach(function(b){
+  b.onclick=function(){
+    document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    setPhase(parseInt(b.dataset.n), b.dataset.l);
+  };
+});
+</script>
+</body>
+</html>"""
+
+
+def run_web_app(output_dir: str = "web", label: str = "phase4") -> Dict:
+    os.makedirs(output_dir, exist_ok=True)
+    czml = _build_czml(gltf_data_uri())
+    czml_json = json.dumps(czml, separators=(",", ":"))
+
+    # Пути к Cesium: локально (assets/cesium) относительно web/, иначе CDN
+    if cesium_pnt.is_cesium_local():
+        js = "../assets/cesium/Build/Cesium/Cesium.js"
+        css = "../assets/cesium/Build/Cesium/Widgets/widgets.css"
+        mode = "offline (локальный Cesium)"
+    else:
+        js = f"{cesium_pnt._CDN_BASE}/Cesium.js"
+        css = f"{cesium_pnt._CDN_BASE}/Widgets/widgets.css"
+        mode = "CDN"
+
+    earth = cesium_pnt._earth_data_url()
+    if earth:
+        earth_js = ("Cesium.SingleTileImageryProvider.fromUrl('%s',{rectangle:"
+                    "Cesium.Rectangle.fromDegrees(-180,-90,180,90)}).then(function(p){"
+                    "viewer.imageryLayers.removeAll();viewer.imageryLayers.addImageryProvider(p);});" % earth)
+    else:
+        earth_js = "// нет встроенной текстуры Земли — однотонный глобус"
+
+    html = (_HTML.replace("__CESIUM_JS__", js).replace("__CESIUM_CSS__", css)
+            .replace("__EARTH_JS__", earth_js).replace("__CZML__", czml_json))
+    path = os.path.join(output_dir, "index.html")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(html)
+
+    # README
+    with open(os.path.join(output_dir, "README.md"), "w", encoding="utf-8") as f:
+        f.write("# Веб-симулятор группировки АВРОРА\n\n"
+                "Откройте `index.html` в браузере. 3D-глобус, орбиты Walker 300/15, "
+                "модель КА, переключение фаз развёртывания (Ф0…Ф4).\n\n"
+                "Офлайн-режим требует локального Cesium — `aurora-pnt download-cesium` "
+                "(каталог `assets/cesium/`). Иначе грузится с CDN (нужен интернет).\n\n"
+                "Пересборка: `python -m aurora.pnt.cli web-app`.\n")
+    return {"html": path, "mode": mode, "size_kb": os.path.getsize(path) // 1024,
+            "n_sat": N_SAT, "n_models": sum(1 for p in czml if "model" in p)}
+
+
+def print_web_app_summary(label: str, r: Dict) -> None:
+    print(f"\n  Web-симулятор АВРОРА -- {label}")
+    print(f"    Режим Cesium: {r['mode']}")
+    print(f"    КА: {r['n_sat']} (с 3D-моделью {r['n_models']}); HTML {r['size_kb']} КБ")
+    print(f"    Открыть: {r['html']}")
