@@ -25,6 +25,7 @@ from aurora.pnt.constellation_anim import (
     GM, R_E, A, INCL, OMEGA_E, N_MEAN)
 from aurora.pnt.cesium_gltf import gltf_data_uri
 from aurora.pnt import cesium_pnt
+from aurora.pnt.cesium_pnt import _ecef_m   # TEME→ECEF (через GMST)
 
 # Вековая прецессия восходящего узла от J2 (для круговой орбиты):
 #   dΩ/dt = -1.5 · n · J2 · (R_E/a)² · cos i   — реальный дрейф плоскостей
@@ -83,6 +84,85 @@ def _roundrobin_order():
         for p in range(N_PLANE):
             order.append(p * N_PER + slot)
     return order, raan, u0
+
+
+def _satrecs_walker(epoch_dt):
+    """300 объектов Satrec (Walker 300/15) через sgp4init — для реальной SGP4-пропагации."""
+    from sgp4.api import Satrec, WGS72, jday
+    jd, fr = jday(epoch_dt.year, epoch_dt.month, epoch_dt.day,
+                  epoch_dt.hour, epoch_dt.minute, epoch_dt.second)
+    epoch_days = (jd + fr) - 2433281.5          # дни от 1949-12-31 00:00 UT
+    n_kozai = N_MEAN * 60.0                       # среднее движение, рад/мин
+    sats = []
+    for p in range(N_PLANE):
+        raan = 2 * math.pi * p / N_PLANE
+        for k in range(N_PER):
+            mo = (2 * math.pi * k / N_PER + 2 * math.pi * p / N_SAT) % (2 * math.pi)
+            s = Satrec()
+            # whichconst, opsmode, satnum, epoch, bstar, ndot, nddot, ecco, argpo, inclo, mo, no_kozai, nodeo
+            s.sgp4init(WGS72, 'i', p * N_PER + k + 1, epoch_days,
+                       1e-4, 0.0, 0.0, 1e-4, 0.0, INCL, mo, n_kozai, raan)
+            sats.append(s)
+    return sats, jd, fr
+
+
+def _build_czml_sgp4(model_uri: str, n_orbits=2.0, step_s=60.0, speed=60, model_every=6):
+    """CZML на реальной SGP4-пропагации (J2/J3/J4 + торможение) + надирная ориентация."""
+    import datetime
+    from sgp4.api import SatrecArray
+    order, _, _ = _roundrobin_order()
+    modeled = {rank for rank in range(N_SAT) if rank % model_every == 0}
+    epoch_dt = datetime.datetime(2024, 1, 1, tzinfo=datetime.timezone.utc)
+    sats, jd0, fr0 = _satrecs_walker(epoch_dt)
+
+    times = np.arange(0, n_orbits * T_ORB + step_s, step_s)
+    jds = np.full(len(times), jd0, dtype=float)
+    frs = fr0 + times / 86400.0
+    e, r, _v = SatrecArray(sats).sgp4(jds, frs)   # r: (N_SAT, n_times, 3) TEME, км
+
+    iso = epoch_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+    end = (epoch_dt + datetime.timedelta(seconds=float(times[-1]))).strftime("%Y-%m-%dT%H:%M:%SZ")
+    avail = f"{iso}/{end}"
+
+    # ECEF-позиции всех КА на сетке времени
+    ecef = np.empty_like(r)
+    for ti in range(len(times)):
+        for si in range(N_SAT):
+            ecef[si, ti] = _ecef_m(r[si, ti], jds[ti], frs[ti])
+
+    pos = {si: [] for si in range(N_SAT)}
+    ori = {rank: [] for rank in modeled}; prev = {rank: None for rank in modeled}
+    for ti, t in enumerate(times):
+        for si in range(N_SAT):
+            pos[si].extend([round(float(t), 1)] + [float(x) for x in ecef[si, ti]])
+        for rank in modeled:
+            si = order[rank]
+            ti2 = min(ti + 1, len(times) - 1)
+            v = ecef[si, ti2] - ecef[si, ti]
+            if np.linalg.norm(v) < 1e-6:
+                v = ecef[si, ti] - ecef[si, max(ti - 1, 0)]
+            q = _nadir_quat(ecef[si, ti], v, prev[rank]); prev[rank] = q
+            ori[rank].extend([round(float(t), 1)] + [float(c) for c in q])
+
+    packets = [{"id": "document", "name": "AURORA (SGP4)", "version": "1.0",
+                "clock": {"interval": avail, "currentTime": iso, "multiplier": speed,
+                          "range": "LOOP_STOP", "step": "SYSTEM_CLOCK_MULTIPLIER"}}]
+    for rank, si in enumerate(order):
+        plane = si // N_PER
+        col = PLANE_COLORS[plane % len(PLANE_COLORS)]
+        pkt = {"id": f"sat_{rank}", "name": f"АВРОРА КА-{rank+1:03d} | плоскость {plane+1}",
+               "availability": avail,
+               "position": {"interpolationAlgorithm": "LAGRANGE", "interpolationDegree": 5,
+                            "referenceFrame": "FIXED", "epoch": iso, "cartesian": pos[si]},
+               "point": {"color": {"rgba": col}, "pixelSize": 7,
+                         "outlineColor": {"rgba": [255, 255, 255, 170]}, "outlineWidth": 1}}
+        if rank in modeled:
+            pkt["model"] = {"gltf": model_uri, "scale": 1.0, "minimumPixelSize": 46,
+                            "maximumScale": 250000, "runAnimations": False}
+            pkt["orientation"] = {"interpolationAlgorithm": "LINEAR", "epoch": iso,
+                                  "unitQuaternion": ori[rank]}
+        packets.append(pkt)
+    return packets
 
 
 def _build_czml(model_uri: str, n_orbits=2.0, step_s=60.0, speed=60, model_every=6):
@@ -235,7 +315,11 @@ document.querySelectorAll('.pbtn').forEach(function(b){
 
 def run_web_app(output_dir: str = "web", label: str = "phase4") -> Dict:
     os.makedirs(output_dir, exist_ok=True)
-    czml = _build_czml(gltf_data_uri())
+    uri = gltf_data_uri()
+    try:
+        czml = _build_czml_sgp4(uri); prop = "SGP4 (реальная, J2/J3/J4 + торможение)"
+    except Exception as exc:
+        czml = _build_czml(uri); prop = f"аналитич.+J2 (SGP4 недоступен: {exc})"
     czml_json = json.dumps(czml, separators=(",", ":"))
 
     # Пути к Cesium: локально (assets/cesium) относительно web/, иначе CDN
@@ -270,12 +354,13 @@ def run_web_app(output_dir: str = "web", label: str = "phase4") -> Dict:
                 "Офлайн-режим требует локального Cesium — `aurora-pnt download-cesium` "
                 "(каталог `assets/cesium/`). Иначе грузится с CDN (нужен интернет).\n\n"
                 "Пересборка: `python -m aurora.pnt.cli web-app`.\n")
-    return {"html": path, "mode": mode, "size_kb": os.path.getsize(path) // 1024,
+    return {"html": path, "mode": mode, "prop": prop, "size_kb": os.path.getsize(path) // 1024,
             "n_sat": N_SAT, "n_models": sum(1 for p in czml if "model" in p)}
 
 
 def print_web_app_summary(label: str, r: Dict) -> None:
     print(f"\n  Web-симулятор АВРОРА -- {label}")
+    print(f"    Пропагация: {r['prop']}")
     print(f"    Режим Cesium: {r['mode']}")
     print(f"    КА: {r['n_sat']} (с 3D-моделью {r['n_models']}); HTML {r['size_kb']} КБ")
     print(f"    Открыть: {r['html']}")
