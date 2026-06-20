@@ -11,7 +11,7 @@ CZML и модель встроены, Cesium берётся локально (a
 """
 
 import sys, os, json, math
-from typing import Dict, List
+from typing import Dict
 import numpy as np
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -25,7 +25,7 @@ from aurora.pnt.constellation_anim import (
     GM, R_E, A, INCL, OMEGA_E, N_MEAN)
 from aurora.pnt.cesium_gltf import gltf_data_uri
 from aurora.pnt import cesium_pnt
-from aurora.pnt.cesium_pnt import _ecef_m   # TEME→ECEF (через GMST)
+from aurora.pnt.cesium_pnt import _gmst_rad   # GMST для TEME→ECEF
 
 # Вековая прецессия восходящего узла от J2 (для круговой орбиты):
 #   dΩ/dt = -1.5 · n · J2 · (R_E/a)² · cos i   — реальный дрейф плоскостей
@@ -119,16 +119,20 @@ def _build_czml_sgp4(model_uri: str, n_orbits=2.0, step_s=60.0, speed=60, model_
     jds = np.full(len(times), jd0, dtype=float)
     frs = fr0 + times / 86400.0
     e, r, _v = SatrecArray(sats).sgp4(jds, frs)   # r: (N_SAT, n_times, 3) TEME, км
+    if int((e != 0).sum()) > 0:                    # сбой пропагации → фолбэк на аналитику (run_web_app)
+        raise RuntimeError(f"SGP4: {int((e != 0).any(axis=1).sum())} КА с ошибкой пропагации")
 
     iso = epoch_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
     end = (epoch_dt + datetime.timedelta(seconds=float(times[-1]))).strftime("%Y-%m-%dT%H:%M:%SZ")
     avail = f"{iso}/{end}"
 
-    # ECEF-позиции всех КА на сетке времени
-    ecef = np.empty_like(r)
-    for ti in range(len(times)):
-        for si in range(N_SAT):
-            ecef[si, ti] = _ecef_m(r[si, ti], jds[ti], frs[ti])
+    # TEME→ECEF: поворот на GMST вокруг Z, векторно по всем КА и эпохам (как _ecef_m, км→м)
+    gmst = np.array([_gmst_rad(float(jds[ti]), float(frs[ti])) for ti in range(len(times))])
+    cg, sg = np.cos(gmst)[None, :], np.sin(gmst)[None, :]
+    xt, yt, zt = r[:, :, 0], r[:, :, 1], r[:, :, 2]
+    ecef = np.stack([(xt * cg + yt * sg) * 1000.0,
+                     (-sg * xt + cg * yt) * 1000.0,
+                     zt * 1000.0], axis=2)
 
     pos = {si: [] for si in range(N_SAT)}
     ori = {rank: [] for rank in modeled}; prev = {rank: None for rank in modeled}
