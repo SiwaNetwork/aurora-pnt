@@ -17,7 +17,9 @@ from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-BASE_DIR = r"c:\Users\SHIWA\Documents\LEOPath"
+# Корень проекта — каталог самого скрипта (машинонезависимо; ранее был зашит
+# абсолютный путь конкретной машины, что ломало сборку при переносе репозитория).
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MD_IN    = os.path.join(BASE_DIR, "AURORA_PNT_Technical_Project.md")
 DOCX_OUT = os.path.join(BASE_DIR, "AURORA_PNT_GOST.docx")
 PDF_OUT  = os.path.join(BASE_DIR, "AURORA_PNT_GOST.pdf")
